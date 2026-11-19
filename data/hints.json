@@ -53,8 +53,8 @@
         "type": "skill_learned",
         "skill": "dodge_roll"
       },
-      "text": "{slot_6}를 눌러 구르기",
-      "touch": "{slot_6}를 탭해 구르기",
+      "text": "{slot_6} 키를 눌러 구르기",
+      "touch": "{slot_6} 버튼을 탭해 구르기",
       "done": {
         "type": "skills_used",
         "slots": [
@@ -71,8 +71,8 @@
         "type": "slot_filled",
         "slot": 1
       },
-      "text": "{slot_2}로 새 스킬 사용",
-      "touch": "{slot_2}로 새 스킬 사용",
+      "text": "{slot_2} 키로 새 스킬 사용",
+      "touch": "{slot_2} 버튼으로 새 스킬 사용",
       "done": {
         "type": "skills_used",
         "slots": [
@@ -89,8 +89,8 @@
         "type": "slot_filled",
         "slot": 2
       },
-      "text": "{slot_3}로 두 번째 스킬 사용",
-      "touch": "{slot_3}로 두 번째 스킬 사용",
+      "text": "{slot_3} 키로 두 번째 스킬 사용",
+      "touch": "{slot_3} 버튼으로 두 번째 스킬 사용",
       "done": {
         "type": "skills_used",
         "slots": [
@@ -122,8 +122,8 @@
         "type": "item_near",
         "range": 12
       },
-      "text": "{names}를 누르고 있으면 모든 아이템의 이름 표시",
-      "touch": "상단의 {names}를 탭하면 모든 아이템의 이름 표시",
+      "text": "{names} 키를 누르고 있으면 모든 아이템의 이름 표시",
+      "touch": "상단의 {names} 버튼을 탭하면 모든 아이템의 이름 표시",
       "done": {
         "type": "picked_up"
       },
@@ -138,8 +138,8 @@
       "trigger": {
         "type": "gear_in_bag"
       },
-      "text": "{inventory}를 눌러 소지품 열기",
-      "touch": "상단의 {inventory}를 탭해 소지품 열기",
+      "text": "{inventory} 키를 눌러 소지품 열기",
+      "touch": "상단의 {inventory} 버튼을 탭해 소지품 열기",
       "done": {
         "type": "panel",
         "panel": "inventory"
@@ -169,8 +169,8 @@
       "trigger": {
         "type": "skill_point"
       },
-      "text": "{tree}를 눌러 스킬 트리에 포인트 사용",
-      "touch": "상단의 {tree}를 탭해 스킬 트리에 포인트 사용",
+      "text": "{tree} 키를 눌러 스킬 트리에 포인트 사용",
+      "touch": "상단의 {tree} 버튼을 탭해 스킬 트리에 포인트 사용",
       "done": {
         "type": "allocated"
       },
@@ -185,8 +185,8 @@
         "fraction": 0.5,
         "flask": "life"
       },
-      "text": "{flask}를 눌러 마시기",
-      "touch": "{flask}를 탭해 마시기",
+      "text": "{flask} 키를 눌러 마시기",
+      "touch": "{flask} 버튼을 탭해 마시기",
       "done": {
         "type": "drank",
         "flask": "life"
