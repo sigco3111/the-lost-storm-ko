@@ -1,0 +1,211 @@
+#title-enter,
+.threshold-button {
+  --threshold-plate: linear-gradient(180deg, rgba(12, 20, 34, 0.66), rgba(4, 8, 15, 0.74));
+  --threshold-plate-pressed: linear-gradient(180deg, rgba(4, 8, 15, 0.76), rgba(2, 4, 9, 0.8));
+  --threshold-label: rgba(239, 230, 214, 0.8);
+  --threshold-label-lit: #fbf4e6;
+  --threshold-light: rgba(127, 212, 255, 0.2);
+  --threshold-light-lit: rgba(150, 220, 255, 0.3);
+  --threshold-glow: 0 0 14px rgba(127, 212, 255, 0.18);
+  --threshold-glow-lit: 0 0 18px rgba(160, 224, 255, 0.55);
+  --threshold-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+  --threshold-sink: 2px;
+  --threshold-gather: 1.18;
+  --threshold-reach-x: 0.3;
+  --threshold-reach-y: 0.9;
+  --threshold-radius: 2px;
+  position: relative;
+  isolation: isolate;
+  min-width: 216px;
+  height: 50px;
+  padding: 0 46px;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+  color: var(--threshold-label);
+  text-shadow: var(--threshold-glow);
+  background: var(--threshold-plate);
+  background-color: transparent;
+  border: none;
+  border-radius: var(--threshold-radius);
+  outline: none;
+  box-shadow: var(--threshold-shadow);
+  transition:
+    color var(--spring-smooth-ms) var(--spring-smooth),
+    text-shadow var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-snappy-ms) var(--spring-snappy),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+#title-enter::before,
+.threshold-button::before,
+#title-enter::after,
+.threshold-button::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--threshold-reach-y) * -100%) calc(var(--threshold-reach-x) * -100%);
+  z-index: -1;
+  pointer-events: none;
+  background: var(--dither), radial-gradient(ellipse 40% 34% at 50% 50%, var(--threshold-light), transparent 100%);
+  background-size: var(--dither-size), auto;
+}
+
+#title-enter::before,
+.threshold-button::before {
+  clip-path: inset(calc(var(--threshold-reach-y) / (1 + 2 * var(--threshold-reach-y)) * 100%) calc(var(--threshold-reach-x) / (1 + 2 * var(--threshold-reach-x)) * 100%) round var(--threshold-radius));
+  opacity: 0.35;
+  animation: threshold-breath var(--drift-ms) var(--drift-ease) infinite;
+}
+
+#title.gone #title-enter::before,
+.lobby-screen:not(.shown) .threshold-button::before {
+  animation-play-state: paused;
+}
+
+#title-enter::after,
+.threshold-button::after {
+  opacity: 0;
+  transform: scale(0.82);
+  background: var(--dither), radial-gradient(ellipse 46% 38% at 50% 50%, var(--threshold-light-lit), transparent 100%);
+  background-size: var(--dither-size), auto;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+#title-enter.bloomed::after,
+.threshold-button.bloomed::after {
+  background: var(--threshold-bloom) center / 100% 100% no-repeat;
+}
+
+@keyframes threshold-breath {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  38% {
+    opacity: 0.62;
+  }
+  46% {
+    opacity: 0.44;
+  }
+  52% {
+    opacity: 0.78;
+  }
+  70% {
+    opacity: 0.4;
+  }
+}
+
+.title-card #title-enter:not(:disabled):hover,
+.threshold-button:not(:disabled):hover,
+.title-card #title-enter:focus-visible,
+.threshold-button:focus-visible {
+  color: var(--threshold-label-lit);
+  text-shadow: var(--threshold-glow-lit);
+  background: var(--threshold-plate);
+  background-color: transparent;
+  transform: none;
+}
+
+.title-card #title-enter:not(:disabled):hover::after,
+.threshold-button:not(:disabled):hover::after,
+.title-card #title-enter:focus-visible::after,
+.threshold-button:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.title-card #title-enter:not(:disabled):active,
+.threshold-button:not(:disabled):active {
+  color: var(--threshold-label-lit);
+  background: var(--threshold-plate-pressed);
+  background-color: transparent;
+  transform: translateY(var(--threshold-sink)) scale(0.985);
+}
+
+.title-card #title-enter:not(:disabled):active::after,
+.threshold-button:not(:disabled):active::after {
+  opacity: 0.7;
+  transform: scale(0.94);
+}
+
+#title.ready #title-enter::after {
+  animation: threshold-gather var(--spring-bouncy-ms) var(--spring-smooth) calc(var(--spring-snappy-ms) / 2) backwards;
+}
+
+@keyframes threshold-gather {
+  from {
+    opacity: 1;
+    transform: scale(var(--threshold-gather));
+  }
+}
+
+.title-card #title-reset {
+  position: relative;
+  height: 30px;
+  margin: 14px auto 0;
+  padding: 0 14px;
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.22em;
+  text-transform: uppercase;
+  color: rgba(239, 230, 214, 0.42);
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+  transition:
+    color var(--spring-smooth-ms) var(--spring-smooth),
+    text-shadow var(--spring-smooth-ms) var(--spring-smooth),
+    background-color var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-snappy-ms) var(--spring-snappy),
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    height var(--spring-smooth-ms) var(--spring-smooth),
+    margin-top var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.title-card #title-reset[hidden] {
+  height: 0;
+  margin-top: 0;
+}
+
+.title-card #title-reset:not(:disabled):hover,
+.title-card #title-reset:focus-visible {
+  color: rgba(239, 230, 214, 0.82);
+  text-shadow: 0 0 12px rgba(127, 212, 255, 0.3);
+  background: rgba(6, 11, 20, 0.36);
+  transform: none;
+}
+
+.title-card #title-reset:not(:disabled):active {
+  background: rgba(3, 6, 12, 0.5);
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #title-enter::before {
+    opacity: 0.45;
+    animation: none;
+  }
+
+  #title.ready #title-enter::after {
+    animation: none;
+  }
+
+  .title-card #title-enter:not(:disabled):active,
+  .title-card #title-reset:not(:disabled):active {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  #title-enter:focus-visible,
+  .threshold-button:focus-visible {
+    outline: 1px solid CanvasText;
+    outline-offset: 2px;
+  }
+}

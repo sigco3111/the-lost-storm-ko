@@ -1,0 +1,182 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { loadContent } from '../../sim/content/content.ts';
+import type { MomentDef, MomentField } from '../../sim/content/moment-types.ts';
+import type { PackRankDef } from '../../sim/content/rank-types.ts';
+import type { Content, MonsterDef, SkillDef } from '../../sim/content/types.ts';
+import { createRng } from '../../sim/rng.ts';
+import { rankPack } from '../../sim/world/ranks.ts';
+import { spawnPacks } from '../../sim/world/monsters.ts';
+import { forceStrike } from '../../sim/world/moments.ts';
+import { stepWorld } from '../../sim/world/step.ts';
+import type { MomentState, MonsterState, World } from '../../sim/world/types.ts';
+import { echoesOf, FIELD, fieldWorld, momentLibrary, QUIET, RAID, standAt } from '../../test/moment-support.ts';
+import { must, worldIn } from '../../test/support.ts';
+import { CATEGORY_NAMES } from './chart-ability.ts';
+import { monsterInfo, monsterLines, monsterSummary, monsterSummaryParts, rankPlate, reusedPhrases } from './monster-info.ts';
+import type { MonsterInfo, MonsterLine, RankPlate } from './monster-info.ts';
+
+const content: Content = loadContent();
+const DT: number = 1 / 30;
+
+function spawn(kind: string, mods: readonly string[] = []): { world: World; monster: MonsterState } {
+  const world: World = worldIn(content, content.world.start, 3);
+  world.zone = { ...world.zone, packs: [{ x: world.player.pos.x + 6, z: world.player.pos.z, members: [{ monster: kind, count: 1, mods: [...mods] }], when: [] }] };
+  spawnPacks(world);
+  return { world, monster: must(world.monsters.at(-1), kind) };
+}
+
+function texts(lines: readonly MonsterLine[], kind: MonsterLine['kind']): string[] {
+  return lines.flatMap((line: MonsterLine): string[] => (line.kind === kind ? [line.kind === 'ability' ? line.name : line.text] : []));
+}
+
+void test('a monster lists its own skill with the chart category, and what it resists comes from its poise', (): void => {
+  const { world, monster } = spawn('warden_patrol');
+  const lines: MonsterLine[] = monsterLines(world, monster);
+  const skill: SkillDef = must(content.skills.get(monster.def.skill), 'skill');
+  assert.deepEqual(lines.find((line: MonsterLine): boolean => line.kind === 'ability'), { kind: 'ability', name: skill.name, tags: CATEGORY_NAMES[skill.category], effect: skill.description });
+  assert.deepEqual(texts(lines, 'resist'), ['Resists knockback', 'Resists stagger']);
+  assert.deepEqual(texts(lines, 'weak'), []);
+});
+
+void test('a monster with default poise shows no resistance line, and a ranged one says it keeps its distance', (): void => {
+  const { world, monster } = spawn('mender');
+  const lines: MonsterLine[] = monsterLines(world, monster);
+  assert.deepEqual(texts(lines, 'resist'), []);
+  assert.ok(texts(lines, 'state').includes('Keeps its distance'));
+  assert.ok(texts(lines, 'ability').includes(must(content.skills.get('mender_stitch'), 'stitch').name));
+});
+
+void test('a swarm says it surrounds you', (): void => {
+  const { world, monster } = spawn('rat');
+  assert.ok(texts(monsterLines(world, monster), 'state').includes('Surrounds you with its kind'));
+});
+
+void test('an ambusher says it waits, then springs', (): void => {
+  const { world, monster } = spawn('spider');
+  assert.ok(texts(monsterLines(world, monster), 'state').includes('Waits for you to come close, then springs'));
+});
+
+void test('a boss names every phase skill once, takes no stagger and is marked as a boss', (): void => {
+  const { world, monster } = spawn('unfinished_colossus');
+  const lines: MonsterLine[] = monsterLines(world, monster);
+  const phases: string[] = [...new Set<string>([monster.def.skill, ...(monster.def.boss?.phases.flatMap((phase): string[] => phase.skills.map((entry): string => entry.skill)) ?? [])])];
+  assert.deepEqual(texts(lines, 'ability'), phases.map((id: string): string => must(content.skills.get(id), id).name));
+  assert.ok(texts(lines, 'resist').includes('Immune to stagger'));
+  assert.ok(texts(lines, 'state').includes('Boss'));
+});
+
+void test('an elite says so, and a guard reads as a resistance and a weakness', (): void => {
+  const { world, monster } = spawn('mended', ['hulking']);
+  assert.ok(texts(monsterLines(world, monster), 'state').includes('Elite'));
+  const guarded: MonsterDef = { ...monster.def, guard: { arcDegrees: 120, damageTaken: 0.2, breakStagger: 0.4, breakTime: 1 }, poise: { knockback: 0, stagger: 1.5, resolve: 0 } };
+  const lines: MonsterLine[] = monsterLines(world, { ...monster, def: guarded });
+  assert.deepEqual(texts(lines, 'resist'), ['Immune to knockback', 'Guards its front']);
+  assert.deepEqual(texts(lines, 'weak'), ['Easily staggered', 'Open from behind, and a heavy blow breaks its guard']);
+});
+
+void test('a summon reads from the monster it calls, with count and cooldown and no tag', (): void => {
+  const { world, monster } = spawn('mended');
+  const caller: MonsterDef = { ...monster.def, summon: { monster: 'mender', count: 2, cooldown: 7.5, limit: 4 } };
+  const line: MonsterLine | undefined = monsterLines(world, { ...monster, def: caller }).find((entry: MonsterLine): boolean => entry.kind === 'ability' && entry.name.startsWith('Calls'));
+  assert.deepEqual(line, { kind: 'ability', name: `Calls 2 ${must(content.monsters.get('mender'), 'mender').name} every 7.5s`, tags: '', effect: '' });
+});
+
+void test('a turned echo is a hostile echo bound to its moment', (): void => {
+  const shy: MomentDef = { ...RAID, id: 'test_shy', turnChance: 0.0001 };
+  const field: MomentField = { ...FIELD, start: 0, max: 1, interval: { min: 1000, max: 1000 }, table: [{ moment: QUIET.id, weight: 50 }, { moment: shy.id, weight: 1 }], sure: [{ type: 'flag', flag: 'first_moment', is: 'cleared', not: true }] };
+  const world: World = fieldWorld(field, momentLibrary([QUIET, shy]));
+  const moment: MomentState = must(forceStrike(world, { x: 40, z: 40 }, null), 'strike');
+  for (let elapsed: number = 0; elapsed < world.content.moments.telegraph + DT * 2; elapsed += DT) stepWorld(world, [], DT);
+  standAt(world, moment.pos);
+  for (let step: number = 0; step < 2; step += 1) stepWorld(world, [], DT);
+  const echo: MonsterState = must(echoesOf(world, moment)[0], 'echo');
+  const states: string[] = texts(monsterLines(world, echo), 'state');
+  assert.ok(states.includes('Hostile echo') && states.includes('Bound to a moment'));
+});
+
+void test('every skill a shipped monster uses carries a category the chart can name', (): void => {
+  for (const def of content.monsters.values()) {
+    const ids: string[] = [def.skill, ...(def.boss?.phases.flatMap((phase): string[] => phase.skills.map((entry): string => entry.skill)) ?? []), ...(def.support === null ? [] : [def.support])];
+    for (const id of ids) assert.notEqual(must(content.skills.get(id), id).category, 'none', `${def.id} uses ${id}`);
+  }
+});
+
+void test('the phone summary keeps one short word per line and drops repeats', (): void => {
+  const lines: MonsterLine[] = [
+    { kind: 'state', text: 'Elite' },
+    { kind: 'ability', name: 'Haymaker', tags: 'Melee', effect: '' },
+    { kind: 'ability', name: 'Sweep', tags: 'Melee', effect: '' },
+    { kind: 'ability', name: 'Calls for help', tags: '', effect: '' },
+    { kind: 'resist', text: 'Resists knockback' },
+  ];
+  assert.equal(monsterSummary(lines), 'Elite · Melee · Calls for help · Resists knockback');
+  assert.deepEqual(monsterSummaryParts(lines), ['Elite', 'Melee', 'Calls for help', 'Resists knockback']);
+});
+
+void test('a new summary keeps every phrase still shown in order and makes only the new ones', (): void => {
+  assert.deepEqual(reusedPhrases(['Hostile echo', 'Melee'], ['Hostile echo', 'Bound to a moment', 'Melee']), [0, null, 1]);
+  assert.deepEqual(reusedPhrases(['Asleep until it hears you', 'Melee'], ['Melee']), [1]);
+  assert.deepEqual(reusedPhrases(['Melee', 'Area'], ['Area', 'Melee']), [1, null]);
+});
+
+void test('the plate shows a ranked monster in its rank colour and lists a rare leader’s modifiers under its name', (): void => {
+  const taker: MonsterDef = must(content.monsters.get('unfinished_taker'), 'taker');
+  const brute: MonsterDef = must(content.monsters.get('unfinished_brute'), 'brute');
+  const rare: PackRankDef = must(content.packRanks.ranks.find((rank: PackRankDef): boolean => rank.id === 'rare'), 'rare');
+  assert.deepEqual(rankPlate(content, taker), { color: null, mods: '' });
+  const [follower, leader] = rankPack(content, createRng(4), rare, [taker, brute], 20);
+  const led: MonsterDef = must(leader, 'leader');
+  const plate: RankPlate = rankPlate(content, led);
+  assert.equal(plate.color, rare.color);
+  assert.deepEqual(plate.mods.split(' · '), led.mods.map((id: string): string => must(content.monsterMods.get(id), id).prefix));
+  const followed: MonsterDef = must(follower, 'follower');
+  assert.deepEqual(rankPlate(content, followed), { color: rare.color, mods: followed.mods.map((id: string): string => must(content.monsterMods.get(id), id).prefix).join(' · ') });
+  assert.ok(rankPlate(content, followed).mods.length > 0);
+});
+
+function assertFresh(info: MonsterInfo, world: World, monster: MonsterState): void {
+  const lines: MonsterLine[] = monsterLines(world, monster);
+  assert.deepEqual(info.lines, lines);
+  assert.equal(info.key, JSON.stringify(lines));
+  assert.deepEqual(info.parts, monsterSummaryParts(lines));
+  assert.equal(info.said, monsterSummary(lines));
+}
+
+void test('the kept info is reused while nothing it shows changes and rebuilt the moment a state does', (): void => {
+  const { world, monster } = spawn('mended', ['hulking']);
+  const first: MonsterInfo = monsterInfo(null, world, monster);
+  assertFresh(first, world, monster);
+  assert.equal(monsterInfo(first, world, monster), first);
+  const raised: MonsterState = { ...monster, revived: true };
+  const again: MonsterInfo = monsterInfo(first, world, raised);
+  assert.notEqual(again, first);
+  assertFresh(again, world, raised);
+  const called: MonsterState = { ...raised, summonerId: raised.id + 1 };
+  const summoned: MonsterInfo = monsterInfo(again, world, called);
+  assert.notEqual(summoned, again);
+  assertFresh(summoned, world, called);
+  const guarded: MonsterState = { ...called, def: { ...called.def, guard: { arcDegrees: 120, damageTaken: 0.2, breakStagger: 0.4, breakTime: 1 } } };
+  const other: MonsterInfo = monsterInfo(summoned, world, guarded);
+  assert.notEqual(other, summoned);
+  assertFresh(other, world, guarded);
+  assert.equal(monsterInfo(other, world, guarded), other);
+});
+
+void test('a sleeper that wakes drops its sleeping line from the kept info', (): void => {
+  const { world, monster } = spawn('cinder_mite');
+  monster.aggro = false;
+  const asleep: MonsterInfo = monsterInfo(null, world, monster);
+  assert.ok(asleep.states.includes('Asleep until it hears you'));
+  assertFresh(asleep, world, monster);
+  monster.aggro = true;
+  const awake: MonsterInfo = monsterInfo(asleep, world, monster);
+  assert.ok(!awake.states.includes('Asleep until it hears you'));
+  assertFresh(awake, world, monster);
+});
+
+void test('every modifier a monster carries has its own line in the card', (): void => {
+  const { world, monster } = spawn('mended', ['smouldering', 'stormlit']);
+  const states: string[] = texts(monsterLines(world, monster), 'state');
+  for (const id of ['smouldering', 'stormlit']) assert.ok(states.includes(must(content.monsterMods.get(id), id).line), id);
+});

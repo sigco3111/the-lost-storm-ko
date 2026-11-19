@@ -1,0 +1,442 @@
+[
+  {
+    "piece": "Spangenhelm",
+    "parts": [
+      {
+        "file": "sketchfab-nasal-949b9f87336d483892c36eb8d4d46052.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.0015,
+        "crown": 0.0015,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          0.85,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Barbute",
+    "parts": [
+      {
+        "file": "sketchfab-barbuta-69c05f5b114f4ec1a92eea3d36e1b078.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Visored_Barbute",
+    "parts": [
+      {
+        "file": "sketchfab-visored_barbuta-8ce8003e097a4e30a5b96f612200f986.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": 0.03,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Gothic_Bascinet",
+    "parts": [
+      {
+        "file": "sketchfab-gothic_bascinet-f6c5e9ee150342fa85c1ca36e5688625.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.0015,
+        "crown": 0.0015,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": 0.03,
+        "floor": -0.05,
+        "stretch": [
+          0.85,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Bascinet",
+    "parts": [
+      {
+        "file": "sketchfab-bascinet-016b0f84c7394b5ca2006c1af3ba6aec.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 2.5,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": 0.03,
+        "floor": -0.05,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Great_Helm",
+    "parts": [
+      {
+        "file": "sketchfab-great_helm-1a9c9bdaf84d48b2899b771bcd9bde8a.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": 0.03,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Hundsgugel",
+    "parts": [
+      {
+        "file": "sketchfab-hundsgugel-a5ffb06276ce4ff6b82ae7083a9f5c43.glb",
+        "turn": [
+          0,
+          -90,
+          0
+        ],
+        "clearance": 0.0015,
+        "crown": 0.0015,
+        "forward": 0,
+        "lift": 0,
+        "widen": 2.5,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": 0.03,
+        "floor": -0.05,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Sallet",
+    "parts": [
+      {
+        "file": "sketchfab-archery_sallet-5b082c77519345b2a37d3beaff65418a.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Norman_Helm",
+    "parts": [
+      {
+        "file": "sketchfab-norman-624fe4b3df49424eac3f55c6a051b7b5.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Ornamented_Great_Helm",
+    "parts": [
+      {
+        "file": "sketchfab-ornamented_great_helm-7b2e7f7c809b46dca7e90da810223dc9.glb",
+        "turn": [
+          0,
+          180,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": 0.03,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "Horned_Helm",
+    "parts": [
+      {
+        "file": "sketchfab-evil_helmet-2291802f3d004ab69ffdf1e73edee848.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          -0.012,
+          -0.015
+        ],
+        "finish": null
+      }
+    ]
+  },
+  {
+    "piece": "War_Helm",
+    "parts": [
+      {
+        "file": "sketchfab-rusty_iron_mask-efd61055f793456c999087e956fa9898.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.003,
+        "crown": 0.003,
+        "forward": 0,
+        "lift": 0,
+        "widen": 1,
+        "anchor": "crown",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": {
+          "colour": [
+            0.16,
+            0.165,
+            0.175
+          ],
+          "metallic": 0.9,
+          "roughness": 0.38
+        }
+      },
+      {
+        "file": "sketchfab-hel_crown-97a33d6d690c42f0a09a2a20fa8fadc4.glb",
+        "turn": [
+          0,
+          0,
+          0
+        ],
+        "clearance": 0.008,
+        "crown": 0,
+        "forward": 0,
+        "lift": 0.03,
+        "widen": 1,
+        "anchor": "base",
+        "saturation": 1,
+        "cut": -0.06,
+        "floor": null,
+        "stretch": [
+          1,
+          1,
+          1
+        ],
+        "shift": [
+          0,
+          0,
+          0
+        ],
+        "finish": {
+          "colour": [
+            0.16,
+            0.165,
+            0.175
+          ],
+          "metallic": 0.9,
+          "roughness": 0.38
+        }
+      }
+    ]
+  }
+]

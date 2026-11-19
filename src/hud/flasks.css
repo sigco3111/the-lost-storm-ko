@@ -1,0 +1,226 @@
+.globe-flask {
+  --flask-gap: 6px;
+  position: absolute;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.hud-globe.life .globe-flask {
+  left: calc(100% + var(--flask-gap));
+}
+
+.hud-globe.mana .globe-flask {
+  right: calc(100% + var(--flask-gap));
+}
+
+body.touch .globe-flask {
+  display: none;
+}
+
+.flask-vessel {
+  --fu: 1px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: calc(var(--fu) * 26);
+  pointer-events: none;
+}
+
+.fv-art {
+  position: relative;
+  width: 100%;
+  height: calc(var(--fu) * 66);
+  transition:
+    translate var(--spring-snappy-ms) var(--spring-snappy),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.fv-art canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+}
+
+.fv-layer {
+  height: 100%;
+}
+
+.fv-fluid {
+  position: absolute;
+  inset: 0;
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+}
+
+.fv-liquid {
+  transition: clip-path var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.fv-surface {
+  transition:
+    translate var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.flask-vessel.fv-empty .fv-art {
+  opacity: 0.78;
+}
+
+.flask-vessel.fv-refused .fv-art {
+  translate: 0 2px;
+}
+
+.fv-key {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(244, 234, 216, 0.85);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 0 4px rgba(0, 0, 0, 0.7);
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.flask-vessel.fv-empty .fv-key {
+  opacity: 0.45;
+}
+
+.fv-bar {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: calc(var(--fu) * 12);
+  height: 1px;
+  margin-left: calc(var(--fu) * -6);
+  background: rgba(244, 234, 216, 0.55);
+  scale: 0 1;
+  transition: scale var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.flask-vessel.fv-keyed .fv-bar {
+  bottom: 6px;
+  width: 15px;
+  height: 1px;
+  margin-left: -7.5px;
+}
+
+.flask-vessel.fv-empty .fv-bar {
+  scale: 1 1;
+}
+
+.tc-btn.flask .flask-vessel {
+  --fu: 0.62px;
+}
+
+.globe-restore {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.globe-restore::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: globe-restore calc(var(--drift-ms) / 4) var(--drift-ease) infinite alternate;
+}
+
+.hud-globe:not(.restoring) .globe-restore::before {
+  animation-play-state: paused;
+}
+
+.hud-globe.life .globe-restore::before {
+  background: radial-gradient(circle at 50% 75%, rgba(220, 90, 80, 0.34), rgba(200, 80, 70, 0) 70%);
+}
+
+.hud-globe.mana .globe-restore::before {
+  background: radial-gradient(circle at 50% 75%, rgba(150, 185, 240, 0.34), rgba(150, 180, 230, 0) 70%);
+}
+
+.hud-globe.restoring .globe-restore {
+  opacity: 1;
+}
+
+@keyframes globe-restore {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fv-art::before {
+  content: '';
+  position: absolute;
+  inset: -26% -110%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 206, 130, 0.85), rgba(244, 168, 76, 0.5) 38%, rgba(232, 150, 60, 0.18) 68%, rgba(232, 150, 60, 0) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.flask-vessel.fv-upgrade .fv-art::before {
+  opacity: 1;
+  animation: flask-upgrade-glow calc(var(--drift-ms) / 2) var(--drift-ease) infinite;
+}
+
+.fv-mark {
+  position: absolute;
+  top: calc(var(--fu) * -6);
+  right: calc(var(--fu) * -7);
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 700;
+  font-size: calc(var(--fu) * 17);
+  line-height: 1;
+  color: #ffdf9a;
+  text-shadow:
+    0 0 4px rgba(255, 214, 140, 0.9),
+    0 0 10px rgba(232, 160, 70, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  scale: 0.4;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    scale var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.flask-vessel.fv-upgrade .fv-mark {
+  opacity: 1;
+  scale: 1;
+}
+
+.tc-btn.flask .fv-mark {
+  top: -4px;
+  right: -6px;
+  font-size: 15px;
+}
+
+@keyframes flask-upgrade-glow {
+  0% {
+    filter: opacity(0.3);
+  }
+  25% {
+    filter: opacity(0.65);
+  }
+  50% {
+    filter: opacity(1);
+  }
+  75% {
+    filter: opacity(0.65);
+  }
+  100% {
+    filter: opacity(0.3);
+  }
+}

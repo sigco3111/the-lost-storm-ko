@@ -1,0 +1,4956 @@
+[
+ {
+  "id": "cleave",
+  "name": "휘두르기",
+  "description": "넓은 호를 그리며 휘두른다. 세 번째 휘두르기마다 도약해 더 강하게 내리치며 적을 밀쳐낸다.",
+  "icon": "cleave",
+  "animation": "attack",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.14,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": true,
+  "engageRange": 2.2,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.0,
+   "arcDegrees": 135
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 6,
+  "stagger": 0.22,
+  "shake": 0.16,
+  "hitStop": 0.035,
+  "vfx": {
+   "style": "slash",
+   "color": "#d6ecff",
+   "cue": "blade",
+   "light": 0.3,
+   "impact": {
+    "sparks": 6,
+    "flash": 0
+   }
+  },
+  "combo": {
+   "window": 0.55,
+   "steps": [
+    {
+     "animation": "attack_b",
+     "windup": 0.14,
+     "recovery": 0.2,
+     "damageScale": 1.1,
+     "areaScale": 1,
+     "knockbackScale": 1,
+     "stagger": 0.22,
+     "shake": 0.18,
+     "hitStop": 0.035
+    },
+    {
+     "animation": "attack_c",
+     "windup": 0.24,
+     "recovery": 0.3,
+     "damageScale": 1.7,
+     "areaScale": 1.15,
+     "knockbackScale": 1.9,
+     "stagger": 0.5,
+     "shake": 0.42,
+     "hitStop": 0.07
+    }
+   ]
+  }
+ },
+ {
+  "id": "thunderclap",
+  "name": "천둥박수",
+  "description": "땅을 내리쳐 주변의 모든 것을 밀쳐내고 불붙인다.",
+  "icon": "thunderclap",
+  "animation": "slam_thunderclap",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 14,
+  "cooldown": 4,
+  "windup": 0.24,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.5,
+  "delivery": {
+   "type": "nova",
+   "radius": 4.6
+  },
+  "damage": {
+   "weaponPercent": 1.5,
+   "flatMin": 4,
+   "flatMax": 8
+  },
+  "knockback": 14,
+  "stagger": 0.65,
+  "shake": 0.55,
+  "hitStop": 0.07,
+  "category": "area",
+  "vfx": {
+   "style": "shockwave",
+   "color": "#ff7a2a",
+   "cue": "ground",
+   "light": 0.55,
+   "impact": {
+    "sparks": 14,
+    "flash": 1.6
+   }
+  },
+  "burn": {
+   "duration": 1.25,
+   "tick": 0.25,
+   "share": 0.04
+  }
+ },
+ {
+  "id": "storm_bolt",
+  "name": "폭풍 번개",
+  "description": "처음 맞은 적을 관통하는 번갯줄기.",
+  "icon": "storm_bolt",
+  "animation": "cast_storm_bolt",
+  "empowered": {
+   "weapon": "staff",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 7,
+  "cooldown": 0.45,
+  "windup": 0.16,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 16,
+  "delivery": {
+   "type": "projectile",
+   "speed": 27,
+   "radius": 0.5,
+   "range": 19,
+   "pierce": 1,
+   "count": 1,
+   "spreadDegrees": 12
+  },
+  "damage": {
+   "weaponPercent": 1.1,
+   "flatMin": 2,
+   "flatMax": 5
+  },
+  "knockback": 4.5,
+  "stagger": 0.2,
+  "shake": 0.14,
+  "hitStop": 0.03,
+  "category": "single",
+  "vfx": {
+   "style": "bolt",
+   "color": "#9be1ff",
+   "cue": "hand",
+   "lightning": {
+    "forks": 1,
+    "glow": 0.65,
+    "afterglow": 0.2,
+    "jitter": 0.55,
+    "width": 1.4,
+    "core": 1.1
+   },
+   "impact": {
+    "sparks": 12,
+    "flash": 1.1
+   },
+   "trail": 1.2
+  }
+ },
+ {
+  "id": "dodge_roll",
+  "name": "회피 구르기",
+  "description": "커서를 향해 구른다. 구르기 초반에는 어떤 공격도 맞지 않고, 공격을 중간에 끊을 수 있다.",
+  "icon": "dodge_roll",
+  "animation": "roll",
+  "manaCost": 0,
+  "cooldown": 1.1,
+  "windup": 0.36,
+  "recovery": 0.12,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "dash",
+   "distance": 5.5,
+   "duration": 0.36,
+   "invulnerable": 0.24,
+   "passThrough": true,
+   "steady": true
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "roll",
+   "color": "#8a7a62",
+   "cue": "none",
+   "shadow": {
+    "color": "#5a2fc0",
+    "strength": 0.9
+   }
+  }
+ },
+ {
+  "id": "volatile_burst",
+  "name": "죽음의 폭발",
+  "description": "품고 있던 것이 터져 나온다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "mark",
+   "range": 0,
+   "radius": 3,
+   "delay": 1.0
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 1.4,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 10,
+  "stagger": 0,
+  "shake": 0.6,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#ff6a30",
+   "light": 0.6,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.6
+   }
+  }
+ },
+ {
+  "id": "mended_rhythm",
+  "category": "melee",
+  "name": "기워진 가락",
+  "description": "같은 두 걸음에 같은 일격이, 되풀이된다.",
+  "icon": "cleave",
+  "animation": "attack",
+  "manaCost": 0,
+  "cooldown": 1.1,
+  "windup": 0.42,
+  "recovery": 0.45,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 1.5,
+  "delivery": {
+   "type": "arc",
+   "reach": 2.0,
+   "arcDegrees": 100
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 2,
+  "stagger": 0.1,
+  "shake": 0.3,
+  "hitStop": 0.04,
+  "vfx": {
+   "style": "claw",
+   "color": "#d9cfb0",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "mender_needle",
+  "category": "single",
+  "name": "바늘",
+  "description": "실을 늘어뜨리며 날아가는 바늘.",
+  "icon": "storm_bolt",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 2.4,
+  "windup": 0.55,
+  "recovery": 0.4,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 10,
+  "delivery": {
+   "type": "projectile",
+   "speed": 11,
+   "radius": 0.4,
+   "range": 17,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 2,
+  "stagger": 0.1,
+  "shake": 0.3,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "bolt",
+   "color": "#d9cfb0",
+   "light": 0.4,
+   "trail": 0.6,
+   "impact": {
+    "sparks": 5,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "mender_stitch",
+  "category": "revive",
+  "name": "바느질",
+  "description": "쓰러진 몸에 실을 꿰어 다시 일으킨다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 7.5,
+  "windup": 1.4,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 9,
+  "delivery": {
+   "type": "revive",
+   "range": 9,
+   "count": 1,
+   "lifeShare": 0.6
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0.2,
+  "hitStop": 0,
+  "vfx": {
+   "style": "orb",
+   "color": "#d9cfb0"
+  }
+ },
+ {
+  "id": "brute_haymaker",
+  "category": "melee",
+  "name": "헤이메이커",
+  "description": "길고 기울어진 준비 동작, 그리고 온몸의 무게가 쏟아진다.",
+  "icon": "cleave",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 2.6,
+  "windup": 1.15,
+  "recovery": 0.9,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.4,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.3,
+   "arcDegrees": 95
+  },
+  "damage": {
+   "weaponPercent": 1.6,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 11,
+  "stagger": 0.4,
+  "commit": {
+   "at": 0.35,
+   "breakStagger": 0.55
+  },
+  "shake": 0.62,
+  "hitStop": 0.09,
+  "vfx": {
+   "style": "slash",
+   "color": "#d08a5a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "taker_snatch",
+  "category": "area",
+  "name": "낚아채기",
+  "description": "웅크렸다가 튀어 올라, 붙잡은 것을 끌고 돌아간다.",
+  "icon": "thunderclap",
+  "animation": "lunge",
+  "manaCost": 0,
+  "cooldown": 3.2,
+  "windup": 0.8,
+  "recovery": 0.7,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 7,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.6
+  },
+  "damage": {
+   "weaponPercent": 0.9,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": -6,
+  "stagger": 0.2,
+  "commit": {
+   "at": 0,
+   "breakStagger": 0.5
+  },
+  "shake": 0.4,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "claw",
+   "color": "#d08a5a",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  },
+  "leap": {
+   "distance": 7,
+   "stopShort": 0.9,
+   "airTime": 0.32
+  },
+  "root": 0.9
+ },
+ {
+  "id": "thrower_stone",
+  "category": "single",
+  "name": "투석",
+  "description": "돌이든, 병이든, 장화든, 손에 잡히는 대로.",
+  "icon": "storm_bolt",
+  "animation": "throw",
+  "manaCost": 0,
+  "cooldown": 2.2,
+  "windup": 0.55,
+  "recovery": 0.4,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 9,
+  "delivery": {
+   "type": "projectile",
+   "speed": 14,
+   "radius": 0.45,
+   "range": 15,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 4,
+  "stagger": 0.15,
+  "commit": {
+   "at": 0,
+   "breakStagger": 0.5
+  },
+  "shake": 0.3,
+  "hitStop": 0.04,
+  "vfx": {
+   "style": "orb",
+   "color": "#b8a48a",
+   "light": 0.3,
+   "trail": 0.6,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   }
+  }
+ },
+ {
+  "id": "borrower_cleave",
+  "category": "melee",
+  "name": "빌린 일격",
+  "description": "누군가가 한때 휘둘렀던 그대로 휘두르는 넓은 베기.",
+  "icon": "cleave",
+  "animation": "chop",
+  "manaCost": 0,
+  "cooldown": 2.2,
+  "windup": 0.95,
+  "recovery": 0.7,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.6,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.6,
+   "arcDegrees": 150
+  },
+  "damage": {
+   "weaponPercent": 1.5,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 10,
+  "stagger": 0.3,
+  "shake": 0.55,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "slash",
+   "color": "#d08a5a",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "colossus_hammer",
+  "category": "melee",
+  "name": "내리치기",
+  "description": "정면으로 느리게 내리치는 일격.",
+  "icon": "cleave",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 2.3,
+  "windup": 1.3,
+  "recovery": 0.8,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.2,
+  "delivery": {
+   "type": "arc",
+   "reach": 4.4,
+   "arcDegrees": 70
+  },
+  "damage": {
+   "weaponPercent": 1.7,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 12,
+  "stagger": 0.4,
+  "shake": 0.5,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "slash",
+   "color": "#d08a5a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "colossus_stone",
+  "category": "single",
+  "name": "투석",
+  "description": "돌덩이를 세게 던진다.",
+  "icon": "storm_bolt",
+  "animation": "throw",
+  "manaCost": 0,
+  "cooldown": 3.6,
+  "windup": 1.05,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 13,
+  "delivery": {
+   "type": "projectile",
+   "speed": 13,
+   "radius": 0.7,
+   "range": 21,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.1,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 8,
+  "stagger": 0.2,
+  "shake": 0.4,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "orb",
+   "color": "#b8a48a",
+   "light": 0.3,
+   "trail": 0.6,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   }
+  }
+ },
+ {
+  "id": "colossus_slam",
+  "category": "area",
+  "name": "대지 강타",
+  "description": "두 손을 내리꽂으면 바닥이 응답한다.",
+  "icon": "thunderclap",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 7.5,
+  "windup": 1.7,
+  "recovery": 0.9,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 4,
+  "delivery": {
+   "type": "nova",
+   "radius": 7.4
+  },
+  "damage": {
+   "weaponPercent": 2.1,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 16,
+  "stagger": 0.5,
+  "shake": 0.7,
+  "hitStop": 0.12,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d08a5a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.5
+   }
+  }
+ },
+ {
+  "id": "still_grasp",
+  "category": "melee",
+  "name": "차가운 손아귀",
+  "description": "멈추지 않는 느린 손길.",
+  "icon": "cleave",
+  "animation": "slam",
+  "manaCost": 0,
+  "cooldown": 1.8,
+  "windup": 1.0,
+  "recovery": 0.8,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 1.8,
+  "delivery": {
+   "type": "arc",
+   "reach": 2.4,
+   "arcDegrees": 90
+  },
+  "damage": {
+   "type": "frost",
+   "weaponPercent": 1.3,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 7,
+  "stagger": 0.3,
+  "shake": 0.45,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "claw",
+   "color": "#c8d4dc",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "keeper_field",
+  "category": "area",
+  "name": "느려진 시간",
+  "description": "땅 위로 시간이 걸쭉해진다. 그 안의 모든 것이 절반의 속도로 움직인다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 7,
+  "windup": 0.8,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 11,
+  "delivery": {
+   "type": "field",
+   "range": 12,
+   "radius": 3.4,
+   "duration": 4.5,
+   "slow": 0.55
+  },
+  "damage": {
+   "type": "frost",
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0.25,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d8b46a",
+   "light": 0.4
+  }
+ },
+ {
+  "id": "keeper_bind",
+  "category": "root",
+  "name": "붙잡힌 순간",
+  "description": "황동 빛의 선이 목표를 한 박자 동안 멈춘다.",
+  "icon": "storm_bolt",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 3.6,
+  "windup": 0.75,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 11,
+  "delivery": {
+   "type": "projectile",
+   "speed": 15,
+   "radius": 0.4,
+   "range": 17,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "type": "frost",
+   "weaponPercent": 0.9,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 3,
+  "stagger": 0.2,
+  "shake": 0.35,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "bolt",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "trail": 0.8,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.5
+   }
+  },
+  "hold": 0.85
+ },
+ {
+  "id": "keeper_volley",
+  "category": "root",
+  "name": "붙잡힌 시간들",
+  "description": "세 개의 황동 선이 부채질처럼 펼쳐진다. 닿는 것마다 멈춘다.",
+  "icon": "storm_bolt",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 5.5,
+  "windup": 1.05,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 12,
+  "delivery": {
+   "type": "projectile",
+   "speed": 13,
+   "radius": 0.4,
+   "range": 17,
+   "pierce": 0,
+   "count": 3,
+   "spreadDegrees": 26
+  },
+  "damage": {
+   "type": "frost",
+   "weaponPercent": 0.8,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 4,
+  "stagger": 0.2,
+  "shake": 0.4,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "bolt",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "trail": 0.8,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.5
+   }
+  },
+  "hold": 0.6
+ },
+ {
+  "id": "rank_thrust",
+  "category": "melee",
+  "name": "열찌르기",
+  "description": "들어 올린 방패 뒤에서 나오는 짧은 찌르기.",
+  "icon": "cleave",
+  "animation": "attack",
+  "manaCost": 0,
+  "cooldown": 1.9,
+  "windup": 0.55,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.2,
+  "delivery": {
+   "type": "arc",
+   "reach": 2.7,
+   "arcDegrees": 70
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 5,
+  "stagger": 0.3,
+  "shake": 0.35,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "slash",
+   "color": "#d8c48f",
+   "light": 0.35,
+   "impact": {
+    "sparks": 5,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "tally_mark",
+  "category": "mark",
+  "name": "계표",
+  "description": "목표를 새기는 창백한 획. 다른 이의 다음 일격에 셈이 실린다.",
+  "icon": "static_brand",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 4.2,
+  "windup": 0.7,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 12,
+  "delivery": {
+   "type": "projectile",
+   "speed": 13,
+   "radius": 0.4,
+   "range": 16,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 0.35,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 1,
+  "stagger": 0.1,
+  "shake": 0.2,
+  "hitStop": 0.04,
+  "vfx": {
+   "style": "brand",
+   "color": "#ece2c4",
+   "light": 0.45,
+   "trail": 0.9,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.4
+   }
+  },
+  "brand": {
+   "duration": 6,
+   "burst": "tally_due"
+  }
+ },
+ {
+  "id": "tally_due",
+  "category": "area",
+  "name": "결산",
+  "description": "새겨진 표를 한꺼번에 거둬들인다.",
+  "icon": "static_brand",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.1,
+  "recovery": 0.1,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.8
+  },
+  "damage": {
+   "weaponPercent": 1.5,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 7,
+  "stagger": 0.45,
+  "shake": 0.6,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#ece2c4",
+   "cue": "none",
+   "light": 0.6,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.8
+   }
+  }
+ },
+ {
+  "id": "custodian_mend",
+  "category": "revive",
+  "name": "제자리로",
+  "description": "쓰러진 수호자를 들어 올려 제자리에 세운다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 9,
+  "windup": 1.6,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 10,
+  "delivery": {
+   "type": "revive",
+   "range": 10,
+   "count": 2,
+   "lifeShare": 0.5
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0.2,
+  "hitStop": 0,
+  "vfx": {
+   "style": "orb",
+   "color": "#c8d4ec"
+  }
+ },
+ {
+  "id": "custodian_push",
+  "category": "area",
+  "name": "마당 쓸기",
+  "description": "막대의 납작한 일격이 주변의 모든 것을 밀어낸다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 4,
+  "windup": 0.7,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.4,
+  "delivery": {
+   "type": "nova",
+   "radius": 2.6
+  },
+  "damage": {
+   "weaponPercent": 0.7,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 9,
+  "stagger": 0.35,
+  "shake": 0.45,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#c8d4ec",
+   "light": 0.45,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "marshal_sweep",
+  "category": "melee",
+  "name": "감독관의 휩쓸기",
+  "description": "열 앞을 쓸어내는 느리고 넓은 휩쓸기.",
+  "icon": "cleave",
+  "animation": "sweep",
+  "manaCost": 0,
+  "cooldown": 2.6,
+  "windup": 0.9,
+  "recovery": 0.7,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.4,
+   "arcDegrees": 160
+  },
+  "damage": {
+   "weaponPercent": 1.5,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 9,
+  "stagger": 0.5,
+  "commit": {
+   "at": 0,
+   "breakStagger": 0.8
+  },
+  "shake": 0.7,
+  "hitStop": 0.12,
+  "vfx": {
+   "style": "slash",
+   "color": "#d8c48f",
+   "light": 0.5,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "keeper_replay",
+  "category": "melee",
+  "name": "다시 베기",
+  "description": "한 번 베고, 잠시 뒤 같은 자리에서 같은 베기가 다시 나온다.",
+  "icon": "cleave",
+  "animation": "attack",
+  "manaCost": 0,
+  "cooldown": 2.4,
+  "windup": 0.6,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.2,
+  "delivery": {
+   "type": "arc",
+   "reach": 3,
+   "arcDegrees": 110
+  },
+  "damage": {
+   "weaponPercent": 1.1,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 6,
+  "stagger": 0.3,
+  "shake": 0.4,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "slash",
+   "color": "#d8b46a",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  },
+  "echo": 0.7
+ },
+ {
+  "id": "gate_replay",
+  "category": "melee",
+  "name": "다시 휩쓸기",
+  "description": "두 번 일어나는 넓은 휩쓸기.",
+  "icon": "cleave",
+  "animation": "sweep",
+  "manaCost": 0,
+  "cooldown": 2.4,
+  "windup": 1.2,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.8,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.8,
+   "arcDegrees": 150
+  },
+  "damage": {
+   "weaponPercent": 0.7,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 9,
+  "stagger": 0.4,
+  "shake": 0.5,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "slash",
+   "color": "#d8b46a",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  },
+  "echo": 0.8
+ },
+ {
+  "id": "gate_ring",
+  "category": "area",
+  "name": "쳐진 시각",
+  "description": "힘의 고리가 터져 나오고, 다시 터진다.",
+  "icon": "thunderclap",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 6.5,
+  "windup": 1.4,
+  "recovery": 0.7,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 4,
+  "delivery": {
+   "type": "nova",
+   "radius": 6
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 2.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 13,
+  "stagger": 0.5,
+  "shake": 0.65,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.5
+   }
+  },
+  "echo": 1.1
+ },
+ {
+  "id": "warden_sweep",
+  "category": "melee",
+  "name": "지팡이 휩쓸기",
+  "description": "무거운 지팡이의 넓은 휩쓸기.",
+  "icon": "cleave",
+  "animation": "attack",
+  "manaCost": 0,
+  "cooldown": 1.6,
+  "windup": 0.5,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.2,
+  "delivery": {
+   "type": "arc",
+   "reach": 2.9,
+   "arcDegrees": 130
+  },
+  "damage": {
+   "weaponPercent": 1.1,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 7,
+  "stagger": 0.35,
+  "shake": 0.3,
+  "hitStop": 0.05,
+  "vfx": {
+   "style": "slash",
+   "color": "#f0c070",
+   "light": 0.35,
+   "impact": {
+    "sparks": 4,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "rival_cleave",
+  "category": "melee",
+  "name": "휘두르기",
+  "description": "그대의 휩쓸기가 그대에게 되돌아온다.",
+  "icon": "cleave",
+  "animation": "sweep",
+  "manaCost": 0,
+  "cooldown": 1.7,
+  "windup": 0.85,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.6,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.4,
+   "arcDegrees": 140
+  },
+  "damage": {
+   "weaponPercent": 0.9,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 7,
+  "stagger": 0.3,
+  "shake": 0.35,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "slash",
+   "color": "#b9c2dc",
+   "light": 0.35,
+   "impact": {
+    "sparks": 5,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "rival_bolt",
+  "category": "single",
+  "name": "폭풍 번개",
+  "description": "그대의 번개가 한 번에 세 갈래로 날아온다.",
+  "icon": "storm_bolt",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 4.2,
+  "windup": 0.95,
+  "recovery": 0.45,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 11,
+  "delivery": {
+   "type": "projectile",
+   "speed": 17,
+   "radius": 0.45,
+   "range": 19,
+   "pierce": 0,
+   "count": 3,
+   "spreadDegrees": 16
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 0.7,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 4.5,
+  "stagger": 0.2,
+  "shake": 0.3,
+  "hitStop": 0.04,
+  "vfx": {
+   "style": "bolt",
+   "color": "#8f9fc4",
+   "light": 0.6,
+   "lightning": {
+    "forks": 1,
+    "glow": 0.45,
+    "afterglow": 0.16,
+    "jitter": 0.7,
+    "width": 1.1,
+    "core": 0.55
+   },
+   "impact": {
+    "sparks": 8,
+    "flash": 0.6
+   },
+   "trail": 0.8
+  }
+ },
+ {
+  "id": "rival_clap",
+  "category": "area",
+  "name": "천둥박수",
+  "description": "그대의 천둥이 더 천천히 모여든다.",
+  "icon": "thunderclap",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 6.5,
+  "windup": 1.35,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.8,
+  "delivery": {
+   "type": "nova",
+   "radius": 5.8
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 1.6,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 14,
+  "stagger": 0.6,
+  "shake": 0.6,
+  "hitStop": 0.09,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#8794bf",
+   "light": 0.5,
+   "lightning": {
+    "forks": 2,
+    "glow": 0.4,
+    "afterglow": 0.2,
+    "jitter": 1.1,
+    "width": 1.3,
+    "core": 0.55
+   },
+   "impact": {
+    "sparks": 10,
+    "flash": 0.8
+   }
+  }
+ },
+ {
+  "id": "forkline",
+  "name": "갈래 번개",
+  "description": "적에서 적으로 튀며 조금씩 약해지는 번개.",
+  "icon": "forkline",
+  "animation": "cast_forkline",
+  "manaCost": 11,
+  "cooldown": 0.9,
+  "windup": 0.14,
+  "recovery": 0.22,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 10,
+  "delivery": {
+   "type": "chain",
+   "range": 11,
+   "jumps": 4,
+   "jumpRange": 6,
+   "falloff": 0.8
+  },
+  "damage": {
+   "weaponPercent": 0.95,
+   "flatMin": 3,
+   "flatMax": 7
+  },
+  "knockback": 2.5,
+  "stagger": 0.18,
+  "shake": 0.18,
+  "hitStop": 0.03,
+  "category": "chain",
+  "vfx": {
+   "style": "fork",
+   "color": "#b8e8ff",
+   "cue": "hand",
+   "lightning": {
+    "forks": 2,
+    "glow": 0.55,
+    "afterglow": 0.28,
+    "jitter": 0.85,
+    "width": 1.3,
+    "core": 1.15
+   },
+   "impact": {
+    "sparks": 8,
+    "flash": 0.9
+   }
+  }
+ },
+ {
+  "id": "mist_step",
+  "name": "안개 걸음",
+  "description": "안개가 되어 조준한 곳에 다시 나타나며, 그 자리의 것들을 밀쳐낸다.",
+  "icon": "mist_step",
+  "animation": "cast",
+  "manaCost": 9,
+  "cooldown": 3.2,
+  "windup": 0.12,
+  "recovery": 0.12,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 7,
+  "delivery": {
+   "type": "blink",
+   "range": 7.5,
+   "radius": 2.4
+  },
+  "damage": {
+   "weaponPercent": 0.6,
+   "flatMin": 2,
+   "flatMax": 4
+  },
+  "knockback": 7,
+  "stagger": 0.35,
+  "shake": 0.22,
+  "hitStop": 0.04,
+  "category": "movement",
+  "vfx": {
+   "style": "mist",
+   "color": "#c9d6e2",
+   "cue": "ground",
+   "lightning": {
+    "forks": 0,
+    "glow": 0.6,
+    "afterglow": 0.32,
+    "jitter": 0.25,
+    "width": 2.4,
+    "core": 0.12
+   }
+  }
+ },
+ {
+  "id": "downdraught",
+  "name": "이안류",
+  "description": "조준한 곳의 소용돌이가 적들을 끌어모은 뒤 밑으로 끌어당긴다.",
+  "icon": "downdraught",
+  "animation": "cast_downdraught",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 15,
+  "cooldown": 4.5,
+  "windup": 0.2,
+  "recovery": 0.25,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 9,
+  "delivery": {
+   "type": "area",
+   "range": 10,
+   "radius": 5.5,
+   "duration": 0.65,
+   "pulse": 0.65,
+   "pull": 11,
+   "slow": 0.6,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.9,
+   "flatMin": 3,
+   "flatMax": 6
+  },
+  "knockback": 0,
+  "stagger": 0.6,
+  "shake": 0.45,
+  "hitStop": 0.06,
+  "category": "area",
+  "vfx": {
+   "style": "wind",
+   "color": "#5fa9cf",
+   "cue": "hand",
+   "water": {
+    "deep": "#0b3352",
+    "foam": "#d6efff",
+    "depth": 0.75
+   }
+  }
+ },
+ {
+  "id": "squall",
+  "name": "소나기 폭풍",
+  "description": "조준한 곳에 폭풍이 일어 0.5초마다 그 아래 모든 것을 친다.",
+  "icon": "squall",
+  "animation": "cast_squall",
+  "empowered": {
+   "weapon": "staff",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 20,
+  "cooldown": 6.5,
+  "windup": 0.22,
+  "recovery": 0.25,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 10,
+  "delivery": {
+   "type": "area",
+   "range": 11,
+   "radius": 3.8,
+   "duration": 4,
+   "pulse": 0.5,
+   "pull": 0,
+   "slow": 0.85,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.6,
+   "flatMin": 2,
+   "flatMax": 4
+  },
+  "knockback": 1.5,
+  "stagger": 0.12,
+  "shake": 0.1,
+  "hitStop": 0.015,
+  "category": "lasting",
+  "vfx": {
+   "style": "storm",
+   "color": "#8fd0ff",
+   "cue": "hand",
+   "lightning": {
+    "forks": 1,
+    "glow": 0.5,
+    "afterglow": 0.22,
+    "jitter": 0.9,
+    "width": 1.3,
+    "core": 0.9
+   },
+   "impact": {
+    "sparks": 8,
+    "flash": 1.3
+   }
+  }
+ },
+ {
+  "id": "thunderhead",
+  "name": "뇌운",
+  "description": "길게 눌러 모으고, 놓아서 친다. 오래 모을수록 더 세고 넓게 떨어진다.",
+  "icon": "thunderhead",
+  "animation": "slam_charged_thunderhead",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "areaPercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 8,
+  "cooldown": 2.6,
+  "windup": 0.2,
+  "recovery": 0.32,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.6,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.2,
+   "arcDegrees": 150
+  },
+  "damage": {
+   "weaponPercent": 1.4,
+   "flatMin": 2,
+   "flatMax": 5
+  },
+  "knockback": 8,
+  "stagger": 0.4,
+  "shake": 0.45,
+  "hitStop": 0.07,
+  "category": "charged",
+  "vfx": {
+   "style": "heave",
+   "color": "#e6f3ff",
+   "cue": "ground",
+   "light": 0.8,
+   "lightning": {
+    "forks": 2,
+    "glow": 0.45,
+    "afterglow": 0.24,
+    "jitter": 1,
+    "width": 1.4,
+    "core": 0.9
+   },
+   "impact": {
+    "sparks": 8,
+    "flash": 1.2
+   }
+  },
+  "press": {
+   "type": "charge",
+   "max": 1.1,
+   "damageScale": 3.1,
+   "areaScale": 1.7
+  }
+ },
+ {
+  "id": "static_brand",
+  "name": "정전기 낙인",
+  "description": "처음 닿은 적을 대전시킨다. 그 적을 다른 무엇으로든 치면 전하가 주변에 터진다.",
+  "icon": "static_brand",
+  "animation": "cast_static_brand",
+  "manaCost": 6,
+  "cooldown": 1.2,
+  "windup": 0.12,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 14,
+  "delivery": {
+   "type": "projectile",
+   "speed": 30,
+   "radius": 0.45,
+   "range": 18,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 0.5,
+   "flatMin": 1,
+   "flatMax": 3
+  },
+  "knockback": 1.5,
+  "stagger": 0.1,
+  "shake": 0.08,
+  "hitStop": 0.02,
+  "category": "mark",
+  "vfx": {
+   "style": "brand",
+   "color": "#f2e08a",
+   "cue": "hand",
+   "light": 0.35,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.6
+   },
+   "trail": 1
+  },
+  "brand": {
+   "duration": 7,
+   "burst": "static_brand_burst"
+  }
+ },
+ {
+  "id": "static_brand_burst",
+  "name": "낙인 폭발",
+  "description": "저장된 전하를 한꺼번에 풀어놓는다.",
+  "icon": "static_brand",
+  "animation": "cast_static_brand_burst",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.1,
+  "recovery": 0.1,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3,
+  "delivery": {
+   "type": "nova",
+   "radius": 3.2
+  },
+  "damage": {
+   "weaponPercent": 1.6,
+   "flatMin": 6,
+   "flatMax": 12
+  },
+  "knockback": 11,
+  "stagger": 0.6,
+  "shake": 0.45,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#f2e08a",
+   "cue": "none",
+   "light": 0.6,
+   "lightning": {
+    "forks": 1,
+    "glow": 0.4,
+    "afterglow": 0.2,
+    "jitter": 0.8,
+    "width": 1.1,
+    "core": 0.8
+   },
+   "impact": {
+    "sparks": 10,
+    "flash": 1.2
+   }
+  }
+ },
+ {
+  "id": "living_wire",
+  "name": "살아 있는 전선",
+  "description": "목표에 번갯줄을 이어 놓는다. 유지하는 동안 그 길 위의 모든 것을 태운다.",
+  "icon": "living_wire",
+  "animation": "cast_living_wire",
+  "manaCost": 3,
+  "cooldown": 0.6,
+  "windup": 0.16,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 11,
+  "delivery": {
+   "type": "beam",
+   "range": 12,
+   "width": 1.1
+  },
+  "damage": {
+   "weaponPercent": 0.42,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "knockback": 0.6,
+  "stagger": 0.08,
+  "shake": 0.05,
+  "hitStop": 0.01,
+  "category": "channel",
+  "vfx": {
+   "style": "beam",
+   "color": "#bfe9ff",
+   "cue": "hand",
+   "lightning": {
+    "forks": 1,
+    "glow": 0.45,
+    "afterglow": 0.14,
+    "jitter": 0.5,
+    "width": 0.9,
+    "core": 0.75
+   },
+   "impact": {
+    "sparks": 4,
+    "flash": 0.45
+   }
+  },
+  "press": {
+   "type": "channel",
+   "interval": 0.18,
+   "max": 4
+  }
+ },
+ {
+  "id": "held_breath",
+  "name": "멈춘 숨",
+  "description": "몇 박자 동안 주변의 모든 것이 기어가듯 움직인다. 그대는 아니다.",
+  "icon": "held_breath",
+  "animation": "cast_held_breath",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "durationPercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 24,
+  "cooldown": 16,
+  "windup": 0.2,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 8,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 9,
+   "duration": 4,
+   "pulse": 0,
+   "pull": 0,
+   "slow": 0.2,
+   "anchor": "caster"
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0.3,
+  "hitStop": 0.05,
+  "category": "defence",
+  "vfx": {
+   "style": "gap",
+   "color": "#d8d0ff",
+   "cue": "hand"
+  }
+ },
+ {
+  "id": "mending_pulse",
+  "name": "치유의 맥박",
+  "description": "빛이 퍼져 나가 상처를 아문다. 그대와 닿는 모든 아군이 생명력 10과 최대 생명력의 12%를 회복한다.",
+  "icon": "mending_pulse",
+  "animation": "cast",
+  "manaCost": 22,
+  "cooldown": 8,
+  "windup": 0.3,
+  "recovery": 0.25,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "nova",
+   "radius": 6,
+   "side": "allies"
+  },
+  "mend": {
+   "flat": 10,
+   "lifeShare": 0.12
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "category": "defence",
+  "vfx": {
+   "style": "mend",
+   "color": "#7fe39a",
+   "cue": "hand",
+   "light": 0.6
+  }
+ },
+ {
+  "id": "storm_bolt_lance",
+  "name": "폭풍 창",
+  "description": "폭풍 번개가 창이 된다. 직선 위의 모든 것을 한꺼번에 치는 번갯줄기.",
+  "icon": "storm_bolt",
+  "animation": "cast_storm_bolt_lance",
+  "empowered": {
+   "weapon": "staff",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 10,
+  "cooldown": 0.9,
+  "windup": 0.2,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 16,
+  "delivery": {
+   "type": "beam",
+   "range": 15,
+   "width": 1.0
+  },
+  "damage": {
+   "weaponPercent": 1.25,
+   "flatMin": 3,
+   "flatMax": 6
+  },
+  "knockback": 4.5,
+  "stagger": 0.2,
+  "shake": 0.2,
+  "hitStop": 0.035,
+  "vfx": {
+   "style": "beam",
+   "color": "#9be1ff",
+   "cue": "hand",
+   "lightning": {
+    "forks": 2,
+    "glow": 0.55,
+    "afterglow": 0.24,
+    "jitter": 0.6,
+    "width": 1.35,
+    "core": 1
+   },
+   "impact": {
+    "sparks": 12,
+    "flash": 1
+   }
+  }
+ },
+ {
+  "id": "thunderclap_standing",
+  "name": "머무는 천둥",
+  "description": "천둥박수가 주변에 머무는 폭풍이 되어 0.5초마다 가까운 모든 것을 친다.",
+  "icon": "thunderclap",
+  "animation": "slam",
+  "manaCost": 16,
+  "cooldown": 5,
+  "windup": 0.24,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.5,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 4.2,
+   "duration": 2.5,
+   "pulse": 0.5,
+   "pull": 0,
+   "slow": 0.85,
+   "anchor": "caster"
+  },
+  "damage": {
+   "weaponPercent": 0.55,
+   "flatMin": 2,
+   "flatMax": 4
+  },
+  "knockback": 3,
+  "stagger": 0.2,
+  "shake": 0.18,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "storm",
+   "color": "#7fd4ff",
+   "cue": "ground",
+   "light": 0.6,
+   "lightning": {
+    "forks": 1,
+    "glow": 0.5,
+    "afterglow": 0.22,
+    "jitter": 0.9,
+    "width": 1.3,
+    "core": 0.9
+   },
+   "impact": {
+    "sparks": 8,
+    "flash": 1.2
+   }
+  }
+ },
+ {
+  "id": "cleave_whirl",
+  "name": "선회 베기",
+  "description": "휘두르기가 온몸의 회전이 된다. 주변 전부를 치지만, 더는 내리치기로 이어지지 않는다.",
+  "icon": "cleave",
+  "animation": "attack_cleave_whirl",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.18,
+  "recovery": 0.24,
+  "scalesWithAttackSpeed": true,
+  "engageRange": 2.2,
+  "delivery": {
+   "type": "nova",
+   "radius": 3.2
+  },
+  "damage": {
+   "weaponPercent": 0.9,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 5,
+  "stagger": 0.2,
+  "shake": 0.16,
+  "hitStop": 0.035,
+  "vfx": {
+   "style": "slash",
+   "color": "#d6ecff",
+   "cue": "blade",
+   "light": 0.3,
+   "impact": {
+    "sparks": 6,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "cleave_millwheel",
+  "name": "물레방아",
+  "description": "휘두르기를 누르고 있으면 달리며 계속 회전한다. 적을 칠 때마다 탄력이 붙어 더 빨리 돌고, 닿는 범위가 넓어지며, 쓰러지지 않는다. 적중마다 마나를 조금 돌려받고, 입힌 피해의 3%를 생명력으로 돌려받는다(희귀는 절반, 우두머리는 4분의 1). 허공에 돌기만 하면 탄력만 소모한다.",
+  "icon": "cleave",
+  "animation": "sweep",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 3,
+  "cooldown": 0,
+  "windup": 0.18,
+  "recovery": 0.16,
+  "scalesWithAttackSpeed": true,
+  "engageRange": 1.6,
+  "delivery": {
+   "type": "nova",
+   "radius": 2
+  },
+  "damage": {
+   "weaponPercent": 0.46,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0.1,
+  "shake": 0.05,
+  "hitStop": 0,
+  "category": "channel",
+  "leech": 0.03,
+  "vfx": {
+   "style": "gale",
+   "color": "#d6ecff",
+   "cue": "blade",
+   "light": 0.3,
+   "impact": {
+    "sparks": 6,
+    "flash": 0
+   }
+  },
+  "press": {
+   "type": "channel",
+   "interval": 0.32,
+   "max": 120,
+   "move": 1,
+   "passThrough": true,
+   "hint": "Hold to keep turning; you can run while it turns"
+  },
+  "momentum": {
+   "perHit": 1,
+   "cap": 24,
+   "grace": 0.6,
+   "drain": 12,
+   "steady": 4,
+   "manaPerHit": 0.6,
+   "lifePerHit": 0,
+   "tiers": [
+    {
+     "at": 6,
+     "turn": 1.1,
+     "reach": 1.05
+    },
+    {
+     "at": 12,
+     "turn": 1.2,
+     "reach": 1.1
+    },
+    {
+     "at": 20,
+     "turn": 1.25,
+     "reach": 1.15
+    }
+   ]
+  }
+ },
+ {
+  "id": "thunderhead_leap",
+  "name": "천둥 도약",
+  "description": "뇌운이 도약이 된다. 조준한 곳에 내려서며 폭풍이 함께 내리꽂힌다.",
+  "icon": "thunderhead",
+  "animation": "slam_charged_thunderhead_leap",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 12,
+  "cooldown": 3.5,
+  "windup": 0.22,
+  "recovery": 0.32,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.6,
+  "delivery": {
+   "type": "blink",
+   "range": 8,
+   "radius": 3.4
+  },
+  "damage": {
+   "weaponPercent": 1.6,
+   "flatMin": 3,
+   "flatMax": 6
+  },
+  "knockback": 10,
+  "stagger": 0.45,
+  "shake": 0.4,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "heave",
+   "color": "#e6f3ff",
+   "cue": "ground",
+   "light": 0.8
+  }
+ },
+ {
+  "id": "dodge_roll_slip",
+  "name": "그림자 걸음",
+  "description": "회피 구르기가 그림자를 가로지르는 걸음이 된다. 조준한 곳에 닿으며 그 자리의 것들을 밀쳐낸다.",
+  "icon": "dodge_roll",
+  "animation": "cast_dodge_roll_slip",
+  "manaCost": 0,
+  "cooldown": 1.6,
+  "windup": 0.1,
+  "recovery": 0.12,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "blink",
+   "range": 6.5,
+   "radius": 1.8
+  },
+  "damage": {
+   "weaponPercent": 0.3,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "knockback": 6,
+  "stagger": 0.25,
+  "shake": 0.1,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "mist",
+   "color": "#8a6fd1",
+   "cue": "ground",
+   "shadow": {
+    "color": "#5a2fc0",
+    "strength": 0.9
+   }
+  }
+ },
+ {
+  "id": "downdraught_updraught",
+  "name": "쇄파",
+  "description": "이안류가 쇄파가 된다. 파도가 주변에서 터져 모든 것을 날려 버린다.",
+  "icon": "downdraught",
+  "animation": "cast_downdraught_updraught",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 15,
+  "cooldown": 4.5,
+  "windup": 0.2,
+  "recovery": 0.25,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 9,
+  "delivery": {
+   "type": "nova",
+   "radius": 5
+  },
+  "damage": {
+   "weaponPercent": 0.8,
+   "flatMin": 3,
+   "flatMax": 6
+  },
+  "knockback": 16,
+  "stagger": 0.5,
+  "shake": 0.45,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "wind",
+   "color": "#5fa9cf",
+   "cue": "ground",
+   "light": 0.8,
+   "water": {
+    "deep": "#0b3352",
+    "foam": "#d6efff",
+    "depth": 0.75
+   }
+  }
+ },
+ {
+  "id": "thunderclap_gathered",
+  "name": "모은 박수",
+  "description": "천둥박수를 모을 수 있다. 오래 모을수록 고리가 넓고 강해지며, 불붙은 땅이 적들을 다시 끌어당긴다.",
+  "icon": "thunderclap",
+  "animation": "slam_charged_thunderclap_gathered",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 14,
+  "cooldown": 4.5,
+  "windup": 0.24,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.5,
+  "delivery": {
+   "type": "nova",
+   "radius": 4.6
+  },
+  "damage": {
+   "weaponPercent": 1.5,
+   "flatMin": 4,
+   "flatMax": 8
+  },
+  "knockback": 14,
+  "stagger": 0.65,
+  "shake": 0.65,
+  "hitStop": 0.09,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#ff7a2a",
+   "cue": "ground",
+   "light": 0.7,
+   "impact": {
+    "sparks": 14,
+    "flash": 1.6
+   }
+  },
+  "press": {
+   "type": "charge",
+   "max": 1.0,
+   "damageScale": 2.4,
+   "areaScale": 1.5
+  },
+  "burn": {
+   "duration": 1.25,
+   "tick": 0.25,
+   "share": 0.04
+  },
+  "leaves": "gathered_embers"
+ },
+ {
+  "id": "cleave_heave",
+  "name": "들어 올려 베기",
+  "description": "휘두르기를 모을 수 있다. 놓으면 단번의 무거운 휩쓸기가 적들을 멀리 날리고 불붙인다.",
+  "icon": "cleave",
+  "animation": "slam_charged_cleave_heave",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 0,
+  "cooldown": 0.8,
+  "windup": 0.2,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.2,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.0,
+   "arcDegrees": 135
+  },
+  "damage": {
+   "weaponPercent": 1.2,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 12,
+  "stagger": 0.45,
+  "shake": 0.4,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "slash",
+   "color": "#ffa060",
+   "cue": "blade",
+   "light": 0.3,
+   "impact": {
+    "sparks": 6,
+    "flash": 0
+   }
+  },
+  "press": {
+   "type": "charge",
+   "max": 0.9,
+   "damageScale": 2.6,
+   "areaScale": 1.4
+  },
+  "burn": {
+   "duration": 1.25,
+   "tick": 0.25,
+   "share": 0.03
+  }
+ },
+ {
+  "id": "storm_bolt_echo",
+  "name": "두 번 치는 번개",
+  "description": "폭풍 번개가 두 번 일어난다. 번개가 치고 잠시 뒤, 그 잔향이 같은 길을 다시 난다.",
+  "icon": "storm_bolt",
+  "animation": "cast_storm_bolt_echo",
+  "empowered": {
+   "weapon": "staff",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 9,
+  "cooldown": 0.45,
+  "windup": 0.16,
+  "recovery": 0.2,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 16,
+  "delivery": {
+   "type": "projectile",
+   "speed": 27,
+   "radius": 0.5,
+   "range": 19,
+   "pierce": 1,
+   "count": 1,
+   "spreadDegrees": 12
+  },
+  "damage": {
+   "weaponPercent": 0.85,
+   "flatMin": 2,
+   "flatMax": 4
+  },
+  "knockback": 4.5,
+  "stagger": 0.2,
+  "shake": 0.14,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "bolt",
+   "color": "#9be1ff",
+   "cue": "hand",
+   "lightning": {
+    "forks": 1,
+    "glow": 0.65,
+    "afterglow": 0.2,
+    "jitter": 0.55,
+    "width": 1.4,
+    "core": 1.1
+   },
+   "impact": {
+    "sparks": 12,
+    "flash": 1.1
+   },
+   "trail": 1.2
+  },
+  "echo": 0.5
+ },
+ {
+  "id": "first_haymaker",
+  "category": "melee",
+  "name": "헤이메이커",
+  "description": "길고 느린, 예고가 뚜렷한 휘두르기. 피할 시간은 충분하다.",
+  "icon": "cleave",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 4.2,
+  "windup": 1.9,
+  "recovery": 0.9,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.4,
+  "delivery": {
+   "type": "arc",
+   "reach": 3.3,
+   "arcDegrees": 95
+  },
+  "damage": {
+   "weaponPercent": 1.6,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 11,
+  "stagger": 0.4,
+  "shake": 0.62,
+  "hitStop": 0.09,
+  "vfx": {
+   "style": "slash",
+   "color": "#d08a5a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "first_stone",
+  "category": "single",
+  "name": "투석",
+  "description": "성의 없는 던지기. 옆으로 비키기 쉽다.",
+  "icon": "storm_bolt",
+  "animation": "throw",
+  "manaCost": 0,
+  "cooldown": 3.6,
+  "windup": 1.0,
+  "recovery": 0.4,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 9,
+  "delivery": {
+   "type": "projectile",
+   "speed": 7,
+   "radius": 0.45,
+   "range": 15,
+   "pierce": 0,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 4,
+  "stagger": 0.15,
+  "shake": 0.3,
+  "hitStop": 0.04,
+  "vfx": {
+   "style": "orb",
+   "color": "#b8a48a",
+   "light": 0.3,
+   "trail": 0.6,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   }
+  }
+ },
+ {
+  "id": "quarrel",
+  "name": "쿼럴",
+  "description": "처음 맞은 적을 꿰뚫는 볼트를 쏜다.",
+  "icon": "quarrel",
+  "animation": "shoot",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.08,
+  "recovery": 0.34,
+  "scalesWithAttackSpeed": true,
+  "engageRange": 13,
+  "delivery": {
+   "type": "projectile",
+   "speed": 36,
+   "radius": 0.4,
+   "range": 17,
+   "pierce": 1,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 0.95,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 3.5,
+  "stagger": 0.16,
+  "shake": 0.1,
+  "hitStop": 0.025,
+  "category": "single",
+  "vfx": {
+   "style": "bolt",
+   "color": "#f1e3bd",
+   "cue": "none",
+   "light": 0.2,
+   "impact": {
+    "sparks": 5,
+    "flash": 0
+   },
+   "trail": 0.8
+  }
+ },
+ {
+  "id": "quarrel_fan",
+  "name": "부채 쿼럴",
+  "description": "쿼럴이 전방에 부채처럼 볼트를 흩뿌린다. 한 발 한 발은 단발보다 가볍다.",
+  "icon": "quarrel",
+  "animation": "shoot_fan",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.1,
+  "recovery": 0.38,
+  "scalesWithAttackSpeed": true,
+  "engageRange": 11,
+  "delivery": {
+   "type": "projectile",
+   "speed": 32,
+   "radius": 0.4,
+   "range": 14,
+   "pierce": 0,
+   "count": 5,
+   "spreadDegrees": 70
+  },
+  "damage": {
+   "weaponPercent": 0.55,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 3,
+  "stagger": 0.14,
+  "shake": 0.12,
+  "hitStop": 0.025,
+  "category": "single",
+  "vfx": {
+   "style": "orb",
+   "color": "#a66bff",
+   "cue": "none",
+   "light": 0.18,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   },
+   "trail": 8,
+   "linger": 0.5
+  }
+ },
+ {
+  "id": "quarrel_heave",
+  "name": "중형 쿼럴",
+  "description": "쿼럴을 모을 수 있다. 놓으면 열을 관통하며 적들을 멀리 날리는 무거운 볼트 한 발이 나간다.",
+  "icon": "quarrel",
+  "animation": "shoot_heave",
+  "manaCost": 0,
+  "cooldown": 0.8,
+  "windup": 0.12,
+  "recovery": 0.36,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 13,
+  "delivery": {
+   "type": "projectile",
+   "speed": 40,
+   "radius": 0.5,
+   "range": 18,
+   "pierce": 3,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.1,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 11,
+  "stagger": 0.4,
+  "shake": 0.35,
+  "hitStop": 0.06,
+  "category": "single",
+  "vfx": {
+   "style": "bolt",
+   "color": "#f1e3bd",
+   "cue": "none",
+   "light": 0.35,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.5
+   },
+   "trail": 1
+  },
+  "press": {
+   "type": "charge",
+   "max": 0.9,
+   "damageScale": 2.4,
+   "areaScale": 1.3
+  }
+ },
+ {
+  "id": "wolf_pounce",
+  "category": "area",
+  "name": "덮치기",
+  "description": "달려들어 물어뜯는 도약.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 2.8,
+  "windup": 1.0,
+  "recovery": 0.55,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6.5,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.3
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 5,
+  "stagger": 0.2,
+  "shake": 0.4,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "claw",
+   "color": "#c9b48a",
+   "light": 0.35,
+   "impact": {
+    "sparks": 5,
+    "flash": 0.2
+   }
+  },
+  "leap": {
+   "distance": 7,
+   "stopShort": 0.9,
+   "airTime": 0.6
+  }
+ },
+ {
+  "id": "rat_bite",
+  "category": "melee",
+  "name": "물기",
+  "description": "발목을 무는 빠른 한입.",
+  "icon": "cleave",
+  "animation": "bite",
+  "manaCost": 0,
+  "cooldown": 1.6,
+  "windup": 0.35,
+  "recovery": 0.4,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0.9,
+  "delivery": {
+   "type": "arc",
+   "reach": 1.3,
+   "arcDegrees": 90
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0.6,
+  "stagger": 0.05,
+  "shake": 0.08,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "claw",
+   "color": "#b89a8a",
+   "light": 0.2,
+   "impact": {
+    "sparks": 2,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "bat_bite",
+  "category": "area",
+  "name": "물기",
+  "description": "닿지 않는 곳을 돌다가, 내려 덮치고, 물고, 다시 기어오른다.",
+  "icon": "cleave",
+  "animation": "bite",
+  "manaCost": 0,
+  "cooldown": 2.2,
+  "windup": 0.45,
+  "recovery": 0.35,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 4.6,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.1
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 1.2,
+  "stagger": 0.08,
+  "shake": 0.1,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "claw",
+   "color": "#d8ccb8",
+   "light": 0.3,
+   "impact": {
+    "sparks": 3,
+    "flash": 0.1
+   }
+  },
+  "leap": {
+   "distance": 4.6,
+   "stopShort": 0.5,
+   "airTime": 0.28
+  }
+ },
+ {
+  "id": "spider_leap",
+  "category": "area",
+  "name": "도약",
+  "description": "가까이 오기를 기다렸다가 위로 떨어진다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 3.6,
+  "windup": 1.1,
+  "recovery": 0.7,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.5
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 4,
+  "stagger": 0.25,
+  "shake": 0.45,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "claw",
+   "color": "#c9b48a",
+   "light": 0.35,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   }
+  },
+  "leap": {
+   "distance": 6.5,
+   "stopShort": 0.9,
+   "airTime": 0.55
+  }
+ },
+ {
+  "id": "crawler_lunge",
+  "category": "melee",
+  "name": "돌진",
+  "description": "가까이 올 때까지 모래 속에 엎드려 있다가, 일직선으로 쏠려 와 꼬리를 꽂는다.",
+  "icon": "cleave",
+  "animation": "lunge",
+  "manaCost": 0,
+  "cooldown": 3.2,
+  "windup": 1.2,
+  "recovery": 0.8,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6.5,
+  "delivery": {
+   "type": "arc",
+   "reach": 2.2,
+   "arcDegrees": 50
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 3,
+  "stagger": 0.3,
+  "shake": 0.4,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "claw",
+   "color": "#c9b48a",
+   "light": 0.3,
+   "impact": {
+    "sparks": 5,
+    "flash": 0.15
+   }
+  },
+  "leap": {
+   "distance": 6.5,
+   "stopShort": 1.0,
+   "airTime": 0.42,
+   "lane": true
+  }
+ },
+ {
+  "id": "weaver_web",
+  "category": "area",
+  "name": "거미줄",
+  "description": "그대가 선 자리에 거미줄 뭉치를 뱉는다. 달라붙고, 쏘고, 속도를 절반으로 묶는다.",
+  "icon": "storm_bolt",
+  "animation": "spit",
+  "manaCost": 0,
+  "cooldown": 4.4,
+  "windup": 0.75,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 11,
+  "delivery": {
+   "type": "area",
+   "range": 11,
+   "radius": 1.9,
+   "duration": 4,
+   "pulse": 0.8,
+   "pull": 0,
+   "slow": 0.55,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.3,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0.05,
+  "shake": 0.12,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "mist",
+   "color": "#8c877d",
+   "light": 0.08,
+   "impact": {
+    "sparks": 2,
+    "flash": 0.03
+   },
+   "cover": {
+    "glow": 0.14,
+    "wobble": 0.3
+   }
+  }
+ },
+ {
+  "id": "silt_smother",
+  "category": "area",
+  "name": "질식",
+  "description": "몸을 들어 올려 덮친다. 떨어진 자리의 개펄이 다리에 달라붙는다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 3.2,
+  "windup": 0.85,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.4,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.4
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 2,
+  "stagger": 0.2,
+  "shake": 0.25,
+  "hitStop": 0.05,
+  "vfx": {
+   "style": "mist",
+   "color": "#8f9a76",
+   "light": 0.35,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   }
+  },
+  "leap": {
+   "distance": 3.4,
+   "stopShort": 0.4,
+   "airTime": 0.5
+  },
+  "leaves": "silt_pool"
+ },
+ {
+  "id": "silt_pool",
+  "category": "area",
+  "name": "달라붙는 개펄",
+  "description": "떨어진 자리에 고인 젖은 개펄. 발을 끌어당긴다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 1.8,
+   "duration": 3.5,
+   "pulse": 0.7,
+   "pull": 0,
+   "slow": 0.6,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.15,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "mist",
+   "color": "#6f7660",
+   "light": 0.08,
+   "impact": {
+    "sparks": 2,
+    "flash": 0.03
+   },
+   "cover": {
+    "glow": 0.14,
+    "wobble": 0.25
+   }
+  }
+ },
+ {
+  "id": "spine_volley",
+  "category": "single",
+  "name": "가시 연발",
+  "description": "몸을 움츠렸다가 가시 세 개를 부채처럼 뿌린다.",
+  "icon": "storm_bolt",
+  "animation": "spit",
+  "manaCost": 0,
+  "cooldown": 3.4,
+  "windup": 0.85,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 10,
+  "delivery": {
+   "type": "projectile",
+   "speed": 10,
+   "radius": 0.35,
+   "range": 13,
+   "pierce": 0,
+   "count": 3,
+   "spreadDegrees": 30
+  },
+  "damage": {
+   "weaponPercent": 0.8,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 2.5,
+  "stagger": 0.1,
+  "shake": 0.15,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "orb",
+   "color": "#cfc6a8",
+   "light": 0.25,
+   "impact": {
+    "sparks": 4,
+    "flash": 0.1
+   },
+   "trail": 0.5
+  }
+ },
+ {
+  "id": "sporecap_bite",
+  "category": "melee",
+  "name": "물기",
+  "description": "가까이 올 때까지 버섯처럼 가만히 있다가, 문다.",
+  "icon": "cleave",
+  "animation": "bite",
+  "manaCost": 0,
+  "cooldown": 1.6,
+  "windup": 0.45,
+  "recovery": 0.45,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 1.1,
+  "delivery": {
+   "type": "arc",
+   "reach": 1.5,
+   "arcDegrees": 100
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 1.5,
+  "stagger": 0.08,
+  "shake": 0.1,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "claw",
+   "color": "#d8ccb8",
+   "light": 0.25,
+   "impact": {
+    "sparks": 3,
+    "flash": 0.08
+   }
+  }
+ },
+ {
+  "id": "spore_burst",
+  "category": "area",
+  "name": "포자 폭발",
+  "description": "죽으며 터진다. 포자 구름에서 벗어나라.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "mark",
+   "range": 0,
+   "radius": 2.3,
+   "delay": 1.1
+  },
+  "damage": {
+   "weaponPercent": 0.9,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 3,
+  "stagger": 0.2,
+  "shake": 0.3,
+  "hitStop": 0.05,
+  "vfx": {
+   "style": "mist",
+   "color": "#cfc79a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.3
+   }
+  }
+ },
+ {
+  "id": "shade_dive",
+  "category": "area",
+  "name": "급강하",
+  "description": "빛의 가장자리를 돌다가 내려 덮치고는 다시 사라진다.",
+  "icon": "cleave",
+  "animation": "dive",
+  "manaCost": 0,
+  "cooldown": 2.8,
+  "windup": 0.6,
+  "recovery": 0.45,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.2
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 2.5,
+  "stagger": 0.12,
+  "shake": 0.18,
+  "hitStop": 0.04,
+  "vfx": {
+   "style": "claw",
+   "color": "#8a8496",
+   "light": 0.2,
+   "impact": {
+    "sparks": 4,
+    "flash": 0.1
+   }
+  },
+  "leap": {
+   "distance": 5.5,
+   "stopShort": 0.6,
+   "airTime": 0.35
+  }
+ },
+ {
+  "id": "drifter_grasp",
+  "category": "area",
+  "name": "붙잡기",
+  "description": "어둠 속에 물러나 있다가 팔로 그대를 끌어들인다.",
+  "icon": "storm_bolt",
+  "animation": "grasp",
+  "manaCost": 0,
+  "cooldown": 4.5,
+  "windup": 0.8,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 8,
+  "delivery": {
+   "type": "area",
+   "range": 8,
+   "radius": 2.2,
+   "duration": 1.0,
+   "pulse": 0.5,
+   "pull": 7,
+   "slow": 0.7,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.6,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0.1,
+  "shake": 0.15,
+  "hitStop": 0.03,
+  "vfx": {
+   "style": "mist",
+   "color": "#6e6676",
+   "light": 0.08,
+   "impact": {
+    "sparks": 2,
+    "flash": 0.03
+   },
+   "cover": {
+    "glow": 0.16,
+    "wobble": 0.3
+   }
+  }
+ },
+ {
+  "id": "spiderling_bite",
+  "category": "area",
+  "name": "물기",
+  "description": "폴짝 뛰어 한입.",
+  "icon": "cleave",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 1.6,
+  "windup": 0.4,
+  "recovery": 0.35,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.6,
+  "delivery": {
+   "type": "nova",
+   "radius": 0.9
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0.8,
+  "stagger": 0.05,
+  "shake": 0.06,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "claw",
+   "color": "#c9b48a",
+   "light": 0.2,
+   "impact": {
+    "sparks": 2,
+    "flash": 0.05
+   }
+  },
+  "leap": {
+   "distance": 2.6,
+   "stopShort": 0.5,
+   "airTime": 0.3
+  }
+ },
+ {
+  "id": "brood_crash",
+  "category": "area",
+  "name": "무리의 낙하",
+  "description": "뒷다리로 일어서더니, 그대가 서 있던 자리에 온몸을 떨군다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 4.0,
+  "windup": 1.4,
+  "recovery": 1.4,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 5,
+  "delivery": {
+   "type": "nova",
+   "radius": 2.5
+  },
+  "damage": {
+   "weaponPercent": 1.1,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 8,
+  "stagger": 0.4,
+  "shake": 0.6,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d8c8a8",
+   "light": 0.5,
+   "impact": {
+    "sparks": 12,
+    "flash": 0.4
+   }
+  },
+  "leap": {
+   "distance": 4.2,
+   "stopShort": 0.6,
+   "airTime": 0.6
+  },
+  "commit": {
+   "at": 0.45,
+   "breakStagger": 0.6
+  }
+ },
+ {
+  "id": "wisp_volley",
+  "name": "위습 연발",
+  "description": "손에 보랏빛이 모여 부풀더니, 먼지를 남기며 날아가는 위습의 연발로 터진다.",
+  "icon": "wisp_volley",
+  "animation": "cast",
+  "manaCost": 12,
+  "cooldown": 1.4,
+  "windup": 0.66,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 13,
+  "delivery": {
+   "type": "projectile",
+   "speed": 28,
+   "radius": 0.4,
+   "range": 13,
+   "pierce": 0,
+   "count": 6,
+   "spreadDegrees": 4,
+   "interval": 0.016
+  },
+  "damage": {
+   "weaponPercent": 0.4,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "knockback": 2,
+  "stagger": 0.08,
+  "shake": 0.2,
+  "hitStop": 0.02,
+  "category": "single",
+  "vfx": {
+   "style": "orb",
+   "color": "#a66bff",
+   "cue": "none",
+   "light": 0.18,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   },
+   "trail": 8,
+   "linger": 0.5,
+   "gather": {
+    "radius": 0.26,
+    "lift": 0.15,
+    "dust": 120,
+    "light": 5,
+    "size": [
+     0,
+     0,
+     0.18,
+     0.35,
+     0.45,
+     0.48,
+     0.56,
+     0.68,
+     0.75,
+     0.77,
+     0.81,
+     0.87,
+     0.91,
+     0.92,
+     0.92,
+     0.92,
+     0.92,
+     0.92,
+     0.92,
+     0.92,
+     0.92,
+     0.95,
+     0.99
+    ],
+    "glow": [
+     0,
+     0,
+     0.03,
+     0.16,
+     0.24,
+     0.28,
+     0.34,
+     0.43,
+     0.49,
+     0.53,
+     0.55,
+     0.63,
+     0.77,
+     0.92,
+     0.99,
+     0.99,
+     0.97,
+     0.93,
+     0.88,
+     0.82,
+     0.77,
+     0.74,
+     0.74
+    ]
+   }
+  }
+ },
+ {
+  "id": "ghost_wave",
+  "name": "유령 파도",
+  "description": "낮은 뿔피리 소리와 함께 창백한 파도가 앞으로 굴러가 길 위의 모든 것을 꿰뚫는다. 잔향이 같은 길을 따라오며 점점 옅어진다.",
+  "icon": "ghost_wave",
+  "animation": "cast_ghost_wave",
+  "empowered": {
+   "weapon": "crossbow",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 16,
+  "cooldown": 3.5,
+  "windup": 0.1,
+  "recovery": 0.45,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 11,
+  "delivery": {
+   "type": "projectile",
+   "speed": 14,
+   "radius": 1.3,
+   "range": 12,
+   "pierce": 99,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.85,
+   "flatMin": 3,
+   "flatMax": 6
+  },
+  "knockback": 5,
+  "stagger": 0.25,
+  "shake": 0.25,
+  "hitStop": 0.05,
+  "category": "area",
+  "vfx": {
+   "style": "wave",
+   "color": "#a58cf0",
+   "cue": "none",
+   "light": 0.3,
+   "wave": {
+    "halfWidth": 1.3,
+    "depth": 1.6,
+    "mist": 140,
+    "swell": [
+     0.37,
+     0.67,
+     0.8,
+     0.69,
+     0.72,
+     1,
+     0.83,
+     0.5,
+     0.66,
+     0.71,
+     0.6,
+     0.62,
+     0.65,
+     0.63,
+     0.53,
+     0.54,
+     0.5,
+     0.46,
+     0.57,
+     0.45,
+     0.24
+    ],
+    "ripples": [
+     {
+      "delay": 0.97,
+      "strength": 0.42
+     },
+     {
+      "delay": 1.25,
+      "strength": 0.3
+     },
+     {
+      "delay": 1.5,
+      "strength": 0.25
+     },
+     {
+      "delay": 1.7,
+      "strength": 0.3
+     },
+     {
+      "delay": 1.88,
+      "strength": 0.14
+     }
+    ],
+    "quiet": 2.2
+   }
+  }
+ },
+ {
+  "id": "spell_strike",
+  "name": "주문 타격",
+  "description": "손을 튀기자 빛 매듭이 앞의 가장 가까운 적에게 박히고, 땅에서 먼지가 튄다.",
+  "icon": "spell_strike",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.27,
+  "recovery": 0.1,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 10,
+  "delivery": {
+   "type": "chain",
+   "range": 10,
+   "jumps": 0,
+   "jumpRange": 1,
+   "falloff": 1
+  },
+  "damage": {
+   "weaponPercent": 0.8,
+   "flatMin": 1,
+   "flatMax": 3
+  },
+  "knockback": 2,
+  "stagger": 0.1,
+  "shake": 0.12,
+  "hitStop": 0.04,
+  "category": "single",
+  "vfx": {
+   "style": "fork",
+   "color": "#bff3ff",
+   "cue": "none",
+   "light": 0.5,
+   "lightning": {
+    "forks": 0,
+    "glow": 0.8,
+    "afterglow": 0.12,
+    "jitter": 0.25,
+    "width": 1.1,
+    "core": 1.4
+   },
+   "impact": {
+    "sparks": 12,
+    "flash": 1.1
+   },
+   "gather": {
+    "radius": 0.14,
+    "lift": 0.1,
+    "size": [
+     0,
+     0.2,
+     0.45,
+     0.8,
+     1,
+     0.95,
+     0.8,
+     0.65,
+     0.55,
+     0.5
+    ],
+    "glow": [
+     0,
+     0.05,
+     0.1,
+     0.35,
+     0.6,
+     0.6,
+     0.45,
+     0.4,
+     0.55,
+     1
+    ],
+    "dust": 60,
+    "light": 2
+   },
+   "punch": {
+    "dust": 14,
+    "kick": 5
+   }
+  }
+ },
+ {
+  "id": "fire_burst",
+  "name": "화염 폭발",
+  "description": "손에 불꽃이 켜져 몇 걸음 앞의 땅에서 터진다. 닿은 것은 계속 타오른다.",
+  "icon": "fire_burst",
+  "animation": "cast_fire_burst",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 22,
+  "cooldown": 8,
+  "windup": 0.28,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3,
+  "delivery": {
+   "type": "area",
+   "range": 2.5,
+   "radius": 2.8,
+   "duration": 1.3,
+   "pulse": 0,
+   "pull": 0,
+   "slow": 1,
+   "anchor": "ground",
+   "opening": true
+  },
+  "damage": {
+   "weaponPercent": 1.6,
+   "flatMin": 4,
+   "flatMax": 8
+  },
+  "burn": {
+   "duration": 1.25,
+   "tick": 0.25,
+   "share": 0.15
+  },
+  "knockback": 3.5,
+  "stagger": 0.2,
+  "shake": 0.35,
+  "hitStop": 0.07,
+  "category": "area",
+  "vfx": {
+   "style": "fire",
+   "color": "#ff7a1a",
+   "cue": "none",
+   "light": 1.2,
+   "impact": {
+    "sparks": 18,
+    "flash": 2.2
+   },
+   "gather": {
+    "radius": 0.16,
+    "lift": 0.1,
+    "size": [
+     0,
+     0.9,
+     1,
+     1,
+     0.95,
+     0.9,
+     0.9,
+     0.85,
+     0.8,
+     0.8
+    ],
+    "glow": [
+     0,
+     1,
+     0.85,
+     0.7,
+     0.8,
+     0.75,
+     0.8,
+     0.85,
+     0.9,
+     1
+    ],
+    "dust": 30,
+    "light": 4
+   },
+   "punch": {
+    "dust": 18,
+    "kick": 6
+   },
+   "burn": {
+    "flares": [
+     {
+      "at": 0.175,
+      "strength": 0.94
+     },
+     {
+      "at": 0.24,
+      "strength": 1
+     },
+     {
+      "at": 0.29,
+      "strength": 0.93
+     },
+     {
+      "at": 0.335,
+      "strength": 0.93
+     },
+     {
+      "at": 0.375,
+      "strength": 0.74
+     },
+     {
+      "at": 0.41,
+      "strength": 0.77
+     },
+     {
+      "at": 0.44,
+      "strength": 0.82
+     },
+     {
+      "at": 0.495,
+      "strength": 0.73
+     },
+     {
+      "at": 0.55,
+      "strength": 0.56
+     },
+     {
+      "at": 0.59,
+      "strength": 0.63
+     },
+     {
+      "at": 0.67,
+      "strength": 0.55
+     },
+     {
+      "at": 0.695,
+      "strength": 0.57
+     },
+     {
+      "at": 0.795,
+      "strength": 0.47
+     },
+     {
+      "at": 0.905,
+      "strength": 0.35
+     },
+     {
+      "at": 0.94,
+      "strength": 0.41
+     },
+     {
+      "at": 1.005,
+      "strength": 0.31
+     },
+     {
+      "at": 1.05,
+      "strength": 0.34
+     },
+     {
+      "at": 1.1,
+      "strength": 0.28
+     },
+     {
+      "at": 1.195,
+      "strength": 0.21
+     },
+     {
+      "at": 1.28,
+      "strength": 0.2
+     }
+    ],
+    "embers": 30,
+    "light": 6
+   }
+  }
+ },
+ {
+  "id": "standing_storm",
+  "name": "머무는 폭풍",
+  "description": "폭풍이 주변에 머물며 0.5초마다 가까운 모든 것을 치고, 친 적 하나하나가 그대를 치유한다.",
+  "icon": "standing_storm",
+  "animation": "slam_standing_storm",
+  "empowered": {
+   "weapon": "staff",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 16,
+  "cooldown": 5,
+  "windup": 0.24,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.5,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 4.2,
+   "duration": 2.5,
+   "pulse": 0.5,
+   "pull": 0,
+   "slow": 0.85,
+   "anchor": "caster"
+  },
+  "damage": {
+   "weaponPercent": 0.55,
+   "flatMin": 2,
+   "flatMax": 4
+  },
+  "knockback": 3,
+  "stagger": 0.2,
+  "shake": 0.18,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "storm",
+   "color": "#7fd4ff",
+   "cue": "ground",
+   "light": 0.6,
+   "lightning": {
+    "forks": 1,
+    "glow": 0.5,
+    "afterglow": 0.22,
+    "jitter": 0.9,
+    "width": 1.3,
+    "core": 0.9
+   },
+   "impact": {
+    "sparks": 8,
+    "flash": 1.2
+   }
+  },
+  "lifeOnHit": 2,
+  "category": "lasting"
+ },
+ {
+  "id": "umbra",
+  "name": "암영",
+  "description": "그림자가 주변에 퍼진다. 안의 적들은 피해를 15% 적게 입히고, 매초 그림자에 물린다.",
+  "icon": "umbra",
+  "animation": "slam_umbra",
+  "empowered": {
+   "weapon": "crossbow",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 18,
+  "cooldown": 10,
+  "windup": 0.2,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 4,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 5,
+   "duration": 8,
+   "pulse": 1,
+   "pull": 0,
+   "slow": 1,
+   "weaken": 0.15,
+   "anchor": "caster"
+  },
+  "damage": {
+   "weaponPercent": 0.35,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "knockback": 0,
+  "stagger": 0.05,
+  "shake": 0.04,
+  "hitStop": 0,
+  "category": "lasting",
+  "vfx": {
+   "style": "gap",
+   "color": "#8a6fd1",
+   "cue": "ground",
+   "shadow": {
+    "color": "#5a2fc0",
+    "strength": 0.68
+   }
+  }
+ },
+ {
+  "id": "ground_heat",
+  "category": "area",
+  "name": "열기",
+  "description": "땅 자체가 타고 있다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 1,
+  "windup": 0.1,
+  "recovery": 0.1,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 1,
+  "delivery": {
+   "type": "nova",
+   "radius": 0.5
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "light": 0,
+   "impact": {
+    "sparks": 0,
+    "flash": 0
+   }
+  }
+ },
+ {
+  "id": "cinder_pounce",
+  "category": "area",
+  "name": "잉걸 덮치기",
+  "description": "달려, 뛰어오르고, 착지한 땅이 계속 타오른다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 3.4,
+  "windup": 0.9,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6.5,
+  "delivery": {
+   "type": "nova",
+   "radius": 1.5
+  },
+  "damage": {
+   "weaponPercent": 0.55,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1.2,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 4,
+  "stagger": 0.15,
+  "shake": 0.35,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "light": 0.6,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.4
+   }
+  },
+  "leap": {
+   "distance": 7,
+   "stopShort": 0.9,
+   "airTime": 0.55
+  },
+  "leaves": "cinder_patch"
+ },
+ {
+  "id": "alpha_pounce",
+  "category": "area",
+  "name": "큰 잉걸 덮치기",
+  "description": "더 긴 도약에, 더 넓은 땅이 타고 남는다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 4.2,
+  "windup": 1.0,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 8,
+  "delivery": {
+   "type": "nova",
+   "radius": 2.3
+  },
+  "damage": {
+   "weaponPercent": 0.7,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1.2,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 6,
+  "stagger": 0.25,
+  "shake": 0.5,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff5414",
+   "light": 0.9,
+   "impact": {
+    "sparks": 14,
+    "flash": 0.6
+   }
+  },
+  "leap": {
+   "distance": 9,
+   "stopShort": 1.0,
+   "airTime": 0.65
+  },
+  "leaves": "alpha_patch"
+ },
+ {
+  "id": "slag_crash",
+  "category": "area",
+  "name": "슬래그 낙하",
+  "description": "일어서고, 멈칫하고, 그대가 서 있던 자리에 온몸을 떨군다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 3.8,
+  "windup": 1.4,
+  "recovery": 1.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 5,
+  "delivery": {
+   "type": "nova",
+   "radius": 2.3
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 9,
+  "stagger": 0.4,
+  "shake": 0.6,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#ff5a1a",
+   "light": 0.6,
+   "impact": {
+    "sparks": 12,
+    "flash": 0.5
+   }
+  },
+  "leap": {
+   "distance": 4.5,
+   "stopShort": 0.6,
+   "airTime": 0.5
+  },
+  "commit": {
+   "at": 0.45,
+   "breakStagger": 0.6
+  }
+ },
+ {
+  "id": "elder_crash",
+  "category": "area",
+  "name": "장로의 낙하",
+  "description": "무게에 땅이 갈라진다.",
+  "icon": "thunderclap",
+  "animation": "pounce",
+  "manaCost": 0,
+  "cooldown": 4.4,
+  "windup": 1.5,
+  "recovery": 1.8,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "nova",
+   "radius": 3.0
+  },
+  "damage": {
+   "weaponPercent": 1.2,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1.5,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 11,
+  "stagger": 0.45,
+  "shake": 0.75,
+  "hitStop": 0.12,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#ff4a12",
+   "light": 0.9,
+   "impact": {
+    "sparks": 16,
+    "flash": 0.7
+   }
+  },
+  "leap": {
+   "distance": 5.5,
+   "stopShort": 0.6,
+   "airTime": 0.6
+  },
+  "commit": {
+   "at": 0.45,
+   "breakStagger": 0.7
+  }
+ },
+ {
+  "id": "slag_eruption",
+  "category": "area",
+  "name": "분출",
+  "description": "그것을 온전히 묶고 있던 것은 용해된 것이었다. 터져 나온다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "mark",
+   "range": 0,
+   "radius": 3.2,
+   "delay": 1.2
+  },
+  "damage": {
+   "weaponPercent": 1.3,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 2,
+   "tick": 0.25,
+   "share": 0.12
+  },
+  "knockback": 9,
+  "stagger": 0.3,
+  "shake": 0.6,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff5414",
+   "light": 0.8,
+   "impact": {
+    "sparks": 14,
+    "flash": 0.8
+   }
+  }
+ },
+ {
+  "id": "elder_eruption",
+  "category": "area",
+  "name": "대분출",
+  "description": "크게 터져 나온다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "mark",
+   "range": 0,
+   "radius": 4.2,
+   "delay": 1.4
+  },
+  "damage": {
+   "weaponPercent": 1.5,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 2.5,
+   "tick": 0.25,
+   "share": 0.12
+  },
+  "knockback": 11,
+  "stagger": 0.35,
+  "shake": 0.8,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff4a12",
+   "light": 1.0,
+   "impact": {
+    "sparks": 18,
+    "flash": 1.0
+   }
+  }
+ },
+ {
+  "id": "ember_spit",
+  "category": "area",
+  "name": "잉걸 뱉기",
+  "description": "그대가 있을 자리로 뱉는 용암 덩어리.",
+  "icon": "storm_bolt",
+  "animation": "lunge",
+  "manaCost": 0,
+  "cooldown": 2.6,
+  "windup": 0.7,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 12,
+  "delivery": {
+   "type": "mark",
+   "range": 13,
+   "radius": 1.7,
+   "delay": 0.9
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1.5,
+   "tick": 0.25,
+   "share": 0.12
+  },
+  "knockback": 4,
+  "stagger": 0.15,
+  "shake": 0.3,
+  "hitStop": 0.05,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff8a3a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.4
+   }
+  }
+ },
+ {
+  "id": "matron_spit",
+  "category": "area",
+  "name": "용암 뱉기",
+  "description": "더 무거운 덩어리를 멀리 앞에 뱉는다.",
+  "icon": "storm_bolt",
+  "animation": "lunge",
+  "manaCost": 0,
+  "cooldown": 2.8,
+  "windup": 0.75,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 14,
+  "delivery": {
+   "type": "mark",
+   "range": 15,
+   "radius": 2.4,
+   "delay": 1.0
+  },
+  "damage": {
+   "weaponPercent": 1.2,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 2,
+   "tick": 0.25,
+   "share": 0.12
+  },
+  "knockback": 6,
+  "stagger": 0.2,
+  "shake": 0.4,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "light": 0.7,
+   "impact": {
+    "sparks": 12,
+    "flash": 0.6
+   }
+  }
+ },
+ {
+  "id": "mite_bite",
+  "category": "melee",
+  "name": "잉걸 물기",
+  "description": "발목을 무는 뜨거운 한입.",
+  "icon": "cleave",
+  "animation": "bite",
+  "manaCost": 0,
+  "cooldown": 1.1,
+  "windup": 0.32,
+  "recovery": 0.35,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0.9,
+  "delivery": {
+   "type": "arc",
+   "reach": 1.2,
+   "arcDegrees": 90
+  },
+  "damage": {
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 1.2,
+  "stagger": 0.06,
+  "shake": 0.08,
+  "hitStop": 0.02,
+  "vfx": {
+   "style": "claw",
+   "color": "#ff8a3a",
+   "light": 0.25,
+   "impact": {
+    "sparks": 3,
+    "flash": 0.05
+   }
+  }
+ },
+ {
+  "id": "cinder_patch",
+  "category": "area",
+  "name": "불타는 땅",
+  "description": "떨어진 자리의 땅이 아직 타고 있다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 1.6,
+   "duration": 2.4,
+   "pulse": 0.6,
+   "pull": 0,
+   "slow": 1,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.2,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1.2,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "light": 0.4,
+   "impact": {
+    "sparks": 4,
+    "flash": 0.1
+   }
+  }
+ },
+ {
+  "id": "alpha_patch",
+  "category": "area",
+  "name": "불타는 땅",
+  "description": "떨어진 자리의 땅이 아직 타고 있다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 2.3,
+   "duration": 3.4,
+   "pulse": 0.6,
+   "pull": 0,
+   "slow": 1,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.2,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "burn": {
+   "duration": 1.2,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "light": 0.4,
+   "impact": {
+    "sparks": 4,
+    "flash": 0.1
+   }
+  }
+ },
+ {
+  "id": "dodge_roll_riptide",
+  "name": "역조",
+  "description": "물살을 타고 커서를 향해 더 멀리 구른다. 착지한 곳에 이안류가 남아 적들을 끌어들인다.",
+  "icon": "dodge_roll",
+  "animation": "roll",
+  "manaCost": 0,
+  "cooldown": 1.1,
+  "windup": 0.36,
+  "recovery": 0.12,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "dash",
+   "distance": 6.5,
+   "duration": 0.36,
+   "invulnerable": 0.24,
+   "passThrough": true,
+   "steady": true
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "roll",
+   "color": "#6f9fb8",
+   "cue": "none",
+   "shadow": {
+    "color": "#2f86c0",
+    "strength": 0.9
+   },
+   "water": {
+    "deep": "#0b3352",
+    "foam": "#d6efff",
+    "depth": 0.75
+   }
+  }
+ },
+ {
+  "id": "riptide_wake",
+  "name": "이안류 소용돌이",
+  "description": "적들을 끌어들여 치는 이안류.",
+  "icon": "downdraught",
+  "animation": "cast",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 3,
+   "duration": 1,
+   "pulse": 0.5,
+   "pull": 9,
+   "slow": 0.6,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.35,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "knockback": 0,
+  "stagger": 0.2,
+  "shake": 0.12,
+  "hitStop": 0,
+  "vfx": {
+   "style": "wind",
+   "color": "#5fa9cf",
+   "cue": "none",
+   "water": {
+    "deep": "#0b3352",
+    "foam": "#d6efff",
+    "depth": 0.75
+   }
+  }
+ },
+ {
+  "id": "millrace",
+  "name": "물살",
+  "description": "조준한 곳으로 물결을 내보낸다. 땅을 따라 달리며 길 위의 모든 것을 꿰뚫는다. 물레방아의 탄력을 전부 소모하며, 오래 모을수록 더 세고 넓고 멀리 달린다. 맞은 것은 모두 기절한다. 탄력이 없으면 0.6초, 가득 차면 1.5초이며, 기절한 몬스터는 이후 4초 동안 다음 기절을 털어낸다(희귀와 우두머리는 더 빨리).",
+  "icon": "millrace",
+  "animation": "slam_millrace",
+  "empowered": {
+   "weapon": "blade",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 14,
+  "cooldown": 3.5,
+  "windup": 0.2,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 7,
+  "delivery": {
+   "type": "projectile",
+   "speed": 15,
+   "radius": 1.2,
+   "range": 7,
+   "pierce": 99,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "weaponPercent": 1.45,
+   "flatMin": 3,
+   "flatMax": 6
+  },
+  "knockback": 2,
+  "stagger": 0.12,
+  "stun": 0.6,
+  "shake": 0.2,
+  "hitStop": 0.03,
+  "category": "area",
+  "spend": {
+   "damage": 0.07,
+   "area": 0.025,
+   "range": 0.025,
+   "stun": 0.9
+  },
+  "vfx": {
+   "style": "wave",
+   "color": "#bfe4ff",
+   "cue": "ground",
+   "light": 0.3,
+   "water": {
+    "deep": "#0b3352",
+    "foam": "#d6efff",
+    "depth": 0.75
+   },
+   "wave": {
+    "halfWidth": 1.2,
+    "depth": 1.2,
+    "mist": 0,
+    "swell": [
+     0.55,
+     0.9,
+     1,
+     0.95,
+     0.9,
+     0.85,
+     0.8,
+     0.72,
+     0.6,
+     0.4
+    ],
+    "ripples": [
+     {
+      "delay": 0.1,
+      "strength": 0.28
+     },
+     {
+      "delay": 0.22,
+      "strength": 0.14
+     }
+    ],
+    "quiet": 1.5
+   }
+  }
+ },
+ {
+  "id": "dodge_roll_shoulder",
+  "name": "어깨치기",
+  "description": "커서를 향해 어깨를 들이민다. 돌진 초반에는 어떤 공격도 맞지 않고, 멈춘 자리의 땅이 타올라 적들을 밀쳐내고 불붙인다.",
+  "icon": "dodge_roll",
+  "animation": "roll_dodge_roll_shoulder",
+  "manaCost": 0,
+  "cooldown": 1.1,
+  "windup": 0.36,
+  "recovery": 0.12,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 6,
+  "delivery": {
+   "type": "dash",
+   "distance": 4.5,
+   "duration": 0.36,
+   "invulnerable": 0.24,
+   "passThrough": true,
+   "steady": true
+  },
+  "damage": {
+   "weaponPercent": 0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "vfx": {
+   "style": "roll",
+   "color": "#c9733a",
+   "cue": "none",
+   "shadow": {
+    "color": "#e0602a",
+    "strength": 0.9
+   }
+  }
+ },
+ {
+  "id": "shoulder_flare",
+  "name": "타오름",
+  "description": "어깨치기가 멈춘 자리의 땅이 타오른다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 2.4,
+  "delivery": {
+   "type": "nova",
+   "radius": 2.4
+  },
+  "damage": {
+   "weaponPercent": 0.5,
+   "flatMin": 2,
+   "flatMax": 4
+  },
+  "burn": {
+   "duration": 1.25,
+   "tick": 0.25,
+   "share": 0.06
+  },
+  "knockback": 9,
+  "stagger": 0.3,
+  "shake": 0.25,
+  "hitStop": 0.04,
+  "category": "area",
+  "vfx": {
+   "style": "fire",
+   "color": "#ff7a1a",
+   "cue": "none",
+   "light": 0.6,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.6
+   }
+  }
+ },
+ {
+  "id": "smouldering_wake",
+  "name": "불길의 자취",
+  "description": "불타는 몬스터가 지나간 자리에 남은 불타는 땅.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 1.1,
+   "duration": 3.5,
+   "pulse": 0.5,
+   "pull": 0,
+   "slow": 1,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.16,
+   "flatMin": 0,
+   "flatMax": 1
+  },
+  "burn": {
+   "duration": 1,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 0,
+  "stagger": 0,
+  "shake": 0,
+  "hitStop": 0,
+  "category": "area",
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "cue": "none",
+   "light": 0.35,
+   "impact": {
+    "sparks": 3,
+    "flash": 0.12
+   }
+  }
+ },
+ {
+  "id": "gathered_embers",
+  "name": "모인 잉걸",
+  "description": "모은 박수가 남긴 불타는 땅. 적들을 다시 끌어당긴다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0,
+  "recovery": 0,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 0,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 3.2,
+   "duration": 1.5,
+   "pulse": 0.5,
+   "pull": 7,
+   "slow": 1,
+   "anchor": "ground"
+  },
+  "damage": {
+   "weaponPercent": 0.15,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "burn": {
+   "duration": 1,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 0,
+  "stagger": 0.05,
+  "shake": 0,
+  "hitStop": 0,
+  "category": "area",
+  "vfx": {
+   "style": "fire",
+   "color": "#ff6a1c",
+   "cue": "none",
+   "light": 0.4,
+   "impact": {
+    "sparks": 4,
+    "flash": 0.1
+   }
+  }
+ },
+ {
+  "id": "banked_fire",
+  "name": "덮어둔 불",
+  "description": "주변에 덮어둔 불이 매초 가까운 모든 것을 치고, 칠 때마다 더 뜨거워진다.",
+  "icon": "banked_fire",
+  "animation": "slam_banked_fire",
+  "empowered": {
+   "weapon": "heavy",
+   "mods": [
+    {
+     "field": "damagePercent",
+     "value": 0.25
+    }
+   ]
+  },
+  "manaCost": 16,
+  "cooldown": 9,
+  "windup": 0.2,
+  "recovery": 0.3,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.5,
+  "delivery": {
+   "type": "area",
+   "range": 0,
+   "radius": 4,
+   "duration": 6,
+   "pulse": 1,
+   "pull": 0,
+   "slow": 1,
+   "anchor": "caster",
+   "stoke": {
+    "perPulse": 0.2,
+    "max": 1
+   }
+  },
+  "damage": {
+   "weaponPercent": 0.3,
+   "flatMin": 1,
+   "flatMax": 2
+  },
+  "burn": {
+   "duration": 1,
+   "tick": 0.25,
+   "share": 0.1
+  },
+  "knockback": 0,
+  "stagger": 0.05,
+  "shake": 0.04,
+  "hitStop": 0,
+  "category": "lasting",
+  "vfx": {
+   "style": "fire",
+   "color": "#ff8a3a",
+   "cue": "ground",
+   "light": 0.5,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.2
+   }
+  }
+ },
+ {
+  "id": "ledger_sweep",
+  "category": "melee",
+  "name": "재어진 휩쓸기",
+  "description": "넓은 휩쓸기, 그리고 같은 휩쓸기가 한 번 더.",
+  "icon": "cleave",
+  "animation": "sweep",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.9,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 3.0,
+  "delivery": {
+   "type": "arc",
+   "reach": 4.2,
+   "arcDegrees": 150
+  },
+  "damage": {
+   "weaponPercent": 0.8,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 9,
+  "stagger": 0.4,
+  "shake": 0.45,
+  "hitStop": 0.08,
+  "vfx": {
+   "style": "slash",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 5,
+    "flash": 0.2
+   }
+  },
+  "echo": 0.7
+ },
+ {
+  "id": "ledger_line",
+  "category": "area",
+  "name": "붙잡힌 선",
+  "description": "닿는 것을 붙잡는 곧은 황동 선.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.8,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 14,
+  "delivery": {
+   "type": "projectile",
+   "speed": 22,
+   "radius": 0.6,
+   "range": 18,
+   "pierce": 1,
+   "count": 1,
+   "spreadDegrees": 0
+  },
+  "damage": {
+   "type": "frost",
+   "weaponPercent": 0.9,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 4,
+  "stagger": 0.2,
+  "shake": 0.35,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "bolt",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.5
+   },
+   "trail": 0.8
+  },
+  "hold": 0.6
+ },
+ {
+  "id": "ledger_hour",
+  "category": "area",
+  "name": "쳐진 시각",
+  "description": "힘의 고리가 터져 나오고, 다시 터진다.",
+  "icon": "thunderclap",
+  "animation": "slam_charged",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 1.4,
+  "recovery": 0.7,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 4.5,
+  "delivery": {
+   "type": "nova",
+   "radius": 6
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 1.6,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 13,
+  "stagger": 0.5,
+  "shake": 0.65,
+  "hitStop": 0.1,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 10,
+    "flash": 0.5
+   }
+  },
+  "echo": 1.0
+ },
+ {
+  "id": "ledger_tally",
+  "category": "area",
+  "name": "계표의 열",
+  "description": "그대가 선 자리를 가로질러 놓인 표의 열이 차례로 내리친다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.7,
+  "recovery": 0.5,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 12,
+  "delivery": {
+   "type": "mark",
+   "range": 14,
+   "radius": 0.8,
+   "delay": 1.1,
+   "count": 5,
+   "spacing": 1.6,
+   "step": 0.12
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 1.0,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 6,
+  "stagger": 0.2,
+  "shake": 0.3,
+  "hitStop": 0.05,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 6,
+    "flash": 0.4
+   }
+  }
+ },
+ {
+  "id": "ledger_hands",
+  "category": "area",
+  "name": "사등분 바늘",
+  "description": "네 개의 선이 교차로 놓이고, 그 사이로 네 개가 더 돌아 놓인다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 1.0,
+  "recovery": 0.6,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 12,
+  "delivery": {
+   "type": "projectile",
+   "speed": 16,
+   "radius": 0.5,
+   "range": 15,
+   "pierce": 1,
+   "count": 4,
+   "spreadDegrees": 90
+  },
+  "damage": {
+   "type": "frost",
+   "weaponPercent": 0.8,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 5,
+  "stagger": 0.2,
+  "shake": 0.4,
+  "hitStop": 0.06,
+  "vfx": {
+   "style": "bolt",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.5
+   },
+   "trail": 0.8
+  },
+  "echo": 0.9,
+  "echoTurn": 45
+ },
+ {
+  "id": "ledger_counted",
+  "category": "area",
+  "name": "세어짐",
+  "description": "발밑의 표. 세어지는 순간 내리친다.",
+  "icon": "thunderclap",
+  "animation": "cast",
+  "manaCost": 0,
+  "cooldown": 0,
+  "windup": 0.7,
+  "recovery": 0.4,
+  "scalesWithAttackSpeed": false,
+  "engageRange": 14,
+  "delivery": {
+   "type": "mark",
+   "range": 16,
+   "radius": 1.1,
+   "delay": 1.0
+  },
+  "damage": {
+   "type": "storm",
+   "weaponPercent": 1.2,
+   "flatMin": 0,
+   "flatMax": 0
+  },
+  "knockback": 8,
+  "stagger": 0.3,
+  "shake": 0.4,
+  "hitStop": 0.07,
+  "vfx": {
+   "style": "shockwave",
+   "color": "#d8b46a",
+   "light": 0.5,
+   "impact": {
+    "sparks": 8,
+    "flash": 0.5
+   }
+  }
+ }
+]

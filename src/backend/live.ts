@@ -1,0 +1,350 @@
+import type { Clock, Timers } from './backend.ts';
+import { chatRefusal, enterFrame, helloFrame, leaveFrame, LIVE_ZONE, liveUrl, moveFrame, mutesFrame, readServerFrame, sayable, sayFrame, whisperFrame } from './live-protocol.ts';
+import type { ChatLine, ChatRefusal, LiveMove, LivePlayer, Place, ServerFrame, WhisperDirection, WhisperRefusal, Worn } from './live-protocol.ts';
+import type { TradeFrame } from '../player-trade/trade-protocol.ts';
+import type { Play } from './play.ts';
+
+export const LIVE = {
+  moveEveryMs: 100,
+  firstRetryMs: 1000,
+  longestRetryMs: 30000,
+  jitterFloor: 0.5,
+  tokenWaitMs: 3000,
+  stillWithin: 0.01,
+} as const;
+
+export interface SocketHandlers {
+  open(): void;
+  message(data: unknown): void;
+  closed(code: number): void;
+}
+
+export interface LiveSocket {
+  send(text: string): void;
+  close(): void;
+}
+
+export type OpenSocket = (url: string, handlers: SocketHandlers) => LiveSocket;
+
+export type LiveEvent =
+  | { readonly type: 'welcome'; readonly you: string; readonly chat: readonly ChatLine[] }
+  | { readonly type: 'present'; readonly you: string; readonly players: readonly LivePlayer[]; readonly chat: readonly ChatLine[] | null }
+  | { readonly type: 'said'; readonly line: ChatLine }
+  | { readonly type: 'refused'; readonly reason: ChatRefusal }
+  | { readonly type: 'whisper'; readonly dir: WhisperDirection; readonly with: string; readonly line: ChatLine }
+  | { readonly type: 'unsent'; readonly reason: WhisperRefusal; readonly to: string }
+  | { readonly type: 'joined'; readonly player: LivePlayer }
+  | { readonly type: 'left'; readonly id: string }
+  | { readonly type: 'look'; readonly id: string; readonly name: string | null; readonly hero: string | null; readonly worn: Worn }
+  | { readonly type: 'moves'; readonly moves: readonly LiveMove[]; readonly at: number }
+  | { readonly type: 'friends' }
+  | { readonly type: 'trade'; readonly frame: TradeFrame }
+  | { readonly type: 'away' }
+  | { readonly type: 'gone' };
+
+export type LiveListener = (event: LiveEvent) => void;
+
+export interface Stand {
+  readonly zone: string | null;
+  readonly x: number;
+  readonly z: number;
+  readonly facing: number;
+}
+
+export interface Live {
+  update(stand: Stand): void;
+  say(text: string): boolean;
+  whisper(to: string, text: string): boolean;
+  mute(names: readonly string[]): void;
+  canTrade(): boolean;
+  trade(frame: string): boolean;
+  subscribe(listener: LiveListener): () => void;
+}
+
+export interface LiveOptions {
+  readonly serverUrl: string;
+  readonly open: OpenSocket;
+  readonly token: () => string | null;
+  readonly clock: Clock;
+  readonly timers: Timers;
+  readonly random: () => number;
+  readonly play?: Play;
+}
+
+export function retryDelayMs(failures: number, random: number): number {
+  const capped: number = Math.min(LIVE.longestRetryMs, LIVE.firstRetryMs * 2 ** Math.max(0, failures));
+  return capped * (LIVE.jitterFloor + (1 - LIVE.jitterFloor) * Math.min(1, Math.max(0, random)));
+}
+
+function moved(from: Place, to: Place): boolean {
+  return Math.abs(from.x - to.x) >= LIVE.stillWithin || Math.abs(from.z - to.z) >= LIVE.stillWithin || Math.abs(from.facing - to.facing) >= LIVE.stillWithin;
+}
+
+function quietly(work: () => void): void {
+  try {
+    work();
+  } catch {
+    return;
+  }
+}
+
+export function createLive(options: LiveOptions): Live {
+  const { clock, timers } = options;
+  const listeners: Set<LiveListener> = new Set<LiveListener>();
+  let socket: LiveSocket | null = null;
+  let welcomed: boolean = false;
+  let entered: boolean = false;
+  let shown: boolean = false;
+  let present: boolean = false;
+  let standDown: boolean = false;
+  let failures: number = 0;
+  let refusals: number = 0;
+  let enterAfter: number = Number.NEGATIVE_INFINITY;
+  let retry: (() => void) | null = null;
+  let sent: Place | null = null;
+  let sentAt: number = Number.NEGATIVE_INFINITY;
+  let here: Place = { x: 0, z: 0, facing: 0 };
+  let roaming: boolean | null = null;
+  let muted: readonly string[] = [];
+  let trading: boolean = false;
+  let elsewhere: boolean = false;
+
+  const emit = (event: LiveEvent): void => {
+    if (event.type === 'gone') {
+      if (!shown) return;
+      shown = false;
+    } else shown = true;
+    for (const listener of listeners) {
+      try {
+        listener(event);
+      } catch {
+        continue;
+      }
+    }
+  };
+
+  const send = (text: string): void => {
+    const open: LiveSocket | null = socket;
+    if (open !== null) quietly((): void => open.send(text));
+  };
+
+  const drop = (): void => {
+    const closing: LiveSocket | null = socket;
+    socket = null;
+    welcomed = false;
+    trading = false;
+    entered = false;
+    present = false;
+    sent = null;
+    if (closing !== null) quietly((): void => closing.close());
+    emit({ type: 'gone' });
+  };
+
+  const waitThen = (delay: number): void => {
+    retry?.();
+    retry = timers.after(delay, (): void => {
+      retry = null;
+    });
+  };
+
+  const backOff = (): void => {
+    waitThen(retryDelayMs(failures, options.random()));
+    failures += 1;
+  };
+
+  const receive = (frame: ServerFrame): void => {
+    switch (frame.type) {
+      case 'welcome':
+        welcomed = true;
+        trading = frame.trade;
+        if (frame.claimed) options.play?.claimed();
+        failures = 0;
+        roaming = frame.roaming !== null;
+        if (frame.roaming === null) return;
+        send(mutesFrame(muted));
+        emit({ type: 'welcome', you: frame.roaming.you, chat: frame.roaming.chat });
+        return;
+      case 'present':
+        refusals = 0;
+        present = frame.chat !== null;
+        emit({ type: 'present', you: frame.you, players: frame.players.filter((player: LivePlayer): boolean => player.id !== frame.you), chat: frame.chat });
+        return;
+      case 'said':
+        emit({ type: 'said', line: frame.line });
+        return;
+      case 'whisper':
+        emit({ type: 'whisper', dir: frame.dir, with: frame.with, line: frame.line });
+        return;
+      case 'unsent':
+        emit({ type: 'unsent', reason: frame.reason, to: frame.to });
+        return;
+      case 'friends':
+        emit({ type: 'friends' });
+        return;
+      case 'trade':
+        emit({ type: 'trade', frame: frame.frame });
+        return;
+      case 'joined':
+        emit({ type: 'joined', player: frame.player });
+        return;
+      case 'left':
+        emit({ type: 'left', id: frame.id });
+        return;
+      case 'look':
+        emit({ type: 'look', id: frame.id, name: frame.name, hero: frame.hero, worn: frame.worn });
+        return;
+      case 'moves':
+        emit({ type: 'moves', moves: frame.moves, at: clock() });
+        return;
+      case 'elsewhere':
+        options.play?.replace();
+        stopForGood();
+        return;
+      case 'full':
+      case 'replaced':
+        standDown = true;
+        if (roaming === true) stepOut();
+        else drop();
+        return;
+      case 'refused': {
+        const chat: ChatRefusal | null = chatRefusal(frame.reason);
+        if (chat !== null) {
+          emit({ type: 'refused', reason: chat });
+          return;
+        }
+        entered = false;
+        present = false;
+        sent = null;
+        enterAfter = clock() + retryDelayMs(refusals, options.random());
+        refusals += 1;
+        return;
+      }
+    }
+  };
+
+  const connect = (): void => {
+    const token: string | null = options.token();
+    if (token === null) {
+      waitThen(LIVE.tokenWaitMs);
+      return;
+    }
+    let opened: LiveSocket | null = null;
+    const handlers: SocketHandlers = {
+      open(): void {
+        if (socket === opened) send(helloFrame(token, options.play?.stamp() ?? null));
+      },
+      message(data: unknown): void {
+        if (socket !== opened) return;
+        const frame: ServerFrame | null = readServerFrame(data);
+        if (frame !== null) receive(frame);
+      },
+      closed(): void {
+        if (socket !== opened) return;
+        drop();
+        backOff();
+      },
+    };
+    try {
+      opened = options.open(liveUrl(options.serverUrl), handlers);
+      socket = opened;
+    } catch {
+      socket = null;
+      backOff();
+    }
+  };
+
+  const stopForGood = (): void => {
+    elsewhere = true;
+    retry?.();
+    retry = null;
+    drop();
+  };
+
+  const stepOut = (): void => {
+    if (!entered && !present) return;
+    entered = false;
+    present = false;
+    sent = null;
+    emit({ type: 'away' });
+  };
+
+  const leave = (): void => {
+    if (entered) send(leaveFrame());
+    drop();
+    retry?.();
+    retry = null;
+    failures = 0;
+    refusals = 0;
+    enterAfter = Number.NEGATIVE_INFINITY;
+    standDown = false;
+  };
+
+  const stay = (inside: boolean): void => {
+    if (elsewhere) return;
+    if (standDown && !(roaming === true && !inside)) return;
+    if (socket === null) {
+      if (retry === null) connect();
+      return;
+    }
+    if (!welcomed) return;
+    if (!inside) {
+      if (entered) send(leaveFrame());
+      stepOut();
+      return;
+    }
+    const now: number = clock();
+    if (!entered) {
+      if (now < enterAfter) return;
+      send(enterFrame(here));
+      entered = true;
+      sent = here;
+      sentAt = now;
+      return;
+    }
+    if (now - sentAt < LIVE.moveEveryMs || (sent !== null && !moved(sent, here))) return;
+    send(moveFrame(here));
+    sent = here;
+    sentAt = now;
+  };
+
+  options.play?.onReplaced(stopForGood);
+
+  return {
+    update(stand: Stand): void {
+      if (elsewhere) return;
+      here = { x: stand.x, z: stand.z, facing: stand.facing };
+      const inside: boolean = stand.zone === LIVE_ZONE;
+      if (!inside && standDown && roaming === true) standDown = false;
+      if (inside || (stand.zone !== null && roaming !== false)) stay(inside);
+      else if (socket !== null || retry !== null || standDown) leave();
+    },
+    say(text: string): boolean {
+      const line: string | null = sayable(text);
+      if (line === null || !(present || (welcomed && roaming === true))) return false;
+      send(sayFrame(line));
+      return true;
+    },
+    whisper(to: string, text: string): boolean {
+      const line: string | null = sayable(text);
+      if (line === null || to === '' || !welcomed || roaming !== true) return false;
+      send(whisperFrame(to, line));
+      return true;
+    },
+    mute(names: readonly string[]): void {
+      muted = names;
+      if (welcomed && roaming === true) send(mutesFrame(muted));
+    },
+    canTrade: (): boolean => trading && present,
+    trade(frame: string): boolean {
+      if (!trading || !present) return false;
+      send(frame);
+      return true;
+    },
+    subscribe(listener: LiveListener): () => void {
+      listeners.add(listener);
+      return (): void => {
+        listeners.delete(listener);
+      };
+    },
+  };
+}

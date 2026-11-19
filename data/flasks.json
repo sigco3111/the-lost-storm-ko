@@ -1,0 +1,102 @@
+[
+ {
+  "id": "life_flask",
+  "name": "생명력 약병",
+  "resource": "life",
+  "amount": 70,
+  "share": 0.35,
+  "duration": 2.4,
+  "cooldown": 0.6,
+  "maxCharges": 30,
+  "chargesPerUse": 10,
+  "chargesPerKill": 3,
+  "tiers": [
+   {
+    "level": 8,
+    "price": 120,
+    "amount": 95,
+    "share": 0.4,
+    "duration": 2.2,
+    "maxCharges": 30,
+    "chargesPerKill": 3
+   },
+   {
+    "level": 14,
+    "price": 600,
+    "amount": 130,
+    "share": 0.44,
+    "duration": 2,
+    "maxCharges": 30,
+    "chargesPerKill": 3
+   },
+   {
+    "level": 19,
+    "price": 1500,
+    "amount": 170,
+    "share": 0.47,
+    "duration": 1.9,
+    "maxCharges": 40,
+    "chargesPerKill": 4
+   },
+   {
+    "level": 25,
+    "price": 4200,
+    "amount": 220,
+    "share": 0.5,
+    "duration": 1.8,
+    "maxCharges": 40,
+    "chargesPerKill": 4
+   }
+  ]
+ },
+ {
+  "id": "mana_flask",
+  "name": "마나 약병",
+  "resource": "mana",
+  "amount": 45,
+  "share": 0.45,
+  "duration": 3,
+  "cooldown": 0.6,
+  "maxCharges": 30,
+  "chargesPerUse": 8,
+  "chargesPerKill": 3,
+  "tiers": [
+   {
+    "level": 8,
+    "price": 80,
+    "amount": 60,
+    "share": 0.5,
+    "duration": 2.7,
+    "maxCharges": 30,
+    "chargesPerKill": 3
+   },
+   {
+    "level": 14,
+    "price": 400,
+    "amount": 80,
+    "share": 0.54,
+    "duration": 2.5,
+    "maxCharges": 30,
+    "chargesPerKill": 3
+   },
+   {
+    "level": 19,
+    "price": 1000,
+    "amount": 100,
+    "share": 0.57,
+    "duration": 2.3,
+    "maxCharges": 40,
+    "chargesPerKill": 4
+   },
+   {
+    "level": 25,
+    "price": 2800,
+    "amount": 125,
+    "share": 0.6,
+    "duration": 2.1,
+    "maxCharges": 40,
+    "chargesPerKill": 4
+   }
+  ]
+ }
+]

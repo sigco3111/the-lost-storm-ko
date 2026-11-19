@@ -1,0 +1,56 @@
+import type { Fields } from '../sim/content/read.ts';
+import { fields, numeric, text } from '../sim/content/read.ts';
+import type { Job, Scenario } from './simulate-run.ts';
+
+export interface JobMessage {
+  readonly index: number;
+  readonly job: Job;
+}
+
+export interface DoneMessage {
+  readonly index: number;
+  readonly stream: string;
+}
+
+function readScenario(value: unknown): Scenario {
+  const source: Fields = fields(value, 'scenario');
+  const kind: string = text(source, 'kind', 'scenario');
+  switch (kind) {
+    case 'slice':
+      return { kind };
+    case 'farm':
+      return { kind, minutes: numeric(source, 'minutes', 'scenario') };
+    case 'fight':
+      return { kind, moment: text(source, 'moment', 'scenario'), repeats: numeric(source, 'repeats', 'scenario') };
+    case 'level':
+      return { kind, level: numeric(source, 'level', 'scenario'), minutes: numeric(source, 'minutes', 'scenario') };
+    case 'over':
+      return { kind, hero: numeric(source, 'hero', 'scenario'), zone: numeric(source, 'zone', 'scenario'), minutes: numeric(source, 'minutes', 'scenario') };
+    case 'boss': {
+      const levels: unknown = source['levels'];
+      if (!Array.isArray(levels) || !levels.every((level: unknown): level is number => typeof level === 'number')) throw new Error('scenario.levels must be a list of levels');
+      return { kind, levels, repeats: numeric(source, 'repeats', 'scenario'), minutes: numeric(source, 'minutes', 'scenario') };
+    }
+    case 'pack': {
+      const levels: unknown = source['levels'];
+      if (!Array.isArray(levels) || !levels.every((level: unknown): level is number => typeof level === 'number')) throw new Error('scenario.levels must be a list of levels');
+      return { kind, monster: text(source, 'monster', 'scenario'), count: numeric(source, 'count', 'scenario'), levels, repeats: numeric(source, 'repeats', 'scenario'), minutes: numeric(source, 'minutes', 'scenario'), groups: numeric(source, 'groups', 'scenario'), gap: numeric(source, 'gap', 'scenario') };
+    }
+    default:
+      throw new Error(`unknown scenario ${kind}`);
+  }
+}
+
+export function readJobMessage(value: unknown): JobMessage {
+  const source: Fields = fields(value, 'message');
+  const job: Fields = fields(source['job'], 'message.job');
+  return {
+    index: numeric(source, 'index', 'message'),
+    job: { scenario: readScenario(job['scenario']), skill: text(job, 'skill', 'job'), build: text(job, 'build', 'job'), seed: numeric(job, 'seed', 'job'), danger: numeric(job, 'danger', 'job'), toughness: numeric(job, 'toughness', 'job') },
+  };
+}
+
+export function readDoneMessage(value: unknown): DoneMessage {
+  const source: Fields = fields(value, 'message');
+  return { index: numeric(source, 'index', 'message'), stream: text(source, 'stream', 'message') };
+}

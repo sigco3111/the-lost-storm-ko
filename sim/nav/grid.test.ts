@@ -1,0 +1,313 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { loadContent } from '../content/content.ts';
+import type { Content, PropDef, SurfaceDef, ZoneDef } from '../content/types.ts';
+import type { Vec2 } from '../math.ts';
+import { blockerGap, buildNavGrid, cellCenter, cellIndex, isSolid, isWalkable, liftStamp, lineOfSight, linePace, lineWalkable, moveWithCollision, nearestWalkable, paceAt, propBlocker, propBlockers, propOutlines, setDriftOpen, stampBlockers } from './grid.ts';
+import type { Blocker, DriftCells, GridStamp, NavGrid } from './grid.ts';
+import { OUTPOST_ZONE, ROAD_CONTENT, roadContent, roadZone } from '../../test/road-support.ts';
+import { must } from '../../test/support.ts';
+import { findPath } from './path.ts';
+
+const content: Content = loadContent();
+const BODY_SAMPLE: number = 0.1;
+const grid: NavGrid = buildNavGrid(OUTPOST_ZONE, content.props, content.surfaces, content.player.radius);
+
+void test('open floor is walkable and void tiles, the outside and wall margins are not', (): void => {
+  assert.ok(isWalkable(grid, 28, 22));
+  assert.ok(!isWalkable(grid, 2, 2));
+  assert.ok(!isWalkable(grid, -3, 10));
+  assert.ok(!isWalkable(grid, 500, 500));
+  assert.ok(!isWalkable(grid, 0.4, 22));
+  assert.ok(isWalkable(grid, 2, 22));
+});
+
+void test('props with a block radius block, and the player start stays free', (): void => {
+  assert.ok(!isWalkable(grid, 20, 14));
+  assert.ok(isSolid(grid, 20, 14));
+  assert.ok(!isWalkable(grid, 20.9, 14));
+  assert.ok(isWalkable(grid, 23, 14));
+  assert.ok(isSolid(grid, -3, 10));
+  assert.ok(!isSolid(grid, 28, 22));
+});
+
+void test('cell lookup maps points to cells and back', (): void => {
+  assert.equal(cellIndex(grid, -1, 5), -1);
+  assert.equal(cellIndex(grid, 5, grid.rows * grid.cellSize + 1), -1);
+  const index: number = cellIndex(grid, 28.1, 22.1);
+  const centre: Vec2 = cellCenter(grid, index);
+  assert.ok(Math.abs(centre.x - 28.1) <= grid.cellSize / 2);
+  assert.ok(Math.abs(centre.z - 22.1) <= grid.cellSize / 2);
+  assert.equal(cellIndex(grid, centre.x, centre.z), index);
+});
+
+void test('lines are blocked by a pillar but not by open floor', (): void => {
+  assert.ok(!lineWalkable(grid, { x: 16, z: 14 }, { x: 24, z: 14 }));
+  assert.ok(lineWalkable(grid, { x: 16, z: 22 }, { x: 24, z: 22 }));
+  assert.ok(!lineOfSight(grid, { x: 16, z: 14 }, { x: 24, z: 14 }));
+  assert.ok(lineOfSight(grid, { x: 28, z: 37 }, { x: 28, z: 20 }));
+  assert.ok(!lineWalkable(grid, { x: 28, z: 22 }, { x: 28, z: -10 }));
+});
+
+void test('nearestWalkable keeps walkable points and snaps others', (): void => {
+  const same: Vec2 = must(nearestWalkable(grid, { x: 28, z: 22 }, 4), 'same point');
+  assert.deepEqual(same, { x: 28, z: 22 });
+  const snapped: Vec2 = must(nearestWalkable(grid, { x: 20, z: 14 }, 4), 'snapped point');
+  assert.ok(isWalkable(grid, snapped.x, snapped.z));
+  assert.ok(Math.hypot(snapped.x - 20, snapped.z - 14) <= 4);
+  assert.equal(nearestWalkable(grid, { x: -50, z: -50 }, 4), null);
+});
+
+void test('moveWithCollision moves freely, slides along a wall and never enters one', (): void => {
+  const free: Vec2 = { x: 28, z: 22 };
+  moveWithCollision(grid, free, 0.5, 0.25);
+  assert.deepEqual(free, { x: 28.5, z: 22.25 });
+
+  const sliding: Vec2 = { x: 1.2, z: 22 };
+  assert.ok(isWalkable(grid, sliding.x, sliding.z));
+  moveWithCollision(grid, sliding, -0.5, 1);
+  assert.equal(sliding.x, 1.2);
+  assert.equal(sliding.z, 23);
+
+  const pinned: Vec2 = { x: 1.2, z: 22 };
+  moveWithCollision(grid, pinned, -2, 0);
+  assert.deepEqual(pinned, { x: 1.2, z: 22 });
+});
+
+const AUDIT = {
+  spawnSnap: 6,
+  approach: 1.5,
+  sampleStep: 0.1,
+  bodyMargin: 0.05,
+  reported: 5,
+  crossings: [[1, 0], [0, 1], [Math.SQRT1_2, Math.SQRT1_2], [Math.SQRT1_2, -Math.SQRT1_2]],
+} as const;
+
+function reachableFrom(zoneGrid: NavGrid, start: Vec2): Uint8Array {
+  const seen: Uint8Array = new Uint8Array(zoneGrid.columns * zoneGrid.rows);
+  const first: number = cellIndex(zoneGrid, start.x, start.z);
+  if (first < 0) return seen;
+  const queue: number[] = [first];
+  seen[first] = 1;
+  while (queue.length > 0) {
+    const current: number = queue.pop() ?? first;
+    const column: number = current % zoneGrid.columns;
+    const row: number = Math.floor(current / zoneGrid.columns);
+    for (let dr: number = -1; dr <= 1; dr += 1) {
+      for (let dc: number = -1; dc <= 1; dc += 1) {
+        const nextColumn: number = column + dc;
+        const nextRow: number = row + dr;
+        if (nextColumn < 0 || nextRow < 0 || nextColumn >= zoneGrid.columns || nextRow >= zoneGrid.rows) continue;
+        const next: number = nextRow * zoneGrid.columns + nextColumn;
+        if (seen[next] === 1 || zoneGrid.walkable[next] !== 1) continue;
+        if (dc !== 0 && dr !== 0 && (zoneGrid.walkable[row * zoneGrid.columns + nextColumn] !== 1 || zoneGrid.walkable[nextRow * zoneGrid.columns + column] !== 1)) continue;
+        seen[next] = 1;
+        queue.push(next);
+      }
+    }
+  }
+  return seen;
+}
+
+for (const zone of content.zones.values()) {
+  const zoneGrid: NavGrid = buildNavGrid(zone, content.props, content.surfaces, content.player.radius);
+
+  void test(`${zone.id}: paths around every blocking prop keep a walker's body out of its footprint`, (): void => {
+    const problems: string[] = [];
+    const blocking = zone.props.filter((placed) => placed.when.length === 0 && must(content.props.get(placed.prop), placed.prop).blockRadius > 0);
+    let crossings: number = 0;
+    for (const placed of blocking) {
+      const reach: number = must(content.props.get(placed.prop), placed.prop).blockRadius + content.player.radius + AUDIT.approach;
+      for (const [dx, dz] of AUDIT.crossings) {
+        const from: Vec2 = { x: placed.x - dx * reach, z: placed.z - dz * reach };
+        const to: Vec2 = { x: placed.x + dx * reach, z: placed.z + dz * reach };
+        if (!isWalkable(zoneGrid, from.x, from.z) || !isWalkable(zoneGrid, to.x, to.z)) continue;
+        const path: Vec2[] = findPath(zoneGrid, from, to);
+        if (path.length === 0) {
+          problems.push(`no path across ${placed.prop} at ${placed.x},${placed.z} from ${from.x.toFixed(2)},${from.z.toFixed(2)}`);
+          continue;
+        }
+        crossings += 1;
+        let previous: Vec2 = from;
+        for (const point of path) {
+          const steps: number = Math.max(1, Math.ceil(Math.hypot(point.x - previous.x, point.z - previous.z) / AUDIT.sampleStep));
+          for (let step: number = 0; step <= steps; step += 1) {
+            const x: number = previous.x + ((point.x - previous.x) * step) / steps;
+            const z: number = previous.z + ((point.z - previous.z) * step) / steps;
+            for (const other of blocking) {
+              const bodies: Blocker[] = propBlockers(must(content.props.get(other.prop), other.prop), other.x, other.z, other.rotationDegrees);
+              const gap: number = Math.min(...bodies.map((body: Blocker): number => blockerGap(body, x, z)));
+              if (gap < content.player.radius - AUDIT.bodyMargin) problems.push(`a path near ${placed.prop} at ${placed.x},${placed.z} passes ${x.toFixed(2)},${z.toFixed(2)}, inside ${other.prop} at ${other.x},${other.z}`);
+            }
+          }
+          previous = point;
+        }
+      }
+    }
+    assert.deepEqual(problems.slice(0, AUDIT.reported), []);
+    if (blocking.length > 0) assert.ok(crossings > 0, `${zone.id} checked no crossing`);
+  });
+
+  void test(`${zone.id}: every pack, exit, checkpoint, waypoint and NPC is reachable from the start`, (): void => {
+    const start: Vec2 = must(nearestWalkable(zoneGrid, zone.playerStart, AUDIT.spawnSnap), `${zone.id} start`);
+    const seen: Uint8Array = reachableFrom(zoneGrid, start);
+    const places: { readonly label: string; readonly x: number; readonly z: number }[] = [
+      ...zone.packs.map((pack, index: number) => ({ label: `pack ${index}`, x: pack.x, z: pack.z })),
+      ...zone.exits.map((exit) => ({ label: `exit ${exit.id}`, x: exit.x, z: exit.z })),
+      ...zone.checkpoints.map((checkpoint) => ({ label: `checkpoint ${checkpoint.id}`, x: checkpoint.x, z: checkpoint.z })),
+      ...zone.npcs.map((npc) => ({ label: `npc ${npc.npc}`, x: npc.x, z: npc.z })),
+      ...(zone.waypoint === null ? [] : [{ label: 'waypoint', x: zone.waypoint.x, z: zone.waypoint.z }]),
+    ];
+    const problems: string[] = [];
+    for (const place of places) {
+      const snapped: Vec2 | null = nearestWalkable(zoneGrid, place, AUDIT.spawnSnap);
+      if (snapped === null || seen[cellIndex(zoneGrid, snapped.x, snapped.z)] !== 1) problems.push(`${place.label} at ${place.x},${place.z} is cut off`);
+    }
+    assert.deepEqual(problems, []);
+  });
+}
+
+void test('the ground sets each cell\'s pace, and a zone without walls has no corner pillars', (): void => {
+  const zone: ZoneDef = roadZone({ tiles: ['wwss', 'wwss'] });
+  const local: NavGrid = buildNavGrid(zone, ROAD_CONTENT.props, roadContent(zone).surfaces, ROAD_CONTENT.player.radius);
+  assert.equal(paceAt(local, 2, 2), 1);
+  assert.equal(paceAt(local, 14, 2), 0.5);
+  assert.equal(isWalkable(local, 8, 4), true);
+  assert.equal(linePace(local, { x: 2, z: 2 }, { x: 14, z: 2 }), 0.5);
+});
+
+void test('a tile whose surface blocks keeps walkers out with a margin but lets bolts fly over it', (): void => {
+  const zone: ZoneDef = roadZone({ tiles: ['wwwwbbwwww', 'wwwwbbwwww', 'wwwwbbwwww'], floors: { w: 'road_firm', b: 'road_molten' } });
+  const firm: SurfaceDef = must(roadContent(zone).surfaces.get('road_firm'), 'road_firm');
+  const surfaces: Map<string, SurfaceDef> = new Map<string, SurfaceDef>([...roadContent(zone).surfaces, ['road_molten', { ...firm, id: 'road_molten', blocks: true }]]);
+  const local: NavGrid = buildNavGrid(zone, ROAD_CONTENT.props, surfaces, ROAD_CONTENT.player.radius);
+  const middle: number = zone.cellSize * 5;
+  assert.equal(isWalkable(local, middle, 3), false);
+  assert.equal(isWalkable(local, zone.cellSize * 4 - 0.05, 3), false);
+  assert.equal(isWalkable(local, zone.cellSize * 2, 3), true);
+  assert.equal(isSolid(local, middle, 3), false);
+  const route: readonly Vec2[] = findPath(local, { x: zone.cellSize, z: 3 }, { x: zone.cellSize * 9, z: 3 });
+  assert.ok(route.every((point: Vec2): boolean => point.x < zone.cellSize * 4 || point.x > zone.cellSize * 6));
+});
+
+void test('a closed drift takes its cells out of the walkable grid and puts them back when it opens', (): void => {
+  const zone: ZoneDef = roadZone({ drifts: [{ id: 'patch', column: 2, row: 0, columns: 1, rows: 4, period: 10, open: 0.5, offset: 0, fade: 1 }] });
+  const local: NavGrid = buildNavGrid(zone, ROAD_CONTENT.props, roadContent(zone).surfaces, ROAD_CONTENT.player.radius);
+  const patch: DriftCells = must(local.drifts[0], 'patch');
+  assert.equal(isWalkable(local, 10, 8), true);
+  setDriftOpen(local, patch, false);
+  assert.equal(isWalkable(local, 10, 8), false);
+  assert.equal(isWalkable(local, 6, 8), true);
+  setDriftOpen(local, patch, true);
+  assert.equal(isWalkable(local, 10, 8), true);
+});
+
+void test('every build of a zone\'s grid is its own copy, so closing cells in one leaves the next build open', (): void => {
+  const zone: ZoneDef = roadZone({ drifts: [{ id: 'patch', column: 2, row: 0, columns: 1, rows: 4, period: 10, open: 0.5, offset: 0, fade: 1 }] });
+  const surfaces: Content['surfaces'] = roadContent(zone).surfaces;
+  const first: NavGrid = buildNavGrid(zone, ROAD_CONTENT.props, surfaces, ROAD_CONTENT.player.radius);
+  setDriftOpen(first, must(first.drifts[0], 'patch'), false);
+  const second: NavGrid = buildNavGrid(zone, ROAD_CONTENT.props, surfaces, ROAD_CONTENT.player.radius);
+  assert.notEqual(second.walkable, first.walkable);
+  assert.equal(isWalkable(first, 10, 8), false);
+  assert.equal(isWalkable(second, 10, 8), true);
+  assert.equal(must(second.drifts[0], 'patch').open, true);
+});
+
+void test('a long prop blocks along its length as a capsule turned by its rotation, and a stamp closes and lifts its cells', (): void => {
+  const log: PropDef = { ...must(content.props.get('dead_log'), 'dead_log'), blockRadius: 0.3, blockLength: 4 };
+  const open: NavGrid = buildNavGrid(OUTPOST_ZONE, content.props, content.surfaces, content.player.radius);
+  const centre: Vec2 = must(findOpen(open), 'open floor');
+  const along: Blocker = must(propBlocker(log, centre.x, centre.z, 0), 'a blocker');
+  assert.ok(blockerGap(along, centre.x + 1.8, centre.z) < 0);
+  assert.ok(blockerGap(along, centre.x, centre.z + 1.8) > 1);
+  const turned: Blocker = must(propBlocker(log, centre.x, centre.z, 90), 'a turned blocker');
+  assert.ok(blockerGap(turned, centre.x, centre.z - 1.8) < 0);
+  assert.ok(blockerGap(turned, centre.x + 1.8, centre.z) > 1);
+  const before: Uint8Array = open.walkable.slice();
+  const stamp: GridStamp = stampBlockers(open, [along], content.player.radius);
+  assert.ok(stamp.cells.length > 0);
+  assert.equal(isWalkable(open, centre.x + 1.5, centre.z), false);
+  assert.equal(isSolid(open, centre.x + 1.5, centre.z), true);
+  liftStamp(open, stamp);
+  assert.deepEqual(open.walkable, before);
+});
+
+function findOpen(open: NavGrid): Vec2 | null {
+  for (let index: number = 0; index < open.walkable.length; index += 1) {
+    const at: Vec2 = cellCenter(open, index);
+    const clear: boolean = [-3, -2, -1, 0, 1, 2, 3].every((dx: number): boolean => [-3, 0, 3].every((dz: number): boolean => isWalkable(open, at.x + dx, at.z + dz) && isWalkable(open, at.x + dz, at.z + dx)));
+    if (clear) return at;
+  }
+  return null;
+}
+
+function placedOutlines(zone: ZoneDef): { readonly prop: string; readonly at: Vec2; readonly outline: Blocker }[] {
+  return zone.props.flatMap((placed): { readonly prop: string; readonly at: Vec2; readonly outline: Blocker }[] => {
+    const def: PropDef | undefined = content.props.get(placed.prop);
+    if (placed.when.length > 0 || def === undefined) return [];
+    return propOutlines(def, placed.x, placed.z, placed.rotationDegrees).map((outline: Blocker): { readonly prop: string; readonly at: Vec2; readonly outline: Blocker } => ({ prop: placed.prop, at: { x: placed.x, z: placed.z }, outline }));
+  });
+}
+
+function cornersOf(blocker: Blocker): readonly Vec2[] {
+  return blocker.kind === 'outline' ? blocker.outline : [blocker.from, blocker.to];
+}
+
+void test('no point inside a placed prop\'s ground outline can be walked on, in any zone', (): void => {
+  for (const zone of content.zones.values()) {
+    const zoneGrid: NavGrid = buildNavGrid(zone, content.props, content.surfaces, content.player.radius);
+    for (const { prop, at, outline } of placedOutlines(zone)) {
+      const corners: readonly Vec2[] = cornersOf(outline);
+      const centre: Vec2 = { x: corners.reduce((sum: number, point: Vec2): number => sum + point.x, 0) / corners.length, z: corners.reduce((sum: number, point: Vec2): number => sum + point.z, 0) / corners.length };
+      for (const corner of [centre, ...corners]) {
+        for (const share of [0, 0.5, 0.9]) {
+          const x: number = centre.x + (corner.x - centre.x) * share;
+          const z: number = centre.z + (corner.z - centre.z) * share;
+          assert.equal(isWalkable(zoneGrid, x, z), false, `${zone.id}: ${prop} at (${at.x}, ${at.z}) lets the hero stand at (${x.toFixed(2)}, ${z.toFixed(2)})`);
+        }
+      }
+    }
+  }
+});
+
+void test('wherever the hero may stand, his whole body is clear of every placed prop\'s ground outline, and he can come right up to it', (): void => {
+  const radius: number = content.player.radius;
+  for (const zone of content.zones.values()) {
+    const zoneGrid: NavGrid = buildNavGrid(zone, content.props, content.surfaces, radius);
+    const bareGrid: NavGrid = buildNavGrid({ ...zone, props: [] }, content.props, content.surfaces, radius);
+    let near: number = 0;
+    let measured: number = 0;
+    for (const { prop, at, outline } of placedOutlines(zone)) {
+      const corners: readonly Vec2[] = cornersOf(outline);
+      const xs: number[] = corners.map((point: Vec2): number => point.x);
+      const zs: number[] = corners.map((point: Vec2): number => point.z);
+      let closest: number = Number.POSITIVE_INFINITY;
+      let floorBeside: boolean = false;
+      for (let x: number = Math.min(...xs) - 1.5; x <= Math.max(...xs) + 1.5; x += BODY_SAMPLE) {
+        for (let z: number = Math.min(...zs) - 1.5; z <= Math.max(...zs) + 1.5; z += BODY_SAMPLE) {
+          const gap: number = blockerGap(outline, x, z);
+          if (gap >= radius && gap < radius + BODY_SAMPLE && isWalkable(bareGrid, x, z)) floorBeside = true;
+          if (!isWalkable(zoneGrid, x, z)) continue;
+          assert.ok(gap >= radius - 1e-6, `${zone.id}: ${prop} at (${at.x}, ${at.z}) lets the hero stand ${gap.toFixed(2)} m from its base`);
+          closest = Math.min(closest, gap);
+        }
+      }
+      if (!floorBeside) continue;
+      measured += 1;
+      if (closest <= radius + BODY_SAMPLE) near += 1;
+    }
+    assert.equal(near, measured, `${zone.id}: the hero can come right up to only ${near} of ${measured} prop outlines`);
+  }
+});
+
+void test('a rotated outline turns with its placement, and a point outside it keeps its distance', (): void => {
+  const slab: PropDef = { ...must(content.props.get('dead_log'), 'dead_log'), blockRadius: 0, blockLength: 0, footprints: [[{ x: -2, z: -0.5 }, { x: 2, z: -0.5 }, { x: 2, z: 0.5 }, { x: -2, z: 0.5 }]] };
+  const along: Blocker = must(propOutlines(slab, 10, 10, 0)[0], 'outline');
+  assert.ok(blockerGap(along, 11.8, 10) < 0);
+  assert.ok(Math.abs(blockerGap(along, 10, 11.5) - 1) < 1e-9);
+  const turned: Blocker = must(propOutlines(slab, 10, 10, 90)[0], 'turned outline');
+  assert.ok(blockerGap(turned, 10, 8.2) < 0);
+  assert.ok(blockerGap(turned, 11.8, 10) > 1);
+  assert.equal(propBlockers(slab, 10, 10, 0).length, 1);
+});

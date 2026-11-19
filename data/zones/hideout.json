@@ -1,0 +1,628 @@
+{
+ "id": "hideout",
+ "name": "은신처",
+ "kind": "town",
+ "level": 1,
+ "cellSize": 4,
+ "floorHeight": 0,
+ "tiles": [
+  "            ",
+  "  rrrrrrrr  ",
+  " rrrrrrrrrr ",
+  "rrrsssssrrr ",
+  "rrrsssssrrrr",
+  "rrrsssssrrrr",
+  "rrrsssssrrr ",
+  " rrrrrrrrrr ",
+  "  rrrrrrrr  ",
+  "            "
+ ],
+ "floors": {
+  "s": "black_ledge",
+  "r": "black_rock",
+  "p": "ruined_road"
+ },
+ "outside": {
+  "surface": "crag_ground",
+  "reach": 6,
+  "barrier": {
+   "nearSides": [
+    "south",
+    "east"
+   ],
+   "exitClear": 3,
+   "rows": [
+    {
+     "far": {
+      "props": [
+       "crag_a_wide",
+       "crag_b_wide",
+       "crag_spire_wide"
+      ],
+      "out": -0.9,
+      "step": 2.6,
+      "turn": 70
+     },
+     "near": {
+      "props": [
+       "edge_low_a_wide",
+       "edge_low_b_wide"
+      ],
+      "out": -0.6,
+      "step": 1.1,
+      "turn": 90
+     },
+     "collide": true,
+     "shadow": true
+    },
+    {
+     "far": {
+      "props": [
+       "ridge_a_wide",
+       "ridge_b_wide"
+      ],
+      "out": 4,
+      "step": 5,
+      "turn": 120
+     },
+     "near": {
+      "props": [
+       "crag_low_wide"
+      ],
+      "out": 2.2,
+      "step": 2.6,
+      "turn": 90
+     },
+     "collide": false,
+     "shadow": false
+    },
+    {
+     "far": {
+      "props": [
+       "ridge_far_wide"
+      ],
+      "out": 10,
+      "step": 9,
+      "turn": 180
+     },
+     "near": {
+      "props": [
+       "crag_a_wide",
+       "crag_b_wide"
+      ],
+      "out": 3.6,
+      "step": 4,
+      "turn": 120
+     },
+     "collide": false,
+     "shadow": false
+    }
+   ]
+  }
+ },
+ "walls": null,
+ "scatter": [
+  {
+   "type": "open",
+   "props": [
+    "hideout_puddle_a",
+    "hideout_puddle_b"
+   ],
+   "count": 16,
+   "clump": 3,
+   "spread": 2.6,
+   "size": {
+    "least": 0.8,
+    "most": 1.2
+   },
+   "clear": 1.8
+  },
+  {
+   "type": "around",
+   "props": [
+    "hideout_moss_a",
+    "hideout_moss_b",
+    "hideout_puddle_a"
+   ],
+   "anchors": [
+    "crag_low_wide",
+    "crag_a_wide",
+    "crag_b_wide",
+    "boulder_2_wide",
+    "rock_4_wide"
+   ],
+   "each": 1,
+   "spread": 1.8,
+   "size": {
+    "least": 0.8,
+    "most": 1.2
+   }
+  }
+ ],
+ "playerStart": {
+  "x": 11,
+  "z": 20
+ },
+ "props": [
+  {
+   "prop": "crag_a_wide",
+   "x": -2,
+   "z": 6,
+   "y": -0.05,
+   "rotationDegrees": 30
+  },
+  {
+   "prop": "crag_b_wide",
+   "x": -3,
+   "z": 34,
+   "y": -0.05,
+   "rotationDegrees": 200
+  },
+  {
+   "prop": "crag_spire_wide",
+   "x": 6,
+   "z": -2,
+   "y": -0.05,
+   "rotationDegrees": 120
+  },
+  {
+   "prop": "crag_low_wide",
+   "x": 20,
+   "z": -3,
+   "y": -0.05,
+   "rotationDegrees": 40
+  },
+  {
+   "prop": "crag_a_wide",
+   "x": 36,
+   "z": -1,
+   "y": -0.05,
+   "rotationDegrees": 250
+  },
+  {
+   "prop": "crag_spire_wide",
+   "x": 50,
+   "z": 8,
+   "y": -0.05,
+   "rotationDegrees": 10
+  },
+  {
+   "prop": "crag_b_wide",
+   "x": 50,
+   "z": 30,
+   "y": -0.05,
+   "rotationDegrees": 300
+  },
+  {
+   "prop": "crag_low_wide",
+   "x": 42,
+   "z": 41,
+   "y": -0.05,
+   "rotationDegrees": 80
+  },
+  {
+   "prop": "crag_a_wide",
+   "x": 24,
+   "z": 43,
+   "y": -0.05,
+   "rotationDegrees": 160
+  },
+  {
+   "prop": "crag_spire_wide",
+   "x": 8,
+   "z": 42,
+   "y": -0.05,
+   "rotationDegrees": 220
+  },
+  {
+   "prop": "boulder_2_wide",
+   "x": 46,
+   "z": 2,
+   "y": -0.05,
+   "rotationDegrees": 75
+  },
+  {
+   "prop": "rock_4_wide",
+   "x": -3,
+   "z": 26,
+   "y": -0.05,
+   "rotationDegrees": 105
+  },
+  {
+   "prop": "crag_low_wide",
+   "x": -2,
+   "z": 12,
+   "y": -0.05,
+   "rotationDegrees": 15
+  },
+  {
+   "prop": "hideout_rock_mass_b",
+   "x": 3.8,
+   "z": 29.3,
+   "y": 0,
+   "rotationDegrees": 341
+  },
+  {
+   "prop": "hideout_rock_mass_b",
+   "x": 43,
+   "z": 27,
+   "y": 0,
+   "rotationDegrees": 88
+  },
+  {
+   "prop": "hideout_rock_mass_a",
+   "x": 15,
+   "z": 4.6,
+   "y": 0,
+   "rotationDegrees": 21
+  },
+  {
+   "prop": "hideout_rock_mass_b",
+   "x": 36,
+   "z": 4.6,
+   "y": 0,
+   "rotationDegrees": 78
+  },
+  {
+   "prop": "hideout_rock_mass_a",
+   "x": 15,
+   "z": 35.6,
+   "y": 0,
+   "rotationDegrees": 140
+  },
+  {
+   "prop": "hideout_rock_mass_b",
+   "x": 35.8,
+   "z": 35,
+   "y": 0,
+   "rotationDegrees": 324
+  },
+  {
+   "prop": "hideout_rubble_heap",
+   "x": 8,
+   "z": 10,
+   "y": 0,
+   "rotationDegrees": 126
+  },
+  {
+   "prop": "hideout_rubble_heap",
+   "x": 10,
+   "z": 33,
+   "y": 0,
+   "rotationDegrees": 133
+  },
+  {
+   "prop": "hideout_rubble_heap",
+   "x": 39,
+   "z": 9,
+   "y": 0,
+   "rotationDegrees": 102
+  },
+  {
+   "prop": "hideout_plank_pile",
+   "x": 9.5,
+   "z": 14,
+   "y": 0,
+   "rotationDegrees": 185
+  },
+  {
+   "prop": "hideout_plank_pile",
+   "x": 38.5,
+   "z": 20,
+   "y": 0,
+   "rotationDegrees": 4
+  },
+  {
+   "prop": "hideout_cart_wreck",
+   "x": 8,
+   "z": 26,
+   "y": 0,
+   "rotationDegrees": 142
+  },
+  {
+   "prop": "hideout_mine_support",
+   "x": 36.5,
+   "z": 13,
+   "y": 0,
+   "rotationDegrees": 13
+  },
+  {
+   "prop": "hideout_mine_support",
+   "x": 8.8,
+   "z": 5.4,
+   "y": 0,
+   "rotationDegrees": 55
+  },
+  {
+   "prop": "hideout_scaffold",
+   "x": 24,
+   "z": 4.6,
+   "y": 0,
+   "rotationDegrees": 354
+  },
+  {
+   "prop": "hideout_barrel_wreck",
+   "x": 35.5,
+   "z": 31,
+   "y": 0,
+   "rotationDegrees": 174
+  },
+  {
+   "prop": "hideout_chain_coil",
+   "x": 20,
+   "z": 33,
+   "y": 0,
+   "rotationDegrees": 143
+  },
+  {
+   "prop": "crate",
+   "x": 31.8,
+   "z": 12.6,
+   "y": 0,
+   "rotationDegrees": 15
+  },
+  {
+   "prop": "crate_tall",
+   "x": 27.2,
+   "z": 10.4,
+   "y": 0,
+   "rotationDegrees": 340
+  },
+  {
+   "prop": "barrel",
+   "x": 32.6,
+   "z": 14.2,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "basket",
+   "x": 28.0,
+   "z": 13.3,
+   "y": 0,
+   "rotationDegrees": 30
+  },
+  {
+   "prop": "lantern",
+   "x": 30.9,
+   "z": 10.2,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "branches",
+   "x": 22.0,
+   "z": 22.0,
+   "y": 0,
+   "rotationDegrees": 20
+  },
+  {
+   "prop": "axe",
+   "x": 21.4,
+   "z": 22.6,
+   "y": 0,
+   "rotationDegrees": 35
+  },
+  {
+   "prop": "pot",
+   "x": 25.9,
+   "z": 21.6,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "stump",
+   "x": 26.8,
+   "z": 23.2,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "cask",
+   "x": 15.0,
+   "z": 18.0,
+   "y": 0,
+   "rotationDegrees": 80
+  },
+  {
+   "prop": "bucket",
+   "x": 17.9,
+   "z": 18.0,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "table_long",
+   "x": 33.4,
+   "z": 26.6,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "descent_table",
+   "x": 33.5,
+   "z": 26.2,
+   "y": 0.88,
+   "rotationDegrees": 30,
+   "when": [
+    {
+     "type": "visited",
+     "zone": "under_hall"
+    }
+   ]
+  },
+  {
+   "prop": "lantern",
+   "x": 33.3,
+   "z": 27.7,
+   "y": 0.88,
+   "rotationDegrees": 0,
+   "when": [
+    {
+     "type": "visited",
+     "zone": "under_hall"
+    }
+   ]
+  },
+  {
+   "prop": "pail",
+   "x": 29.4,
+   "z": 27.6,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "basket",
+   "x": 32.6,
+   "z": 30.2,
+   "y": 0,
+   "rotationDegrees": 200
+  },
+  {
+   "prop": "campfire_wide",
+   "x": 24.0,
+   "z": 20.0,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "brazier",
+   "x": 17.5,
+   "z": 11.5,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "post_lantern_lit_wide",
+   "x": 13.0,
+   "z": 18.3,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "post_lantern_lit_wide",
+   "x": 16.0,
+   "z": 22.2,
+   "y": 0,
+   "rotationDegrees": 180
+  },
+  {
+   "prop": "bench",
+   "x": 20.0,
+   "z": 23.5,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "stool",
+   "x": 27.5,
+   "z": 24.0,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "stall_camp",
+   "x": 29.5,
+   "z": 11.5,
+   "y": 0,
+   "rotationDegrees": 200
+  },
+  {
+   "prop": "stash_chest",
+   "x": 20.5,
+   "z": 26.5,
+   "y": 0,
+   "rotationDegrees": 160
+  },
+  {
+   "prop": "shelter",
+   "x": 31.0,
+   "z": 28.5,
+   "y": 0,
+   "rotationDegrees": 270
+  }
+ ],
+ "packs": [],
+ "surge": null,
+ "exits": [
+  {
+   "id": "west",
+   "x": 1.6,
+   "z": 20,
+   "radius": 2.2,
+   "to": "hall_of_time",
+   "toExit": "east",
+   "arrival": {
+    "x": 11,
+    "z": 20
+   },
+   "requires": []
+  }
+ ],
+ "checkpoints": [],
+ "waypoint": {
+  "x": 24,
+  "z": 14.5,
+  "radius": 1.8
+ },
+ "markerSurfaces": {
+  "stone": "hall_stone"
+ },
+ "portalSpot": {
+  "x": 21,
+  "z": 17.5
+ },
+ "npcs": [
+  {
+   "npc": "warden_trader",
+   "x": 29.5,
+   "z": 15,
+   "facingDegrees": 220
+  },
+  {
+   "npc": "warden_guide",
+   "x": 18.5,
+   "z": 21,
+   "facingDegrees": 260
+  },
+  {
+   "npc": "warden_lookout",
+   "x": 31,
+   "z": 23,
+   "facingDegrees": 250
+  },
+  {
+   "npc": "warden_auctioneer",
+   "x": 19.5,
+   "z": 14.5,
+   "facingDegrees": 120
+  },
+  {
+   "npc": "warden_appraiser",
+   "x": 24,
+   "z": 9.8,
+   "facingDegrees": 0
+  }
+ ],
+ "ambience": {
+  "background": "#0a0e16",
+  "abyss": "#05070b",
+  "fogNear": 26,
+  "fogFar": 92,
+  "skyColor": "#5a6f94",
+  "groundColor": "#344057",
+  "skyIntensity": 6.8,
+  "keyColor": "#b9cbe8",
+  "keyIntensity": 4.8
+ },
+ "weather": {
+  "lightning": {
+   "first": 3,
+   "min": 7,
+   "max": 14
+  },
+  "rain": 0,
+  "wet": 0.35,
+  "mistWall": null
+ }
+}

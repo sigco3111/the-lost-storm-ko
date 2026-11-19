@@ -1,0 +1,241 @@
+[
+ {
+  "id": "warden_guide",
+  "name": "관리인 안내자",
+  "title": "관리인",
+  "faction": "wardens",
+  "rig": "warden",
+  "scale": 1.0,
+  "tint": "#f2e2d0",
+  "color": "#f0c070",
+  "gear": [
+   "warden_staff",
+   "warden_lantern"
+  ],
+  "wear": [
+   "warden_jerkin",
+   "warden_breeches",
+   "warden_boots",
+   "warden_hood"
+  ],
+  "talks": [
+   {
+    "id": "warden_guide_first",
+    "once": true,
+    "when": [
+     {
+      "type": "flag",
+      "flag": "warden_met",
+      "is": "owed"
+     }
+    ],
+    "lines": [
+     "warden_guide_fell",
+     "warden_guide_counted",
+     "warden_guide_road"
+    ]
+   },
+   {
+    "id": "warden_guide_lesson",
+    "once": true,
+    "when": [
+     {
+      "type": "objective",
+      "quest": "wardens_lesson",
+      "objective": "ask",
+      "is": "current"
+     }
+    ],
+    "lines": [
+     "warden_guide_lesson"
+    ]
+   },
+   {
+    "id": "warden_guide_between",
+    "once": true,
+    "when": [
+     {
+      "type": "flag",
+      "flag": "fire_lesson",
+      "is": "given"
+     }
+    ],
+    "lines": [
+     "warden_guide_born",
+     "warden_guide_far_apart",
+     "warden_guide_gap",
+     "warden_guide_counting",
+     "warden_guide_no_one",
+     "warden_guide_ledger"
+    ]
+   },
+   {
+    "id": "warden_guide_gate",
+    "once": true,
+    "when": [
+     {
+      "type": "flag",
+      "flag": "fire_lesson",
+      "is": "given"
+     },
+     {
+      "type": "flag",
+      "flag": "keeper_defeated",
+      "not": true
+     }
+    ],
+    "lines": [
+     "warden_guide_reckoner",
+     "warden_guide_stronger"
+    ]
+   },
+   {
+    "id": "warden_guide_after",
+    "once": true,
+    "when": [
+     {
+      "type": "flag",
+      "flag": "keeper_defeated"
+     }
+    ],
+    "lines": [
+     "warden_guide_short"
+    ]
+   },
+   {
+    "id": "warden_guide_talk",
+    "once": false,
+    "when": [],
+    "lines": [
+     "warden_guide_road"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "warden_trader",
+  "name": "관리인 상인",
+  "title": "관리인",
+  "faction": "wardens",
+  "rig": "warden",
+  "scale": 1.0,
+  "tint": "#f2e2d0",
+  "color": "#f0c070",
+  "gear": [
+   "warden_lantern"
+  ],
+  "wear": [
+   "warden_jerkin",
+   "warden_breeches",
+   "warden_boots",
+   "warden_gloves"
+  ],
+  "talks": [
+   {
+    "id": "warden_trader_talk",
+    "once": false,
+    "when": [],
+    "lines": [
+     "warden_trader_goods"
+    ]
+   }
+  ],
+  "service": "vendor"
+ },
+ {
+  "id": "warden_lookout",
+  "name": "관리인 망꾼",
+  "title": "관리인",
+  "faction": "wardens",
+  "rig": "warden",
+  "scale": 1.0,
+  "tint": "#f2e2d0",
+  "color": "#f0c070",
+  "gear": [
+   "warden_staff",
+   "warden_lantern"
+  ],
+  "wear": [
+   "warden_jerkin",
+   "warden_breeches",
+   "warden_boots",
+   "warden_hood",
+   "warden_gloves"
+  ],
+  "talks": [
+   {
+    "id": "warden_lookout_talk",
+    "once": false,
+    "when": [],
+    "lines": [
+     "warden_lookout_ahead"
+    ]
+   }
+  ]
+ },
+ {
+  "id": "warden_auctioneer",
+  "name": "관리인 경매인",
+  "title": "경매인",
+  "faction": "wardens",
+  "rig": "warden",
+  "scale": 1.0,
+  "tint": "#f2e2d0",
+  "color": "#f0c070",
+  "gear": [
+   "warden_lantern"
+  ],
+  "wear": [
+   "warden_jerkin",
+   "warden_breeches",
+   "warden_boots",
+   "warden_hood"
+  ],
+  "talks": [
+   {
+    "id": "warden_auctioneer_talk",
+    "once": false,
+    "when": [],
+    "lines": [
+     "warden_auctioneer_trade"
+    ]
+   }
+  ],
+  "service": "auction"
+ },
+ {
+  "id": "warden_appraiser",
+  "name": "관리인 감정사",
+  "title": "감정사",
+  "faction": "wardens",
+  "rig": "appraiser",
+  "scale": 1.0,
+  "tint": "#f2e2d0",
+  "color": "#f0c070",
+  "gear": [
+   "warden_lantern"
+  ],
+  "wear": [
+   "appraiser_robe",
+   "appraiser_skirt",
+   "plain_shoes",
+   "appraiser_hood",
+   "appraiser_charm"
+  ],
+  "talks": [
+   {
+    "id": "warden_appraiser_talk",
+    "once": false,
+    "when": [],
+    "lines": [
+     "warden_appraiser_read"
+    ]
+   }
+  ],
+  "service": "identify",
+  "remarks": {
+   "no_gold": "warden_appraiser_short",
+   "good_find": "warden_appraiser_good"
+  }
+ }
+]

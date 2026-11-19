@@ -1,0 +1,150 @@
+# The Lost Storm
+
+A single-player isometric action RPG on Three.js, in TypeScript, built with Vite. It runs in the browser with no server; an optional cloud save backend is described in the Persistence section below. See [README.md](README.md) for how to run it and how the code is laid out.
+
+## Code comments
+
+Do not write comments in code. No block comments, no line comments, no JSDoc, no docstrings used as comments, no TODO notes. Do not replace a comment with a shorter one.
+
+Agents read this source. Names, types, and tests carry the meaning. A comment that explains a change, a workaround, a tuning value, or a ticket belongs in the commit, the issue, or the PR.
+
+Leave type directives, shebangs, generated-file banners, and legal notices. Lint suppression comments are banned too: fix the code instead.
+
+This applies to TypeScript, GLSL, CSS, and shell. It does not apply to Markdown, JSON data descriptions, or user-facing copy. `test/rules.test.ts` enforces it.
+
+## Types
+
+All game and tool code is TypeScript with `strict` on and every extra strictness flag in `tsconfig.json`. Do not add `.js` files. The one exception is the model trainer in `rl/`, which is Python (see Training a model).
+
+- Give every function an explicit return type and every parameter a type. Give every exported value and every state object a named `interface` or type.
+- Do not use `any`, `@ts-ignore`, `@ts-expect-error` or `@ts-nocheck`. Do not use the non-null `!`; check the value instead.
+- Do not cast to get past the checker. Data that comes from outside the type system (JSON files, `localStorage`, a loaded GLB) is `unknown` until a reader function has checked it. `sim/content/read.ts` has the readers.
+- Prefer a discriminated union over a string field plus optional fields. Handle every member of a union in a `switch`; the lint rule `switch-exhaustiveness-check` fails on a missing case.
+- Mark fields `readonly` unless the code mutates them.
+
+## Lint
+
+`npm run lint` runs oxlint with type information (`.oxlintrc.json`). It must report zero errors and zero warnings. Do not add a suppression comment and do not turn a rule off to get a change through.
+
+Before every PR run all three and get zero errors:
+
+```
+npm run typecheck
+npm run lint
+npm run test:affected
+```
+
+`npm run test:affected` runs only the tests your branch can affect (its diff against `origin/main` plus uncommitted and untracked files), split over up to four processes, in a few seconds. Run it through the machine's test lane. `npm test` is the whole suite, split over up to four processes that each run their files together (a few seconds); the merge queue runs it. `npm run test:isolated` is the whole suite with one process per file; every push to `main` runs it.
+
+## Before you submit
+
+Run `npm run typecheck`, `npm run lint` and `npm run test:affected` through the machine's lanes (`~/Dev/ops/lanes/lane check --` for typecheck and lint, `~/Dev/ops/lanes/lane test --` for tests). `test:affected` runs only the tests your diff can reach, plus the rules test, in a few seconds. Run `npm test` (the whole suite) only after changing configuration, the lockfile or shared test support. Never start `node --test` over the whole tree yourself. Tests never start a server, a browser or a process, and never wait on real time: use the fake clock. A test that reads files from disk (imports `node:fs`) must match a rule in `tools/affected-rules.json` (`alwaysRun`, an `importers` rule's `alsoRun`, or an `only` run); importing a file or naming its path from the root does not satisfy `tools/affected.test.ts`. CI is informational until `CI_GATE` is `on`, but a warning on `CI result` means a real break: fix it in your own follow-up.
+
+## Logic and rendering are separate layers
+
+- `sim/` is the game: stats, combat, skills, monster behaviour, pathfinding, loot, inventory, progression, saving. It is plain TypeScript. It never imports Three.js or anything from `src/`, and never touches `window`, `document` or `localStorage`. It runs in Node, which is how it is tested.
+- `src/` draws the game and reads input. It reads the world state and the events `stepWorld` returns, and sends commands back. It never changes world state directly.
+
+A change to how damage is rolled, how a skill hits, how a monster decides, what drops or how a level is gained goes in `sim/` with a test, never in `src/`.
+
+## Training a model
+
+The game trains its own model to play it. The game side is TypeScript in `sim/rl/` (the arena, what the model sees, what its actions do, the reward, replays) and `tools/rl/` (the process the trainer talks to over stdin and stdout). The trainer is Python in `rl/`, managed by `uv`, and is the only Python in the repository. Python there follows the same spirit: no comments, type hints on every function. See [rl/README.md](rl/README.md).
+
+- `sim/rl/contract.ts` is the contract between the game and the model, and `sim/rl/contract.test.ts` pins its fingerprint. Describe a skill, a monster or anything else the model sees by its numbers, never by its id, so a balance change or a new skill needs no new input. A change to the layout raises `RL.version` and updates the pinned fingerprint in the same pull request.
+- A change to how the arena, the reward or the observation works goes in `sim/rl/` with a test, like any other sim change.
+- Training runs, checkpoints and replays live in `rl/runs/`, which is ignored. Never commit a checkpoint.
+
+## Persistence and the optional backend
+
+`src/backend/` is the only code that loads or saves progress. `main.ts` talks to a `Backend` (`load`, `save`, `reset`, `flush`). The local implementation is the `localStorage` behaviour the game always had. The remote one exists only when `VITE_SERVER_URL` is set.
+
+- With the variable unset the game makes no network request. A plain clone must keep working offline.
+- A backend never fails the game. Network errors, timeouts and bad answers are absorbed and retried, and the game keeps saving locally. Only `load` (started first, so it overlaps the character load) and `reset` (before the page reloads) wait for the network, three seconds at most each. `reset` must keep waiting: a reload that outruns it would load the old cloud copy back.
+- Nothing from the network is trusted unchecked: a response is read with `readSave` before it is used, and a token is only ever sent to the server address that issued it.
+- Console output goes through `src/backend/console-log.ts`, the one file in `src/` exempt from `no-console` (as `tools/` is).
+- Nothing about a particular server belongs in this repository beyond the protocol types in `src/backend/api.ts` and `src/backend/live-protocol.ts` and the `VITE_SERVER_URL` entry in the README.
+- Signing in is `src/backend/account.ts` (the decisions, tested with the fake server), `src/account-flow.ts` and `src/title-account.ts` (the title-screen control) and `src/google-identity.ts` (the only file that touches Google's script). The Google client id comes from the server at run time, never from this repository, and no Google asset is committed. After a sign-in or a sign-out the page reloads, so the save backend never runs with a stale token.
+- A guest with a level to lose is asked to sign in by `src/keep/`: `keep-prompt.ts` decides (tested), `keep-view.ts` draws the line in the lobby sheet and the card in play, `keep-start.ts` wires both to the title's sign-in. It is not a second sign-in: its button leads to the title's control. Before any sign-in request the account flow calls `beforeSignIn`, which saves on this device and marks the sync record pending. When the sign-in links the guest (the identity is new to the server) that record is kept, and it, not the upload, carries the character through the reload. A sign-in to an identity that already has a character follows `merge.ts` as before: the character that is further along is kept.
+- The shared Hideout and the chat are `src/backend/live.ts`, the only code that opens a `WebSocket`. It opens while the player is in play: against a server that welcomes it with the General chat it stays open in every zone and enters the Hideout only while the player stands there; against an older server it opens only in the Hideout. Chat is General (everyone online) and whispers between two players; the slash commands are parsed in `src/hideout/chat-command.ts` and the channel decisions are `src/hideout/chat.ts`, both tested. The token goes in the first frame, never in the URL. Every frame is read by `src/backend/live-protocol.ts` before use. A drop or an old server backs off and never fails the game. Other players are drawn by `src/render/others.ts` as scenery; `sim/` never hears of them.
+- The decisions (which copy wins on load and on a conflict) are pure functions in `src/backend/merge.ts`. Test them there, and test the sync behaviour in `src/backend/remote.test.ts` with the fake server in `test/backend-support.ts`.
+
+## Content is data
+
+Monsters, skills, items, rarities, affixes, skill-tree nodes, rigs, attachments, props, the world and its zones (`data/zones/`) are JSON files in `data/`. A zone's floor is drawn from its tile map: each tile letter names a surface in `data/surfaces.json` (a tiling colour, normal and roughness texture with a size in metres), and `outside` names the surface that runs past the walls. World models in `public/models/world/` carry no textures; a prop's `surfaces` field dresses each of the model's named materials in a surface, so a new look for a wall or a pillar is a new prop entry, not a new model. Adding a monster, a skill, an item or a tree node is a data change only.
+
+The playable heroes are data: `heroes` in `data/player.json` lists each with an id, a name and a rig, and the first is the default. The chosen hero is part of the save (`hero`), set by the `hero` command only until a weapon is in hand, and code asks `sim/hero.ts` for the rig instead of assuming one. A `hero` condition (`{"type": "hero", "is": "woman"}`) lets an encounter, a line or a quest step depend on who woke, which is how each hero is laid a weapon of their own in the opening.
+
+How a weapon is held and what it does to a skill are data too. An attachment may name a `stance`; a rig lists `clips.stances`, and an actor holding that attachment plays the stance's idle and looks its actions up there first, falling back to the rig's own clips. An item base may list `variants` (`{skill, becomes}`), which turn one skill into another while the item is worn; the hand crossbow turns Cleave into a shot this way. The weapon's grip is modelled to fit the hand the stance's clips were authored with; clips are never edited and fingers are never posed.
+
+How a fight sounds is data too. A weapon base has a `weaponKind` and a monster has a `bodyMaterial`; `data/audio.json` picks a hit's layers from them: a cue may list `weapons` to play only for those kinds, a hit takes its body sound from the monster's own id, else its material, else `fallback`, a crit adds its sound to the hit, and the shield sound belongs to the `guarded` table, which the sim's blocked and broken guard events trigger. The engine never repeats a file within the last two plays of a sound. An area has its own sound tables (`areaStart`, `areaPulse` on every pulse, `areaStrike` once for a pulse that hit something however many it hit, `areaEnd`) and a brand has `brand`, all keyed by the skill's form first and then by the skill it changes. `sim/content/audio-coverage.test.ts` fails on any skill or form with no sound at its start, any area that stands 2 s or more and pulses with no sound while it stands, and any lasting area with no end sound; the few skills meant to be silent are listed with a reason under `silent` in `data/audio.json`.
+
+If new content cannot be expressed in the data, extend the schema in `sim/content/` and its handling in the engine in a general way (a new delivery type, a new modifier target), then write the content as data. Do not special-case an id in engine or render code. `sim/content/content.test.ts` checks every cross-reference between the data files.
+
+## The guide's measured numbers
+
+`tools/guide/measured.json` holds the numbers the guide's build pages show, with the balance fingerprint they were measured at. A pull request never re-measures them and never changes that file. A sim or data change lands with the old numbers. The guide then says, on every page that shows them, that they were measured on other balance, and `tools/guide/site.test.ts` reports that without failing. One job refreshes them on main: `npm run guide:refresh` measures a fresh worktree of `origin/main` and opens a pull request that changes only that file. The fingerprint (`tools/guide/fingerprint.ts`) skips fields that cannot change a fight: names, descriptions, icons, pictures, worn models, colours and effects. The one exception: a pull request that adds a build to the guide runs `node tools/guide/measure.ts` once at its own head and commits the result, because a build with no numbers cannot be drawn. The fingerprint still keeps, for each starting item, whether it is worn and whether it has a picture, because both decide what a new character starts with.
+
+## Tests
+
+Name a test file exactly after the file it tests, in the same directory: `foo.ts` is tested by `foo.test.ts`. A feature that adds tests for a file that already has a test file puts them in a topic file beside it, `foo.<topic>.test.ts` (lowercase letters, digits and hyphens, such as `bot.flasks.test.ts`), instead of appending to `foo.test.ts`. A topic test file counts as named after `foo.ts` for `test/rules.test.ts` and `tools/affected.ts`. Run `npm run test:affected` while you work and `npm test` when you want everything.
+
+`tools/affected.ts` picks the tests from the real import graph and the rules in `tools/affected-rules.json`. A changed file runs its own test and every test that imports it, directly or through other files; a test also reaches the file it is named after and any file in `sim/`, `src/`, `test/`, `tools/` or `data/` it names by its path from the root. `data/**` also runs the content cross-check, `src/hud/**` every HUD test, `src/backend/**` every backend test. `public/**` runs the content check, which reads the models' clips. Docs and Markdown run only `test/rules.test.ts`, which runs on every change. Configuration, the lockfile, shared test support, the tool itself and any path no rule names run everything. A test that reads files from disk instead of importing them must be named in a rule; `tools/affected.test.ts` fails until it is. Tests never start a server, a browser or another process, and never wait on real time: use the fake clock and timers in `test/`.
+
+CI (`.github/workflows/ci.yml`) runs typecheck and lint on every push, the affected tests on a pull request, and `npm run test:isolated` on every push to `main`. With `CI_GATE` on it also runs `npm test` once a pull request enters the merge queue (`mq-live`) and on the queue's `mq-batch-*` branches; while it is off the queue never waits on CI: those runs are skipped and a batch branch gets an instant passing `CI result`. `CI result` is the one check that sums them up. For now CI is informational: a failing step is reported as a warning and in the run summary of `CI result`, and every check still passes, so nothing blocks landing. Setting the repository variable `CI_GATE` to `on` makes any failure fail its check and stop the merge queue.
+
+## Working beside other sessions
+
+Many sessions land work at the same time, and two additions at the same spot in one file make the later one bounce from the merge queue. Most bounces come from two features each appending to the end of the same file. So:
+
+- New tests for an existing file go in a topic test file (see Tests), not at the end of `foo.test.ts`.
+- A new panel or feature gets its own CSS file; do not append its rules to the end of a shared stylesheet.
+- When you must add to a shared file (a list, a type, an import block, a JSON array), put the addition beside what it belongs with, never at the end by default.
+- New content goes in its own file wherever the data has a folder for it (`data/zones/`).
+
+## Tuning values
+
+Game balance lives in `data/`. Every other tuning number (camera, effects, timings, HUD) lives in a named constant object at the top of its file. Do not put a bare number in the middle of a function.
+
+## Assets and licences
+
+This repository is meant to become public, so every file in it must be redistributable.
+
+- Humans use the Quaternius universal skeleton. A body is `public/models/characters/<frame>.glb` (head only). Any body with the same joint names plays the clips, because `src/render/clip-fit.ts` fits each clip to the body's rest pose at load. The skeleton monsters keep the older `DEF-*` rig and its clip folder. Never bake a weapon into a character file: held gear is an attachment in `data/attachments.json`.
+- Clothes are modular parts in `public/models/wear/<frame>/`, picked by `pieces` in `data/wearables.json` and bound to the wearer's skeleton by joint name. Never model clothes into a character file. Look at a new piece on its body in the browser, in every animation, before it ships.
+- Ship only CC0 assets, or CC BY with full attribution. Every file under `public/models` and `public/textures` has a row in [ASSETS.md](ASSETS.md) with its source and licence, and the pack's licence text is in `licenses/`. `test/rules.test.ts` fails on a model or texture with no row.
+- MakeHuman is banned. No MakeHuman body, garment, hair, skin, rig or build script goes into this repository, and no character is built from one. It ships no animations, so animating it always means forcing it onto another skeleton, which is what broke the hands. A new character starts from a pack whose bodies and animations ship together on one skeleton. The two still-figure props (`still_figure.glb`, `still_figure_bowed.glb`) were built from it earlier and are the only remains; `test/rules.test.ts` fails on any other mention.
+- Never commit Mixamo files, Splice samples, Sketchfab downloads without a redistributable licence, or anything ripped from another game. Local-only assets go in `public/models/local/` and `public/audio/local/`, which are git-ignored.
+- Do not copy another game's name, characters, art, music, levels or interface. The Lost Storm is its own world.
+
+## Game feel
+
+Input must answer on the same frame. A hit that lands shows it: flash, knockback, a damage number, particles, and for heavy hits a short hit-stop and screen shake. A hit-stop holds only the struck body (and the hero's swing on a heavy melee hit), never the whole world; the only world-wide slow-down is a rare eased dip on a boss, a pack leader or a huge crit, with a cooldown (`src/render/time-moment.ts`). The camera kicks once per volley, not once per monster. When you add an attack, a skill or a monster, give it all of these through the skill's data (`knockback`, `stagger`, `shake`, `hitStop`, `vfx`).
+
+## Effects on the ground
+
+Ground effects are drawn as light through the shared ground-light shader (`createGroundLight` in `src/render/ground-light.ts`): area markers, reach indicators, novas, telegraphs, roots, wards, click markers. Its fill, band, wave, sector and lane forms are parameters of that one shader. Never draw a ground effect as a flat ring, disc or hard-edged shape, or with a perfect outline: no `RingGeometry`, `CircleGeometry`, `TorusGeometry`, `LineLoop` or full-circle sector mesh. Every edge is feathered, the outline is broken by noise, and strength eases in and out. Radius and timing come from the sim. `test/rules.test.ts` fails on a flat shape outside its short allowlist of non-effect uses.
+
+Places are not effects. A waypoint, a way between levels and a checkpoint are solid models from `data/markers.json` (a zone's waypoint, exits and checkpoints may name a `marker`; the default comes from the role, and an exit to a deeper level is a way down). Their light belongs to the object: lit carvings, a lit focal piece, a surface inside the frame, a small point light. Never mark a place with a pool of ground light; `test/rules.test.ts` fails on a marker kind with no model and on render code that draws ground light while reading a zone's waypoint, exits or checkpoints.
+
+## HUD motion and style
+
+Every user-visible change in the HUD animates with spring motion: panels opening, text that changes, bars, buttons. Nothing may jump from one frame to the next. Use the `--spring-*` easings and durations in `src/hud/hud.css`; do not write ad-hoc timings or cubic-bezier curves. The one exception is a continuous ambient loop that is not a state change, such as the liquid drifting in the globes: it uses the `--drift-ease` and `--drift-ms` tokens defined beside the springs, never a bare timing.
+
+A style value that changes while the game runs (a custom property an effect drives every frame) is written on the element that reads it, or on the smallest element that holds every reader, never on `body` or the root element. A custom property is inherited, so a change on the page re-styles every element under it: with the HUD's four thousand elements that is a full style pass of about 20 ms in that frame, on every frame the value moves. `test/rules.test.ts` fails on a property written on `document.body` or `document.documentElement`.
+
+No thick or bright borders, outlines or focus rings, no pill-shaped radii, and small corner radii. Panels are clean, dark and translucent.
+
+## No browser-native controls or pop-ups
+
+The game never shows the browser's or the operating system's own UI. No `<select>`, `<option>`, `<datalist>`, native `<dialog>` or `showModal`, `alert`, `confirm`, `prompt`, native date, colour or file pickers, number fields with spin buttons (`type="number"`; use a text input with `inputmode`), or `title` tooltips. Every dropdown, menu, dialog, tooltip and picker is drawn by the HUD's own components, styled and animated like the rest of the HUD: a choice list is `src/hud/dropdown.ts`, a hint on an item is the HUD tooltip. Where there is no HUD tooltip (the title and landing screens), an icon carries `aria-label` and nothing else.
+
+A new dropdown, menu, dialog, tooltip or picker is looked at in a real browser at device scale 1 and 2, and at the phone layout, before it ships: padding and alignment measured from the DOM with `getBoundingClientRect`, text and carets checked for blur, clipping and an off-centre glyph, and the open and close frames captured to show nothing swaps in one frame. `test/rules.test.ts` fails on any of the native controls above in shipped code.
+
+## No sound during development
+
+The game has no audio yet. When it gets audio, never play it from an agent session: run browsers muted.
+
+## Git
+
+Never push to `main`. Every change goes on a branch and lands through a pull request.

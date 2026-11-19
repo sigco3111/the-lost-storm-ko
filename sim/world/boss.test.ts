@@ -1,0 +1,468 @@
+import assert from 'node:assert/strict';
+import { EMPTY_BUFFER } from './press-buffer.ts';
+import { test } from 'node:test';
+import { OUTPOST_CONTENT, OUTPOST_ZONE } from '../../test/road-support.ts';
+import { armed, must, worldIn, zoneOf } from '../../test/support.ts';
+import { botFight, botInDanger, createBot } from '../bot.ts';
+import type { Bot } from '../bot.ts';
+import { loadContent } from '../content/content.ts';
+import { withheldZones } from '../content/withheld.ts';
+import type { BossDef, BossPhase, Condition, Content, LineDef, MonsterDef, QuestDef, ZoneDef, ZonePack } from '../content/types.ts';
+import { distance } from '../math.ts';
+import { xpToNextLevel } from '../progression.ts';
+import { phaseAt, pickBossSkill } from './boss.ts';
+import { applyHit, offenceOf } from './combat.ts';
+import { stepWorld } from './step.ts';
+import { choicesOpen } from './death.ts';
+import type { MonsterState, World, WorldEvent } from './types.ts';
+import { SKILLS } from './skills.ts';
+import { enterZone } from './zones.ts';
+import { allHold } from './conditions.ts';
+import { createWorld } from './create.ts';
+import { readSave, toSave } from '../save.ts';
+import type { SaveData } from '../save.ts';
+
+const shipped: Content = loadContent();
+const DT: number = 1 / 30;
+
+function rankOf(rarity: string): number {
+  return shipped.rarities.findIndex((entry): boolean => entry.id === rarity);
+}
+const ROOM: string = 'proving_ground';
+
+type EventOf<T extends WorldEvent['type']> = Extract<WorldEvent, { readonly type: T }>;
+
+function ofType<T extends WorldEvent['type']>(events: readonly WorldEvent[], type: T): EventOf<T>[] {
+  return events.filter((event: WorldEvent): event is EventOf<T> => event.type === type);
+}
+
+function room(monster: string, when: readonly Condition[] = []): Content {
+  const packs: ZonePack[] = [{ x: 28, z: 14, members: [{ monster, count: 1, mods: [] }], when }];
+  const zone: ZoneDef = { ...OUTPOST_ZONE, id: ROOM, level: 2, surge: null, packs, exits: [], waypoint: null, moments: null };
+  return { ...OUTPOST_CONTENT, zones: new Map<string, ZoneDef>([...OUTPOST_CONTENT.zones, [zone.id, zone]]) };
+}
+
+const SPOKEN: readonly string[] = ['stormcaller_rival_sight_1', 'stormcaller_rival_sight_2', 'stormcaller_rival_half_1', 'stormcaller_rival_death_1'];
+
+function voiced(): Content {
+  const base: Content = room('stormcaller_rival');
+  const def: MonsterDef = must(base.monsters.get('stormcaller_rival'), 'rival');
+  const block: BossDef = must(def.boss, 'boss block');
+  const [sight, again, half, death] = SPOKEN;
+  const boss: BossDef = {
+    ...block,
+    barks: { aggro: [must(sight, 'sight'), must(again, 'again')], death: [must(death, 'death')] },
+    phases: [...block.phases.slice(0, 1), { ...must(block.phases[1], 'second phase'), barks: [must(half, 'half')] }, ...block.phases.slice(2)],
+  };
+  const lines: [string, LineDef][] = SPOKEN.map((id: string): [string, LineDef] => [id, { id, speaker: def.id, text: 'A test line.' }]);
+  return { ...base, monsters: new Map<string, MonsterDef>([...base.monsters, [def.id, { ...def, boss }]]), lines: new Map<string, LineDef>([...base.lines, ...lines]) };
+}
+
+function bossOf(world: World): MonsterState {
+  return must(world.monsters.find((monster: MonsterState): boolean => monster.def.boss !== null), 'boss');
+}
+
+function sturdy(world: World): World {
+  world.player.stats.maxLife = 100000;
+  world.player.maxLife = 100000;
+  world.player.life = 100000;
+  world.player.stats.lifeRegen = 5000;
+  return world;
+}
+
+function phaseSkills(phase: BossPhase | undefined, name: string): Set<string> {
+  const read: BossPhase = must(phase, name);
+  return new Set<string>([...read.skills.map((entry): string => entry.skill), ...read.measure]);
+}
+
+function bosses(): MonsterDef[] {
+  return [...shipped.monsters.values()].filter((monster: MonsterDef): boolean => monster.boss !== null);
+}
+
+function run(world: World, seconds: number): WorldEvent[] {
+  const events: WorldEvent[] = [];
+  const steps: number = Math.round(seconds / DT);
+  for (let step: number = 0; step < steps; step += 1) events.push(...stepWorld(world, [], DT));
+  return events;
+}
+
+function strike(world: World, boss: MonsterState): WorldEvent[] {
+  world.player.pos = { x: boss.pos.x, z: boss.pos.z + 1.6 };
+  world.player.cooldowns = {};
+  world.player.action = null;
+  world.player.buffered = EMPTY_BUFFER;
+  const events: WorldEvent[] = [];
+  for (let step: number = 0; step < 150; step += 1) {
+    const fresher: WorldEvent[] = stepWorld(world, step === 0 ? [{ type: 'skill', slot: 0, aim: boss.pos, targetId: boss.id }] : [], DT);
+    events.push(...fresher);
+    if (ofType(fresher, 'damage').some((event): boolean => event.targetId === boss.id)) break;
+  }
+  return events;
+}
+
+function hurt(world: World, boss: MonsterState, toFraction: number): WorldEvent[] {
+  boss.life = Math.floor(boss.maxLife * toFraction) + 1;
+  return strike(world, boss);
+}
+
+void test('the act ships at least two bosses, each with more than one skill and a second phase that adds one', (): void => {
+  assert.ok(bosses().length >= 2);
+  for (const def of bosses()) {
+    const boss: BossDef = must(def.boss, def.id);
+    assert.ok(boss.phases.length >= 2, `${def.id} phases`);
+    const first: Set<string> = phaseSkills(boss.phases[0], 'first phase');
+    const last: Set<string> = phaseSkills(boss.phases.at(-1), 'last phase');
+    assert.ok(first.size >= 2, `${def.id} opens with one skill`);
+    assert.ok([...last].some((skill: string): boolean => !first.has(skill)), `${def.id} gains nothing in its last phase`);
+    for (const phase of boss.phases) for (const skill of phaseSkills(phase, 'phase')) assert.ok(must(shipped.skills.get(skill), skill).windup >= 0.7, `${skill} has too short a wind-up to read`);
+  }
+});
+
+void test('the active phase is the last one whose threshold the life fraction has reached', (): void => {
+  const boss: BossDef = must(must(shipped.monsters.get('stormcaller_rival'), 'boss').boss, 'boss block');
+  assert.equal(phaseAt(boss, 1), 0);
+  assert.equal(phaseAt(boss, 0.51), 0);
+  assert.equal(phaseAt(boss, 0.5), 1);
+  assert.equal(phaseAt(boss, 0.01), 1);
+});
+
+void test('a boss uses more than one skill in a fight, and only skills of its active phase', (): void => {
+  for (const def of bosses()) {
+    const world: World = sturdy(armed(worldIn(room(def.id), ROOM, 3)));
+    const boss: MonsterState = bossOf(world);
+    const block: BossDef = must(def.boss, def.id);
+    world.player.pos = { x: 28, z: 22 };
+    const opening: Set<string> = phaseSkills(block.phases[0], 'phase');
+    const used: string[] = ofType(run(world, 40), 'skill_start').filter((event): boolean => event.actorId === boss.id).map((event): string => event.skill.id);
+    assert.ok(new Set<string>(used).size >= 2, `${def.id} used ${[...new Set<string>(used)].join(', ')}`);
+    assert.ok(used.every((skill: string): boolean => opening.has(skill)), `${def.id} used a later phase's skill at full life`);
+    hurt(world, boss, (must(block.phases[1], 'second phase').below + (block.phases[2]?.below ?? 0)) / 2);
+    assert.equal(boss.phase, 1);
+    const later: string[] = ofType(run(world, 60), 'skill_start').filter((event): boolean => event.actorId === boss.id).map((event): string => event.skill.id);
+    const second: Set<string> = phaseSkills(block.phases[1], 'phase');
+    assert.ok(later.every((skill: string): boolean => second.has(skill)));
+    assert.ok(later.some((skill: string): boolean => !opening.has(skill)), `${def.id} never used its new skill in 60s`);
+  }
+});
+
+void test('a skill on cooldown is not picked while another is ready, and the pick is reproducible', (): void => {
+  const pick = (seed: number): string[] => {
+    const world: World = armed(worldIn(room('unfinished_colossus'), ROOM, seed));
+    const boss: MonsterState = bossOf(world);
+    const block: BossDef = must(boss.def.boss, 'boss');
+    return Array.from({ length: 12 }, (): string => must(pickBossSkill(world, boss, block), 'skill').id);
+  };
+  assert.deepEqual(pick(5), pick(5));
+  assert.ok(new Set<string>(pick(5)).size >= 2);
+  const world: World = armed(worldIn(room('unfinished_colossus'), ROOM, 6));
+  const boss: MonsterState = bossOf(world);
+  boss.cooldowns['colossus_hammer'] = 3;
+  for (let attempt: number = 0; attempt < 12; attempt += 1) assert.equal(pickBossSkill(world, boss, must(boss.def.boss, 'boss'))?.id, 'colossus_stone');
+  boss.cooldowns['colossus_stone'] = 5;
+  assert.equal(pickBossSkill(world, boss, must(boss.def.boss, 'boss'))?.id, 'colossus_hammer');
+});
+
+void test('crossing a threshold fires the phase event once and the phase barks follow it', (): void => {
+  const world: World = armed(worldIn(voiced(), ROOM, 7));
+  const boss: MonsterState = bossOf(world);
+  boss.spawnTime = 0;
+  const first: WorldEvent[] = hurt(world, boss, 0.5);
+  assert.deepEqual(ofType(first, 'boss_phase'), [{ type: 'boss_phase', monsterId: boss.id, phase: 1 }]);
+  assert.deepEqual(ofType(first, 'bark').filter((event): boolean => event.line.id.includes('half')).map((event): string => event.speaker), ['stormcaller_rival']);
+  const again: WorldEvent[] = hurt(world, boss, 0.3);
+  assert.equal(ofType(again, 'boss_phase').length, 0);
+  assert.equal(ofType(again, 'bark').length, 0);
+});
+
+void test('a boss is not staggered, keeps its feet through its wind-up, and takes a fraction of the knockback once it stands idle', (): void => {
+  const world: World = sturdy(armed(worldIn(room('unfinished_colossus'), ROOM, 8)));
+  const boss: MonsterState = bossOf(world);
+  const cleave = must(world.content.skills.get('cleave'), 'cleave');
+  boss.spawnTime = 0;
+  boss.aggro = true;
+  world.player.pos = { x: boss.pos.x, z: boss.pos.z + 2.5 };
+  for (let step: number = 0; step < 200 && boss.action?.phase !== 'windup'; step += 1) stepWorld(world, [], DT);
+  assert.equal(boss.action?.phase, 'windup');
+  world.events = [];
+  applyHit(world, offenceOf(world.player), boss, cleave, { x: 0, z: -1 });
+  assert.equal(boss.stagger, 0);
+  assert.equal(boss.action.phase, 'windup');
+  assert.equal(ofType(world.events, 'skill_interrupt').length, 0);
+  assert.deepEqual(boss.knock, { x: 0, z: 0 });
+  boss.action = null;
+  applyHit(world, offenceOf(world.player), boss, cleave, { x: 0, z: -1 });
+  assert.ok(Math.abs(Math.hypot(boss.knock.x, boss.knock.z) - cleave.knockback * must(boss.def.boss, 'boss').poise.knockback * world.content.world.recovery.boss) < 1e-9);
+
+  const plain: World = armed(worldIn(OUTPOST_CONTENT, 'outpost', 8));
+  const thrall: MonsterState = must(plain.monsters.find((monster: MonsterState): boolean => monster.def.id === 'mended'), 'thrall');
+  applyHit(plain, offenceOf(plain.player), thrall, cleave, { x: 0, z: -1 });
+  if (thrall.alive) assert.equal(thrall.stagger, cleave.stagger);
+  assert.ok(Math.abs(Math.hypot(thrall.knock.x, thrall.knock.z) - cleave.knockback) < 1e-9);
+});
+
+void test('a boss barks when it notices the hero and when it dies, and drops its guaranteed reward', (): void => {
+  const world: World = armed(worldIn(voiced(), ROOM, 9));
+  const boss: MonsterState = bossOf(world);
+  const block: BossDef = must(boss.def.boss, 'boss');
+  boss.spawnTime = 0;
+  world.player.pos = { x: boss.pos.x, z: boss.pos.z + 6 };
+  const noticed: WorldEvent[] = run(world, 1);
+  assert.deepEqual(ofType(noticed, 'bark').map((event): string => event.line.id), block.barks.aggro);
+  assert.equal(ofType(run(world, 2), 'bark').length, 0);
+  boss.phase = block.phases.length - 1;
+  const dying: WorldEvent[] = hurt(world, boss, 0);
+  assert.equal(boss.alive, false);
+  assert.deepEqual(ofType(dying, 'bark').map((event): string => event.line.id), block.barks.death);
+  const drops = ofType(dying, 'drop').map((event) => event.ground.content);
+  const items = drops.flatMap((content) => (content.kind === 'item' ? [content.item] : []));
+  assert.equal(items.length, block.drop.items);
+  assert.ok(items.every((item): boolean => (shipped.leaning ? rankOf(item.rarity) >= rankOf(block.drop.floor) : item.rarity === block.drop.floor)), 'with leaning off a boss drops exactly its floor, as the server rolls it');
+  const gold = drops.flatMap((content) => (content.kind === 'gold' ? [content.amount] : []));
+  assert.equal(gold.length, 1);
+  assert.ok(must(gold[0], 'gold') >= block.drop.goldMin);
+});
+
+void test('one blow that takes a boss through a threshold and kills it still announces the phase before the death', (): void => {
+  const world: World = armed(worldIn(voiced(), ROOM, 14));
+  const boss: MonsterState = bossOf(world);
+  const block: BossDef = must(boss.def.boss, 'boss');
+  boss.spawnTime = 0;
+  boss.life = 1;
+  const events: WorldEvent[] = strike(world, boss);
+  assert.equal(boss.alive, false);
+  assert.deepEqual(ofType(events, 'boss_phase'), [{ type: 'boss_phase', monsterId: boss.id, phase: 1 }]);
+  const spoken: string[] = ofType(events, 'bark').map((event): string => event.line.id);
+  assert.deepEqual(spoken.slice(-block.barks.death.length), block.barks.death);
+  assert.ok(spoken.indexOf('stormcaller_rival_half_1') >= 0 && spoken.indexOf('stormcaller_rival_half_1') < spoken.indexOf(must(block.barks.death[0], 'death line')));
+});
+
+void test('a boss that outlives the hero starts the next attempt from its first phase', (): void => {
+  const world: World = armed(worldIn(room('unfinished_colossus'), ROOM, 15));
+  const boss: MonsterState = bossOf(world);
+  boss.spawnTime = 0;
+  hurt(world, boss, 0.4);
+  assert.equal(boss.phase, 1);
+  world.player.life = 1;
+  world.player.stats.lifeRegen = 0;
+  world.player.pos = { x: boss.pos.x, z: boss.pos.z + 2 };
+  const events: WorldEvent[] = [];
+  for (let step: number = 0; step < 900 && ofType(events, 'player_respawn').length === 0; step += 1) events.push(...stepWorld(world, choicesOpen(world) ? [{ type: 'respawn', choice: 'checkpoint' }] : [], DT));
+  assert.equal(ofType(events, 'player_respawn').length, 1);
+  assert.equal(boss.life, boss.maxLife);
+  assert.equal(boss.phase, 0);
+  assert.equal(boss.nextSkill, null);
+  const again: WorldEvent[] = hurt(world, boss, 0.4);
+  assert.deepEqual(ofType(again, 'boss_phase'), [{ type: 'boss_phase', monsterId: boss.id, phase: 1 }]);
+});
+
+void test('a boss that crosses a threshold picks from the new phase at once, even before the phase is announced', (): void => {
+  const base: Content = room('unfinished_colossus');
+  const mason: MonsterDef = must(base.monsters.get('unfinished_colossus'), 'unfinished_colossus');
+  const block: BossDef = must(mason.boss, 'boss');
+  const split: BossDef = {
+    ...block,
+    phases: [
+      { below: 1, skills: [{ skill: 'colossus_hammer', weight: 1 }], barks: [], measure: [], beat: 0, holds: [], unseal: [], anchor: null },
+      { below: 0.5, skills: [{ skill: 'colossus_slam', weight: 1 }], barks: [], measure: [], beat: 0, holds: [], unseal: [], anchor: null },
+    ],
+  };
+  const content: Content = { ...base, monsters: new Map<string, MonsterDef>([...base.monsters, [mason.id, { ...mason, boss: split }]]) };
+  const world: World = sturdy(armed(worldIn(content, ROOM, 17)));
+  const boss: MonsterState = bossOf(world);
+  boss.spawnTime = 0;
+  boss.aggro = true;
+  boss.nextSkill = must(world.content.skills.get('colossus_hammer'), 'hammer');
+  boss.life = Math.floor(boss.maxLife * 0.4);
+  assert.equal(boss.phase, 0);
+  assert.equal(pickBossSkill(world, boss, split)?.id, 'colossus_slam');
+  world.player.pos = { x: boss.pos.x, z: boss.pos.z + 2.5 };
+  const events: WorldEvent[] = stepWorld(world, [], DT);
+  const started = ofType(events, 'skill_start').filter((event): boolean => event.actorId === boss.id);
+  assert.deepEqual(started.map((event): string => event.skill.id), ['colossus_slam']);
+});
+
+void test('the lane a bolt is read by reaches as far as the bolt does', (): void => {
+  const world: World = sturdy(armed(worldIn(room('unfinished_colossus'), ROOM, 16)));
+  const boss: MonsterState = bossOf(world);
+  const stone = must(world.content.skills.get('colossus_stone'), 'stone');
+  const delivery = stone.delivery;
+  const range: number = delivery.type === 'projectile' ? delivery.range : 0;
+  assert.ok(range > 0);
+  boss.spawnTime = 0;
+  boss.pos = { x: 28, z: 6 };
+  boss.action = { skill: stone, phase: 'windup', timeLeft: 0.5, windup: stone.windup, recovery: stone.recovery, direction: { x: 0, z: 1 }, target: null, travelSpeed: 0, travelLeft: 0, slot: null, elapsed: 0, goal: null, turned: 0 };
+  assert.equal(botInDanger(world, { x: 28, z: 6 + range - 1 }), true);
+  assert.equal(botInDanger(world, { x: 28, z: 6 + range + SKILLS.projectileOrigin }), true);
+  assert.equal(botInDanger(world, { x: 28, z: 6 + range + SKILLS.projectileOrigin + 4 }), false);
+  assert.equal(botInDanger(world, { x: 33, z: 6 + range - 1 }), false);
+  assert.equal(botInDanger(world, { x: 28, z: 4 }), false);
+});
+
+void test('a pack whose condition fails does not spawn, so a beaten boss is not handed out again', (): void => {
+  const hunt: QuestDef = { id: 'hunt', name: 'Hunt', requires: [], when: [], objectives: [{ id: 'slay', type: 'defeat', monster: 'unfinished_colossus', text: 'Slay', waiting: '', when: [], sets: {} }] };
+  const during: Condition[] = [{ type: 'objective', quest: 'hunt', objective: 'slay', is: 'current', not: false }];
+  const content: Content = { ...room('unfinished_colossus', during), quests: new Map<string, QuestDef>([[hunt.id, hunt]]) };
+  const world: World = armed(worldIn(content, ROOM, 10));
+  assert.equal(world.monsters.length, 1);
+  const boss: MonsterState = bossOf(world);
+  boss.spawnTime = 0;
+  hurt(world, boss, 0);
+  assert.equal(boss.alive, false);
+  assert.deepEqual(world.quests, { hunt: 1 });
+  enterZone(world, zoneOf(content, ROOM), { type: 'start' });
+  assert.equal(world.monsters.length, 0);
+  world.quests = { hunt: 0 };
+  enterZone(world, zoneOf(content, ROOM), { type: 'start' });
+  assert.equal(world.monsters.length, 1);
+});
+
+function gated(def: MonsterDef): boolean {
+  const lairs: ZoneDef[] = [...shipped.zones.values()].filter((zone: ZoneDef): boolean => zone.packs.some((pack: ZonePack): boolean => pack.members.some((member): boolean => member.monster === def.id)));
+  const withheld: ReadonlySet<string> = withheldZones(shipped);
+  if (def.boss !== null && def.boss.countBreak !== null) return true;
+  return lairs.every((lair: ZoneDef): boolean => withheld.has(lair.id)) || lairs.some((lair: ZoneDef): boolean => [...shipped.zones.values()].some((zone: ZoneDef): boolean => zone.exits.some((exit): boolean => exit.to === lair.id && exit.requires.some((entry: Condition): boolean => entry.type === 'level'))));
+}
+
+void test('the bot beats each boss the act does not keep behind a level or withhold, and whose fight is not set by the pieces of its court, at the level it is met, and reading the telegraph is what keeps it alive', (): void => {
+  for (const def of bosses().filter((candidate: MonsterDef): boolean => !gated(candidate))) {
+    const fight = (dodges: boolean): { readonly won: boolean; readonly deaths: number; readonly lifeLeft: number } => {
+      const world: World = armed(worldIn(room(def.id), ROOM, 21));
+      world.player.level = 3;
+      const bot: Bot = createBot(world, { dodges, reaction: 0 });
+      const boss: MonsterState = bossOf(world);
+      const won: boolean = botFight(bot, (): boolean => !boss.alive, def.id);
+      return { won, deaths: bot.deaths, lifeLeft: world.player.life / world.player.maxLife };
+    };
+    const careful = fight(true);
+    const reckless = fight(false);
+    assert.ok(careful.won, `${def.id}: the bot did not win while dodging`);
+    assert.ok(careful.deaths < reckless.deaths || (careful.deaths === reckless.deaths && careful.lifeLeft > reckless.lifeLeft), `${def.id}: dodging did not help (careful ${JSON.stringify(careful)}, reckless ${JSON.stringify(reckless)})`);
+  }
+});
+
+void test('a boss whose count the pieces of its court hold is fought there and left out of the open-room fight, and the others are not', (): void => {
+  const court: MonsterDef[] = bosses().filter((def: MonsterDef): boolean => def.boss !== null && def.boss.countBreak !== null);
+  assert.ok(court.length > 0);
+  for (const def of court) {
+    assert.equal(gated(def), true, def.id);
+    const block: BossDef = must(def.boss, def.id);
+    assert.equal(gated({ ...def, boss: { ...block, countBreak: null } }), false, `${def.id} without its count`);
+  }
+});
+
+void test('the Gatekeeper in its lair fights in three phases, each threshold announced once with its own bark and its own skills', (): void => {
+  const world: World = armed(worldIn(shipped, 'keepers_gate', 3));
+  const boss: MonsterState = bossOf(world);
+  const block: BossDef = must(boss.def.boss, 'boss');
+  boss.spawnTime = 0;
+  assert.equal(block.phases.length, 3);
+  for (let phase: number = 1; phase < block.phases.length; phase += 1) {
+    const entered: BossPhase = must(block.phases[phase], `phase ${phase}`);
+    const events: WorldEvent[] = hurt(world, boss, entered.below - 0.02);
+    assert.deepEqual(ofType(events, 'boss_phase'), [{ type: 'boss_phase', monsterId: boss.id, phase }]);
+    assert.deepEqual(ofType(events, 'bark').map((event): string => event.line.id).filter((id: string): boolean => !block.barks.aggro.includes(id)), [...entered.barks]);
+    assert.ok(entered.barks.length > 0, `phase ${phase} says nothing`);
+    const allowed: Set<string> = new Set<string>(entered.skills.map((entry): string => entry.skill));
+    for (let pick: number = 0; pick < 20; pick += 1) assert.ok(allowed.has(pickBossSkill(world, boss, block)?.id ?? ''), `phase ${phase} picked outside its skills`);
+  }
+  const last: Set<string> = new Set<string>(must(block.phases.at(-1), 'last').skills.map((entry): string => entry.skill));
+  const before: Set<string> = new Set<string>(block.phases.slice(0, -1).flatMap((phase: BossPhase): string[] => phase.skills.map((entry): string => entry.skill)));
+  assert.ok([...last].some((skill: string): boolean => !before.has(skill)), 'the last phase brings nothing new');
+});
+
+void test('the Gatekeeper stands at the hero\'s level in its lair and keeps clear of the door, so the hero chooses when the fight starts', (): void => {
+  const world: World = armed(worldIn(shipped, 'hall_of_time', 4));
+  world.player.level = 12;
+  const lair: ZoneDef = zoneOf(shipped, 'keepers_gate');
+  enterZone(world, lair, { type: 'exit', exit: 'hall' });
+  const boss: MonsterState = bossOf(world);
+  assert.equal(boss.level, 12);
+  assert.ok(distance(boss.pos, world.player.pos) > boss.def.aggroRadius + 4, 'the boss stands too near the door');
+  run(world, 3);
+  assert.equal(boss.aggro, false);
+});
+
+function bossDrops(events: readonly WorldEvent[]): { readonly items: number; readonly rarities: readonly string[]; readonly gold: readonly number[] } {
+  const drops = ofType(events, 'drop').map((event) => event.ground.content);
+  const rarities: string[] = drops.flatMap((content) => (content.kind === 'item' ? [content.item.rarity] : []));
+  return { items: rarities.length, rarities, gold: drops.flatMap((content) => (content.kind === 'gold' ? [content.amount] : [])) };
+}
+
+void test('the first Gatekeeper kill pays once: a share of a level, a purse of gold and its flag, and every kill after drops only the guaranteed reward', (): void => {
+  const world: World = armed(worldIn(shipped, 'hall_of_time', 9));
+  world.player.level = 9;
+  world.player.xp = 0;
+  enterZone(world, zoneOf(shipped, 'keepers_gate'), { type: 'exit', exit: 'hall' });
+  const block: BossDef = must(bossOf(world).def.boss, 'boss');
+  const first = must(block.firstKill, 'first kill reward');
+  const bonus: number = Math.round(xpToNextLevel(shipped.player.xp, world.player.level) * first.xpShare);
+  const opening: MonsterState = bossOf(world);
+  opening.spawnTime = 0;
+  const won: WorldEvent[] = hurt(world, opening, 0);
+  assert.deepEqual(ofType(won, 'boss_defeated'), [{ type: 'boss_defeated', monsterId: opening.id, monster: opening.def.id, first: true, yielded: false }]);
+  assert.equal(world.flags[first.flag], 'defeated');
+  assert.ok(ofType(won, 'xp').some((event): boolean => event.amount === bonus), `no first-kill experience of ${bonus}`);
+  const firstDrops = bossDrops(won);
+  assert.equal(firstDrops.items, block.drop.items);
+  assert.ok(firstDrops.rarities.every((rarity: string): boolean => (shipped.leaning ? rankOf(rarity) >= rankOf(block.drop.floor) : rarity === block.drop.floor)));
+  assert.equal(firstDrops.gold.length, 2);
+  assert.ok(firstDrops.gold.some((amount: number): boolean => amount >= first.goldMin && amount <= first.goldMax));
+  const rematch: World = armed(worldIn(room('timekeeper_gatekeeper'), ROOM, 9));
+  rematch.player.level = 9;
+  rematch.flags[first.flag] = 'defeated';
+  const again: MonsterState = bossOf(rematch);
+  assert.equal(again.alive, true);
+  again.spawnTime = 0;
+  const rewon: WorldEvent[] = hurt(rematch, again, 0);
+  assert.deepEqual(ofType(rewon, 'boss_defeated').map((event): boolean => event.first), [false]);
+  assert.equal(ofType(rewon, 'xp').some((event): boolean => event.amount === Math.round(xpToNextLevel(shipped.player.xp, rematch.player.level) * first.xpShare)), false);
+  const laterDrops = bossDrops(rewon);
+  assert.equal(laterDrops.items, block.drop.items);
+  assert.equal(laterDrops.gold.length, 1);
+});
+
+function bossesIn(world: World): string[] {
+  return world.monsters.filter((monster: MonsterState): boolean => monster.def.boss !== null).map((monster: MonsterState): string => monster.def.id);
+}
+
+void test('a beaten Gatekeeper stays beaten: a fresh entry leaves the lair empty and quiet, and the way on stays open', (): void => {
+  const world: World = armed(worldIn(shipped, 'hall_of_time', 11));
+  world.player.level = 9;
+  enterZone(world, zoneOf(shipped, 'keepers_gate'), { type: 'exit', exit: 'hall' });
+  assert.deepEqual(bossesIn(world), ['timekeeper_gatekeeper']);
+  const boss: MonsterState = bossOf(world);
+  boss.spawnTime = 0;
+  hurt(world, boss, 0);
+  assert.equal(world.flags['keeper_defeated'], 'defeated');
+  enterZone(world, zoneOf(shipped, 'hall_of_time'), { type: 'exit', exit: 'gate' });
+  enterZone(world, zoneOf(shipped, 'keepers_gate'), { type: 'exit', exit: 'hall' });
+  world.events = [];
+  assert.deepEqual(bossesIn(world), []);
+  const heard: WorldEvent[] = [];
+  for (let step: number = 0; step < 90; step += 1) heard.push(...stepWorld(world, [], DT));
+  assert.deepEqual(ofType(heard, 'bark'), []);
+  assert.deepEqual(ofType(heard, 'aggro'), []);
+  assert.deepEqual(bossesIn(world), []);
+  const exits: readonly string[] = zoneOf(shipped, 'keepers_gate').exits.filter((exit): boolean => allHold(world, exit.requires)).map((exit): string => exit.id);
+  assert.deepEqual(exits.toSorted(), ['hall', 'under']);
+});
+
+void test('a beaten Gatekeeper stays beaten through a save, and an older save that only carries its flag counts as beaten', (): void => {
+  const beaten: World = armed(worldIn(shipped, 'keepers_gate', 12));
+  const boss: MonsterState = bossOf(beaten);
+  boss.spawnTime = 0;
+  hurt(beaten, boss, 0);
+  const kept: SaveData = must(readSave(shipped, JSON.parse(JSON.stringify(toSave(beaten)))), 'save');
+  assert.equal(kept.flags['keeper_defeated'], 'defeated');
+  const restored: World = createWorld(shipped, { seed: 13, save: kept });
+  enterZone(restored, zoneOf(shipped, 'keepers_gate'), { type: 'exit', exit: 'hall' });
+  assert.deepEqual(bossesIn(restored), []);
+  const fresh: SaveData = toSave(createWorld(shipped, { seed: 14, save: null }));
+  const older = { ...fresh, zone: 'keepers_gate', flags: { ...fresh.flags, keeper_defeated: 'defeated' }, quests: { ...fresh.quests, the_gate: 1 }, visited: [...fresh.visited, 'hall_of_time', 'keepers_gate'] };
+  const read: SaveData = must(readSave(shipped, JSON.parse(JSON.stringify(older))), 'older save');
+  const arrived: World = createWorld(shipped, { seed: 15, save: read });
+  assert.equal(arrived.zone.id, 'keepers_gate');
+  assert.deepEqual(bossesIn(arrived), []);
+  const untouched: World = createWorld(shipped, { seed: 16, save: must(readSave(shipped, JSON.parse(JSON.stringify({ ...fresh, zone: 'keepers_gate' }))), 'unbeaten save') });
+  assert.deepEqual(bossesIn(untouched), ['timekeeper_gatekeeper']);
+});

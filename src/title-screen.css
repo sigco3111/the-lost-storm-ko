@@ -1,0 +1,109 @@
+#hud,
+#overlays,
+.tc {
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s;
+}
+
+body:not(.playing) #hud,
+body:not(.playing) #overlays,
+body:not(.playing) .tc,
+body:not(.playing) .tc-rotate {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none !important;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear var(--spring-smooth-ms);
+}
+
+body:not(.playing) #hud *,
+body:not(.playing) .tc * {
+  pointer-events: none !important;
+}
+
+body.hud-away:not(.playing) #hud *,
+body.hud-away:not(.playing) .tc * {
+  visibility: hidden !important;
+}
+
+.title-fold {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 0fr;
+  width: min(400px, calc(100vw - 32px));
+  border-radius: 4px;
+  background: rgba(8, 11, 16, 0.86);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition:
+    grid-template-rows var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear var(--spring-smooth-ms);
+}
+
+.title-fold.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    grid-template-rows var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s;
+}
+
+.title-fold-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.title-controls {
+  display: grid;
+}
+
+.title-controls .title-keys {
+  grid-area: 1 / 1;
+  align-self: start;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear var(--spring-smooth-ms);
+}
+
+body.input-known:not(.touch) .title-keys-desk,
+body.input-known.touch .title-keys-touch {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s;
+}
+
+@media (max-width: 600px), (max-height: 520px) {
+  .title-keys {
+    font-size: 13px;
+  }
+
+  .title-keys div {
+    grid-template-columns: minmax(92px, auto) minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
+#title:not([data-lobby^='http' i]):not([data-lobby='on']) .title-account,
+#title:not([data-lobby^='http' i]):not([data-lobby='on']) .title-sync,
+#title[data-lobby='off'] .title-account,
+#title[data-lobby='off'] .title-sync {
+  display: none;
+}

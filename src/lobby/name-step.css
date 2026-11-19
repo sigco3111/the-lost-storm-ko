@@ -1,0 +1,146 @@
+.name-step {
+  display: grid;
+  grid-template-rows: 0fr;
+  width: min(280px, 100%);
+  margin: 0 auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition:
+    grid-template-rows var(--spring-snappy-ms) var(--spring-snappy),
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-snappy-ms) var(--spring-snappy),
+    visibility 0s linear var(--spring-snappy-ms);
+}
+
+.name-step[data-state='open'],
+.name-step[data-state='busy'] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    grid-template-rows var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear 0s;
+}
+
+.name-step-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.name-step-note {
+  margin: 2px 0 10px;
+  font-family: var(--sans);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: rgba(239, 230, 214, 0.66);
+  transition: color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.name-step-note.problem {
+  color: #e8a48c;
+}
+
+.name-step-note.tick {
+  animation: name-step-tick var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.name-step-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+  transition: opacity var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.name-step[aria-busy] .name-step-row {
+  opacity: 0.55;
+}
+
+.name-step-field {
+  appearance: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  padding: 0 14px;
+  font-family: var(--sans);
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: #f4ecdc;
+  caret-color: #e9c98a;
+  background: rgba(8, 13, 22, 0.66);
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.32);
+  transition: background-color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.name-step-field::selection {
+  color: #f4ecdc;
+  background: rgba(127, 212, 255, 0.28);
+}
+
+.name-step-field::placeholder {
+  color: rgba(239, 230, 214, 0.32);
+}
+
+.name-step-field:focus {
+  background: rgba(18, 28, 44, 0.72);
+}
+
+.title-card .name-step button.name-step-choose {
+  height: 24px;
+  margin: 0;
+  padding: 0 4px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(239, 230, 214, 0.5);
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  transition: color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.title-card .name-step button.name-step-choose:not(:disabled):hover,
+.title-card .name-step button.name-step-choose:focus-visible,
+.title-card .name-step button.name-step-choose:not(:disabled):active {
+  color: rgba(244, 236, 220, 0.86);
+  background: transparent;
+  transform: none;
+}
+
+.title-card .name-step button.name-step-choose.offer {
+  color: rgba(233, 201, 138, 0.86);
+}
+
+.title-card .name-step button.name-step-choose.tick,
+.name-step-field.tick {
+  animation: name-step-tick var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+@keyframes name-step-tick {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+.name-step-field.nudge {
+  animation: name-step-nudge var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+@keyframes name-step-nudge {
+  from {
+    transform: translateX(5px);
+  }
+}

@@ -1,0 +1,126 @@
+[
+  {
+    "out": "public/models/characters/wight_man.glb",
+    "body": "public/models/characters/man.glb",
+    "drop": [
+      "Head",
+      "Eyes",
+      "Eyebrows"
+    ],
+    "mesh": "Head",
+    "anchor": "Head",
+    "parts": [
+      {
+        "source": "2026-11-18-sketchfab-skull/skull_downloadable.glb",
+        "height": 0.97,
+        "triangles": 3600,
+        "material": "skull",
+        "tint": "#ffffff"
+      },
+      {
+        "source": "public/models/characters/skeleton.glb",
+        "sizeFrom": "DEF-head",
+        "keep": [
+          "DEF-neck"
+        ],
+        "joints": [
+          {
+            "from": "DEF-head",
+            "to": "Head"
+          },
+          {
+            "from": "DEF-neck",
+            "to": "neck_01"
+          },
+          {
+            "from": "DEF-spine.003",
+            "to": "spine_03"
+          }
+        ],
+        "height": 0.97,
+        "material": "bone",
+        "tint": "#ffffff"
+      }
+    ],
+    "eyes": {
+      "material": "eyes",
+      "colour": "#2a7ae0",
+      "strength": 1,
+      "radius": 0.0085,
+      "at": [
+        [
+          0.039,
+          1.706,
+          0.051
+        ],
+        [
+          -0.039,
+          1.706,
+          0.051
+        ]
+      ]
+    }
+  },
+  {
+    "out": "public/models/characters/wight_woman.glb",
+    "body": "public/models/characters/woman.glb",
+    "drop": [
+      "Head",
+      "Eyes",
+      "Eyebrows"
+    ],
+    "mesh": "Head",
+    "anchor": "Head",
+    "parts": [
+      {
+        "source": "2026-11-18-sketchfab-skull/skull_downloadable.glb",
+        "height": 0.95,
+        "triangles": 3600,
+        "material": "skull",
+        "tint": "#ffffff"
+      },
+      {
+        "source": "public/models/characters/skeleton.glb",
+        "sizeFrom": "DEF-head",
+        "keep": [
+          "DEF-neck"
+        ],
+        "joints": [
+          {
+            "from": "DEF-head",
+            "to": "Head"
+          },
+          {
+            "from": "DEF-neck",
+            "to": "neck_01"
+          },
+          {
+            "from": "DEF-spine.003",
+            "to": "spine_03"
+          }
+        ],
+        "height": 0.95,
+        "material": "bone",
+        "tint": "#ffffff"
+      }
+    ],
+    "eyes": {
+      "material": "eyes",
+      "colour": "#2a7ae0",
+      "strength": 1,
+      "radius": 0.008,
+      "at": [
+        [
+          0.037,
+          1.665,
+          0.046
+        ],
+        [
+          -0.037,
+          1.665,
+          0.046
+        ]
+      ]
+    }
+  }
+]

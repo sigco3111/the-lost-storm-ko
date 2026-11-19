@@ -1,0 +1,521 @@
+{
+ "fingerprint": "28ecc70fb41f3cb3",
+ "runs": 4,
+ "builds": [
+  {
+   "id": "stormcaller",
+   "steady": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 21.5
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 42.7
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 70
+     }
+    ],
+    "killsPerMinute": 5.2,
+    "fightSeconds": 3.9,
+    "flasksPerFight": 0.07,
+    "deathsPerHour": 0.7,
+    "lowShare": 0,
+    "magicDeathShare": 0.02,
+    "rareDeathShare": 0.06,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 22,
+      "lifeLeft": 1
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 13,
+      "lifeLeft": 0.92
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 15,
+      "lifeLeft": 1
+     }
+    ]
+   },
+   "careless": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 22.3
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 49.9
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 92.4
+     }
+    ],
+    "killsPerMinute": 4.8,
+    "fightSeconds": 3.5,
+    "flasksPerFight": 0.13,
+    "deathsPerHour": 13,
+    "lowShare": 0.09,
+    "magicDeathShare": 0.06,
+    "rareDeathShare": 0.25,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 17,
+      "lifeLeft": 0.42
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 15,
+      "lifeLeft": 0.44
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 11,
+      "lifeLeft": 0.83
+     }
+    ]
+   }
+  },
+  {
+   "id": "bulwark",
+   "steady": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 22
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 43.4
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 75.3
+     }
+    ],
+    "killsPerMinute": 4.9,
+    "fightSeconds": 4.8,
+    "flasksPerFight": 0.1,
+    "deathsPerHour": 0.4,
+    "lowShare": 0.01,
+    "magicDeathShare": 0,
+    "rareDeathShare": 0.07,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 39,
+      "lifeLeft": 1
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 27,
+      "lifeLeft": 1
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 34,
+      "lifeLeft": 0.99
+     }
+    ]
+   },
+   "careless": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 22.7
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 44.9
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 80.7
+     }
+    ],
+    "killsPerMinute": 4.5,
+    "fightSeconds": 4.5,
+    "flasksPerFight": 0.11,
+    "deathsPerHour": 5.2,
+    "lowShare": 0.04,
+    "magicDeathShare": 0.03,
+    "rareDeathShare": 0.12,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 16,
+      "lifeLeft": 0.84
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 16,
+      "lifeLeft": 0.79
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 23,
+      "lifeLeft": 0.69
+     }
+    ]
+   }
+  },
+  {
+   "id": "whirlwind",
+   "steady": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 25.3
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 50.2
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 89.3
+     }
+    ],
+    "killsPerMinute": 4.1,
+    "fightSeconds": 7.9,
+    "flasksPerFight": 0.04,
+    "deathsPerHour": 0,
+    "lowShare": 0,
+    "magicDeathShare": 0.01,
+    "rareDeathShare": 0,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 57,
+      "lifeLeft": 0.89
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 69,
+      "lifeLeft": 0.99
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 63,
+      "lifeLeft": 1
+     }
+    ]
+   },
+   "careless": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 34.8
+     },
+     {
+      "level": 15,
+      "share": 0.5,
+      "minutes": 60.3
+     },
+     {
+      "level": 20,
+      "share": 0.25,
+      "minutes": 117.3
+     }
+    ],
+    "killsPerMinute": 3,
+    "fightSeconds": 6.6,
+    "flasksPerFight": 0.34,
+    "deathsPerHour": 10.2,
+    "lowShare": 0.06,
+    "magicDeathShare": 0.19,
+    "rareDeathShare": 0.23,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 10,
+      "winShare": 0.9,
+      "seconds": 40,
+      "lifeLeft": 0.35
+     },
+     {
+      "level": 15,
+      "attempts": 6,
+      "winShare": 0.83,
+      "seconds": 44,
+      "lifeLeft": 0.77
+     },
+     {
+      "level": 20,
+      "attempts": 3,
+      "winShare": 1,
+      "seconds": 54,
+      "lifeLeft": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "windrunner",
+   "steady": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 27.5
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 51.1
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 85
+     }
+    ],
+    "killsPerMinute": 4.4,
+    "fightSeconds": 7.2,
+    "flasksPerFight": 0.21,
+    "deathsPerHour": 1.7,
+    "lowShare": 0.02,
+    "magicDeathShare": 0.08,
+    "rareDeathShare": 0.02,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 0.67,
+      "seconds": 29,
+      "lifeLeft": 0.87
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 58,
+      "lifeLeft": 0.52
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 43,
+      "lifeLeft": 0.54
+     }
+    ]
+   },
+   "careless": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 34.3
+     },
+     {
+      "level": 15,
+      "share": 0.75,
+      "minutes": 87.7
+     },
+     {
+      "level": 20,
+      "share": 0.5,
+      "minutes": 154
+     }
+    ],
+    "killsPerMinute": 3.1,
+    "fightSeconds": 6,
+    "flasksPerFight": 0.43,
+    "deathsPerHour": 27.9,
+    "lowShare": 0.13,
+    "magicDeathShare": 0.28,
+    "rareDeathShare": 0.37,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 0.83,
+      "seconds": 17,
+      "lifeLeft": 0.51
+     },
+     {
+      "level": 15,
+      "attempts": 9,
+      "winShare": 0.56,
+      "seconds": 36,
+      "lifeLeft": 0.2
+     },
+     {
+      "level": 20,
+      "attempts": 6,
+      "winShare": 1,
+      "seconds": 22,
+      "lifeLeft": 0.68
+     }
+    ]
+   }
+  },
+  {
+   "id": "echo-weaver",
+   "steady": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 22
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 40.5
+     },
+     {
+      "level": 20,
+      "share": 0.75,
+      "minutes": 72.9
+     }
+    ],
+    "killsPerMinute": 4.8,
+    "fightSeconds": 4.2,
+    "flasksPerFight": 0.11,
+    "deathsPerHour": 1.6,
+    "lowShare": 0.01,
+    "magicDeathShare": 0.01,
+    "rareDeathShare": 0.17,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 27,
+      "lifeLeft": 1
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 22,
+      "lifeLeft": 1
+     },
+     {
+      "level": 20,
+      "attempts": 9,
+      "winShare": 1,
+      "seconds": 24,
+      "lifeLeft": 1
+     }
+    ]
+   },
+   "careless": {
+    "runs": 4,
+    "levels": [
+     {
+      "level": 10,
+      "share": 1,
+      "minutes": 34.1
+     },
+     {
+      "level": 15,
+      "share": 1,
+      "minutes": 73.8
+     },
+     {
+      "level": 20,
+      "share": 1,
+      "minutes": 112.8
+     }
+    ],
+    "killsPerMinute": 4.4,
+    "fightSeconds": 4.2,
+    "flasksPerFight": 0.26,
+    "deathsPerHour": 25,
+    "lowShare": 0.13,
+    "magicDeathShare": 0.19,
+    "rareDeathShare": 0.34,
+    "boss": [
+     {
+      "level": 10,
+      "attempts": 12,
+      "winShare": 0.33,
+      "seconds": 20,
+      "lifeLeft": 0.28
+     },
+     {
+      "level": 15,
+      "attempts": 12,
+      "winShare": 0.92,
+      "seconds": 25,
+      "lifeLeft": 0.32
+     },
+     {
+      "level": 20,
+      "attempts": 12,
+      "winShare": 1,
+      "seconds": 15,
+      "lifeLeft": 0.66
+     }
+    ]
+   }
+  }
+ ]
+}

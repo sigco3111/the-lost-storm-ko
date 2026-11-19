@@ -1,0 +1,71 @@
+.elsewhere-card {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(6, 8, 12, 0.72);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear var(--spring-smooth-ms);
+}
+
+.elsewhere-card.on {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s;
+}
+
+.elsewhere-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 360px;
+  padding: 20px 24px;
+  border-radius: 6px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-edge);
+  color: var(--text);
+  font: 15px/1.4 var(--sans);
+  text-align: center;
+  scale: 0.96;
+  translate: 0 8px;
+  transition:
+    scale var(--spring-bouncy-ms) var(--spring-bouncy),
+    translate var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.elsewhere-card.on .elsewhere-panel {
+  scale: 1;
+  translate: 0 0;
+}
+
+.elsewhere-here {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 4px;
+  background: rgba(127, 212, 255, 0.16);
+  color: var(--text);
+  font: 600 14px/1 var(--sans);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.elsewhere-here:hover,
+.elsewhere-here:focus-visible {
+  background: rgba(127, 212, 255, 0.26);
+}
+
+.elsewhere-here:disabled {
+  cursor: default;
+  opacity: 0.6;
+}

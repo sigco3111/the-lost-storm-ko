@@ -1,0 +1,2052 @@
+[
+ {
+  "id": "unfinished_brute",
+  "name": "메아리",
+  "rig": "unfinished_heavy",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.3,
+  "radius": 0.5,
+  "life": 110,
+  "damageMin": 8,
+  "damageMax": 12,
+  "moveSpeed": 3.1,
+  "xp": 18,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "brute_haymaker",
+  "loot": {
+   "goldChance": 0.65,
+   "goldMin": 4,
+   "goldMax": 11,
+   "itemChance": 0.24
+  },
+  "color": "#d08a5a",
+  "tint": "#f2e4d6",
+  "gear": [
+   "raider_maul",
+   "scrap_board"
+  ],
+  "wear": [
+   "salvaged_mail",
+   "faded_trousers",
+   "mismatched_gloves"
+  ],
+  "poise": {
+   "knockback": 0.3,
+   "stagger": 0.35,
+   "resolve": 3
+  }
+ },
+ {
+  "id": "unfinished_taker",
+  "name": "메아리",
+  "rig": "unfinished_taker",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.0,
+  "radius": 0.5,
+  "life": 40,
+  "damageMin": 5,
+  "damageMax": 8,
+  "moveSpeed": 6.6,
+  "xp": 13,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "stalker",
+   "orbitRange": 5
+  },
+  "skill": "taker_snatch",
+  "poise": {
+   "knockback": 0.3,
+   "stagger": 0.3
+  },
+  "loot": {
+   "goldChance": 0.55,
+   "goldMin": 3,
+   "goldMax": 8,
+   "itemChance": 0.18
+  },
+  "color": "#d08a5a",
+  "tint": "#e6d8c8",
+  "gear": [],
+  "wear": [
+   "patched_tunic",
+   "odd_breeches"
+  ]
+ },
+ {
+  "id": "unfinished_thrower",
+  "name": "메아리",
+  "rig": "unfinished_thrower",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.0,
+  "radius": 0.5,
+  "life": 34,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 4.0,
+  "xp": 11,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 8,
+   "retreatRange": 4
+  },
+  "skill": "thrower_stone",
+  "poise": {
+   "knockback": 0.3,
+   "stagger": 0.3
+  },
+  "loot": {
+   "goldChance": 0.65,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.2
+  },
+  "color": "#d08a5a",
+  "tint": "#f2e4d6",
+  "gear": [
+   "scrap_javelin"
+  ],
+  "wear": [
+   "stolen_jerkin",
+   "faded_trousers",
+   "torn_hood",
+   "cast_off_boots"
+  ]
+ },
+ {
+  "id": "unfinished_borrower",
+  "name": "메아리",
+  "rig": "unfinished_heavy",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.45,
+  "radius": 0.5,
+  "life": 260,
+  "damageMin": 10,
+  "damageMax": 15,
+  "moveSpeed": 3.4,
+  "xp": 55,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "borrower_cleave",
+  "loot": {
+   "goldChance": 1,
+   "goldMin": 10,
+   "goldMax": 24,
+   "itemChance": 0.85
+  },
+  "color": "#d08a5a",
+  "tint": "#e6d8c8",
+  "gear": [
+   "raider_cleaver"
+  ],
+  "wear": [
+   "stolen_jerkin",
+   "odd_breeches",
+   "cast_off_boots",
+   "torn_hood",
+   "mismatched_gloves"
+  ],
+  "poise": {
+   "knockback": 0.15,
+   "stagger": 0.2
+  },
+  "barks": [
+   "unfinished_borrower_said_1",
+   "unfinished_borrower_said_2",
+   "unfinished_borrower_said_3",
+   "unfinished_borrower_said_4",
+   "unfinished_borrower_said_5"
+  ]
+ },
+ {
+  "id": "unfinished_colossus",
+  "name": "메아리",
+  "rig": "unfinished_heavy",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.75,
+  "radius": 0.5,
+  "life": 780,
+  "damageMin": 9,
+  "damageMax": 14,
+  "moveSpeed": 3.7,
+  "xp": 60,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "colossus_hammer",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#d08a5a",
+  "tint": "#f2e4d6",
+  "gear": [
+   "raider_maul"
+  ],
+  "wear": [
+   "salvaged_mail",
+   "odd_breeches",
+   "cast_off_boots",
+   "mismatched_gloves"
+  ],
+  "boss": {
+   "title": "너무 크게 만들어진 것",
+   "phases": [
+    {
+     "below": 1,
+     "skills": [
+      {
+       "skill": "colossus_hammer",
+       "weight": 3
+      },
+      {
+       "skill": "colossus_stone",
+       "weight": 2
+      }
+     ],
+     "barks": []
+    },
+    {
+     "below": 0.5,
+     "skills": [
+      {
+       "skill": "colossus_hammer",
+       "weight": 2
+      },
+      {
+       "skill": "colossus_stone",
+       "weight": 2
+      },
+      {
+       "skill": "colossus_slam",
+       "weight": 3
+      }
+     ],
+     "barks": []
+    }
+   ],
+   "poise": {
+    "knockback": 0.1
+   },
+   "drop": {
+    "items": 1,
+    "floor": "rare",
+    "goldMin": 30,
+    "goldMax": 50
+   },
+   "barks": {
+    "aggro": [],
+    "death": []
+   }
+  }
+ },
+ {
+  "id": "still_standing",
+  "name": "스틸",
+  "rig": "still_figure",
+  "bodyMaterial": "flesh",
+  "faction": "still",
+  "scale": 1.0,
+  "radius": 0.5,
+  "life": 60,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 1.6,
+  "xp": 8,
+  "aggroRadius": 6,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "still_grasp",
+  "loot": {
+   "goldChance": 0.3,
+   "goldMin": 1,
+   "goldMax": 5,
+   "itemChance": 0.1
+  },
+  "color": "#c8d4dc",
+  "tint": "#c4c8ca",
+  "gear": [],
+  "wear": [
+   "still_tunic",
+   "still_trousers",
+   "still_hood"
+  ],
+  "dormant": {
+   "noiseRadius": 0.6
+  },
+  "poise": {
+   "knockback": 0.15,
+   "stagger": 0.1
+  }
+ },
+ {
+  "id": "still_waking",
+  "name": "스틸",
+  "rig": "still_figure",
+  "bodyMaterial": "flesh",
+  "faction": "still",
+  "scale": 1.04,
+  "radius": 0.5,
+  "life": 90,
+  "damageMin": 8,
+  "damageMax": 12,
+  "moveSpeed": 1.9,
+  "xp": 14,
+  "aggroRadius": 6,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "still_grasp",
+  "loot": {
+   "goldChance": 0.5,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.22
+  },
+  "color": "#c8d4dc",
+  "tint": "#b2b6b8",
+  "gear": [],
+  "wear": [
+   "still_tunic",
+   "still_trousers"
+  ],
+  "dormant": {
+   "noiseRadius": 5.5
+  },
+  "poise": {
+   "knockback": 0.1,
+   "stagger": 0.05
+  }
+ },
+ {
+  "id": "mender",
+  "name": "기우는 자",
+  "rig": "mender",
+  "bodyMaterial": "bone",
+  "faction": "menders",
+  "scale": 1.1,
+  "radius": 0.5,
+  "life": 20,
+  "damageMin": 6,
+  "damageMax": 10,
+  "moveSpeed": 3.8,
+  "xp": 16,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 9,
+   "retreatRange": 4.5
+  },
+  "skill": "mender_needle",
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 4,
+   "goldMax": 11,
+   "itemChance": 0.24
+  },
+  "color": "#d9cfb0",
+  "tint": "#fff4e6",
+  "gear": [
+   "mender_knife"
+  ],
+  "wear": [
+   "mender_coat",
+   "mender_trousers",
+   "mender_gloves",
+   "mender_hood"
+  ],
+  "support": "mender_stitch"
+ },
+ {
+  "id": "mended",
+  "name": "기워진 것",
+  "rig": "mended",
+  "bodyMaterial": "bone",
+  "faction": "menders",
+  "scale": 1.0,
+  "radius": 0.5,
+  "life": 30,
+  "damageMin": 4,
+  "damageMax": 7,
+  "moveSpeed": 5.2,
+  "xp": 10,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "mended_rhythm",
+  "loot": {
+   "goldChance": 0.55,
+   "goldMin": 2,
+   "goldMax": 7,
+   "itemChance": 0.16
+  },
+  "color": "#d9cfb0",
+  "tint": "#d8ccc0",
+  "gear": [
+   "mended_cleaver"
+  ],
+  "wear": [
+   "stitched_tunic",
+   "stitched_trousers"
+  ]
+ },
+ {
+  "id": "timekeeper_adept",
+  "name": "시간지기 견습생",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.02,
+  "radius": 0.5,
+  "life": 46,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 3.4,
+  "xp": 20,
+  "aggroRadius": 9,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 10,
+   "retreatRange": 5
+  },
+  "skill": "keeper_field",
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 5,
+   "goldMax": 12,
+   "itemChance": 0.26
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_rod"
+  ],
+  "wear": [
+   "keeper_robe",
+   "lens_mask"
+  ]
+ },
+ {
+  "id": "timekeeper_binder",
+  "name": "시간지기 결속사",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.02,
+  "radius": 0.5,
+  "life": 42,
+  "damageMin": 7,
+  "damageMax": 11,
+  "moveSpeed": 3.4,
+  "xp": 20,
+  "aggroRadius": 9,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 9,
+   "retreatRange": 4.5
+  },
+  "skill": "keeper_bind",
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 5,
+   "goldMax": 12,
+   "itemChance": 0.26
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_rod"
+  ],
+  "wear": [
+   "keeper_robe",
+   "keeper_gloves",
+   "lens_mask"
+  ]
+ },
+ {
+  "id": "timekeeper_duelist",
+  "name": "시간지기 결투사",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.06,
+  "radius": 0.5,
+  "life": 80,
+  "damageMin": 7,
+  "damageMax": 11,
+  "moveSpeed": 4.2,
+  "xp": 22,
+  "aggroRadius": 9,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "keeper_replay",
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 5,
+   "goldMax": 12,
+   "itemChance": 0.28
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_blade"
+  ],
+  "wear": [
+   "keeper_robe",
+   "keeper_gloves",
+   "lens_mask"
+  ],
+  "poise": {
+   "knockback": 0.4,
+   "stagger": 0.5
+  }
+ },
+ {
+  "id": "timekeeper_gatekeeper",
+  "name": "결산자",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.38,
+  "radius": 0.5,
+  "life": 600,
+  "damageMin": 5,
+  "damageMax": 6,
+  "moveSpeed": 4.0,
+  "xp": 150,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "gate_replay",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_blade"
+  ],
+  "wear": [
+   "keeper_robe",
+   "lens_mask",
+   "keeper_gloves"
+  ],
+  "boss": {
+   "title": "시간지기",
+   "phases": [
+    {
+     "below": 1,
+     "skills": [
+      {
+       "skill": "gate_replay",
+       "weight": 3
+      },
+      {
+       "skill": "keeper_bind",
+       "weight": 2
+      }
+     ],
+     "barks": []
+    },
+    {
+     "below": 0.66,
+     "skills": [
+      {
+       "skill": "gate_replay",
+       "weight": 2
+      },
+      {
+       "skill": "keeper_bind",
+       "weight": 1
+      },
+      {
+       "skill": "keeper_field",
+       "weight": 2
+      },
+      {
+       "skill": "gate_ring",
+       "weight": 3
+      }
+     ],
+     "barks": [
+      "timekeeper_gatekeeper_slower"
+     ]
+    },
+    {
+     "below": 0.33,
+     "skills": [
+      {
+       "skill": "gate_replay",
+       "weight": 2
+      },
+      {
+       "skill": "keeper_volley",
+       "weight": 3
+      },
+      {
+       "skill": "keeper_field",
+       "weight": 1
+      },
+      {
+       "skill": "gate_ring",
+       "weight": 3
+      }
+     ],
+     "barks": [
+      "timekeeper_gatekeeper_count"
+     ]
+    }
+   ],
+   "poise": {
+    "knockback": 0.05
+   },
+   "drop": {
+    "items": 2,
+    "floor": "rare",
+    "goldMin": 60,
+    "goldMax": 90
+   },
+   "firstKill": {
+    "flag": "keeper_defeated",
+    "xpShare": 0.5,
+    "goldMin": 200,
+    "goldMax": 260
+   },
+   "barks": {
+    "aggro": [
+     "timekeeper_gatekeeper_early"
+    ],
+    "death": [
+     "timekeeper_gatekeeper_yours"
+    ]
+   }
+  }
+ },
+ {
+  "id": "warden_patrol",
+  "name": "관리인 순찰대",
+  "rig": "warden",
+  "bodyMaterial": "armour",
+  "faction": "wardens",
+  "scale": 1.04,
+  "radius": 0.5,
+  "life": 140,
+  "damageMin": 7,
+  "damageMax": 10,
+  "moveSpeed": 4.0,
+  "xp": 0,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "warden_sweep",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#f0c070",
+  "tint": "#f2e2d0",
+  "gear": [
+   "warden_staff",
+   "warden_lantern"
+  ],
+  "wear": [
+   "warden_jerkin",
+   "warden_breeches",
+   "warden_boots",
+   "warden_hood",
+   "warden_gloves"
+  ],
+  "poise": {
+   "knockback": 0.4,
+   "stagger": 0.4
+  }
+ },
+ {
+  "id": "stormcaller_rival",
+  "name": "폭풍소환사 라이벌",
+  "rig": "skeleton_hero",
+  "bodyMaterial": "flesh",
+  "faction": "stormcallers",
+  "scale": 1.12,
+  "radius": 0.5,
+  "life": 560,
+  "damageMin": 7,
+  "damageMax": 11,
+  "moveSpeed": 5.6,
+  "xp": 60,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "rival_cleave",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#8fdcff",
+  "tint": "#f4eedd",
+  "gear": [
+   "sword_1h"
+  ],
+  "wear": [],
+  "boss": {
+   "title": "흩어져 가는 것",
+   "phases": [
+    {
+     "below": 1,
+     "skills": [
+      {
+       "skill": "rival_cleave",
+       "weight": 3
+      },
+      {
+       "skill": "rival_bolt",
+       "weight": 2
+      }
+     ],
+     "barks": []
+    },
+    {
+     "below": 0.5,
+     "skills": [
+      {
+       "skill": "rival_cleave",
+       "weight": 2
+      },
+      {
+       "skill": "rival_bolt",
+       "weight": 2
+      },
+      {
+       "skill": "rival_clap",
+       "weight": 3
+      }
+     ],
+     "barks": []
+    }
+   ],
+   "poise": {
+    "knockback": 0.2
+   },
+   "drop": {
+    "items": 1,
+    "floor": "rare",
+    "goldMin": 30,
+    "goldMax": 50
+   },
+   "barks": {
+    "aggro": [],
+    "death": []
+   }
+  }
+ },
+ {
+  "id": "first_brute",
+  "name": "메아리",
+  "rig": "unfinished_heavy",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.3,
+  "radius": 0.5,
+  "life": 190,
+  "damageMin": 6,
+  "damageMax": 7,
+  "moveSpeed": 2.6,
+  "xp": 18,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "first_haymaker",
+  "loot": {
+   "goldChance": 0.65,
+   "goldMin": 4,
+   "goldMax": 11,
+   "itemChance": 0.24
+  },
+  "color": "#d08a5a",
+  "tint": "#f2e4d6",
+  "gear": [
+   "raider_maul",
+   "scrap_board"
+  ],
+  "wear": [
+   "salvaged_mail",
+   "faded_trousers",
+   "mismatched_gloves"
+  ],
+  "poise": {
+   "knockback": 0.3,
+   "stagger": 0.35
+  }
+ },
+ {
+  "id": "first_thrower",
+  "name": "메아리",
+  "rig": "unfinished_thrower",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 1.0,
+  "radius": 0.5,
+  "life": 110,
+  "damageMin": 5,
+  "damageMax": 6,
+  "moveSpeed": 4.0,
+  "xp": 11,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 8,
+   "retreatRange": 4
+  },
+  "skill": "first_stone",
+  "loot": {
+   "goldChance": 0.65,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.2
+  },
+  "color": "#d08a5a",
+  "tint": "#f2e4d6",
+  "gear": [
+   "scrap_javelin"
+  ],
+  "wear": [
+   "stolen_jerkin",
+   "faded_trousers",
+   "torn_hood",
+   "cast_off_boots"
+  ],
+  "poise": {
+   "knockback": 0.6,
+   "stagger": 0
+  }
+ },
+ {
+  "id": "wolf",
+  "name": "늑대",
+  "rig": "wolf",
+  "bodyMaterial": "hide",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.6,
+  "life": 48,
+  "damageMin": 6,
+  "damageMax": 10,
+  "moveSpeed": 6.2,
+  "xp": 14,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "stalker",
+   "orbitRange": 5
+  },
+  "skill": "wolf_pounce",
+  "loot": {
+   "goldChance": 0.4,
+   "goldMin": 2,
+   "goldMax": 7,
+   "itemChance": 0.15
+  },
+  "color": "#c9b48a",
+  "tint": "#a39a8c",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "rat",
+  "name": "쥐",
+  "rig": "rat",
+  "bodyMaterial": "hide",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.4,
+  "life": 1,
+  "scalesLife": false,
+  "damageMin": 2,
+  "damageMax": 3,
+  "moveSpeed": 4.0,
+  "xp": 2,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "swarm",
+   "ring": 2.2
+  },
+  "skill": "rat_bite",
+  "loot": {
+   "goldChance": 0.1,
+   "goldMin": 1,
+   "goldMax": 2,
+   "itemChance": 0.02
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "bat",
+  "name": "박쥐",
+  "rig": "bat",
+  "bodyMaterial": "hide",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.35,
+  "life": 1,
+  "scalesLife": false,
+  "damageMin": 2,
+  "damageMax": 3,
+  "moveSpeed": 7.2,
+  "xp": 3,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "swarm",
+   "ring": 3.8
+  },
+  "skill": "bat_bite",
+  "loot": {
+   "goldChance": 0.1,
+   "goldMin": 1,
+   "goldMax": 2,
+   "itemChance": 0.02
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "spider",
+  "name": "거미",
+  "rig": "spider",
+  "bodyMaterial": "chitin",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.8,
+  "life": 60,
+  "damageMin": 9,
+  "damageMax": 14,
+  "moveSpeed": 1.9,
+  "xp": 18,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "ambush",
+   "spring": 4.5
+  },
+  "skill": "spider_leap",
+  "loot": {
+   "goldChance": 0.4,
+   "goldMin": 2,
+   "goldMax": 8,
+   "itemChance": 0.16
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "weaver",
+  "name": "직조 거미",
+  "rig": "spider",
+  "bodyMaterial": "chitin",
+  "faction": "beasts",
+  "scale": 0.68,
+  "radius": 0.6,
+  "life": 40,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 1.35,
+  "xp": 17,
+  "aggroRadius": 13,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 9,
+   "retreatRange": 4,
+   "lead": 0.6
+  },
+  "skill": "weaver_web",
+  "loot": {
+   "goldChance": 0.4,
+   "goldMin": 2,
+   "goldMax": 8,
+   "itemChance": 0.16
+  },
+  "color": "#c9b48a",
+  "tint": "#d4ccb8",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "spiderling",
+  "name": "새끼 거미",
+  "rig": "spider",
+  "bodyMaterial": "chitin",
+  "faction": "beasts",
+  "scale": 0.5,
+  "radius": 0.4,
+  "life": 9,
+  "damageMin": 3,
+  "damageMax": 5,
+  "moveSpeed": 1.0,
+  "xp": 4,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "swarm",
+   "ring": 1.8
+  },
+  "skill": "spiderling_bite",
+  "loot": {
+   "goldChance": 0.1,
+   "goldMin": 1,
+   "goldMax": 2,
+   "itemChance": 0.02
+  },
+  "color": "#c9b48a",
+  "tint": "#a39a8c",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "broodmother",
+  "name": "무리어미",
+  "rig": "spider",
+  "bodyMaterial": "chitin",
+  "faction": "beasts",
+  "scale": 1.85,
+  "radius": 1.3,
+  "life": 200,
+  "damageMin": 10,
+  "damageMax": 15,
+  "moveSpeed": 1.5,
+  "xp": 60,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "brood_crash",
+  "loot": {
+   "goldChance": 0.85,
+   "goldMin": 8,
+   "goldMax": 24,
+   "itemChance": 0.5
+  },
+  "color": "#c9b48a",
+  "tint": "#8a7d6c",
+  "gear": [],
+  "wear": [],
+  "summon": {
+   "monster": "spiderling",
+   "count": 2,
+   "cooldown": 9,
+   "limit": 4
+  },
+  "poise": {
+   "knockback": 0.3,
+   "stagger": 0.4,
+   "resolve": 3
+  }
+ },
+ {
+  "id": "crawler",
+  "name": "기어다니는 것",
+  "rig": "crawler",
+  "bodyMaterial": "chitin",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.7,
+  "life": 80,
+  "damageMin": 10,
+  "damageMax": 15,
+  "moveSpeed": 0.7,
+  "xp": 20,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "crawler_lunge",
+  "loot": {
+   "goldChance": 0.45,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.18
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": [],
+  "dormant": {
+   "noiseRadius": 6
+  }
+ },
+ {
+  "id": "silt_ooze",
+  "name": "개펄 수액",
+  "rig": "silt_ooze",
+  "bodyMaterial": "flesh",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.6,
+  "life": 70,
+  "damageMin": 8,
+  "damageMax": 12,
+  "moveSpeed": 1.1,
+  "xp": 18,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "silt_smother",
+  "loot": {
+   "goldChance": 0.45,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.18
+  },
+  "color": "#c9b48a",
+  "tint": "#d4ccb8",
+  "gear": [],
+  "wear": [],
+  "poise": {
+   "knockback": 0.6,
+   "stagger": 0.8,
+   "resolve": 1
+  }
+ },
+ {
+  "id": "spined_ooze",
+  "name": "가시 수액",
+  "rig": "spined_ooze",
+  "bodyMaterial": "flesh",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.65,
+  "life": 50,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 0.9,
+  "xp": 20,
+  "aggroRadius": 13,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 8,
+   "retreatRange": 4,
+   "lead": 0.4
+  },
+  "skill": "spine_volley",
+  "loot": {
+   "goldChance": 0.45,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.18
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "sporecap",
+  "name": "포자버섯",
+  "rig": "sporecap",
+  "bodyMaterial": "flesh",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.55,
+  "life": 45,
+  "damageMin": 7,
+  "damageMax": 11,
+  "moveSpeed": 1.0,
+  "xp": 16,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "sporecap_bite",
+  "loot": {
+   "goldChance": 0.4,
+   "goldMin": 2,
+   "goldMax": 8,
+   "itemChance": 0.16
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": [],
+  "dormant": {
+   "noiseRadius": 5
+  },
+  "deathSkill": "spore_burst"
+ },
+ {
+  "id": "cave_shade",
+  "name": "그림자",
+  "rig": "cave_shade",
+  "bodyMaterial": "hide",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.55,
+  "life": 34,
+  "damageMin": 7,
+  "damageMax": 11,
+  "moveSpeed": 3.0,
+  "xp": 15,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "stalker",
+   "orbitRange": 5
+  },
+  "skill": "shade_dive",
+  "loot": {
+   "goldChance": 0.35,
+   "goldMin": 2,
+   "goldMax": 7,
+   "itemChance": 0.14
+  },
+  "color": "#c9b48a",
+  "tint": "#b0a59a",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "drifter",
+  "name": "떠도는 것",
+  "rig": "drifter",
+  "bodyMaterial": "flesh",
+  "faction": "beasts",
+  "scale": 1.0,
+  "radius": 0.6,
+  "life": 60,
+  "damageMin": 5,
+  "damageMax": 8,
+  "moveSpeed": 1.2,
+  "xp": 20,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 7,
+   "retreatRange": 3.5,
+   "lead": 0
+  },
+  "skill": "drifter_grasp",
+  "loot": {
+   "goldChance": 0.45,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.18
+  },
+  "color": "#c9b48a",
+  "tint": "#d4ccb8",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "unfinished_crier",
+  "name": "메아리",
+  "rig": "unfinished_taker",
+  "bodyMaterial": "flesh",
+  "faction": "unfinished",
+  "scale": 0.95,
+  "radius": 0.5,
+  "life": 38,
+  "damageMin": 5,
+  "damageMax": 8,
+  "moveSpeed": 5.6,
+  "xp": 15,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "taker_snatch",
+  "poise": {
+   "knockback": 0.3,
+   "stagger": 0.3
+  },
+  "alarm": {
+   "reach": 36,
+   "cry": 3
+  },
+  "loot": {
+   "goldChance": 0.55,
+   "goldMin": 3,
+   "goldMax": 8,
+   "itemChance": 0.2
+  },
+  "color": "#d08a5a",
+  "tint": "#e6d8c8",
+  "gear": [],
+  "wear": [
+   "torn_hood",
+   "odd_breeches",
+   "cast_off_boots"
+  ]
+ },
+ {
+  "id": "cinder_hound",
+  "name": "잉걸 사냥개",
+  "rig": "wolf",
+  "bodyMaterial": "hide",
+  "faction": "cinders",
+  "scale": 0.95,
+  "radius": 0.6,
+  "life": 44,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 6.6,
+  "xp": 15,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "stalker",
+   "orbitRange": 5.5
+  },
+  "skill": "cinder_pounce",
+  "loot": {
+   "goldChance": 0.4,
+   "goldMin": 2,
+   "goldMax": 8,
+   "itemChance": 0.15
+  },
+  "color": "#ff6a1c",
+  "tint": "#7a645a",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 5,
+   "seam": 0.03,
+   "strength": 2.0,
+   "rim": 0.25
+  }
+ },
+ {
+  "id": "cinder_alpha",
+  "name": "잉걸 우두머리",
+  "rig": "wolf",
+  "bodyMaterial": "hide",
+  "faction": "cinders",
+  "scale": 1.4,
+  "radius": 0.85,
+  "life": 170,
+  "damageMin": 9,
+  "damageMax": 14,
+  "moveSpeed": 6.0,
+  "xp": 60,
+  "aggroRadius": 14,
+  "behaviour": {
+   "type": "stalker",
+   "orbitRange": 6.5
+  },
+  "skill": "alpha_pounce",
+  "loot": {
+   "goldChance": 0.9,
+   "goldMin": 10,
+   "goldMax": 30,
+   "itemChance": 0.6
+  },
+  "color": "#ff6a1c",
+  "tint": "#5e4a40",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 5,
+   "seam": 0.03,
+   "strength": 2.4,
+   "rim": 0.3
+  },
+  "summon": {
+   "monster": "cinder_hound",
+   "count": 2,
+   "cooldown": 9,
+   "limit": 3
+  },
+  "poise": {
+   "knockback": 0.4,
+   "stagger": 0.4,
+   "resolve": 3
+  }
+ },
+ {
+  "id": "slagback",
+  "name": "찌꺼기등",
+  "rig": "stegosaurus",
+  "bodyMaterial": "armour",
+  "faction": "cinders",
+  "scale": 1.6,
+  "radius": 1.1,
+  "life": 130,
+  "damageMin": 8,
+  "damageMax": 11,
+  "moveSpeed": 2.0,
+  "xp": 28,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "slag_crash",
+  "loot": {
+   "goldChance": 0.55,
+   "goldMin": 4,
+   "goldMax": 12,
+   "itemChance": 0.24
+  },
+  "color": "#ff6a1c",
+  "tint": "#6a5a52",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 6,
+   "seam": 0.025,
+   "strength": 1.9,
+   "rim": 0.2
+  },
+  "guard": {
+   "arcDegrees": 140,
+   "damageTaken": 0.35,
+   "breakStagger": 0.4,
+   "breakTime": 2.5
+  },
+  "poise": {
+   "knockback": 0.2,
+   "stagger": 0.3,
+   "resolve": 4
+  },
+  "deathSkill": "slag_eruption"
+ },
+ {
+  "id": "slagback_elder",
+  "name": "찌꺼기등 장로",
+  "rig": "stegosaurus",
+  "bodyMaterial": "armour",
+  "faction": "cinders",
+  "scale": 2.1,
+  "radius": 1.45,
+  "life": 340,
+  "damageMin": 10,
+  "damageMax": 13,
+  "moveSpeed": 2.5,
+  "xp": 90,
+  "aggroRadius": 12,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "elder_crash",
+  "loot": {
+   "goldChance": 0.95,
+   "goldMin": 14,
+   "goldMax": 40,
+   "itemChance": 0.7
+  },
+  "color": "#ff6a1c",
+  "tint": "#574a44",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 6,
+   "seam": 0.025,
+   "strength": 2.2,
+   "rim": 0.25
+  },
+  "guard": {
+   "arcDegrees": 150,
+   "damageTaken": 0.3,
+   "breakStagger": 0.45,
+   "breakTime": 3
+  },
+  "poise": {
+   "knockback": 0.1,
+   "stagger": 0.2,
+   "resolve": 5
+  },
+  "deathSkill": "elder_eruption",
+  "summon": {
+   "monster": "cinder_mite",
+   "count": 3,
+   "cooldown": 8,
+   "limit": 6
+  }
+ },
+ {
+  "id": "ember_spitter",
+  "name": "잉걸 뱉는 자",
+  "rig": "crawler",
+  "bodyMaterial": "chitin",
+  "faction": "cinders",
+  "scale": 1,
+  "radius": 0.6,
+  "life": 40,
+  "damageMin": 5,
+  "damageMax": 8,
+  "moveSpeed": 0.7,
+  "xp": 17,
+  "aggroRadius": 14,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 10,
+   "retreatRange": 5,
+   "lead": 1.0
+  },
+  "skill": "ember_spit",
+  "loot": {
+   "goldChance": 0.45,
+   "goldMin": 3,
+   "goldMax": 9,
+   "itemChance": 0.18
+  },
+  "color": "#ff6a1c",
+  "tint": "#8a5040",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 5,
+   "seam": 0.03,
+   "strength": 2.0,
+   "rim": 0.2
+  }
+ },
+ {
+  "id": "spitter_matron",
+  "name": "뱉는 자 어미",
+  "rig": "crawler",
+  "bodyMaterial": "chitin",
+  "faction": "cinders",
+  "scale": 1.5,
+  "radius": 0.95,
+  "life": 220,
+  "damageMin": 8,
+  "damageMax": 11,
+  "moveSpeed": 1.05,
+  "xp": 75,
+  "aggroRadius": 15,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 11,
+   "retreatRange": 6,
+   "lead": 1.1
+  },
+  "skill": "matron_spit",
+  "loot": {
+   "goldChance": 0.9,
+   "goldMin": 12,
+   "goldMax": 34,
+   "itemChance": 0.65
+  },
+  "color": "#ff6a1c",
+  "tint": "#74443a",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 5,
+   "seam": 0.03,
+   "strength": 2.3,
+   "rim": 0.25
+  },
+  "summon": {
+   "monster": "ember_spitter",
+   "count": 1,
+   "cooldown": 10,
+   "limit": 2
+  },
+  "poise": {
+   "knockback": 0.4,
+   "stagger": 0.4,
+   "resolve": 3
+  }
+ },
+ {
+  "id": "cinder_mite",
+  "name": "잉걸 진드기",
+  "rig": "rat",
+  "bodyMaterial": "hide",
+  "faction": "cinders",
+  "scale": 0.9,
+  "radius": 0.4,
+  "life": 14,
+  "damageMin": 3,
+  "damageMax": 5,
+  "moveSpeed": 3.6,
+  "xp": 5,
+  "aggroRadius": 9,
+  "behaviour": {
+   "type": "swarm",
+   "ring": 1.8
+  },
+  "skill": "mite_bite",
+  "loot": {
+   "goldChance": 0.12,
+   "goldMin": 1,
+   "goldMax": 3,
+   "itemChance": 0.03
+  },
+  "color": "#ff6a1c",
+  "tint": "#9a6248",
+  "gear": [],
+  "wear": [],
+  "heatproof": true,
+  "crust": {
+   "cells": 4,
+   "seam": 0.035,
+   "strength": 2.6,
+   "rim": 0.3
+  },
+  "dormant": {
+   "noiseRadius": 4.5
+  }
+ },
+ {
+  "id": "timekeeper_rank",
+  "name": "시간지기 열병",
+  "rig": "timekeeper",
+  "bodyMaterial": "armour",
+  "faction": "timekeepers",
+  "scale": 1.08,
+  "radius": 0.55,
+  "life": 120,
+  "damageMin": 7,
+  "damageMax": 11,
+  "moveSpeed": 2.9,
+  "xp": 26,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "rank_thrust",
+  "guard": {
+   "arcDegrees": 150,
+   "damageTaken": 0.2,
+   "breakStagger": 0.45,
+   "breakTime": 1.5
+  },
+  "poise": {
+   "knockback": 0.15,
+   "stagger": 0.3
+  },
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 6,
+   "goldMax": 14,
+   "itemChance": 0.28
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_blade",
+   "rank_shield"
+  ],
+  "wear": [
+   "blackened_plate",
+   "iron_vambraces",
+   "iron_greaves",
+   "iron_sabatons",
+   "lens_mask"
+  ]
+ },
+ {
+  "id": "timekeeper_tallier",
+  "name": "시간지기 계수사",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.0,
+  "radius": 0.5,
+  "life": 58,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 3.4,
+  "xp": 24,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 10,
+   "retreatRange": 5
+  },
+  "skill": "tally_mark",
+  "poise": {
+   "knockback": 0.8,
+   "stagger": 0.8
+  },
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 6,
+   "goldMax": 14,
+   "itemChance": 0.28
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_rod"
+  ],
+  "wear": [
+   "tally_robe",
+   "keeper_gloves",
+   "lens_mask"
+  ]
+ },
+ {
+  "id": "timekeeper_custodian",
+  "name": "시간지기 관리인",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.04,
+  "radius": 0.5,
+  "life": 90,
+  "damageMin": 6,
+  "damageMax": 9,
+  "moveSpeed": 3.2,
+  "xp": 30,
+  "aggroRadius": 10,
+  "behaviour": {
+   "type": "ranged",
+   "preferredRange": 7,
+   "retreatRange": 3.5
+  },
+  "skill": "custodian_push",
+  "support": "custodian_mend",
+  "poise": {
+   "knockback": 0.5,
+   "stagger": 0.5
+  },
+  "loot": {
+   "goldChance": 0.7,
+   "goldMin": 6,
+   "goldMax": 14,
+   "itemChance": 0.28
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_rod"
+  ],
+  "wear": [
+   "custodian_robe",
+   "keeper_gloves",
+   "lens_mask"
+  ]
+ },
+ {
+  "id": "timekeeper_marshal",
+  "name": "시간지기 감독관",
+  "rig": "timekeeper",
+  "bodyMaterial": "armour",
+  "faction": "timekeepers",
+  "scale": 1.24,
+  "radius": 0.7,
+  "life": 400,
+  "damageMin": 10,
+  "damageMax": 15,
+  "moveSpeed": 2.7,
+  "xp": 120,
+  "aggroRadius": 11,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "marshal_sweep",
+  "guard": {
+   "arcDegrees": 150,
+   "damageTaken": 0.25,
+   "breakStagger": 0.5,
+   "breakTime": 1.8
+  },
+  "summon": {
+   "monster": "timekeeper_rank",
+   "count": 2,
+   "cooldown": 14,
+   "limit": 4
+  },
+  "poise": {
+   "knockback": 0.05,
+   "stagger": 0.15
+  },
+  "loot": {
+   "goldChance": 1,
+   "goldMin": 30,
+   "goldMax": 50,
+   "itemChance": 0.9
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_blade",
+   "rank_shield"
+  ],
+  "wear": [
+   "blackened_plate",
+   "iron_vambraces",
+   "iron_greaves",
+   "iron_sabatons",
+   "lens_mask"
+  ]
+ },
+ {
+  "id": "ledger_keeper",
+  "name": "시간지기",
+  "rig": "timekeeper",
+  "bodyMaterial": "flesh",
+  "faction": "timekeepers",
+  "scale": 1.7,
+  "radius": 0.65,
+  "life": 1813,
+  "damageMin": 16,
+  "damageMax": 18,
+  "moveSpeed": 3.6,
+  "xp": 400,
+  "aggroRadius": 14,
+  "behaviour": {
+   "type": "chaser"
+  },
+  "skill": "ledger_sweep",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [
+   "keeper_blade"
+  ],
+  "wear": [
+   "ledger_mantle",
+   "crown_tines",
+   "keeper_gloves"
+  ],
+  "boss": {
+   "title": "시간지기",
+   "phases": [
+    {
+     "below": 1,
+     "measure": [
+      "ledger_sweep",
+      "ledger_sweep",
+      "ledger_line",
+      "ledger_hour"
+     ],
+     "beat": 1.6,
+     "holds": [
+      "count_clock_a"
+     ],
+     "barks": []
+    },
+    {
+     "below": 0.7,
+     "measure": [
+      "ledger_sweep",
+      "ledger_tally",
+      "ledger_sweep",
+      "ledger_hands",
+      "ledger_tally",
+      "ledger_hour"
+     ],
+     "beat": 1.35,
+     "holds": [
+      "count_clock_b"
+     ],
+     "barks": []
+    },
+    {
+     "below": 0.4,
+     "measure": [
+      "ledger_counted",
+      "ledger_sweep",
+      "ledger_counted",
+      "ledger_hands",
+      "ledger_counted",
+      "ledger_hour"
+     ],
+     "beat": 1.15,
+     "holds": [
+      "ledger_book"
+     ],
+     "barks": [],
+     "unseal": [
+      "ledger_book"
+     ],
+     "anchor": {
+      "monster": "ledger_book",
+      "radius": 5
+     }
+    }
+   ],
+   "poise": {
+    "knockback": 0.05
+   },
+   "drop": {
+    "items": 2,
+    "floor": "rare",
+    "goldMin": 120,
+    "goldMax": 180
+   },
+   "firstKill": {
+    "flag": "ledger_keeper_defeated",
+    "xpShare": 0.5,
+    "goldMin": 400,
+    "goldMax": 520
+   },
+   "barks": {
+    "aggro": [],
+    "death": []
+   },
+   "countBreak": {
+    "stagger": 2.5,
+    "open": 5,
+    "damageTaken": 1.5
+   },
+   "yields": true,
+   "presence": {
+    "color": "#e8c46a",
+    "radius": 2.6,
+    "glow": 0.32
+   }
+  }
+ },
+ {
+  "id": "count_clock_a",
+  "name": "선 시계",
+  "rig": "standing_clock",
+  "bodyMaterial": "armour",
+  "faction": "timekeeper_works",
+  "scale": 1.0,
+  "radius": 0.7,
+  "life": 900,
+  "damageMin": 0,
+  "damageMax": 0,
+  "moveSpeed": 0,
+  "xp": 0,
+  "aggroRadius": 0,
+  "poise": {
+   "knockback": 0,
+   "stagger": 0,
+   "resolve": 0
+  },
+  "behaviour": {
+   "type": "fixed",
+   "sealed": false,
+   "collateral": 0.35,
+   "strikes": {
+    "count": 12,
+    "gap": 4
+   }
+  },
+  "skill": "ledger_counted",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "count_clock_b",
+  "name": "선 시계",
+  "rig": "standing_clock",
+  "bodyMaterial": "armour",
+  "faction": "timekeeper_works",
+  "scale": 1.0,
+  "radius": 0.7,
+  "life": 900,
+  "damageMin": 0,
+  "damageMax": 0,
+  "moveSpeed": 0,
+  "xp": 0,
+  "aggroRadius": 0,
+  "poise": {
+   "knockback": 0,
+   "stagger": 0,
+   "resolve": 0
+  },
+  "behaviour": {
+   "type": "fixed",
+   "sealed": false,
+   "collateral": 0.35,
+   "strikes": {
+    "count": 12,
+    "gap": 4
+   }
+  },
+  "skill": "ledger_counted",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [],
+  "wear": []
+ },
+ {
+  "id": "ledger_book",
+  "name": "장부",
+  "rig": "ledger_plinth",
+  "bodyMaterial": "armour",
+  "faction": "timekeeper_works",
+  "scale": 1.0,
+  "radius": 0.9,
+  "life": 375,
+  "damageMin": 0,
+  "damageMax": 0,
+  "moveSpeed": 0,
+  "xp": 0,
+  "aggroRadius": 0,
+  "poise": {
+   "knockback": 0,
+   "stagger": 0,
+   "resolve": 0
+  },
+  "behaviour": {
+   "type": "fixed",
+   "sealed": true,
+   "collateral": 0,
+   "strikes": {
+    "count": 14,
+    "gap": 4
+   }
+  },
+  "skill": "ledger_counted",
+  "loot": {
+   "goldChance": 0,
+   "goldMin": 0,
+   "goldMax": 0,
+   "itemChance": 0
+  },
+  "color": "#d8b46a",
+  "tint": "#fff4e6",
+  "gear": [],
+  "wear": []
+ }
+]

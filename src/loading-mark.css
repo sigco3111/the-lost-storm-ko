@@ -1,0 +1,93 @@
+.loading-mark {
+  --mark-cycle: 720ms;
+  --mark-show: 250ms;
+  --mark-step: 0.05625;
+  display: grid;
+  grid-template-columns: repeat(5, 5px);
+  gap: 3px;
+  width: fit-content;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-mark i {
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--storm);
+  opacity: 0.12;
+  transform: scale(0.8);
+  will-change: opacity, transform;
+  --mark-row: 0;
+  --mark-col: 0;
+  --mark-phase: calc((var(--mark-row) + var(--mark-col)) * var(--mark-step));
+}
+
+.loading-mark i:nth-child(n + 6) {
+  --mark-row: 1;
+}
+
+.loading-mark i:nth-child(n + 11) {
+  --mark-row: 2;
+}
+
+.loading-mark i:nth-child(n + 16) {
+  --mark-row: 3;
+}
+
+.loading-mark i:nth-child(n + 21) {
+  --mark-row: 4;
+}
+
+.loading-mark i:nth-child(5n + 2) {
+  --mark-col: 1;
+}
+
+.loading-mark i:nth-child(5n + 3) {
+  --mark-col: 2;
+}
+
+.loading-mark i:nth-child(5n + 4) {
+  --mark-col: 3;
+}
+
+.loading-mark i:nth-child(5n) {
+  --mark-col: 4;
+}
+
+.loading-mark.playing {
+  opacity: 1;
+  will-change: opacity, transform;
+  animation: mark-in var(--spring-smooth-ms) var(--spring-smooth) var(--mark-show) backwards;
+}
+
+.loading-mark.playing i {
+  animation: mark-scan var(--mark-cycle) var(--drift-ease) calc(var(--mark-show) + var(--mark-cycle) * var(--mark-phase)) var(--mark-cycles, infinite) both;
+}
+
+@keyframes mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mark-scan {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.8);
+  }
+  20% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+  45% {
+    opacity: 0.12;
+    transform: scale(0.8);
+  }
+}

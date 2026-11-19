@@ -1,0 +1,250 @@
+[
+ {
+  "id": "unfinished",
+  "name": "미완의 것들",
+  "palette": {
+   "tints": [
+    "#f2e4d6",
+    "#e6d8c8"
+   ],
+   "glow": "#d08a5a"
+  },
+  "wearables": [
+   "salvaged_mail",
+   "patched_tunic",
+   "stolen_jerkin",
+   "odd_breeches",
+   "faded_trousers",
+   "cast_off_boots",
+   "torn_hood",
+   "mismatched_gloves"
+  ],
+  "weapons": [
+   "raider_maul",
+   "raider_cleaver",
+   "scrap_board",
+   "scrap_javelin"
+  ],
+  "regards": {
+   "player": "hostile",
+   "wardens": "hostile",
+   "menders": "wary",
+   "timekeepers": "wary",
+   "stormcallers": "wary"
+  }
+ },
+ {
+  "id": "still",
+  "name": "정지된 것들",
+  "palette": {
+   "tints": [
+    "#c4c8ca",
+    "#b2b6b8"
+   ],
+   "glow": "#c8d4dc"
+  },
+  "wearables": [
+   "still_shroud",
+   "still_tunic",
+   "still_trousers",
+   "still_hood"
+  ],
+  "weapons": [],
+  "regards": {
+   "player": "hostile"
+  }
+ },
+ {
+  "id": "menders",
+  "name": "기우는 자들",
+  "palette": {
+   "tints": [
+    "#fff4e6",
+    "#d8ccc0"
+   ],
+   "glow": "#d9cfb0"
+  },
+  "wearables": [
+   "mender_coat",
+   "mender_trousers",
+   "mender_gloves",
+   "mender_hood",
+   "stitched_tunic",
+   "stitched_trousers"
+  ],
+  "weapons": [
+   "mender_knife",
+   "mended_cleaver"
+  ],
+  "regards": {
+   "player": "hostile",
+   "wardens": "hostile",
+   "unfinished": "wary"
+  }
+ },
+ {
+  "id": "timekeepers",
+  "name": "시간지기들",
+  "palette": {
+   "tints": [
+    "#fff4e6"
+   ],
+   "glow": "#d8b46a"
+  },
+  "wearables": [
+   "keeper_robe",
+   "ledger_mantle",
+   "crown_tines",
+   "lens_mask",
+   "keeper_gloves",
+   "tally_robe",
+   "custodian_robe",
+   "blackened_plate",
+   "iron_vambraces",
+   "iron_greaves",
+   "iron_sabatons"
+  ],
+  "weapons": [
+   "keeper_rod",
+   "keeper_blade",
+   "rank_shield"
+  ],
+  "regards": {
+   "player": "hostile",
+   "unfinished": "wary",
+   "menders": "wary"
+  },
+  "unison": {
+   "sight": 16,
+   "gather": 2,
+   "look": 0.7,
+   "turn": 0.14,
+   "flinch": 0.4,
+   "flinchRange": 14
+  }
+ },
+ {
+  "id": "wardens",
+  "name": "관리인들",
+  "palette": {
+   "tints": [
+    "#f2e2d0"
+   ],
+   "glow": "#f0c070"
+  },
+  "wearables": [
+   "warden_jerkin",
+   "warden_breeches",
+   "warden_boots",
+   "warden_hood",
+   "warden_gloves",
+   "appraiser_robe",
+   "appraiser_skirt",
+   "plain_shoes",
+   "appraiser_hood",
+   "appraiser_charm"
+  ],
+  "weapons": [
+   "warden_staff",
+   "warden_lantern"
+  ],
+  "regards": {
+   "player": "friendly",
+   "unfinished": "hostile",
+   "menders": "hostile"
+  }
+ },
+ {
+  "id": "stormcallers",
+  "name": "폭풍소환사들",
+  "palette": {
+   "tints": [
+    "#f4eedd"
+   ],
+   "glow": "#8fdcff"
+  },
+  "wearables": [
+   "dirty_shirt",
+   "dirty_trousers",
+   "leather_boots"
+  ],
+  "weapons": [
+   "sword_1h"
+  ],
+  "regards": {
+   "player": "hostile",
+   "unfinished": "wary",
+   "menders": "wary",
+   "timekeepers": "wary"
+  }
+ },
+ {
+  "id": "echoes",
+  "name": "메아리",
+  "palette": {
+   "tints": [
+    "#ffffff"
+   ],
+   "glow": "#ffffff"
+  },
+  "wearables": [],
+  "weapons": [],
+  "regards": {
+   "player": "hostile"
+  }
+ },
+ {
+  "id": "beasts",
+  "name": "짐승",
+  "palette": {
+   "tints": [
+    "#a39a8c",
+    "#b0a59a",
+    "#d4ccb8",
+    "#8a7d6c"
+   ],
+   "glow": "#c9b48a"
+  },
+  "wearables": [],
+  "weapons": [],
+  "regards": {
+   "player": "hostile"
+  }
+ },
+ {
+  "id": "cinders",
+  "name": "잉걸",
+  "palette": {
+   "tints": [
+    "#7a645a",
+    "#5e4a40",
+    "#6a5a52",
+    "#574a44",
+    "#8a5040",
+    "#74443a",
+    "#9a6248"
+   ],
+   "glow": "#ff6a1c"
+  },
+  "wearables": [],
+  "weapons": [],
+  "regards": {
+   "player": "hostile"
+  }
+ },
+ {
+  "id": "timekeeper_works",
+  "name": "시간지기들",
+  "palette": {
+   "tints": [
+    "#fff4e6"
+   ],
+   "glow": "#d8b46a"
+  },
+  "wearables": [],
+  "weapons": [],
+  "regards": {
+   "player": "hostile"
+  }
+ }
+]

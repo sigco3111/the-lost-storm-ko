@@ -1,0 +1,443 @@
+@import "@fontsource/noto-sans-kr/korean-400.css";
+@import "@fontsource/noto-sans-kr/korean-500.css";
+@import "@fontsource/noto-sans-kr/korean-700.css";
+@import "@fontsource/noto-serif-kr/korean-500.css";
+@import "@fontsource/noto-serif-kr/korean-700.css";
+@import "../tokens.css";
+@import "../page-transition.css";
+@import "./sections.css";
+
+@font-face {
+  font-family: "Cinzel";
+  font-style: normal;
+  font-weight: 700;
+  font-display: optional;
+  src: url("@fontsource/cinzel/files/cinzel-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Alegreya Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: optional;
+  src: url("@fontsource/alegreya-sans/files/alegreya-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Alegreya Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: optional;
+  src: url("@fontsource/alegreya-sans/files/alegreya-sans-latin-700-normal.woff2") format("woff2");
+}
+
+:root {
+  --ink: #05070b;
+  --panel: rgba(8, 11, 17, 0.72);
+  --muted: rgba(239, 230, 214, 0.66);
+  --faint: rgba(239, 230, 214, 0.42);
+  --line: rgba(239, 230, 214, 0.08);
+  --gutter: clamp(16px, 4vw, 48px);
+  --measure: 1180px;
+  --hero-top: max(100svh, 620px);
+  --rise: 14px;
+  --stagger: 70ms;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ink);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.5;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--text);
+  text-decoration-color: rgba(232, 184, 102, 0.5);
+  text-underline-offset: 3px;
+  transition: color var(--spring-snappy-ms) var(--spring-snappy), text-decoration-color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+a:hover {
+  color: var(--ember);
+  text-decoration-color: var(--ember);
+}
+
+a:focus-visible {
+  outline: none;
+  color: var(--ember);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.hero {
+  position: relative;
+  height: var(--hero-top);
+  max-height: 1000px;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse 60% 70% at 70% 46%, #0b1018 0%, var(--ink) 70%);
+}
+
+.hero-stage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: max(0px, calc((100% - var(--measure)) / 2 - 40px));
+  z-index: -2;
+  width: min(62vw, 720px);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 80%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 74%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 80%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 8%, #000 74%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.hero-still img,
+.hero-loop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  opacity: 0;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.hero-stage[data-hero="man"] [data-hero-still="man"] img,
+.hero-stage[data-hero="woman"] [data-hero-still="woman"] img {
+  opacity: 1;
+}
+
+.hero-stage[data-hero="man"] [data-hero-loop="man"].on,
+.hero-stage[data-hero="woman"] [data-hero-loop="woman"].on {
+  opacity: 1;
+}
+
+.hero-still img.waiting {
+  opacity: 0.02;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    var(--dither),
+    linear-gradient(90deg, var(--ink) 0%, rgba(5, 7, 11, 0.85) calc((100% - var(--measure)) / 2 + 380px), rgba(5, 7, 11, 0) calc((100% - var(--measure)) / 2 + 640px)),
+    linear-gradient(0deg, var(--ink) 0%, rgba(5, 7, 11, 0) 22%);
+  background-size: var(--dither-size), auto, auto;
+}
+
+.hero-body {
+  position: absolute;
+  top: 50%;
+  left: max(var(--gutter), calc((100% - var(--measure)) / 2 + var(--gutter)));
+  width: min(560px, calc(100% - 2 * var(--gutter)));
+  transform: translateY(-46%);
+}
+
+.hero-body > * {
+  animation: rise var(--spring-smooth-ms) var(--spring-smooth) both;
+}
+
+.hero-body > :nth-child(2) {
+  animation-delay: var(--stagger);
+}
+
+.hero-body > :nth-child(3) {
+  animation-delay: calc(2 * var(--stagger));
+}
+
+.hero-body > :nth-child(n + 4) {
+  animation-delay: calc(3 * var(--stagger));
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise));
+  }
+}
+
+.kicker {
+  margin: 0 0 14px;
+  color: var(--ember);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.alpha-tag {
+  margin-left: 10px;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(40px, 5.6vw, 72px);
+  line-height: 1.02;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.7);
+}
+
+.lede {
+  margin: 18px 0 28px;
+  max-width: 34ch;
+  color: rgba(239, 230, 214, 0.86);
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.45;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.8);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.play {
+  display: inline-block;
+  padding: 14px 34px 13px;
+  border-radius: 3px;
+  background: var(--ember);
+  color: #140f06;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 30px -10px rgba(232, 184, 102, 0.55);
+  transition: transform var(--spring-snappy-ms) var(--spring-bouncy), background-color var(--spring-snappy-ms) var(--spring-snappy), box-shadow var(--spring-smooth-ms) var(--spring-smooth), color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.play:hover,
+.play:focus-visible {
+  outline: none;
+  color: #140f06;
+  background: #f3cb85;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px -10px rgba(232, 184, 102, 0.7);
+}
+
+.play:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.play.quiet {
+  background: rgba(239, 230, 214, 0.08);
+  color: var(--text);
+  font-size: 16px;
+  box-shadow: none;
+}
+
+.play.quiet:hover,
+.play.quiet:focus-visible {
+  background: rgba(239, 230, 214, 0.14);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.fine {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8);
+}
+
+.live-now {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), transform var(--spring-smooth-ms) var(--spring-smooth), visibility 0s linear var(--spring-smooth-ms);
+}
+
+.hero-body > .live-now {
+  animation: none;
+}
+
+.live-now.ready {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), transform var(--spring-smooth-ms) var(--spring-smooth), visibility 0s;
+}
+
+.live-now b {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #7ddc8a;
+  vertical-align: 2px;
+  box-shadow: 0 0 10px rgba(125, 220, 138, 0.7);
+}
+
+.hero-pick {
+  position: absolute;
+  bottom: clamp(28px, 6vh, 56px);
+  right: calc(max(0px, calc((100% - var(--measure)) / 2 - 40px)) + min(31vw, 360px));
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 4px;
+  background: rgba(8, 11, 17, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transform: translateX(50%);
+  animation: fade-in var(--spring-smooth-ms) var(--spring-smooth) calc(4 * var(--stagger)) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.hero-pick-option {
+  padding: 6px 14px 5px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--faint);
+  font: inherit;
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: color var(--spring-snappy-ms) var(--spring-snappy), background-color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.hero-pick-option:hover,
+.hero-pick-option:focus-visible {
+  outline: none;
+  color: var(--text);
+}
+
+.hero-pick-option[aria-pressed="true"] {
+  background: rgba(239, 230, 214, 0.1);
+  color: var(--text);
+}
+
+@media (max-width: 1100px) {
+  .hero-stage {
+    right: -4vw;
+    width: 64vw;
+  }
+
+  .hero-pick {
+    right: calc(-4vw + 32vw);
+  }
+
+  .hero-body {
+    width: min(500px, 52vw);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    height: auto;
+    max-height: none;
+    overflow: hidden;
+    padding-top: min(78svh, 136vw);
+  }
+
+  .hero-stage {
+    top: 0;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    width: min(100%, 560px);
+    height: min(84svh, 146vw);
+    transform: translateX(-50%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%), linear-gradient(180deg, #000 0%, #000 56%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%), linear-gradient(180deg, #000 0%, #000 56%, transparent 100%);
+  }
+
+  .hero-still img,
+  .hero-loop {
+    object-position: 50% 18%;
+  }
+
+  .hero-shade {
+    background: var(--dither), linear-gradient(0deg, var(--ink) 0%, var(--ink) calc(100% - min(78svh, 136vw) - 40px), rgba(5, 7, 11, 0) calc(100% - min(78svh, 136vw) + 120px));
+    background-size: var(--dither-size), auto;
+  }
+
+  .hero-body {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    margin-top: -120px;
+    padding: 0 var(--gutter) 28px;
+    transform: none;
+  }
+
+  h1 {
+    font-size: clamp(36px, 10.4vw, 48px);
+  }
+
+  .lede {
+    margin: 12px 0 22px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .play {
+    display: block;
+  }
+
+  .hero-pick {
+    top: calc(env(safe-area-inset-top) + 14px);
+    right: var(--gutter);
+    bottom: auto;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-body > *,
+  .live-now {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .hero-pick {
+    animation: none;
+  }
+}

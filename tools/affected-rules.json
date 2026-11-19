@@ -1,0 +1,40 @@
+{
+  "testRoots": ["sim", "src", "test", "tools"],
+  "graphRoots": ["sim", "src", "test", "tools", "data"],
+  "alwaysRun": ["test/rules.test.ts"],
+  "rules": [
+    {
+      "kind": "everything",
+      "paths": [
+        "package.json",
+        "package-lock.json",
+        "tsconfig.json",
+        ".oxlintrc.json",
+        "vite.config.ts",
+        ".node-version",
+        ".nvmrc",
+        ".github/**",
+        "test/support.ts",
+        "test/*-support.ts",
+        "test/fake-*.ts",
+        "tools/affected.ts",
+        "tools/affected-rules.json"
+      ]
+    },
+    { "kind": "importers", "paths": ["sim/**", "test/**/*.test.ts", "tools/**"], "alsoRun": [] },
+    { "kind": "importers", "paths": ["data/**"], "alsoRun": ["sim/content/content.test.ts", "sim/content/bodies.test.ts", "sim/content/bodies.clips.test.ts", "src/launch/data.test.ts", "sim/content/audio.test.ts", "tools/builds-band.test.ts", "tools/guide/site.test.ts", "tools/site/head.test.ts", "src/skill-steer.test.ts"] },
+    { "kind": "importers", "paths": ["src/**"], "alsoRun": ["src/hud/hud.test.ts", "src/hud/hud-gate.test.ts"] },
+    { "kind": "importers", "paths": ["src/hud/**"], "alsoRun": ["src/hud/**/*.test.ts"] },
+    { "kind": "importers", "paths": ["src/backend/**"], "alsoRun": ["src/backend/**/*.test.ts"] },
+    { "kind": "importers", "paths": ["src/**/*.css"], "alsoRun": ["src/title-screen.test.ts", "src/landing/leave.test.ts", "src/hud/panel-cover.test.ts", "src/opening/opening.test.ts", "src/opening/opening.legible.test.ts", "src/title-account.test.ts", "src/veil.test.ts"] },
+    { "kind": "importers", "paths": ["src/input.ts"], "alsoRun": ["src/input.test.ts"] },
+    { "kind": "only", "paths": ["index.html", "play/**"], "run": ["src/launch/data.test.ts", "tools/site/head.test.ts"] },
+    { "kind": "only", "paths": ["public/**"], "run": ["sim/content/content.test.ts", "sim/content/bodies.test.ts", "sim/content/bodies.clips.test.ts"] },
+    { "kind": "only", "paths": ["public/*.html", "public/landing/**"], "run": ["tools/site/head.test.ts"] },
+    { "kind": "only", "paths": ["index.html", "play/index.html", "public/*.webmanifest", "public/*.png", "public/*.svg", "public/*.ico", "public/landing/**"], "run": ["tools/site/head.manifest.test.ts"] },
+    { "kind": "only", "paths": ["guide/**"], "run": ["tools/guide/site.test.ts", "tools/site/head.test.ts"] },
+    { "kind": "only", "paths": ["public/models/characters/man.glb", "public/models/characters/woman.glb", "public/models/wear/man/**", "public/models/wear/woman/**"], "run": ["tools/fit-over.test.ts"] },
+    { "kind": "only", "paths": ["spec/**"], "run": ["src/hud/overlay-core.test.ts"] },
+    { "kind": "only", "paths": ["**/*.md", "docs/**", "licenses/**", "blender/**", "rl/**", "LICENSE", ".gitignore", ".claude/**"], "run": [] }
+  ]
+}

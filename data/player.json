@@ -1,0 +1,204 @@
+{
+ "heroes": [
+  {
+   "id": "man",
+   "name": "남자",
+   "rig": "hero_man",
+   "names": "man"
+  },
+  {
+   "id": "woman",
+   "name": "여자",
+   "rig": "hero_woman",
+   "names": "woman"
+  },
+  {
+   "id": "wight_man",
+   "name": "와이트 남자",
+   "rig": "hero_wight_man",
+   "names": "man"
+  },
+  {
+   "id": "wight_woman",
+   "name": "와이트 여자",
+   "rig": "hero_wight_woman",
+   "names": "woman"
+  }
+ ],
+ "radius": 0.5,
+ "baseStats": {
+  "maxLife": 100,
+  "maxMana": 50,
+  "lifeRegen": 1.5,
+  "manaRegen": 3,
+  "damageMin": 2,
+  "damageMax": 4,
+  "damagePercent": 0,
+  "attackSpeed": 1,
+  "critChance": 0.06,
+  "critMultiplier": 1.6,
+  "moveSpeed": 7.6,
+  "armour": 0,
+  "goldFind": 0,
+  "stormResist": 0,
+  "frostResist": 0
+ },
+ "perLevel": [
+  {
+   "stat": "maxLife",
+   "op": "add",
+   "value": 12
+  },
+  {
+   "stat": "maxMana",
+   "op": "add",
+   "value": 4
+  },
+  {
+   "stat": "damageMin",
+   "op": "add",
+   "value": 0.5
+  },
+  {
+   "stat": "damageMax",
+   "op": "add",
+   "value": 1
+  }
+ ],
+ "skillBook": [
+  {
+   "skill": "cleave",
+   "level": 1
+  },
+  {
+   "skill": "dodge_roll",
+   "level": 1,
+   "when": [
+    {
+     "type": "flag",
+     "flag": "roll_taught",
+     "is": "yes"
+    }
+   ]
+  }
+ ],
+ "skillBar": [
+  {
+   "skill": "cleave",
+   "bindings": [
+    "mouse_left"
+   ],
+   "label": "LMB"
+  },
+  {
+   "skill": null,
+   "bindings": [
+    "KeyQ"
+   ],
+   "label": "Q"
+  },
+  {
+   "skill": null,
+   "bindings": [
+    "KeyW",
+    "mouse_right"
+   ],
+   "label": "W"
+  },
+  {
+   "skill": null,
+   "bindings": [
+    "KeyE"
+   ],
+   "label": "E"
+  },
+  {
+   "skill": null,
+   "bindings": [
+    "KeyR"
+   ],
+   "label": "R"
+  },
+  {
+   "skill": "dodge_roll",
+   "bindings": [
+    "Space"
+   ],
+   "label": "Space"
+  }
+ ],
+ "xp": {
+  "base": 105,
+  "growth": 1.332,
+  "after": {
+   "from": 9,
+   "growth": 1.17
+  },
+  "maxLevel": 30,
+  "gap": {
+   "band": 5,
+   "widenEvery": 10,
+   "soft": 2,
+   "power": 3,
+   "floor": 0.05,
+   "above": true
+  }
+ },
+ "startingItems": [
+  "rusted_blade",
+  "traveller_coat",
+  "traveller_trousers",
+  "traveller_boots"
+ ],
+ "dressedFlag": "traveller_dressed",
+ "neverWears": [
+  "leather_hood",
+  "sackcloth_cowl",
+  "torn_hood",
+  "still_hood",
+  "mender_hood",
+  "keeper_hood",
+  "warden_hood",
+  "traveller_hood"
+ ],
+ "firstDrop": {
+  "flag": "first_drop",
+  "rarity": "magic"
+ },
+ "unarmedVisual": null,
+ "inventorySize": 24,
+ "pickupRadius": 1.6,
+ "pickupAim": 2.8,
+ "rootGrace": 1.6,
+ "goldMagnetRadius": 3.2,
+ "respawnDelay": 1.4,
+ "respawnInvulnerability": 3,
+ "deathPenalty": {
+  "minLevel": 1,
+  "xpPercent": 0.1
+ },
+ "resistance": {
+  "armourCap": 0.75,
+  "cap": 0.75,
+  "floor": -1,
+  "tierPenalty": 0.2
+ },
+ "caps": [
+  {
+   "stat": "attackSpeed",
+   "max": 2
+  },
+  {
+   "stat": "critChance",
+   "max": 0.5
+  },
+  {
+   "stat": "moveSpeed",
+   "max": 10.64
+  }
+ ],
+ "manaShows": "costly_skill",
+ "tint": "#e8d2bd",
+ "color": "#8fdcff",
+ "gear": []
+}

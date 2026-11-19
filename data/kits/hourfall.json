@@ -1,0 +1,492 @@
+{
+  "id": "hourfall",
+  "letters": {
+    "themes": ["c", "s", "g", "m", "l", "k"],
+    "passage": "c",
+    "pond": "w",
+    "shore": "m"
+  },
+  "shape": {"radiusLeast": 5.5, "radiusMost": 8, "alcoves": 2, "pondChance": 0.3},
+  "walls": {"band": 6, "back": 1, "side": 2, "front": 4},
+  "stairs": {"prop": "wide_stair", "y": -0.9},
+  "density": {"props": 0.174, "caches": 0.0221},
+  "caches": ["cache_basket", "cache_coin_pile", "cache_gold_bag", "cache_jug", "cache_satchel", "cache_urn", "cache_urn_square"],
+  "families": [
+    {"members": [{"monster": "unfinished_taker", "count": 2}, {"monster": "unfinished_thrower", "count": 1}]},
+    {"members": [{"monster": "unfinished_borrower", "count": 1}, {"monster": "unfinished_taker", "count": 1}], "waits": 8},
+    {"members": [{"monster": "spider", "count": 1}]},
+    {"members": [{"monster": "unfinished_thrower", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "sporecap", "count": 1}, {"monster": "spider", "count": 1}, {"monster": "rat", "count": 6}]},
+    {"members": [{"monster": "silt_ooze", "count": 2}, {"monster": "spider", "count": 1}]},
+    {"members": [{"monster": "unfinished_taker", "count": 2}, {"monster": "unfinished_thrower", "count": 1}]},
+    {"members": [{"monster": "unfinished_brute", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "unfinished_brute", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "unfinished_taker", "count": 2}, {"monster": "unfinished_thrower", "count": 1}]},
+    {"members": [{"monster": "unfinished_thrower", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "unfinished_brute", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "unfinished_brute", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "unfinished_thrower", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "spider", "count": 2}, {"monster": "weaver", "count": 2}, {"monster": "crawler", "count": 2}]},
+    {"members": [{"monster": "unfinished_thrower", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "bat", "count": 6}, {"monster": "spider", "count": 2}, {"monster": "rat", "count": 4}]},
+    {"members": [{"monster": "unfinished_thrower", "count": 1}, {"monster": "unfinished_taker", "count": 1}]},
+    {"members": [{"monster": "crawler", "count": 1}, {"monster": "spined_ooze", "count": 2}, {"monster": "spider", "count": 2}, {"monster": "weaver", "count": 1}]}
+  ],
+  "clusters": [
+    [
+      {"prop": "cave_scree", "dx": 3.93, "dz": 2.34, "turn": 28},
+      {"prop": "cave_rock_chunk_b", "dx": 1.82, "dz": 0.03, "turn": 167},
+      {"prop": "cave_ribcage", "dx": 0.26, "dz": 3.74, "turn": 154},
+      {"prop": "cave_bone_a", "dx": 1.69, "dz": 5.3, "turn": 250},
+      {"prop": "cave_bone_a", "dx": 5.8, "dz": 4.36, "turn": 55},
+      {"prop": "cave_bone_a", "dx": 7.63, "dz": 3.33, "turn": 354},
+      {"prop": "cave_bone_a", "dx": 4.21, "dz": 4.87, "turn": 112},
+      {"prop": "cave_bone_b", "dx": 0.17, "dz": -1.43, "turn": 292},
+      {"prop": "cave_stalagmites", "dx": -0.76, "dz": 0.79, "turn": 263},
+      {"prop": "cave_skull_bones", "dx": -3.9, "dz": -5.94, "turn": 221},
+      {"prop": "cave_skull_bones", "dx": -4.82, "dz": -0.66, "turn": 56},
+      {"prop": "cave_bone_a", "dx": -6.83, "dz": -4.19, "turn": 80},
+      {"prop": "cave_bone_a", "dx": -1.49, "dz": -6.21, "turn": 220},
+      {"prop": "cave_bone_a", "dx": -5.66, "dz": -3.06, "turn": 325},
+      {"prop": "cave_ribcage", "dx": -2.02, "dz": -3.33, "turn": 235}
+    ],
+    [
+      {"prop": "cave_scree", "dx": -2.34, "dz": -3.13, "turn": 73},
+      {"prop": "cave_scree", "dx": -5.44, "dz": 2.56, "turn": 72},
+      {"prop": "cave_scree", "dx": -0.39, "dz": 0.04, "turn": 96},
+      {"prop": "cave_rock_chunk_b", "dx": 4.39, "dz": -0.56, "turn": 116},
+      {"prop": "cave_pickaxe", "dx": 0.74, "dz": -2.85, "turn": 256},
+      {"prop": "cave_lantern", "dx": 8.87, "dz": -2.95, "turn": 302},
+      {"prop": "cave_debris", "dx": -5.65, "dz": -0.75, "turn": 101},
+      {"prop": "cave_shards", "dx": 4.54, "dz": -2.76, "turn": 60},
+      {"prop": "cave_shards", "dx": 6.39, "dz": -1.74, "turn": 164},
+      {"prop": "cave_shards", "dx": -7.36, "dz": 4.63, "turn": 53},
+      {"prop": "cave_rock_chunk_a", "dx": -2.65, "dz": 1.73, "turn": 65},
+      {"prop": "cave_rock_chunk_a", "dx": 2.72, "dz": 0.94, "turn": 150},
+      {"prop": "cave_rock_chunk_a", "dx": -3.77, "dz": 4.9, "turn": 10}
+    ],
+    [
+      {"prop": "cave_scree", "dx": -0.82, "dz": -0.85, "turn": 82},
+      {"prop": "cave_rock_chunk_b", "dx": -0.33, "dz": -6.1, "turn": 218},
+      {"prop": "cave_rock_chunk_b", "dx": -2.69, "dz": 4.71, "turn": 12},
+      {"prop": "cave_ribcage", "dx": 2.36, "dz": -6.1, "turn": 178},
+      {"prop": "cave_ribcage", "dx": 4.32, "dz": -3.4, "turn": 264},
+      {"prop": "cave_skull_a", "dx": -0.18, "dz": 3.38, "turn": 26},
+      {"prop": "cave_skull_a", "dx": -0.3, "dz": 5.73, "turn": 185},
+      {"prop": "cave_skull_a", "dx": 2.02, "dz": -3.69, "turn": 136},
+      {"prop": "cave_bone_a", "dx": -1.84, "dz": -3.07, "turn": 242},
+      {"prop": "cave_bone_b", "dx": 0.11, "dz": 1.57, "turn": 296},
+      {"prop": "cave_bone_b", "dx": 1.91, "dz": -1.76, "turn": 248},
+      {"prop": "cave_bone_b", "dx": -1.76, "dz": 2.16, "turn": 66},
+      {"prop": "cave_shroom_glow", "dx": -2.74, "dz": 7.41, "turn": 18}
+    ],
+    [
+      {"prop": "cave_scree", "dx": 2.43, "dz": 0.28, "turn": 56},
+      {"prop": "cave_scree", "dx": -2.16, "dz": -2.37, "turn": 343},
+      {"prop": "cave_rock_chunk_b", "dx": -1.91, "dz": -5.26, "turn": 105},
+      {"prop": "cave_rock_chunk_b", "dx": -4.44, "dz": -8.26, "turn": 145},
+      {"prop": "cave_mineral", "dx": 7.98, "dz": 3.83, "turn": 182},
+      {"prop": "cave_mineral", "dx": -2.77, "dz": 1.52, "turn": 175},
+      {"prop": "cave_crystal", "dx": 2.83, "dz": 3.55, "turn": 322},
+      {"prop": "cave_ribcage", "dx": 5.18, "dz": 1.83, "turn": 308},
+      {"prop": "cave_ribcage", "dx": -0.0, "dz": 2.39, "turn": 261},
+      {"prop": "cave_skull_a", "dx": -4.97, "dz": -6.04, "turn": 63},
+      {"prop": "cave_stalagmites", "dx": -2.92, "dz": 4.4, "turn": 142},
+      {"prop": "cave_shards", "dx": 5.48, "dz": 4.87, "turn": 165},
+      {"prop": "cave_shards", "dx": -4.7, "dz": -0.78, "turn": 152}
+    ],
+    [
+      {"prop": "cave_rock_chunk_b", "dx": -6.67, "dz": -0.86, "turn": 267},
+      {"prop": "cave_pickaxe", "dx": -0.86, "dz": -0.2, "turn": 27},
+      {"prop": "cave_lantern", "dx": 6.88, "dz": -1.07, "turn": 31},
+      {"prop": "cave_lantern", "dx": 1.62, "dz": 1.13, "turn": 291},
+      {"prop": "cave_debris", "dx": -4.26, "dz": 0.21, "turn": 314},
+      {"prop": "cave_debris", "dx": 9.18, "dz": -3.27, "turn": 79},
+      {"prop": "cave_sacks", "dx": 4.94, "dz": 1.23, "turn": 235},
+      {"prop": "cave_sacks", "dx": -8.68, "dz": 1.17, "turn": 291},
+      {"prop": "cave_shards", "dx": -2.15, "dz": 1.66, "turn": 290}
+    ],
+    [
+      {"prop": "cave_scree", "dx": -0.14, "dz": -0.6, "turn": 141},
+      {"prop": "cave_sacks", "dx": -1.89, "dz": 2.21, "turn": 199},
+      {"prop": "cave_lantern", "dx": 1.37, "dz": -3.18, "turn": 260},
+      {"prop": "cave_lantern", "dx": 1.36, "dz": 2.13, "turn": 192},
+      {"prop": "cave_stalagmites", "dx": -1.37, "dz": 4.93, "turn": 320},
+      {"prop": "cave_rock_chunk_b", "dx": -3.01, "dz": 0.18, "turn": 115},
+      {"prop": "cave_shards", "dx": 3.69, "dz": -5.68, "turn": 163}
+    ],
+    [
+      {"prop": "cave_scree", "dx": -0.78, "dz": 0.98, "turn": 343},
+      {"prop": "cave_mineral", "dx": 1.66, "dz": -1.37, "turn": 266},
+      {"prop": "cave_mineral", "dx": 1.75, "dz": 2.81, "turn": 50},
+      {"prop": "cave_stalagmites", "dx": 0.13, "dz": 5.79, "turn": 353},
+      {"prop": "cave_shards", "dx": -0.08, "dz": -3.13, "turn": 146},
+      {"prop": "cave_shroom_glow", "dx": -2.68, "dz": -5.1, "turn": 149}
+    ],
+    [
+      {"prop": "cave_shroom_glow", "dx": 4.1, "dz": -1.45, "turn": 111},
+      {"prop": "cave_shroom_shelf", "dx": 2.19, "dz": 1.44, "turn": 304},
+      {"prop": "cave_shroom_shelf", "dx": -5.32, "dz": 1.16, "turn": 266},
+      {"prop": "cave_stalagmites", "dx": -2.06, "dz": 1.48, "turn": 75},
+      {"prop": "cave_shards", "dx": -0.39, "dz": -0.87, "turn": 330},
+      {"prop": "cave_bone_b", "dx": 1.5, "dz": -1.76, "turn": 94}
+    ],
+    [
+      {"prop": "cave_rock_chunk_a", "dx": 2.15, "dz": -3.11, "turn": 256},
+      {"prop": "cave_crystal", "dx": -4.29, "dz": 0.95, "turn": 326},
+      {"prop": "cave_crystal", "dx": 0.93, "dz": 2.0, "turn": 38},
+      {"prop": "cave_shards", "dx": 2.78, "dz": 0.02, "turn": 234},
+      {"prop": "cave_shards", "dx": -1.59, "dz": 0.13, "turn": 16}
+    ],
+    [
+      {"prop": "cave_sack_open", "dx": -1.21, "dz": -1.06, "turn": 222},
+      {"prop": "cave_debris", "dx": 3.59, "dz": 0.29, "turn": 106},
+      {"prop": "cave_bone_a", "dx": 1.14, "dz": 0.87, "turn": 178},
+      {"prop": "cave_stalagmites", "dx": -3.53, "dz": -0.08, "turn": 326}
+    ],
+    [
+      {"prop": "cave_sacks", "dx": 1.02, "dz": 0.49, "turn": 246},
+      {"prop": "cave_sack_open", "dx": -0.88, "dz": 2.56, "turn": 309},
+      {"prop": "cave_lantern", "dx": 0.98, "dz": -2.41, "turn": 65},
+      {"prop": "cave_lantern", "dx": -1.13, "dz": -0.64, "turn": 88}
+    ],
+    [
+      {"prop": "cave_crystal", "dx": -0.37, "dz": -0.25, "turn": 90},
+      {"prop": "cave_mineral", "dx": -1.69, "dz": 2.96, "turn": 233},
+      {"prop": "cave_mineral", "dx": 2.07, "dz": -2.72, "turn": 228}
+    ],
+    [
+      {"prop": "cave_rock_chunk_a", "dx": 1.74, "dz": 0.82, "turn": 23},
+      {"prop": "cave_bone_a", "dx": -0.7, "dz": -1.29, "turn": 340},
+      {"prop": "cave_bone_a", "dx": -1.05, "dz": 0.47, "turn": 152}
+    ],
+    [
+      {"prop": "cave_rock_chunk_b", "dx": 1.12, "dz": -2.28, "turn": 192},
+      {"prop": "cave_roots_patch", "dx": -1.41, "dz": 2.22, "turn": 0},
+      {"prop": "cave_skull_a", "dx": 0.28, "dz": 0.06, "turn": 144}
+    ],
+    [
+      {"prop": "cave_rock_chunk_b", "dx": -0.82, "dz": -1.59, "turn": 221},
+      {"prop": "cave_shroom_red", "dx": 1.14, "dz": -0.05, "turn": 253},
+      {"prop": "cave_skull_a", "dx": -0.32, "dz": 1.65, "turn": 41}
+    ],
+    [
+      {"prop": "cave_rock_chunk_b", "dx": 1.2, "dz": -1.93, "turn": 199},
+      {"prop": "cave_roots_patch", "dx": -1.91, "dz": 0.39, "turn": 51},
+      {"prop": "cave_shroom_red", "dx": 0.72, "dz": 1.53, "turn": 251}
+    ],
+    [
+      {"prop": "cave_roots_patch", "dx": 2.02, "dz": 1.63, "turn": 122},
+      {"prop": "cave_roots_patch", "dx": -0.17, "dz": 0.39, "turn": 299},
+      {"prop": "cave_shroom_red", "dx": -1.85, "dz": -2.03, "turn": 37}
+    ],
+    [
+      {"prop": "cave_scree", "dx": 0.14, "dz": -2.78, "turn": 9},
+      {"prop": "cave_skull_a", "dx": -0.45, "dz": -0.14, "turn": 193},
+      {"prop": "cave_shards", "dx": 0.32, "dz": 2.92, "turn": 277}
+    ],
+    [{"prop": "cave_bone_b", "dx": 0.11, "dz": -0.84, "turn": 195}, {"prop": "cave_crystal", "dx": -0.11, "dz": 0.84, "turn": 186}],
+    [{"prop": "cave_crystal", "dx": 1.44, "dz": 0.47, "turn": 140}, {"prop": "cave_stalagmites", "dx": -1.44, "dz": -0.47, "turn": 79}],
+    [{"prop": "cave_crystal", "dx": 1.58, "dz": -0.6, "turn": 45}, {"prop": "cave_ribcage", "dx": -1.59, "dz": 0.6, "turn": 18}],
+    [{"prop": "cave_ladder", "dx": -1.65, "dz": -0.14, "turn": 309}, {"prop": "cave_sack_open", "dx": 1.64, "dz": 0.14, "turn": 168}],
+    [{"prop": "cave_mineral", "dx": -1.26, "dz": -1.04, "turn": 262}, {"prop": "cave_shards", "dx": 1.27, "dz": 1.04, "turn": 147}],
+    [{"prop": "cave_ribcage", "dx": -1.25, "dz": 0.54, "turn": 58}, {"prop": "cave_skull_b", "dx": 1.25, "dz": -0.54, "turn": 194}],
+    [{"prop": "cave_rock_chunk_a", "dx": -0.93, "dz": -1.39, "turn": 277}, {"prop": "cave_scree", "dx": 0.93, "dz": 1.38, "turn": 77}],
+    [{"prop": "cave_rock_chunk_a", "dx": -1.03, "dz": -0.98, "turn": 37}, {"prop": "cave_roots_patch", "dx": 1.04, "dz": 0.97, "turn": 58}],
+    [{"prop": "cave_roots_patch", "dx": -1.09, "dz": -0.92, "turn": 356}, {"prop": "cave_stalagmites", "dx": 1.1, "dz": 0.92, "turn": 92}],
+    [{"prop": "cave_roots_patch", "dx": 1.41, "dz": 0.79, "turn": 20}, {"prop": "cave_shroom_red", "dx": -1.41, "dz": -0.8, "turn": 106}],
+    [{"prop": "cave_roots_patch", "dx": 0.97, "dz": 0.8, "turn": 210}, {"prop": "cave_shroom_glow", "dx": -0.97, "dz": -0.8, "turn": 230}],
+    [{"prop": "cave_roots_patch", "dx": -0.77, "dz": -1.36, "turn": 286}, {"prop": "cave_shroom_red", "dx": 0.77, "dz": 1.35, "turn": 112}],
+    [{"prop": "cave_sacks", "dx": 0.09, "dz": -1.42, "turn": 59}, {"prop": "cave_skull_bones", "dx": -0.09, "dz": 1.42, "turn": 133}],
+    [{"prop": "cave_scree", "dx": -0.26, "dz": 1.55, "turn": 25}, {"prop": "cave_stalagmites", "dx": 0.26, "dz": -1.55, "turn": 329}],
+    [{"prop": "cave_scree", "dx": 1.06, "dz": 1.32, "turn": 335}, {"prop": "cave_shroom_glow", "dx": -1.06, "dz": -1.32, "turn": 134}],
+    [{"prop": "cave_shards", "dx": -0.41, "dz": 1.59, "turn": 6}, {"prop": "cave_stalagmites", "dx": 0.41, "dz": -1.6, "turn": 140}],
+    [{"prop": "cave_shroom_glow", "dx": 1.12, "dz": -1.28, "turn": 13}, {"prop": "cave_bone_b", "dx": -1.12, "dz": 1.28, "turn": 120}],
+    [{"prop": "cave_shroom_red", "dx": -1.32, "dz": 0.01, "turn": 293}, {"prop": "cave_shroom_shelf", "dx": 1.31, "dz": -0.01, "turn": 346}],
+    [{"prop": "cave_shroom_shelf", "dx": -1.42, "dz": 0.06, "turn": 14}, {"prop": "cave_roots_patch", "dx": 1.42, "dz": -0.06, "turn": 33}],
+    [{"prop": "cave_skull_a", "dx": 0.47, "dz": 1.08, "turn": 103}, {"prop": "cave_bone_a", "dx": -0.48, "dz": -1.08, "turn": 188}],
+    [{"prop": "cave_bone_b", "dx": 0.0, "dz": 0.0, "turn": 142}],
+    [{"prop": "cave_column", "dx": 0.0, "dz": 0.0, "turn": 320}],
+    [{"prop": "cave_crystal", "dx": 0.0, "dz": 0.0, "turn": 109}],
+    [{"prop": "cave_crystal", "dx": 0.0, "dz": 0.0, "turn": 287}],
+    [{"prop": "cave_crystal", "dx": 0.0, "dz": 0.0, "turn": 27}],
+    [{"prop": "cave_crystal", "dx": 0.0, "dz": 0.0, "turn": 217}],
+    [{"prop": "cave_crystal", "dx": 0.0, "dz": 0.0, "turn": 14}],
+    [{"prop": "cave_crystal_big", "dx": 0.0, "dz": 0.0, "turn": 19}],
+    [{"prop": "cave_crystal_big", "dx": 0.0, "dz": 0.0, "turn": 207}],
+    [{"prop": "cave_crystal_big", "dx": 0.0, "dz": 0.0, "turn": 106}],
+    [{"prop": "cave_debris", "dx": 0.0, "dz": 0.0, "turn": 33}],
+    [{"prop": "cave_debris", "dx": 0.0, "dz": 0.0, "turn": 61}],
+    [{"prop": "cave_debris", "dx": 0.0, "dz": 0.0, "turn": 292}],
+    [{"prop": "cave_debris", "dx": 0.0, "dz": 0.0, "turn": 251}],
+    [{"prop": "cave_embers", "dx": 0.0, "dz": 0.0, "turn": 0}],
+    [{"prop": "cave_fire", "dx": 0.0, "dz": 0.0, "turn": 0}],
+    [{"prop": "cave_fire", "dx": 0.0, "dz": 0.0, "turn": 0}],
+    [{"prop": "cave_ladder", "dx": 0.0, "dz": 0.0, "turn": 274}],
+    [{"prop": "cave_mineral", "dx": 0.0, "dz": 0.0, "turn": 125}],
+    [{"prop": "cave_pickaxe", "dx": 0.0, "dz": 0.0, "turn": 303}],
+    [{"prop": "cave_rock_chunk_a", "dx": 0.0, "dz": 0.0, "turn": 285}],
+    [{"prop": "cave_rock_chunk_a", "dx": 0.0, "dz": 0.0, "turn": 235}],
+    [{"prop": "cave_rock_chunk_a", "dx": 0.0, "dz": 0.0, "turn": 284}],
+    [{"prop": "cave_rock_chunk_b", "dx": 0.0, "dz": 0.0, "turn": 0}],
+    [{"prop": "cave_rock_chunk_b", "dx": 0.0, "dz": 0.0, "turn": 310}],
+    [{"prop": "cave_roots_patch", "dx": 0.0, "dz": 0.0, "turn": 217}],
+    [{"prop": "cave_sack_open", "dx": 0.0, "dz": 0.0, "turn": 163}],
+    [{"prop": "cave_sacks", "dx": 0.0, "dz": 0.0, "turn": 341}],
+    [{"prop": "cave_scree", "dx": 0.0, "dz": 0.0, "turn": 47}],
+    [{"prop": "cave_shards", "dx": 0.0, "dz": 0.0, "turn": 52}],
+    [{"prop": "cave_shards", "dx": 0.0, "dz": 0.0, "turn": 347}],
+    [{"prop": "cave_shards", "dx": 0.0, "dz": 0.0, "turn": 203}],
+    [{"prop": "cave_shards", "dx": 0.0, "dz": 0.0, "turn": 164}],
+    [{"prop": "cave_shards", "dx": 0.0, "dz": 0.0, "turn": 142}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 167}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 102}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 28}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 310}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 238}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 101}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 196}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 210}],
+    [{"prop": "cave_shroom_glow", "dx": 0.0, "dz": 0.0, "turn": 1}],
+    [{"prop": "cave_shroom_red", "dx": 0.0, "dz": 0.0, "turn": 257}],
+    [{"prop": "cave_shroom_shelf", "dx": 0.0, "dz": 0.0, "turn": 324}],
+    [{"prop": "cave_shroom_shelf", "dx": 0.0, "dz": 0.0, "turn": 85}],
+    [{"prop": "cave_skull_b", "dx": 0.0, "dz": 0.0, "turn": 84}],
+    [{"prop": "cave_skull_bones", "dx": 0.0, "dz": 0.0, "turn": 114}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 89}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 325}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 236}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 216}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 192}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 248}],
+    [{"prop": "cave_stalagmite", "dx": 0.0, "dz": 0.0, "turn": 251}],
+    [{"prop": "cave_stalagmites", "dx": 0.0, "dz": 0.0, "turn": 99}],
+    [{"prop": "cave_stalagmites", "dx": 0.0, "dz": 0.0, "turn": 9}]
+  ],
+  "zone": {
+    "markerSurfaces": {"stone": "cave_stone"},
+    "kind": "wild",
+    "ranks": true,
+    "floors": {"c": "cave_floor", "s": "cave_stone", "g": "cave_gravel", "w": "cave_water", "m": "mud", "k": "black_rock", "l": "lichen_stone"},
+    "outside": {"surface": "cave_bed", "reach": 3, "barrier": null},
+    "walls": null,
+    "scatter": [
+      {
+        "type": "cliff",
+        "props": [
+          "rubble_chip",
+          "rubble_shard"
+        ],
+        "side": "foot",
+        "step": 1.3,
+        "drop": 2.5,
+        "cover": 0.6,
+        "tuck": 0.2,
+        "size": {
+          "least": 0.8,
+          "most": 1.1
+        }
+      },
+      {
+        "type": "around",
+        "props": [
+          "rubble_chip",
+          "rubble_shard"
+        ],
+        "anchors": [
+          "cave_stalagmite",
+          "cave_rock_chunk_a",
+          "cave_rock_chunk_b",
+          "cave_scree",
+          "cave_fire"
+        ],
+        "each": 10,
+        "spread": 0.8,
+        "size": {
+          "least": 0.95,
+          "most": 1.2
+        }
+      },
+      {
+        "type": "open",
+        "props": [
+          "cave_puddle_a",
+          "cave_puddle_b",
+          "cave_moss_a",
+          "cave_moss_b",
+          "cave_pebble_bed"
+        ],
+        "count": 30,
+        "clump": 4,
+        "spread": 2.6,
+        "size": {
+          "least": 0.8,
+          "most": 1.25
+        },
+        "clear": 1.4
+      },
+      {
+        "type": "open",
+        "props": [
+          "cave_chain_coil",
+          "cave_pickaxe_heads",
+          "cave_spear_down"
+        ],
+        "count": 12,
+        "clump": 1,
+        "spread": 0,
+        "size": {
+          "least": 0.9,
+          "most": 1.1
+        },
+        "clear": 1.5
+      },
+      {
+        "type": "around",
+        "props": [
+          "cave_moss_a",
+          "cave_moss_b",
+          "cave_puddle_a"
+        ],
+        "anchors": [
+          "cave_stalagmite",
+          "cave_rock_chunk_a",
+          "cave_rock_chunk_b",
+          "cave_fire"
+        ],
+        "each": 1,
+        "spread": 1.4,
+        "size": {
+          "least": 0.8,
+          "most": 1.2
+        }
+      }
+    ],
+    "packReturn": {"after": 90, "away": 30},
+    "surge": null,
+    "ambience": {"background": "#050506", "abyss": "#020203", "fogNear": 40, "fogFar": 88, "skyColor": "#5a6676", "groundColor": "#2e2620", "skyIntensity": 4.4, "keyColor": "#c4b49e", "keyIntensity": 3.4},
+    "weather": {"lightning": null, "rain": 0, "wet": 0.25, "mistWall": null},
+    "heroLight": {"strength": 15, "radius": 22, "height": 7, "falloff": 1, "rim": 0.35},
+    "terrain": {
+      "rise": 1.84, "groundStep": 0.6,
+      "cliff": "cave_rock",
+      "rough": {"reach": 1.2, "scale": 3, "calm": []},
+      "blends": [
+        {
+          "surface": "lichen_stone",
+          "scale": 8,
+          "cover": 0.24
+        },
+        {
+          "surface": "cave_water",
+          "scale": 5,
+          "cover": 0.1
+        },
+        {
+          "surface": "cave_gravel",
+          "scale": 4,
+          "cover": 0.25
+        },
+        {
+          "surface": "cave_wet_floor",
+          "scale": 6,
+          "cover": 0.22
+        },
+        {
+          "surface": "black_rock",
+          "scale": 11,
+          "cover": 0.22
+        },
+        {
+          "surface": "cave_cracked",
+          "scale": 5,
+          "cover": 0.16
+        },
+        {
+          "surface": "pale_flagstone",
+          "scale": 3,
+          "cover": 0.75,
+          "near": "/",
+          "reach": 6
+        }
+      ],
+      "cliffs": [
+        {
+          "props": [
+            "cave_rock_face_b",
+            "cave_boulder_large",
+            "cave_rock_chunk_a",
+            "cave_boulder_moss_b",
+            "cave_rock_face_a",
+            "cave_rock_chunk_a"
+          ],
+          "side": "foot",
+          "step": 2.5,
+          "drop": 2.5,
+          "cover": 0.8,
+          "tuck": 0.6,
+          "size": {
+            "least": 0.7,
+            "most": 1.2
+          }
+        },
+        {
+          "props": [
+            "cave_rock_chunk_a",
+            "cave_rock_chunk_b",
+            "cave_shards",
+            "cave_shards",
+            "cave_boulder_moss_c"
+          ],
+          "side": "rim",
+          "step": 2.6,
+          "drop": 2.5,
+          "cover": 0.7,
+          "tuck": 0.4,
+          "size": {
+            "least": 0.6,
+            "most": 1.1
+          }
+        },
+        {
+          "props": [
+            "cave_roots_dark",
+            "cave_rubble_heap",
+            "cave_roots_patch",
+            "cave_chunk_wet",
+            "cave_roots_dark",
+            "cave_debris"
+          ],
+          "side": "foot",
+          "step": 3.2,
+          "drop": 2.5,
+          "cover": 0.8,
+          "tuck": 0.9,
+          "size": {
+            "least": 0.85,
+            "most": 1.3
+          }
+        },
+        {
+          "props": [
+            "cave_plank_pile",
+            "cave_slab_pile",
+            "cave_rubble_heap",
+            "cave_shield_broken",
+            "cave_slab_pile",
+            "cave_plank_pile"
+          ],
+          "side": "foot",
+          "step": 5,
+          "drop": 2.5,
+          "cover": 0.6,
+          "tuck": 0.8,
+          "size": {
+            "least": 0.8,
+            "most": 1.1
+          }
+        }
+      ]
+    }
+  }
+}

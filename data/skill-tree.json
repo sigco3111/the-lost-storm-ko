@@ -1,0 +1,8909 @@
+[
+ {
+  "id": "shadow_veil",
+  "name": "장막",
+  "description": "회피 구르기나 그림자 걸음 후 2초 동안 장막에 가려진다. 쿼럴의 피해가 50% 증가하고 적을 1명 더 관통한다.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "wind",
+  "column": 1.21,
+  "row": 4.85,
+  "requires": [
+   "wind_1"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "use",
+    "skill": {
+     "group": "roll"
+    },
+    "effect": {
+     "type": "empower",
+     "skillMods": [
+      {
+       "skill": "quarrel",
+       "field": "damagePercent",
+       "value": 0.5
+      },
+      {
+       "skill": "quarrel",
+       "field": "pierce",
+       "value": 1
+      }
+     ],
+     "duration": 2,
+     "look": {
+      "color": "#5a2fc0",
+      "shade": 0.22
+     }
+    }
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "storm_storm_bolt",
+  "name": "폭풍 번개",
+  "description": "처음 맞은 적을 관통하는 번갯줄기.",
+  "icon": "storm_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 0.2,
+  "row": -1.59,
+  "requires": [],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "storm_bolt",
+  "weapon": "staff"
+ },
+ {
+  "id": "stormcallers_focus",
+  "name": "폭풍소환사의 집중",
+  "description": "최대 마나 +25, 초당 마나 재생 +2.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "storm",
+  "column": 0.54,
+  "row": -2.54,
+  "requires": [
+   "storm_storm_bolt"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 25
+   },
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 2
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_1",
+  "name": "정전기의 윙윙",
+  "description": "최대 마나 +10, 번개 스킬 피해 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 1.14,
+  "row": -3.63,
+  "requires": [
+   "stormcallers_focus",
+   "storm_blade_near",
+   "echo_storm_near"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ]
+ },
+ {
+  "id": "forked_bolt",
+  "name": "갈라진 번개",
+  "description": "폭풍 번개 발사체 +2, 폭풍 번개 관통 +1.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 1.95,
+  "row": -4.61,
+  "requires": [
+   "storm_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "storm_bolt",
+    "field": "projectiles",
+    "value": 2
+   },
+   {
+    "skill": "storm_bolt",
+    "field": "pierce",
+    "value": 1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_2",
+  "name": "대전된 공기",
+  "description": "번개 스킬 피해 +14%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 1.18,
+  "row": -5.63,
+  "requires": [
+   "forked_bolt"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.14
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_3",
+  "name": "넓은 하늘",
+  "description": "번개 스킬 범위 +8%.",
+  "icon": "thunder_ring",
+  "kind": "minor",
+  "path": "storm",
+  "column": 1.17,
+  "row": -6.69,
+  "requires": [
+   "storm_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_4",
+  "name": "빠른 불꽃",
+  "description": "초당 마나 재생 +0.6, 번개 스킬 재사용 시간 -4%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 2.95,
+  "row": -5.45,
+  "requires": [
+   "forked_bolt"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "cooldownPercent",
+    "value": -0.04
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_lance",
+  "name": "폭풍 창",
+  "description": "폭풍 번개가 창이 된다. 직선 위의 모든 것을 한꺼번에 치는 번갯줄기.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "storm",
+  "column": 4.13,
+  "row": -6.14,
+  "requires": [
+   "storm_4",
+   "storm_blade_mid",
+   "echo_storm_mid"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "storm_bolt",
+    "becomes": "storm_bolt_lance"
+   }
+  ]
+ },
+ {
+  "id": "storm_5",
+  "name": "밝은 아크",
+  "description": "치명타 확률 +1.5%, 번개 스킬 피해 +8%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 5.91,
+  "row": -5.42,
+  "requires": [
+   "storm_lance"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.015
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_6",
+  "name": "긴 손길",
+  "description": "번개류 스킬 사거리 +10%, 번개류 스킬 피해 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 7.66,
+  "row": -4.67,
+  "requires": [
+   "storm_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "missile",
+    "field": "rangePercent",
+    "value": 0.1
+   },
+   {
+    "group": "missile",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "standing_thunder",
+  "name": "머무는 폭풍",
+  "description": "머무는 폭풍 습득: 폭풍이 주변에 머물며 0.5초마다 가까운 모든 것을 치고, 친 적 하나하나가 그대를 치유한다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "storm",
+  "column": 9.1,
+  "row": -4.18,
+  "requires": [
+   "storm_6"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "standing_storm",
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_7",
+  "name": "정전기의 윙윙",
+  "description": "최대 마나 +10, 번개 스킬 피해 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 5.46,
+  "row": -6.64,
+  "requires": [
+   "storm_lance"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "thunder_in_the_bones",
+  "name": "뼛속의 천둥",
+  "description": "최대 마나 +15, 번개 스킬 피해 +15%, 갈래 번개 연쇄 +1.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "storm",
+  "column": 6.92,
+  "row": -6.94,
+  "requires": [
+   "storm_7"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.15
+   },
+   {
+    "skill": "forkline",
+    "field": "chains",
+    "value": 1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_8",
+  "name": "대전된 공기",
+  "description": "번개 스킬 피해 +14%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 8.48,
+  "row": -7.01,
+  "requires": [
+   "thunder_in_the_bones",
+   "storm_blade_far",
+   "echo_storm_far"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.14
+   }
+  ]
+ },
+ {
+  "id": "storm_9",
+  "name": "넓은 하늘",
+  "description": "번개 스킬 범위 +8%.",
+  "icon": "thunder_ring",
+  "kind": "minor",
+  "path": "storm",
+  "column": 8.48,
+  "row": -8.03,
+  "requires": [
+   "storm_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "rolling_thunder",
+  "name": "구르는 천둥",
+  "description": "천둥박수 범위 +35%, 천둥박수 밀쳐내기 +50%, 천둥박수 재사용 시간 -25%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "storm",
+  "column": 9.16,
+  "row": -8.7,
+  "requires": [
+   "storm_9"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "thunderclap",
+    "field": "areaPercent",
+    "value": 0.35
+   },
+   {
+    "skill": "thunderclap",
+    "field": "knockbackPercent",
+    "value": 0.5
+   },
+   {
+    "skill": "thunderclap",
+    "field": "cooldownPercent",
+    "value": -0.25
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_10",
+  "name": "빠른 불꽃",
+  "description": "초당 마나 재생 +0.6, 번개 스킬 재사용 시간 -4%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 10.16,
+  "row": -5.75,
+  "requires": [
+   "storm_8"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "cooldownPercent",
+    "value": -0.04
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_11",
+  "name": "밝은 아크",
+  "description": "치명타 확률 +1.5%, 번개 스킬 피해 +8%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 11.82,
+  "row": -4.46,
+  "requires": [
+   "storm_10"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.015
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_12",
+  "name": "긴 손길",
+  "description": "번개류 스킬 사거리 +10%, 번개류 스킬 피해 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 10.38,
+  "row": -6.78,
+  "requires": [
+   "storm_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "missile",
+    "field": "rangePercent",
+    "value": 0.1
+   },
+   {
+    "group": "missile",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_13",
+  "name": "정전기의 윙윙",
+  "description": "최대 마나 +10, 번개 스킬 피해 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 12.05,
+  "row": -6.31,
+  "requires": [
+   "storm_12"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "eye_of_the_storm",
+  "name": "폭풍의 눈",
+  "description": "최대 생명력 -25%, 번개 스킬 피해 +35%, 번개 스킬 범위 +15%.",
+  "icon": "eye_of_storm",
+  "kind": "keystone",
+  "path": "storm",
+  "column": 18.7,
+  "row": -9.81,
+  "requires": [
+   "storm_25"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "percent",
+    "value": -0.25
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.35
+   },
+   {
+    "group": "lightning",
+    "field": "areaPercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_gate",
+  "name": "모여드는 어둠",
+  "description": "최대 마나 +10, 번개 스킬 피해 +6%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 19.99,
+  "row": -15.34,
+  "requires": [
+   "storm_25"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "squall_line_1",
+  "name": "가까운 날씨",
+  "description": "범위 스킬 범위 +8%.",
+  "icon": "thunder_ring",
+  "kind": "minor",
+  "path": "storm",
+  "column": 20.32,
+  "row": -17.17,
+  "requires": [
+   "storm_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_2",
+  "name": "젖은 바람",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 21.09,
+  "row": -18.11,
+  "requires": [
+   "squall_line_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_low_cloud",
+  "name": "낮은 구름",
+  "description": "머무는 폭풍 지속시간 +25%, 머무는 폭풍 범위 +15%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "storm",
+  "column": 21.88,
+  "row": -19.03,
+  "requires": [
+   "squall_line_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "standing_storm",
+    "field": "durationPercent",
+    "value": 0.25
+   },
+   {
+    "skill": "standing_storm",
+    "field": "areaPercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_3",
+  "name": "가까운 날씨",
+  "description": "범위 스킬 범위 +8%.",
+  "icon": "thunder_ring",
+  "kind": "minor",
+  "path": "storm",
+  "column": 22.7,
+  "row": -19.92,
+  "requires": [
+   "squall_line_low_cloud"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_4",
+  "name": "젖은 바람",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 23.54,
+  "row": -20.79,
+  "requires": [
+   "squall_line_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_rain_on_the_wind",
+  "name": "바람에 실린 비",
+  "description": "범위 스킬 피해 +15%, 범위 스킬 지속시간 +15%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "storm",
+  "column": 24.4,
+  "row": -21.62,
+  "requires": [
+   "squall_line_4"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "damagePercent",
+    "value": 0.15
+   },
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_5",
+  "name": "가까운 날씨",
+  "description": "범위 스킬 범위 +8%.",
+  "icon": "thunder_ring",
+  "kind": "minor",
+  "path": "storm",
+  "column": 25.54,
+  "row": -22.13,
+  "requires": [
+   "squall_line_rain_on_the_wind"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_6",
+  "name": "젖은 바람",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 26.9,
+  "row": -22.39,
+  "requires": [
+   "squall_line_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_walking_storm",
+  "name": "걷는 폭풍",
+  "description": "번개 스킬을 쓸 때마다 그대와 함께 걷는 머무는 폭풍이 일어난다(4초에 최대 한 번). 최대 마나 -20%.",
+  "icon": "eye_of_storm",
+  "kind": "keystone",
+  "path": "storm",
+  "column": 28.27,
+  "row": -22.61,
+  "requires": [
+   "squall_line_6"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "percent",
+    "value": -0.2
+   }
+  ],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "use",
+    "skill": {
+     "group": "lightning"
+    },
+    "cooldown": 4,
+    "effect": {
+     "type": "cast",
+     "skill": "standing_storm",
+     "at": "caster"
+    }
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_7",
+  "name": "젖은 바람",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "lightning",
+  "kind": "minor",
+  "path": "storm",
+  "column": 23.54,
+  "row": -22.98,
+  "requires": [
+   "squall_line_rain_on_the_wind"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "squall_line_mending_rain",
+  "name": "치유의 비",
+  "description": "머무는 폭풍이 친 적 하나당 생명력을 2 더 치유한다.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "storm",
+  "column": 24.0,
+  "row": -24.08,
+  "requires": [
+   "squall_line_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "standing_storm",
+    "field": "lifeOnHit",
+    "value": 2
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "squall_line"
+ },
+ {
+  "id": "forked_sky_1",
+  "name": "갈라진 공기",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 21.37,
+  "row": -15.84,
+  "requires": [
+   "storm_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_2",
+  "name": "긴 아크",
+  "description": "갈래 번개 범위 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 22.57,
+  "row": -16.23,
+  "requires": [
+   "forked_sky_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "areaPercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_forking_path",
+  "name": "갈라지는 길",
+  "description": "갈래 번개 연쇄 +1, 갈래 번개 피해 +15%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 23.79,
+  "row": -16.59,
+  "requires": [
+   "forked_sky_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "chains",
+    "value": 1
+   },
+   {
+    "skill": "forkline",
+    "field": "damagePercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_3",
+  "name": "갈라진 공기",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 25.02,
+  "row": -16.91,
+  "requires": [
+   "forked_sky_forking_path"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_4",
+  "name": "긴 아크",
+  "description": "갈래 번개 범위 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 26.26,
+  "row": -17.21,
+  "requires": [
+   "forked_sky_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "areaPercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_split_bolt",
+  "name": "분열 번개",
+  "description": "폭풍 번개 발사체 +1, 번개 스킬 피해 +10%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 27.52,
+  "row": -17.47,
+  "requires": [
+   "forked_sky_4"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "storm_bolt",
+    "field": "projectiles",
+    "value": 1
+   },
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_5",
+  "name": "갈라진 공기",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 28.79,
+  "row": -17.7,
+  "requires": [
+   "forked_sky_split_bolt"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_6",
+  "name": "긴 아크",
+  "description": "갈래 번개 범위 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 30.08,
+  "row": -17.9,
+  "requires": [
+   "forked_sky_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "areaPercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_branching_sky",
+  "name": "가지 치는 하늘",
+  "description": "번개 스킬로 처치한 적마다 쓰러진 자리에서 갈래 번개가 튀어 나온다(0.5초에 최대 한 번). 갈래 번개 연쇄 +2, 번개 스킬 범위 -15%.",
+  "icon": "forked_bolt",
+  "kind": "keystone",
+  "path": "storm",
+  "column": 31.37,
+  "row": -18.07,
+  "requires": [
+   "forked_sky_6"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "chains",
+    "value": 2
+   },
+   {
+    "group": "lightning",
+    "field": "areaPercent",
+    "value": -0.15
+   }
+  ],
+  "triggers": [
+   {
+    "on": "kill",
+    "skill": {
+     "group": "lightning"
+    },
+    "cooldown": 0.5,
+    "effect": {
+     "type": "cast",
+     "skill": "forkline",
+     "at": "target"
+    }
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_7",
+  "name": "갈라진 공기",
+  "description": "번개 스킬 피해 +8%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "storm",
+  "column": 28.73,
+  "row": -16.03,
+  "requires": [
+   "forked_sky_split_bolt"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "forked_sky_long_jump",
+  "name": "긴 도약",
+  "description": "갈래 번개 범위 +25%, 번개 스킬 마나 소모 -10%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 30.41,
+  "row": -15.2,
+  "requires": [
+   "forked_sky_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "areaPercent",
+    "value": 0.25
+   },
+   {
+    "group": "lightning",
+    "field": "manaCostPercent",
+    "value": -0.1
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "forked_sky"
+ },
+ {
+  "id": "static_front_1",
+  "name": "대전된 구름",
+  "description": "최대 마나 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 22.34,
+  "row": -14.44,
+  "requires": [
+   "storm_gate"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_2",
+  "name": "이온화",
+  "description": "초당 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 23.89,
+  "row": -14.22,
+  "requires": [
+   "static_front_1"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_pent_charge",
+  "name": "가둔 전하",
+  "description": "정전기 낙인 피해 +30%, 낙인 폭발 피해 +20%.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "storm",
+  "column": 25.42,
+  "row": -13.95,
+  "requires": [
+   "static_front_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "static_brand",
+    "field": "damagePercent",
+    "value": 0.3
+   },
+   {
+    "skill": "static_brand_burst",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_3",
+  "name": "대전된 구름",
+  "description": "최대 마나 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 26.94,
+  "row": -13.64,
+  "requires": [
+   "static_front_pent_charge"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_4",
+  "name": "이온화",
+  "description": "초당 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 28.45,
+  "row": -13.28,
+  "requires": [
+   "static_front_3"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_pressure",
+  "name": "압력",
+  "description": "최대 마나 +25, 초당 마나 재생 +2.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "storm",
+  "column": 29.95,
+  "row": -12.88,
+  "requires": [
+   "static_front_4"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 25
+   },
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 2
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_5",
+  "name": "대전된 구름",
+  "description": "최대 마나 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 31.28,
+  "row": -12.81,
+  "requires": [
+   "static_front_pressure"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_6",
+  "name": "이온화",
+  "description": "초당 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 32.51,
+  "row": -12.97,
+  "requires": [
+   "static_front_5"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_lightning_rod",
+  "name": "피뢰침",
+  "description": "적이 그대를 치면 품고 있던 전하가 낙인 폭발로 주변에 터진다(1.2초에 최대 한 번). 최대 마나 +30, 방어력 -20%.",
+  "icon": "lightning",
+  "kind": "keystone",
+  "path": "storm",
+  "column": 33.74,
+  "row": -13.11,
+  "requires": [
+   "static_front_6"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 30
+   },
+   {
+    "stat": "armour",
+    "op": "percent",
+    "value": -0.2
+   }
+  ],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "struck",
+    "cooldown": 1.2,
+    "effect": {
+     "type": "cast",
+     "skill": "static_brand_burst",
+     "at": "caster"
+    }
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_7",
+  "name": "대전된 구름",
+  "description": "최대 마나 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 30.9,
+  "row": -11.31,
+  "requires": [
+   "static_front_pressure"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "static_front_thin_air",
+  "name": "옅은 공기",
+  "description": "번개 스킬 마나 소모 -15%.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "storm",
+  "column": 32.37,
+  "row": -10.39,
+  "requires": [
+   "static_front_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "manaCostPercent",
+    "value": -0.15
+   }
+  ],
+  "weapon": "staff",
+  "specialty": "static_front"
+ },
+ {
+  "id": "blade_thunderhead",
+  "name": "뇌운",
+  "description": "길게 눌러 모으고, 놓아서 친다. 오래 모을수록 더 세고 넓게 떨어진다.",
+  "icon": "thunderhead",
+  "kind": "notable",
+  "path": "blade",
+  "column": 1.55,
+  "row": -0.31,
+  "requires": [],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "thunderhead",
+  "weapon": "blade"
+ },
+ {
+  "id": "heavy_hands",
+  "name": "무거운 손",
+  "description": "피해 +20%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "blade",
+  "column": 2.57,
+  "row": -0.3,
+  "requires": [
+   "blade_thunderhead"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.2
+   }
+  ],
+  "skillMods": [],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_1",
+  "name": "날카로운 날",
+  "description": "피해 +6%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 3.85,
+  "row": -0.06,
+  "requires": [
+   "heavy_hands",
+   "storm_blade_near",
+   "blade_wind_near"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.06
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "whetstone",
+  "name": "숫돌",
+  "description": "피해 +8%, 치명타 확률 +6%.",
+  "icon": "blade",
+  "kind": "notable",
+  "path": "blade",
+  "column": 4.96,
+  "row": 0.46,
+  "requires": [
+   "blade_1"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_2",
+  "name": "매서운 눈",
+  "description": "치명타 확률 +2.5%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 5.73,
+  "row": -0.66,
+  "requires": [
+   "whetstone"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.025
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_3",
+  "name": "무게추 손잡이",
+  "description": "최소 피해 +1, 최대 피해 +1, 무기 스킬 피해 +4%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "blade",
+  "column": 6.76,
+  "row": -0.97,
+  "requires": [
+   "blade_2"
+  ],
+  "statMods": [
+   {
+    "stat": "damageMin",
+    "op": "add",
+    "value": 1
+   },
+   {
+    "stat": "damageMax",
+    "op": "add",
+    "value": 1
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_4",
+  "name": "끝까지 휘두르기",
+  "description": "무기 스킬 밀쳐내기 +12%, 무기 스킬 비틀거림 +10%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 6.06,
+  "row": 1.08,
+  "requires": [
+   "whetstone"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.12
+   },
+   {
+    "group": "weapon",
+    "field": "staggerPercent",
+    "value": 0.1
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "whirling_cleave",
+  "name": "선회 베기",
+  "description": "휘두르기가 온몸의 회전이 된다. 주변 전부를 치지만, 더는 내리치기로 이어지지 않는다. 쇠뇌를 들면 쿼럴이 부채처럼 볼트를 흩뿌린다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "blade",
+  "column": 7.14,
+  "row": 2.03,
+  "requires": [
+   "blade_4",
+   "storm_blade_mid",
+   "blade_wind_mid"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "cleave",
+    "becomes": "cleave_whirl"
+   },
+   {
+    "skill": "quarrel",
+    "becomes": "quarrel_fan"
+   }
+  ]
+ },
+ {
+  "id": "endless_turn",
+  "name": "끝없는 회전",
+  "description": "선회 베기가 물레방아가 된다. 누르고 있는 동안 계속 회전하며 달리는 그대를 실어 나른다. 적을 칠 때마다 탄력이 붙는다. 더 빠른 회전, 더 넓은 범위, 무엇에도 쓰러지지 않는다.",
+  "icon": "blade",
+  "kind": "notable",
+  "path": "blade",
+  "column": 8.3,
+  "row": 1.55,
+  "requires": [
+   "whirling_cleave"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "cleave_whirl",
+    "becomes": "cleave_millwheel"
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "millstone",
+  "name": "맷돌",
+  "description": "물레방아 탄력 상한 +50%, 물레방아 피해의 4%가 추가로 생명력으로 돌아온다(합계 7%).",
+  "icon": "blade",
+  "kind": "notable",
+  "path": "blade",
+  "column": 9.45,
+  "row": 2.15,
+  "requires": [
+   "endless_turn"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "cleave_millwheel",
+    "field": "momentumCapPercent",
+    "value": 0.5
+   },
+   {
+    "skill": "cleave_millwheel",
+    "field": "leech",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "riptide",
+  "name": "역조",
+  "description": "회피 구르기가 역조가 된다. 더 멀리 구르고, 착지한 곳에 이안류가 남아 적들을 끌어들인다. 이동 속도 +6%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "blade",
+  "column": 10.95,
+  "row": 2.15,
+  "requires": [
+   "millstone"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "dodge_roll",
+    "becomes": "dodge_roll_riptide"
+   }
+  ],
+  "triggers": [
+   {
+    "on": "use",
+    "skill": {
+     "skill": "dodge_roll_riptide"
+    },
+    "effect": {
+     "type": "cast",
+     "skill": "riptide_wake",
+     "at": "target"
+    }
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_millrace",
+  "name": "물살",
+  "description": "물살 습득: 길 위의 모든 것을 꿰뚫는 물결을 내보내고 물레방아의 탄력을 소모한다. 오래 모을수록 더 세고 넓고 멀리 간다. 회전이 적 4명을 칠 때마다 모든 약병에 충전 1을 준다(0.5초에 최대 한 번). 물레방아 탄력 유예 +60%.",
+  "icon": "millrace",
+  "kind": "notable",
+  "path": "blade",
+  "column": 10.1,
+  "row": 3.85,
+  "requires": [
+   "riptide",
+   "unbroken_rhythm"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "cleave_millwheel",
+    "field": "momentumGracePercent",
+    "value": 0.6
+   }
+  ],
+  "unlock": "millrace",
+  "triggers": [
+   {
+    "on": "hit",
+    "skill": {
+     "group": "spin"
+    },
+    "every": 4,
+    "cooldown": 0.5,
+    "effect": {
+     "type": "flask",
+     "charges": 1
+    }
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "deep_water",
+  "name": "깊은 물",
+  "description": "물살 범위 +25%, 물살 사거리 +25%, 물살이 친 적 하나당 생명력 +2.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "blade",
+  "column": 11.4,
+  "row": 4.3,
+  "requires": [
+   "blade_millrace"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "areaPercent",
+    "value": 0.25
+   },
+   {
+    "skill": "millrace",
+    "field": "rangePercent",
+    "value": 0.25
+   },
+   {
+    "skill": "millrace",
+    "field": "lifeOnHit",
+    "value": 2
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_5",
+  "name": "잔인한 선",
+  "description": "치명타 피해 배율 +12%, 무기 스킬 피해 +4%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "blade",
+  "column": 7.01,
+  "row": 3.98,
+  "requires": [
+   "whirling_cleave"
+  ],
+  "statMods": [
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_6",
+  "name": "긴 휘두르기",
+  "description": "무기 스킬 범위 +6%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 6.84,
+  "row": 5.85,
+  "requires": [
+   "blade_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "areaPercent",
+    "value": 0.06
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "thunder_leap",
+  "name": "천둥 도약",
+  "description": "뇌운이 도약이 된다. 조준한 곳에 내려서며 폭풍이 함께 내리꽂힌다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "blade",
+  "column": 6.81,
+  "row": 7.33,
+  "requires": [
+   "blade_6"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "thunderhead",
+    "becomes": "thunderhead_leap"
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_7",
+  "name": "날카로운 날",
+  "description": "피해 +6%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 7.96,
+  "row": 3.14,
+  "requires": [
+   "whirling_cleave"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "unbroken_rhythm",
+  "name": "끊기지 않는 가락",
+  "description": "공격 속도 +10%, 무기 스킬 마나 소모 -20%.",
+  "icon": "blade",
+  "kind": "notable",
+  "path": "blade",
+  "column": 8.74,
+  "row": 4.49,
+  "requires": [
+   "blade_7"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.1
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "manaCostPercent",
+    "value": -0.2
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_8",
+  "name": "매서운 눈",
+  "description": "치명타 확률 +2.5%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 9.29,
+  "row": 5.88,
+  "requires": [
+   "unbroken_rhythm",
+   "storm_blade_far",
+   "blade_wind_far"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.025
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "blade_9",
+  "name": "무게추 손잡이",
+  "description": "최소 피해 +1, 최대 피해 +1, 무기 스킬 피해 +4%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "blade",
+  "column": 10.26,
+  "row": 5.62,
+  "requires": [
+   "blade_8"
+  ],
+  "statMods": [
+   {
+    "stat": "damageMin",
+    "op": "add",
+    "value": 1
+   },
+   {
+    "stat": "damageMax",
+    "op": "add",
+    "value": 1
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "headsman",
+  "name": "망나니",
+  "description": "치명타 피해 배율 +40%, 뇌운 피해 +25%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "blade",
+  "column": 11.09,
+  "row": 5.97,
+  "requires": [
+   "blade_9"
+  ],
+  "statMods": [
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.4
+   }
+  ],
+  "skillMods": [
+   {
+    "skill": "thunderhead",
+    "field": "damagePercent",
+    "value": 0.25
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_10",
+  "name": "끝까지 휘두르기",
+  "description": "무기 스킬 밀쳐내기 +12%, 무기 스킬 비틀거림 +10%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 8.58,
+  "row": 7.94,
+  "requires": [
+   "blade_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.12
+   },
+   {
+    "group": "weapon",
+    "field": "staggerPercent",
+    "value": 0.1
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_11",
+  "name": "잔인한 선",
+  "description": "치명타 피해 배율 +12%, 무기 스킬 피해 +4%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "blade",
+  "column": 7.86,
+  "row": 9.94,
+  "requires": [
+   "blade_10"
+  ],
+  "statMods": [
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_12",
+  "name": "긴 휘두르기",
+  "description": "무기 스킬 범위 +6%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 9.65,
+  "row": 7.72,
+  "requires": [
+   "blade_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "areaPercent",
+    "value": 0.06
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_13",
+  "name": "날카로운 날",
+  "description": "피해 +6%, 무기 스킬 피해 +4%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 9.73,
+  "row": 9.53,
+  "requires": [
+   "blade_12"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "edge_without_rest",
+  "name": "쉬지 않는 날",
+  "description": "치명타 피해 배율 +40%, 최대 생명력 -30%, 무기 스킬 피해 +40%.",
+  "icon": "blade",
+  "kind": "keystone",
+  "path": "blade",
+  "column": 9.48,
+  "row": 11.59,
+  "requires": [
+   "blade_13"
+  ],
+  "statMods": [
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.4
+   },
+   {
+    "stat": "maxLife",
+    "op": "percent",
+    "value": -0.3
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.4
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "blade_gate",
+  "name": "물때의 변화",
+  "description": "최대 생명력 +8, 기본 공격 피해 +6%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 14.02,
+  "row": 11.76,
+  "requires": [
+   "blade_13"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 8
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "maelstrom_1",
+  "name": "소용돌이",
+  "description": "회전 스킬 범위 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 15.93,
+  "row": 11.58,
+  "requires": [
+   "blade_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_2",
+  "name": "암류",
+  "description": "회전 스킬 피해 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 17.08,
+  "row": 12.05,
+  "requires": [
+   "maelstrom_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_gyre",
+  "name": "큰 소용돌이",
+  "description": "회전 스킬 피해 +20%, 물레방아 탄력 상한 +20%.",
+  "icon": "blade",
+  "kind": "notable",
+  "path": "blade",
+  "column": 18.2,
+  "row": 12.54,
+  "requires": [
+   "maelstrom_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "damagePercent",
+    "value": 0.2
+   },
+   {
+    "skill": "cleave_millwheel",
+    "field": "momentumCapPercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_3",
+  "name": "소용돌이",
+  "description": "회전 스킬 범위 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 19.3,
+  "row": 13.06,
+  "requires": [
+   "maelstrom_gyre"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_4",
+  "name": "암류",
+  "description": "회전 스킬 피해 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 20.37,
+  "row": 13.61,
+  "requires": [
+   "maelstrom_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_sucking_water",
+  "name": "빨아들이는 물",
+  "description": "이안류 범위 +25%, 이안류 재사용 시간 -20%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "blade",
+  "column": 21.43,
+  "row": 14.18,
+  "requires": [
+   "maelstrom_4"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "downdraught",
+    "field": "areaPercent",
+    "value": 0.25
+   },
+   {
+    "skill": "downdraught",
+    "field": "cooldownPercent",
+    "value": -0.2
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_5",
+  "name": "소용돌이",
+  "description": "회전 스킬 범위 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 22.25,
+  "row": 15.12,
+  "requires": [
+   "maelstrom_sucking_water"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_6",
+  "name": "암류",
+  "description": "회전 스킬 피해 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 22.87,
+  "row": 16.33,
+  "requires": [
+   "maelstrom_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_maelstrom",
+  "name": "대소용돌이",
+  "description": "회전이 적들을 밀쳐내는 대신 끌어당기고, 여섯 번째로 치는 적마다 주변에 이안류가 열린다(1.5초에 최대 한 번). 회전 스킬 피해 -15%.",
+  "icon": "gust",
+  "kind": "keystone",
+  "path": "blade",
+  "column": 23.46,
+  "row": 17.55,
+  "requires": [
+   "maelstrom_6"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "pull",
+    "value": 4
+   },
+   {
+    "group": "spin",
+    "field": "damagePercent",
+    "value": -0.15
+   }
+  ],
+  "triggers": [
+   {
+    "on": "hit",
+    "skill": {
+     "group": "spin"
+    },
+    "every": 6,
+    "cooldown": 1.5,
+    "effect": {
+     "type": "cast",
+     "skill": "riptide_wake",
+     "at": "caster"
+    }
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_7",
+  "name": "암류",
+  "description": "회전 스킬 피해 +8%.",
+  "icon": "blade",
+  "kind": "minor",
+  "path": "blade",
+  "column": 22.52,
+  "row": 12.99,
+  "requires": [
+   "maelstrom_sucking_water"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spin",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "maelstrom_still_centre",
+  "name": "고요한 중심",
+  "description": "물레방아 탄력 유예 +30%, 이동 속도 +6%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "blade",
+  "column": 23.72,
+  "row": 13.11,
+  "requires": [
+   "maelstrom_7"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [
+   {
+    "skill": "cleave_millwheel",
+    "field": "momentumGracePercent",
+    "value": 0.3
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "maelstrom"
+ },
+ {
+  "id": "spring_tide_1",
+  "name": "짠물",
+  "description": "기본 공격이 친 적 하나당 생명력 +1.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 14.88,
+  "row": 12.91,
+  "requires": [
+   "blade_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "lifeOnHit",
+    "value": 1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_2",
+  "name": "넘침",
+  "description": "최대 생명력 +12.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "blade",
+  "column": 15.58,
+  "row": 13.93,
+  "requires": [
+   "spring_tide_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_flood_water",
+  "name": "범람하는 물",
+  "description": "기본 공격 피해의 2%가 생명력으로 돌아온다. 최대 생명력 +20.",
+  "icon": "tempered_body",
+  "kind": "notable",
+  "path": "blade",
+  "column": 16.26,
+  "row": 14.96,
+  "requires": [
+   "spring_tide_2"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 20
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "leech",
+    "value": 0.02
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_3",
+  "name": "짠물",
+  "description": "기본 공격이 친 적 하나당 생명력 +1.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 16.92,
+  "row": 16.02,
+  "requires": [
+   "spring_tide_flood_water"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "lifeOnHit",
+    "value": 1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_4",
+  "name": "넘침",
+  "description": "최대 생명력 +12.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "blade",
+  "column": 17.55,
+  "row": 17.1,
+  "requires": [
+   "spring_tide_3"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_slack_water",
+  "name": "고인 물",
+  "description": "초당 생명력 재생 +2, 무기 스킬 피해 +10%.",
+  "icon": "tempered_body",
+  "kind": "notable",
+  "path": "blade",
+  "column": 18.14,
+  "row": 18.2,
+  "requires": [
+   "spring_tide_4"
+  ],
+  "statMods": [
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 2
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_5",
+  "name": "짠물",
+  "description": "기본 공격이 친 적 하나당 생명력 +1.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 18.72,
+  "row": 19.32,
+  "requires": [
+   "spring_tide_slack_water"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "lifeOnHit",
+    "value": 1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_6",
+  "name": "넘침",
+  "description": "최대 생명력 +12.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "blade",
+  "column": 19.26,
+  "row": 20.46,
+  "requires": [
+   "spring_tide_5"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_high_water",
+  "name": "만조",
+  "description": "처치한 적마다 모든 약병에 충전 1을 주고(2초에 최대 한 번), 4초 동안 초당 생명력 재생 +3(최대 5회 중첩). 최대 생명력 -20%.",
+  "icon": "tempered_body",
+  "kind": "keystone",
+  "path": "blade",
+  "column": 19.77,
+  "row": 21.62,
+  "requires": [
+   "spring_tide_6"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "percent",
+    "value": -0.2
+   }
+  ],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "kill",
+    "cooldown": 2,
+    "effect": {
+     "type": "flask",
+     "charges": 1
+    }
+   },
+   {
+    "on": "kill",
+    "effect": {
+     "type": "buff",
+     "stat": "lifeRegen",
+     "op": "add",
+     "value": 3,
+     "duration": 4,
+     "stacks": 5
+    }
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_7",
+  "name": "넘침",
+  "description": "최대 생명력 +12.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "blade",
+  "column": 17.01,
+  "row": 19.67,
+  "requires": [
+   "spring_tide_slack_water"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "spring_tide_rising_water",
+  "name": "차오르는 물",
+  "description": "물살이 친 적 하나당 생명력 +3, 물살 피해 +20%.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "blade",
+  "column": 16.62,
+  "row": 21.41,
+  "requires": [
+   "spring_tide_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "lifeOnHit",
+    "value": 3
+   },
+   {
+    "skill": "millrace",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "spring_tide"
+ },
+ {
+  "id": "tidal_bore_1",
+  "name": "흐르는 물",
+  "description": "이동 스킬 재사용 시간 -5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "blade",
+  "column": 13.71,
+  "row": 14.15,
+  "requires": [
+   "blade_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.05
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_2",
+  "name": "범람의 손길",
+  "description": "물살 사거리 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 13.89,
+  "row": 15.62,
+  "requires": [
+   "tidal_bore_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "rangePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_swell",
+  "name": "너울",
+  "description": "물살 사거리 +30%, 물살 피해 +20%.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "blade",
+  "column": 14.01,
+  "row": 17.09,
+  "requires": [
+   "tidal_bore_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "rangePercent",
+    "value": 0.3
+   },
+   {
+    "skill": "millrace",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_3",
+  "name": "흐르는 물",
+  "description": "이동 스킬 재사용 시간 -5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "blade",
+  "column": 14.09,
+  "row": 18.55,
+  "requires": [
+   "tidal_bore_swell"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.05
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_4",
+  "name": "범람의 손길",
+  "description": "물살 사거리 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 14.13,
+  "row": 20.02,
+  "requires": [
+   "tidal_bore_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "rangePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_surge_line",
+  "name": "밀물 선",
+  "description": "이동 속도 +8%, 무기 스킬 피해 +10%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "blade",
+  "column": 14.12,
+  "row": 21.48,
+  "requires": [
+   "tidal_bore_4"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.08
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_5",
+  "name": "흐르는 물",
+  "description": "이동 스킬 재사용 시간 -5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "blade",
+  "column": 14.4,
+  "row": 22.72,
+  "requires": [
+   "tidal_bore_surge_line"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.05
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_6",
+  "name": "범람의 손길",
+  "description": "물살 사거리 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 14.91,
+  "row": 23.82,
+  "requires": [
+   "tidal_bore_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "rangePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_the_bore",
+  "name": "물보라",
+  "description": "구를 때마다 앞으로 물살의 물결이 나간다(1.5초에 최대 한 번). 물살 피해 -25%.",
+  "icon": "gust",
+  "kind": "keystone",
+  "path": "blade",
+  "column": 15.39,
+  "row": 24.93,
+  "requires": [
+   "tidal_bore_6"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "millrace",
+    "field": "damagePercent",
+    "value": -0.25
+   }
+  ],
+  "triggers": [
+   {
+    "on": "use",
+    "skill": {
+     "group": "roll"
+    },
+    "cooldown": 1.5,
+    "effect": {
+     "type": "cast",
+     "skill": "millrace",
+     "at": "caster"
+    }
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_7",
+  "name": "흐르는 물",
+  "description": "이동 스킬 재사용 시간 -5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "blade",
+  "column": 12.76,
+  "row": 22.65,
+  "requires": [
+   "tidal_bore_surge_line"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.05
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "tidal_bore_crest",
+  "name": "물마루",
+  "description": "이안류 소용돌이 피해 +30%, 이안류 소용돌이 범위 +20%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "blade",
+  "column": 12.23,
+  "row": 24.18,
+  "requires": [
+   "tidal_bore_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "riptide_wake",
+    "field": "damagePercent",
+    "value": 0.3
+   },
+   {
+    "skill": "riptide_wake",
+    "field": "areaPercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "blade",
+  "specialty": "tidal_bore"
+ },
+ {
+  "id": "windborne",
+  "name": "밤에 태어난 자",
+  "description": "이동 속도 +8%, 최대 생명력 +20, 회피 구르기 재사용 시간 -20%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "wind",
+  "column": 1.0,
+  "row": 2.38,
+  "requires": [
+   "wind_ghost_wave"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.08
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 20
+   }
+  ],
+  "skillMods": [
+   {
+    "skill": "dodge_roll",
+    "field": "cooldownPercent",
+    "value": -0.2
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_1",
+  "name": "가벼운 발",
+  "description": "이동 속도 +3%, 최대 생명력 +8.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": 1.14,
+  "row": 3.63,
+  "requires": [
+   "windborne",
+   "blade_wind_near",
+   "wind_stone_near"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.03
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 8
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "drag_of_the_deep",
+  "name": "심해의 끌림",
+  "description": "이안류 범위 +25%, 이안류 비틀거림 +30%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "blade",
+  "column": 10.6,
+  "row": -0.6,
+  "requires": [
+   "wind_downdraught"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "downdraught",
+    "field": "areaPercent",
+    "value": 0.25
+   },
+   {
+    "skill": "downdraught",
+    "field": "staggerPercent",
+    "value": 0.3
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "wind_downdraught",
+  "name": "이안류",
+  "description": "이안류 습득: 조준한 곳의 소용돌이가 적들을 끌어모은 뒤 밑으로 끌어당긴다.",
+  "icon": "downdraught",
+  "kind": "notable",
+  "path": "blade",
+  "column": 10.1,
+  "row": 0.8,
+  "requires": [
+   "millstone"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "downdraught",
+  "weapon": "blade"
+ },
+ {
+  "id": "wind_2",
+  "name": "두 번째 숨",
+  "description": "이동 스킬 재사용 시간 -6%, 피해 +4%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": 2.4,
+  "row": 5.24,
+  "requires": [
+   "shadow_veil"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.06
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_3",
+  "name": "먼 걸음",
+  "description": "최대 생명력 +12, 이동 스킬 사거리 +8%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": 3.04,
+  "row": 6.08,
+  "requires": [
+   "wind_2"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "rangePercent",
+    "value": 0.08
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_4",
+  "name": "일격 흘리기",
+  "description": "방어력 +6, 이동 속도 +2%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": 0.86,
+  "row": 6.15,
+  "requires": [
+   "shadow_veil"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.02
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "slip_through",
+  "name": "그림자 걸음",
+  "description": "회피 구르기가 그림자를 가로지르는 걸음이 된다. 조준한 곳에 닿으며 그 자리의 것들을 밀쳐낸다. 구르기처럼 장막에 가려진다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "wind",
+  "column": 0.26,
+  "row": 7.44,
+  "requires": [
+   "wind_4",
+   "blade_wind_mid",
+   "wind_stone_mid"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "dodge_roll",
+    "becomes": "dodge_roll_slip"
+   }
+  ]
+ },
+ {
+  "id": "wind_5",
+  "name": "편한 숨",
+  "description": "초당 마나 재생 +0.5, 이동 스킬 마나 소모 -8%, 쇠뇌 사격 피해 +5%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -1.53,
+  "row": 7.83,
+  "requires": [
+   "slip_through"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.5
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "manaCostPercent",
+    "value": -0.08
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_6",
+  "name": "빠른 뽑기",
+  "description": "공격 속도 +4%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -3.53,
+  "row": 8.28,
+  "requires": [
+   "wind_5"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "updraught",
+  "name": "쇄파",
+  "description": "이안류가 쇄파가 된다. 파도가 주변에서 터져 모든 것을 날려 버린다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "blade",
+  "column": 11.75,
+  "row": -1.3,
+  "requires": [
+   "drag_of_the_deep"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "downdraught",
+    "becomes": "downdraught_updraught"
+   }
+  ],
+  "weapon": "blade"
+ },
+ {
+  "id": "wind_7",
+  "name": "가벼운 발",
+  "description": "이동 속도 +3%, 피해 +4%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -0.43,
+  "row": 8.56,
+  "requires": [
+   "slip_through"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.03
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "through_the_mist",
+  "name": "깊은 그림자",
+  "description": "유령 파도 피해 +40%, 유령 파도 재사용 시간 -20%, 방어력 +10, 쇠뇌 사격 피해 +20%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "wind",
+  "column": -1.49,
+  "row": 9.69,
+  "requires": [
+   "wind_7"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [
+   {
+    "skill": "ghost_wave",
+    "field": "damagePercent",
+    "value": 0.4
+   },
+   {
+    "skill": "ghost_wave",
+    "field": "cooldownPercent",
+    "value": -0.2
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_8",
+  "name": "두 번째 숨",
+  "description": "이동 스킬 재사용 시간 -6%, 피해 +4%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -2.75,
+  "row": 10.67,
+  "requires": [
+   "through_the_mist",
+   "blade_wind_far",
+   "wind_stone_far"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.06
+   }
+  ]
+ },
+ {
+  "id": "wind_9",
+  "name": "먼 걸음",
+  "description": "최대 생명력 +12, 이동 스킬 사거리 +8%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -2.12,
+  "row": 11.49,
+  "requires": [
+   "wind_8"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "rangePercent",
+    "value": 0.08
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "racing_cloud",
+  "name": "달리는 구름",
+  "description": "공격 속도 +8%, 이동 속도 +6%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "wind",
+  "column": -2.36,
+  "row": 12.46,
+  "requires": [
+   "wind_9"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "long_wake",
+  "name": "긴 자취",
+  "description": "물레방아가 마지막 적중 후 탄력을 60% 더 오래 유지한다. 이동 속도 +6%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "wind",
+  "column": -1.25,
+  "row": 13.15,
+  "requires": [
+   "racing_cloud"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [
+   {
+    "skill": "cleave_millwheel",
+    "field": "momentumGracePercent",
+    "value": 0.6
+   }
+  ]
+ },
+ {
+  "id": "wind_10",
+  "name": "일격 흘리기",
+  "description": "방어력 +6, 이동 속도 +2%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -4.78,
+  "row": 10.63,
+  "requires": [
+   "wind_8"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.02
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_11",
+  "name": "편한 숨",
+  "description": "초당 마나 재생 +0.5, 이동 스킬 마나 소모 -8%, 쇠뇌 사격 피해 +5%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -6.98,
+  "row": 10.53,
+  "requires": [
+   "wind_10"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.5
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "manaCostPercent",
+    "value": -0.08
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_12",
+  "name": "빠른 뽑기",
+  "description": "공격 속도 +4%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -4.38,
+  "row": 11.58,
+  "requires": [
+   "wind_8"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_13",
+  "name": "가벼운 발",
+  "description": "이동 속도 +3%, 피해 +4%, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -6.05,
+  "row": 12.19,
+  "requires": [
+   "wind_12"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.03
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "never_still",
+  "name": "멈추지 않는 자",
+  "description": "공격 속도 +20%, 이동 속도 +15%, 방어력 -40%, 이동 스킬 재사용 시간 -30%, 쇠뇌 사격 피해 +50%.",
+  "icon": "gust",
+  "kind": "keystone",
+  "path": "wind",
+  "column": -8.07,
+  "row": 12.6,
+  "requires": [
+   "wind_13"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.2
+   },
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.15
+   },
+   {
+    "stat": "armour",
+    "op": "percent",
+    "value": -0.4
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "motion",
+    "field": "cooldownPercent",
+    "value": -0.3
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.5
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "stone_thunderclap",
+  "name": "천둥박수",
+  "description": "땅을 내리쳐 주변의 모든 것을 밀쳐낸다.",
+  "icon": "thunderclap",
+  "kind": "notable",
+  "path": "stone",
+  "column": -1.06,
+  "row": 1.18,
+  "requires": [],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "thunderclap",
+  "weapon": "heavy"
+ },
+ {
+  "id": "tempered_body",
+  "name": "단련된 몸",
+  "description": "최대 생명력 +30, 초당 생명력 재생 +1.",
+  "icon": "tempered_body",
+  "kind": "notable",
+  "path": "stone",
+  "column": -1.87,
+  "row": 1.77,
+  "requires": [
+   "stone_thunderclap"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 30
+   },
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 1
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_1",
+  "name": "두꺼운 가죽",
+  "description": "방어력 +12, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -3.0,
+  "row": 2.33,
+  "requires": [
+   "tempered_body",
+   "wind_stone_near",
+   "stone_echo_near"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ]
+ },
+ {
+  "id": "bedrock",
+  "name": "반석",
+  "description": "방어력 +30, 최대 생명력 +20, 피해 +10%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "stone",
+  "column": -4.32,
+  "row": 2.52,
+  "requires": [
+   "stone_1"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 30
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 20
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.1
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_held_breath",
+  "name": "멈춘 숨",
+  "description": "몇 박자 동안 주변의 모든 것이 기어가듯 움직인다. 그대는 아니다.",
+  "icon": "held_breath",
+  "kind": "notable",
+  "path": "stone",
+  "column": -5.85,
+  "row": 0.79,
+  "requires": [
+   "bedrock"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "held_breath",
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_2",
+  "name": "깊은 뿌리",
+  "description": "최대 생명력 +15, 무기·화염 스킬 피해 +3%.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -4.2,
+  "row": 3.87,
+  "requires": [
+   "bedrock"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_3",
+  "name": "느린 치유",
+  "description": "초당 생명력 재생 +0.5, 무기·화염 스킬 피해 +3%.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -4.91,
+  "row": 4.71,
+  "requires": [
+   "stone_2"
+  ],
+  "statMods": [
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 0.5
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_4",
+  "name": "거친 착지",
+  "description": "범위 스킬 비틀거림 +12%, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -5.63,
+  "row": 2.63,
+  "requires": [
+   "bedrock"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "staggerPercent",
+    "value": 0.12
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "gathered_clap",
+  "name": "모은 박수",
+  "description": "천둥박수를 모을 수 있다. 오래 모을수록 고리가 넓고 강해진다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "stone",
+  "column": -7.01,
+  "row": 2.51,
+  "requires": [
+   "stone_4",
+   "wind_stone_mid",
+   "stone_echo_mid"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "thunderclap",
+    "becomes": "thunderclap_gathered"
+   }
+  ]
+ },
+ {
+  "id": "stone_5",
+  "name": "돌의 무게",
+  "description": "최대 생명력 +8, 방어력 +6, 피해 +4%, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -7.96,
+  "row": 0.92,
+  "requires": [
+   "gathered_clap"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 8
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_6",
+  "name": "넓은 어깨",
+  "description": "무기 스킬 밀쳐내기 +12%, 무기·화염 스킬 피해 +3%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -8.91,
+  "row": -0.74,
+  "requires": [
+   "stone_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.12
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "heaving_cleave",
+  "name": "들어 올려 베기",
+  "description": "휘두르기를 모을 수 있다. 놓으면 단번의 무거운 휩쓸기가 적들을 멀리 날린다. 쇠뇌를 들면 쿼럴을 모았다가 무거운 볼트 한 발로 쏜다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "stone",
+  "column": -9.8,
+  "row": -1.94,
+  "requires": [
+   "stone_6"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "cleave",
+    "becomes": "cleave_heave"
+   },
+   {
+    "skill": "quarrel",
+    "becomes": "quarrel_heave"
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_7",
+  "name": "두꺼운 가죽",
+  "description": "방어력 +12, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -8.31,
+  "row": 2.12,
+  "requires": [
+   "gathered_clap"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "mountain_falls",
+  "name": "산이 무너진다",
+  "description": "천둥박수 비틀거림 +40%, 천둥박수 피해 +45%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "stone",
+  "column": -9.69,
+  "row": 1.51,
+  "requires": [
+   "stone_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "thunderclap",
+    "field": "staggerPercent",
+    "value": 0.4
+   },
+   {
+    "skill": "thunderclap",
+    "field": "damagePercent",
+    "value": 0.45
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_8",
+  "name": "깊은 뿌리",
+  "description": "최대 생명력 +15, 무기·화염 스킬 피해 +3%.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -11.0,
+  "row": 0.65,
+  "requires": [
+   "mountain_falls",
+   "wind_stone_far",
+   "stone_echo_far"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ]
+ },
+ {
+  "id": "stone_9",
+  "name": "느린 치유",
+  "description": "초당 생명력 재생 +0.5, 무기·화염 스킬 피해 +3%.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -11.56,
+  "row": 1.49,
+  "requires": [
+   "stone_8"
+  ],
+  "statMods": [
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 0.5
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "old_oak",
+  "name": "늙은 참나무",
+  "description": "최대 생명력 +25, 초당 생명력 재생 +2, 피해 +10%.",
+  "icon": "tempered_body",
+  "kind": "notable",
+  "path": "stone",
+  "column": -12.52,
+  "row": 1.7,
+  "requires": [
+   "stone_9"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 25
+   },
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 2
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.1
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_10",
+  "name": "거친 착지",
+  "description": "범위 스킬 비틀거림 +12%, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -11.6,
+  "row": -1.35,
+  "requires": [
+   "stone_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "staggerPercent",
+    "value": 0.12
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_11",
+  "name": "돌의 무게",
+  "description": "최대 생명력 +8, 방어력 +6, 피해 +4%, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -12.22,
+  "row": -3.4,
+  "requires": [
+   "stone_10"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 8
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_12",
+  "name": "넓은 어깨",
+  "description": "무기 스킬 밀쳐내기 +12%, 무기·화염 스킬 피해 +3%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -12.37,
+  "row": -0.61,
+  "requires": [
+   "stone_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.12
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_13",
+  "name": "두꺼운 가죽",
+  "description": "방어력 +12, 무기·화염 스킬 피해 +3%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -13.46,
+  "row": -1.97,
+  "requires": [
+   "stone_12"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "the_unmoved",
+  "name": "움직이지 않는 자",
+  "description": "방어력 +60%, 최대 생명력 +40, 피해 +20%, 이동 속도 -8%.",
+  "icon": "bulwark",
+  "kind": "keystone",
+  "path": "stone",
+  "column": -14.48,
+  "row": -3.76,
+  "requires": [
+   "stone_13"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "percent",
+    "value": 0.6
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 40
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.2
+   },
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": -0.08
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_gate",
+  "name": "덮어둔 숯",
+  "description": "최대 생명력 +12, 무기·화염 스킬 피해 +4%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -18.26,
+  "row": -1.28,
+  "requires": [
+   "stone_13"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.04
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.04
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "hearth_1",
+  "name": "난로 돌",
+  "description": "최대 생명력 +15.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -19.7,
+  "row": -0.01,
+  "requires": [
+   "stone_gate"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_2",
+  "name": "따뜻한 돌",
+  "description": "방어력 +15.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -20.9,
+  "row": 0.29,
+  "requires": [
+   "hearth_1"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_kept_warm",
+  "name": "간직한 온기",
+  "description": "최대 생명력 +30, 초당 생명력 재생 +1.5.",
+  "icon": "tempered_body",
+  "kind": "notable",
+  "path": "stone",
+  "column": -22.09,
+  "row": 0.55,
+  "requires": [
+   "hearth_2"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 30
+   },
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 1.5
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_3",
+  "name": "난로 돌",
+  "description": "최대 생명력 +15.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -23.29,
+  "row": 0.78,
+  "requires": [
+   "hearth_kept_warm"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_4",
+  "name": "따뜻한 돌",
+  "description": "방어력 +15.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -24.48,
+  "row": 0.97,
+  "requires": [
+   "hearth_3"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_thick_walls",
+  "name": "두꺼운 벽",
+  "description": "방어력 +15%, 폭풍 저항 +8%, 냉기 저항 +8%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "stone",
+  "column": -25.68,
+  "row": 1.12,
+  "requires": [
+   "hearth_4"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "percent",
+    "value": 0.15
+   },
+   {
+    "stat": "stormResist",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "frostResist",
+    "op": "add",
+    "value": 0.08
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_5",
+  "name": "난로 돌",
+  "description": "최대 생명력 +15.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -26.89,
+  "row": 0.85,
+  "requires": [
+   "hearth_thick_walls"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_6",
+  "name": "따뜻한 돌",
+  "description": "방어력 +15.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "stone",
+  "column": -28.1,
+  "row": 0.23,
+  "requires": [
+   "hearth_5"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_the_kept_hearth",
+  "name": "지켜진 난로",
+  "description": "적이 그대를 치면 땅이 주변에서 타올라 적들을 밀쳐내고 불붙인다(1.5초에 최대 한 번). 방어력 +25%, 피해 -10%.",
+  "icon": "bulwark",
+  "kind": "keystone",
+  "path": "stone",
+  "column": -29.3,
+  "row": -0.41,
+  "requires": [
+   "hearth_6"
+  ],
+  "statMods": [
+   {
+    "stat": "armour",
+    "op": "percent",
+    "value": 0.25
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": -0.1
+   }
+  ],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "struck",
+    "cooldown": 1.5,
+    "effect": {
+     "type": "cast",
+     "skill": "shoulder_flare",
+     "at": "caster"
+    }
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_7",
+  "name": "잉걸 자리",
+  "description": "초당 생명력 재생 +1.",
+  "icon": "tempered_body",
+  "kind": "minor",
+  "path": "stone",
+  "column": -25.86,
+  "row": 2.73,
+  "requires": [
+   "hearth_thick_walls"
+  ],
+  "statMods": [
+   {
+    "stat": "lifeRegen",
+    "op": "add",
+    "value": 1
+   }
+  ],
+  "skillMods": [],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "hearth_banked_low",
+  "name": "낮게 덮은 불",
+  "description": "덮어둔 불 지속시간 +40%, 덮어둔 불 범위 +20%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "stone",
+  "column": -26.89,
+  "row": 3.34,
+  "requires": [
+   "hearth_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "banked_fire",
+    "field": "durationPercent",
+    "value": 0.4
+   },
+   {
+    "skill": "banked_fire",
+    "field": "areaPercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "hearth"
+ },
+ {
+  "id": "kiln_1",
+  "name": "가마의 열기",
+  "description": "화염 스킬 피해 +6%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -19.63,
+  "row": -1.7,
+  "requires": [
+   "stone_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_2",
+  "name": "느린 연소",
+  "description": "화염 스킬 지속시간 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "stone",
+  "column": -20.79,
+  "row": -2.11,
+  "requires": [
+   "kiln_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_draught_hole",
+  "name": "바람구멍",
+  "description": "화염 스킬 범위 +20%, 화염 스킬 재사용 시간 -10%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "stone",
+  "column": -21.95,
+  "row": -2.54,
+  "requires": [
+   "kiln_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "areaPercent",
+    "value": 0.2
+   },
+   {
+    "group": "fire",
+    "field": "cooldownPercent",
+    "value": -0.1
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_3",
+  "name": "가마의 열기",
+  "description": "화염 스킬 피해 +6%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -23.1,
+  "row": -3.02,
+  "requires": [
+   "kiln_draught_hole"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_4",
+  "name": "느린 연소",
+  "description": "화염 스킬 지속시간 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "stone",
+  "column": -24.25,
+  "row": -3.52,
+  "requires": [
+   "kiln_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_firing",
+  "name": "점화",
+  "description": "화염 스킬 피해 +18%, 무기 스킬 피해 +8%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "stone",
+  "column": -25.38,
+  "row": -4.06,
+  "requires": [
+   "kiln_4"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.18
+   },
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_5",
+  "name": "가마의 열기",
+  "description": "화염 스킬 피해 +6%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -26.5,
+  "row": -4.63,
+  "requires": [
+   "kiln_firing"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_6",
+  "name": "느린 연소",
+  "description": "화염 스킬 지속시간 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "stone",
+  "column": -27.61,
+  "row": -5.24,
+  "requires": [
+   "kiln_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_white_heat",
+  "name": "백열",
+  "description": "화염 스킬이 적중하면 맞은 적의 발밑이 불타, 적들을 다시 끌어당긴다(1초에 최대 한 번). 화염 스킬 피해 +25%, 최대 생명력 -15%.",
+  "icon": "heavy_strike",
+  "kind": "keystone",
+  "path": "stone",
+  "column": -28.71,
+  "row": -5.87,
+  "requires": [
+   "kiln_6"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "percent",
+    "value": -0.15
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.25
+   }
+  ],
+  "triggers": [
+   {
+    "on": "hit",
+    "skill": {
+     "group": "fire"
+    },
+    "cooldown": 1,
+    "effect": {
+     "type": "cast",
+     "skill": "gathered_embers",
+     "at": "target"
+    }
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_7",
+  "name": "가마의 열기",
+  "description": "화염 스킬 피해 +6%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -25.32,
+  "row": -5.92,
+  "requires": [
+   "kiln_firing"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "kiln_stoked",
+  "name": "부채질된 불",
+  "description": "천둥박수 재사용 시간 -25%, 천둥박수 피해 +15%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "stone",
+  "column": -26.03,
+  "row": -7.55,
+  "requires": [
+   "kiln_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "thunderclap",
+    "field": "cooldownPercent",
+    "value": -0.25
+   },
+   {
+    "skill": "thunderclap",
+    "field": "damagePercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "kiln"
+ },
+ {
+  "id": "rockfall_1",
+  "name": "바위의 무게",
+  "description": "기본 공격 피해 +8%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -19.41,
+  "row": -3.39,
+  "requires": [
+   "stone_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_2",
+  "name": "흩날리는 자갈",
+  "description": "무기 스킬 밀쳐내기 +15%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -20.42,
+  "row": -4.48,
+  "requires": [
+   "rockfall_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_boulder_swing",
+  "name": "바위 휘두르기",
+  "description": "기본 공격 피해 +15%, 기본 공격 밀쳐내기 +20%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "stone",
+  "column": -21.38,
+  "row": -5.59,
+  "requires": [
+   "rockfall_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.15
+   },
+   {
+    "group": "main",
+    "field": "knockbackPercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_3",
+  "name": "바위의 무게",
+  "description": "기본 공격 피해 +8%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -22.31,
+  "row": -6.73,
+  "requires": [
+   "rockfall_boulder_swing"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_4",
+  "name": "흩날리는 자갈",
+  "description": "무기 스킬 밀쳐내기 +15%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -23.19,
+  "row": -7.89,
+  "requires": [
+   "rockfall_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_landslip",
+  "name": "산사태",
+  "description": "치명타 피해 +20%, 무기 스킬 피해 +10%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "stone",
+  "column": -24.04,
+  "row": -9.08,
+  "requires": [
+   "rockfall_4"
+  ],
+  "statMods": [
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.2
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_5",
+  "name": "바위의 무게",
+  "description": "기본 공격 피해 +8%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -25.01,
+  "row": -9.91,
+  "requires": [
+   "rockfall_landslip"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_6",
+  "name": "흩날리는 자갈",
+  "description": "무기 스킬 밀쳐내기 +15%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -26.06,
+  "row": -10.5,
+  "requires": [
+   "rockfall_5"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "knockbackPercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_rockfall",
+  "name": "낙석",
+  "description": "기본 공격 세 번째 적중마다 맞은 적 위로 천둥박수가 떨어진다(2초에 최대 한 번). 공격 속도 -15%.",
+  "icon": "heavy_strike",
+  "kind": "keystone",
+  "path": "stone",
+  "column": -27.11,
+  "row": -11.13,
+  "requires": [
+   "rockfall_6"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": -0.15
+   }
+  ],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "hit",
+    "skill": {
+     "group": "main"
+    },
+    "every": 3,
+    "cooldown": 2,
+    "effect": {
+     "type": "cast",
+     "skill": "thunderclap",
+     "at": "target"
+    }
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_7",
+  "name": "바위의 무게",
+  "description": "기본 공격 피해 +8%.",
+  "icon": "heavy_strike",
+  "kind": "minor",
+  "path": "stone",
+  "column": -23.64,
+  "row": -10.83,
+  "requires": [
+   "rockfall_landslip"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "rockfall_shoulder_the_hill",
+  "name": "언덕을 짊어지고",
+  "description": "타오름 피해 +30%, 타오름 범위 +30%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "stone",
+  "column": -24.11,
+  "row": -12.38,
+  "requires": [
+   "rockfall_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "shoulder_flare",
+    "field": "damagePercent",
+    "value": 0.3
+   },
+   {
+    "skill": "shoulder_flare",
+    "field": "areaPercent",
+    "value": 0.3
+   }
+  ],
+  "weapon": "heavy",
+  "specialty": "rockfall"
+ },
+ {
+  "id": "echo_forkline",
+  "name": "갈래 번개",
+  "description": "적에서 적으로 튀며 조금씩 약해지는 번개.",
+  "icon": "forkline",
+  "kind": "notable",
+  "path": "echo",
+  "column": -1.42,
+  "row": -0.69,
+  "requires": [],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "forkline"
+ },
+ {
+  "id": "first_echo",
+  "name": "첫 번째 메아리",
+  "description": "최대 마나 +15, 범위 스킬 지속시간 +15%, 범위 스킬 피해 +10%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "echo",
+  "column": -2.23,
+  "row": -1.31,
+  "requires": [
+   "echo_forkline"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 15
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.15
+   },
+   {
+    "group": "spread",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ]
+ },
+ {
+  "id": "echo_1",
+  "name": "남겨짐",
+  "description": "범위 스킬 지속시간 +10%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -3.11,
+  "row": -2.27,
+  "requires": [
+   "first_echo",
+   "stone_echo_near",
+   "echo_storm_near"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ]
+ },
+ {
+  "id": "long_squall",
+  "name": "긴 소나기 폭풍",
+  "description": "소나기 폭풍 지속시간 +50%, 소나기 폭풍 범위 +15%, 소나기 폭풍 피해 +30%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "storm",
+  "column": 4.81,
+  "row": -4.82,
+  "requires": [
+   "echo_squall"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "squall",
+    "field": "durationPercent",
+    "value": 0.5
+   },
+   {
+    "skill": "squall",
+    "field": "areaPercent",
+    "value": 0.15
+   },
+   {
+    "skill": "squall",
+    "field": "damagePercent",
+    "value": 0.3
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "echo_squall",
+  "name": "소나기 폭풍",
+  "description": "조준한 곳에 폭풍이 일어 0.5초마다 그 아래 모든 것을 친다.",
+  "icon": "squall",
+  "kind": "notable",
+  "path": "storm",
+  "column": 3.41,
+  "row": -4.27,
+  "requires": [
+   "forked_bolt"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "squall",
+  "weapon": "staff"
+ },
+ {
+  "id": "echo_2",
+  "name": "기억된 마나",
+  "description": "최대 마나 +12.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": -4.96,
+  "row": -2.84,
+  "requires": [
+   "echo_15"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "echo_3",
+  "name": "한 번 더",
+  "description": "범위 스킬 범위 +6%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -6.0,
+  "row": -3.22,
+  "requires": [
+   "echo_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "areaPercent",
+    "value": 0.06
+   }
+  ]
+ },
+ {
+  "id": "echo_mending_pulse",
+  "name": "치유의 맥박",
+  "description": "빛이 퍼져 나가 상처를 아문다. 그대와 닿는 모든 아군이 생명력 10과 최대 생명력의 12%를 회복한다.",
+  "icon": "mending_pulse",
+  "kind": "notable",
+  "path": "echo",
+  "column": -6.41,
+  "row": -2.09,
+  "requires": [
+   "echo_3"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "mending_pulse"
+ },
+ {
+  "id": "echo_4",
+  "name": "붙잡힌 순간",
+  "description": "멈춘 숨 재사용 시간 -6%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -4.25,
+  "row": -4.45,
+  "requires": [
+   "echo_15"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "held_breath",
+    "field": "cooldownPercent",
+    "value": -0.06
+   }
+  ]
+ },
+ {
+  "id": "twice_told_bolt",
+  "name": "두 번 치는 번개",
+  "description": "폭풍 번개가 두 번 일어난다. 번개가 치고 잠시 뒤, 그 잔향이 같은 길을 다시 난다.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "storm",
+  "column": 2.91,
+  "row": -6.95,
+  "requires": [
+   "storm_4"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "storm_bolt",
+    "becomes": "storm_bolt_echo"
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "echo_5",
+  "name": "고요한 마음",
+  "description": "초당 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": -3.32,
+  "row": -7.36,
+  "requires": [
+   "twice_swung"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "echo_6",
+  "name": "똑같이 다시",
+  "description": "치명타 확률 +1%, 범위 스킬 피해 +7%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -2.11,
+  "row": -8.72,
+  "requires": [
+   "echo_5"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.01
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "damagePercent",
+    "value": 0.07
+   }
+  ]
+ },
+ {
+  "id": "forked",
+  "name": "갈라짐",
+  "description": "기본 공격이 적중하면 맞은 적에게서 갈래 번개가 튀어 나온다(0.6초에 최대 한 번).",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "echo",
+  "column": -1.14,
+  "row": -9.99,
+  "requires": [
+   "echo_6"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "triggers": [
+   {
+    "on": "hit",
+    "skill": {
+     "group": "main"
+    },
+    "cooldown": 0.6,
+    "effect": {
+     "type": "cast",
+     "skill": "forkline",
+     "at": "target"
+    }
+   }
+  ]
+ },
+ {
+  "id": "echo_7",
+  "name": "남겨짐",
+  "description": "범위 스킬 지속시간 +10%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -4.67,
+  "row": -7.17,
+  "requires": [
+   "twice_swung"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ]
+ },
+ {
+  "id": "between_heartbeats",
+  "name": "심장 박동 사이",
+  "description": "멈춘 숨 지속시간 +30%, 멈춘 숨 범위 +20%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "echo",
+  "column": -4.48,
+  "row": -8.74,
+  "requires": [
+   "echo_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "held_breath",
+    "field": "durationPercent",
+    "value": 0.3
+   },
+   {
+    "skill": "held_breath",
+    "field": "areaPercent",
+    "value": 0.2
+   }
+  ]
+ },
+ {
+  "id": "echo_8",
+  "name": "기억된 마나",
+  "description": "최대 마나 +12.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": -4.04,
+  "row": -10.22,
+  "requires": [
+   "between_heartbeats",
+   "stone_echo_far",
+   "echo_storm_far"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "echo_9",
+  "name": "한 번 더",
+  "description": "범위 스킬 범위 +6%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -5.06,
+  "row": -10.54,
+  "requires": [
+   "echo_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "areaPercent",
+    "value": 0.06
+   }
+  ]
+ },
+ {
+  "id": "worn_groove",
+  "name": "닳은 홈",
+  "description": "치명타 확률 +2%, 범위 스킬 피해 +15%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "echo",
+  "column": -5.46,
+  "row": -11.43,
+  "requires": [
+   "echo_9"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.02
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "damagePercent",
+    "value": 0.15
+   }
+  ]
+ },
+ {
+  "id": "echo_10",
+  "name": "붙잡힌 순간",
+  "description": "멈춘 숨 재사용 시간 -6%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -2.33,
+  "row": -11.46,
+  "requires": [
+   "echo_8"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "held_breath",
+    "field": "cooldownPercent",
+    "value": -0.06
+   }
+  ]
+ },
+ {
+  "id": "echo_11",
+  "name": "고요한 마음",
+  "description": "초당 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": -0.62,
+  "row": -12.58,
+  "requires": [
+   "echo_10"
+  ],
+  "statMods": [
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "echo_12",
+  "name": "똑같이 다시",
+  "description": "치명타 확률 +1%, 범위 스킬 피해 +7%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -3.28,
+  "row": -11.91,
+  "requires": [
+   "echo_8"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.01
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "damagePercent",
+    "value": 0.07
+   }
+  ]
+ },
+ {
+  "id": "echo_13",
+  "name": "남겨짐",
+  "description": "범위 스킬 지속시간 +10%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -2.26,
+  "row": -13.43,
+  "requires": [
+   "echo_12"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ]
+ },
+ {
+  "id": "twice_remembered",
+  "name": "두 번 기억됨",
+  "description": "피해 -10%, 범위 스킬 피해 +12%, 범위 스킬 지속시간 +40%, 범위 스킬 범위 +20%, 멈춘 숨 재사용 시간 -30%.",
+  "icon": "echo",
+  "kind": "keystone",
+  "path": "echo",
+  "column": -0.89,
+  "row": -14.95,
+  "requires": [
+   "echo_13"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": -0.1
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "damagePercent",
+    "value": 0.12
+   },
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.4
+   },
+   {
+    "group": "spread",
+    "field": "areaPercent",
+    "value": 0.2
+   },
+   {
+    "skill": "held_breath",
+    "field": "cooldownPercent",
+    "value": -0.3
+   }
+  ]
+ },
+ {
+  "id": "storm_blade_near",
+  "name": "교차로",
+  "description": "최대 생명력 +6, 최대 마나 +6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 3.48,
+  "row": -2.39,
+  "requires": [
+   "storm_1",
+   "blade_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "storm_blade_mid",
+  "name": "바람의 만남",
+  "description": "피해 +5%, 방어력 +5.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 8.05,
+  "row": -2.31,
+  "requires": [
+   "storm_lance",
+   "whirling_cleave"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.05
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 5
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "storm_blade_far",
+  "name": "먼 교차로",
+  "description": "피해 +8%, 최대 생명력 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 12.24,
+  "row": 0.44,
+  "requires": [
+   "storm_8",
+   "blade_8"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "common_storm_blade_1",
+  "common": "even_keel",
+  "path": "storm",
+  "column": 15.3,
+  "row": -2.54,
+  "requires": [
+   "charged_air"
+  ]
+ },
+ {
+  "id": "common_storm_blade_2",
+  "common": "weathered",
+  "path": "storm",
+  "column": 15.63,
+  "row": -1.12,
+  "requires": [
+   "common_storm_blade_1"
+  ]
+ },
+ {
+  "id": "common_storm_blade_3",
+  "common": "clear_head",
+  "path": "storm",
+  "column": 15.56,
+  "row": 0.34,
+  "requires": [
+   "common_storm_blade_2"
+  ]
+ },
+ {
+  "id": "common_storm_blade_4",
+  "common": "sheltered",
+  "path": "storm",
+  "column": 15.07,
+  "row": 1.74,
+  "requires": [
+   "common_storm_blade_3"
+  ]
+ },
+ {
+  "id": "common_storm_blade_5",
+  "common": "light_step",
+  "path": "storm",
+  "column": 14.3,
+  "row": 2.99,
+  "requires": [
+   "common_storm_blade_4"
+  ]
+ },
+ {
+  "id": "common_storm_blade_6",
+  "common": "hardy",
+  "path": "storm",
+  "column": 13.33,
+  "row": 4.1,
+  "requires": [
+   "common_storm_blade_5"
+  ]
+ },
+ {
+  "id": "common_storm_blade_7",
+  "common": "even_keel",
+  "path": "storm",
+  "column": 12.25,
+  "row": 5.09,
+  "requires": [
+   "common_storm_blade_6",
+   "headsman"
+  ]
+ },
+ {
+  "id": "common_storm_blade_spur_1",
+  "common": "weathered",
+  "path": "storm",
+  "column": 16.41,
+  "row": 1.89,
+  "requires": [
+   "common_storm_blade_4"
+  ]
+ },
+ {
+  "id": "common_storm_blade_spur_2",
+  "common": "clear_head",
+  "path": "storm",
+  "column": 17.75,
+  "row": 2.05,
+  "requires": [
+   "common_storm_blade_spur_1"
+  ]
+ },
+ {
+  "id": "blade_wind_near",
+  "name": "교차로",
+  "description": "최대 생명력 +6, 최대 마나 +6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 3.3,
+  "row": 2.54,
+  "requires": [
+   "blade_1",
+   "wind_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "blade_wind_mid",
+  "name": "바람의 만남",
+  "description": "피해 +5%, 방어력 +5.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 4.61,
+  "row": 6.98,
+  "requires": [
+   "whirling_cleave",
+   "slip_through"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.05
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 5
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "blade_wind_far",
+  "name": "먼 교차로",
+  "description": "피해 +8%, 최대 생명력 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "blade",
+  "column": 3.32,
+  "row": 11.8,
+  "requires": [
+   "blade_8",
+   "wind_8"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "common_blade_wind_1",
+  "common": "weathered",
+  "path": "blade",
+  "column": 7.09,
+  "row": 11.12,
+  "requires": [
+   "blade_11"
+  ]
+ },
+ {
+  "id": "common_blade_wind_2",
+  "common": "clear_head",
+  "path": "blade",
+  "column": 6.2,
+  "row": 12.25,
+  "requires": [
+   "common_blade_wind_1"
+  ]
+ },
+ {
+  "id": "common_blade_wind_3",
+  "common": "sheltered",
+  "path": "blade",
+  "column": 5.21,
+  "row": 13.23,
+  "requires": [
+   "common_blade_wind_2"
+  ]
+ },
+ {
+  "id": "common_blade_wind_4",
+  "common": "light_step",
+  "path": "blade",
+  "column": 4.02,
+  "row": 14.03,
+  "requires": [
+   "common_blade_wind_3"
+  ]
+ },
+ {
+  "id": "common_blade_wind_5",
+  "common": "hardy",
+  "path": "blade",
+  "column": 2.67,
+  "row": 14.47,
+  "requires": [
+   "common_blade_wind_4"
+  ]
+ },
+ {
+  "id": "common_blade_wind_6",
+  "common": "even_keel",
+  "path": "blade",
+  "column": 1.26,
+  "row": 14.42,
+  "requires": [
+   "common_blade_wind_5"
+  ]
+ },
+ {
+  "id": "common_blade_wind_7",
+  "common": "weathered",
+  "path": "blade",
+  "column": -0.07,
+  "row": 13.93,
+  "requires": [
+   "common_blade_wind_6",
+   "long_wake"
+  ]
+ },
+ {
+  "id": "common_blade_wind_spur_1",
+  "common": "clear_head",
+  "path": "blade",
+  "column": 4.39,
+  "row": 15.33,
+  "requires": [
+   "common_blade_wind_4"
+  ]
+ },
+ {
+  "id": "common_blade_wind_spur_2",
+  "common": "sheltered",
+  "path": "blade",
+  "column": 4.76,
+  "row": 16.63,
+  "requires": [
+   "common_blade_wind_spur_1"
+  ]
+ },
+ {
+  "id": "wind_stone_near",
+  "name": "교차로",
+  "description": "최대 생명력 +6, 최대 마나 +6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -1.38,
+  "row": 3.97,
+  "requires": [
+   "wind_1",
+   "stone_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "wind_stone_mid",
+  "name": "바람의 만남",
+  "description": "피해 +5%, 방어력 +5.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -5.23,
+  "row": 6.57,
+  "requires": [
+   "slip_through",
+   "gathered_clap"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.05
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 5
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "wind_stone_far",
+  "name": "먼 교차로",
+  "description": "피해 +8%, 최대 생명력 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -10.1,
+  "row": 6.84,
+  "requires": [
+   "wind_8",
+   "stone_8"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "common_wind_stone_1",
+  "common": "clear_head",
+  "path": "wind",
+  "column": -10.41,
+  "row": 11.22,
+  "requires": [
+   "wind_19"
+  ]
+ },
+ {
+  "id": "common_wind_stone_2",
+  "common": "sheltered",
+  "path": "wind",
+  "column": -11.42,
+  "row": 10.33,
+  "requires": [
+   "common_wind_stone_1"
+  ]
+ },
+ {
+  "id": "common_wind_stone_3",
+  "common": "light_step",
+  "path": "wind",
+  "column": -12.34,
+  "row": 9.29,
+  "requires": [
+   "common_wind_stone_2"
+  ]
+ },
+ {
+  "id": "common_wind_stone_4",
+  "common": "hardy",
+  "path": "wind",
+  "column": -13.06,
+  "row": 8.15,
+  "requires": [
+   "common_wind_stone_3"
+  ]
+ },
+ {
+  "id": "common_wind_stone_5",
+  "common": "even_keel",
+  "path": "wind",
+  "column": -13.54,
+  "row": 6.9,
+  "requires": [
+   "common_wind_stone_4"
+  ]
+ },
+ {
+  "id": "common_wind_stone_6",
+  "common": "weathered",
+  "path": "wind",
+  "column": -13.71,
+  "row": 5.55,
+  "requires": [
+   "common_wind_stone_5"
+  ]
+ },
+ {
+  "id": "common_wind_stone_7",
+  "common": "clear_head",
+  "path": "wind",
+  "column": -13.56,
+  "row": 4.19,
+  "requires": [
+   "common_wind_stone_6"
+  ]
+ },
+ {
+  "id": "common_wind_stone_8",
+  "common": "sheltered",
+  "path": "wind",
+  "column": -13.14,
+  "row": 2.9,
+  "requires": [
+   "common_wind_stone_7",
+   "old_oak"
+  ]
+ },
+ {
+  "id": "common_wind_stone_spur_1",
+  "common": "light_step",
+  "path": "wind",
+  "column": -14.74,
+  "row": 7.51,
+  "requires": [
+   "common_wind_stone_5"
+  ]
+ },
+ {
+  "id": "common_wind_stone_spur_2",
+  "common": "hardy",
+  "path": "wind",
+  "column": -15.95,
+  "row": 8.13,
+  "requires": [
+   "common_wind_stone_spur_1"
+  ]
+ },
+ {
+  "id": "stone_echo_near",
+  "name": "교차로",
+  "description": "최대 생명력 +6, 최대 마나 +6, 무기·화염 스킬 피해 +3%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "stone",
+  "column": -4.16,
+  "row": -0.04,
+  "requires": [
+   "stone_1",
+   "echo_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ]
+ },
+ {
+  "id": "stone_echo_mid",
+  "name": "바람의 만남",
+  "description": "피해 +5%, 방어력 +5, 무기·화염 스킬 피해 +3%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "stone",
+  "column": -7.85,
+  "row": -2.89,
+  "requires": [
+   "gathered_clap",
+   "twice_swung"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.05
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 5
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ]
+ },
+ {
+  "id": "stone_echo_far",
+  "name": "먼 교차로",
+  "description": "피해 +8%, 최대 생명력 +10, 무기·화염 스킬 피해 +3%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "stone",
+  "column": -9.65,
+  "row": -7.56,
+  "requires": [
+   "stone_8",
+   "echo_8"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "weapon",
+    "field": "damagePercent",
+    "value": 0.03
+   },
+   {
+    "group": "fire",
+    "field": "damagePercent",
+    "value": 0.03
+   }
+  ]
+ },
+ {
+  "id": "common_stone_echo_1",
+  "common": "sheltered",
+  "path": "stone",
+  "column": -12.32,
+  "row": -4.77,
+  "requires": [
+   "stone_11"
+  ]
+ },
+ {
+  "id": "common_stone_echo_2",
+  "common": "light_step",
+  "path": "stone",
+  "column": -12.28,
+  "row": -6.18,
+  "requires": [
+   "common_stone_echo_1"
+  ]
+ },
+ {
+  "id": "common_stone_echo_3",
+  "common": "hardy",
+  "path": "stone",
+  "column": -12.03,
+  "row": -7.54,
+  "requires": [
+   "common_stone_echo_2"
+  ]
+ },
+ {
+  "id": "common_stone_echo_4",
+  "common": "even_keel",
+  "path": "stone",
+  "column": -11.5,
+  "row": -8.81,
+  "requires": [
+   "common_stone_echo_3"
+  ]
+ },
+ {
+  "id": "common_stone_echo_5",
+  "common": "weathered",
+  "path": "stone",
+  "column": -10.64,
+  "row": -9.91,
+  "requires": [
+   "common_stone_echo_4"
+  ]
+ },
+ {
+  "id": "common_stone_echo_6",
+  "common": "clear_head",
+  "path": "stone",
+  "column": -9.52,
+  "row": -10.68,
+  "requires": [
+   "common_stone_echo_5"
+  ]
+ },
+ {
+  "id": "common_stone_echo_7",
+  "common": "sheltered",
+  "path": "stone",
+  "column": -8.21,
+  "row": -11.16,
+  "requires": [
+   "common_stone_echo_6"
+  ]
+ },
+ {
+  "id": "common_stone_echo_8",
+  "common": "light_step",
+  "path": "stone",
+  "column": -6.85,
+  "row": -11.39,
+  "requires": [
+   "common_stone_echo_7",
+   "worn_groove"
+  ]
+ },
+ {
+  "id": "common_stone_echo_spur_1",
+  "common": "hardy",
+  "path": "stone",
+  "column": -11.63,
+  "row": -10.83,
+  "requires": [
+   "common_stone_echo_5"
+  ]
+ },
+ {
+  "id": "common_stone_echo_spur_2",
+  "common": "even_keel",
+  "path": "stone",
+  "column": -12.62,
+  "row": -11.75,
+  "requires": [
+   "common_stone_echo_spur_1"
+  ]
+ },
+ {
+  "id": "echo_storm_near",
+  "name": "교차로",
+  "description": "최대 생명력 +6, 최대 마나 +6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": -1.22,
+  "row": -4.04,
+  "requires": [
+   "echo_1",
+   "storm_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 6
+   },
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "echo_storm_mid",
+  "name": "바람의 만남",
+  "description": "피해 +5%, 방어력 +5.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": 0.41,
+  "row": -8.37,
+  "requires": [
+   "twice_swung",
+   "storm_lance"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.05
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 5
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "echo_storm_far",
+  "name": "먼 교차로",
+  "description": "피해 +8%, 최대 생명력 +10.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "echo",
+  "column": 4.22,
+  "row": -11.49,
+  "requires": [
+   "echo_8",
+   "storm_8"
+  ],
+  "statMods": [
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": []
+ },
+ {
+  "id": "common_echo_storm_1",
+  "common": "hardy",
+  "path": "echo",
+  "column": 0.52,
+  "row": -13.32,
+  "requires": [
+   "echo_11"
+  ]
+ },
+ {
+  "id": "common_echo_storm_2",
+  "common": "even_keel",
+  "path": "echo",
+  "column": 1.72,
+  "row": -13.9,
+  "requires": [
+   "common_echo_storm_1"
+  ]
+ },
+ {
+  "id": "common_echo_storm_3",
+  "common": "weathered",
+  "path": "echo",
+  "column": 3.01,
+  "row": -14.28,
+  "requires": [
+   "common_echo_storm_2"
+  ]
+ },
+ {
+  "id": "common_echo_storm_4",
+  "common": "clear_head",
+  "path": "echo",
+  "column": 4.36,
+  "row": -14.41,
+  "requires": [
+   "common_echo_storm_3"
+  ]
+ },
+ {
+  "id": "common_echo_storm_5",
+  "common": "sheltered",
+  "path": "echo",
+  "column": 5.71,
+  "row": -14.28,
+  "requires": [
+   "common_echo_storm_4"
+  ]
+ },
+ {
+  "id": "common_echo_storm_6",
+  "common": "light_step",
+  "path": "echo",
+  "column": 6.99,
+  "row": -13.9,
+  "requires": [
+   "common_echo_storm_5"
+  ]
+ },
+ {
+  "id": "common_echo_storm_7",
+  "common": "hardy",
+  "path": "echo",
+  "column": 8.22,
+  "row": -13.3,
+  "requires": [
+   "common_echo_storm_6"
+  ]
+ },
+ {
+  "id": "common_echo_storm_8",
+  "common": "even_keel",
+  "path": "echo",
+  "column": 9.35,
+  "row": -12.55,
+  "requires": [
+   "common_echo_storm_7"
+  ]
+ },
+ {
+  "id": "common_echo_storm_9",
+  "common": "weathered",
+  "path": "echo",
+  "column": 10.39,
+  "row": -11.69,
+  "requires": [
+   "common_echo_storm_8",
+   "storm_21"
+  ]
+ },
+ {
+  "id": "common_echo_storm_spur_1",
+  "common": "clear_head",
+  "path": "echo",
+  "column": 6.21,
+  "row": -15.53,
+  "requires": [
+   "common_echo_storm_5"
+  ]
+ },
+ {
+  "id": "common_echo_storm_spur_2",
+  "common": "sheltered",
+  "path": "echo",
+  "column": 6.71,
+  "row": -16.79,
+  "requires": [
+   "common_echo_storm_spur_1"
+  ]
+ },
+ {
+  "id": "storm_14",
+  "name": "대전됨",
+  "description": "번개 스킬 피해 +12%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 6.04,
+  "row": -3.96,
+  "requires": [
+   "long_squall"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.12
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "gathering_squall",
+  "name": "모이는 소나기 폭풍",
+  "description": "소나기 폭풍 피해 +25%, 소나기 폭풍 마나 소모 -20%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "storm",
+  "column": 8.55,
+  "row": -5.6,
+  "requires": [
+   "storm_14"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "squall",
+    "field": "damagePercent",
+    "value": 0.25
+   },
+   {
+    "skill": "squall",
+    "field": "manaCostPercent",
+    "value": -0.2
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_15",
+  "name": "광활한 하늘",
+  "description": "번개 스킬 범위 +8%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 10.25,
+  "row": -9.73,
+  "requires": [
+   "rolling_thunder"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_16",
+  "name": "깊은 우물",
+  "description": "최대 마나 +10, 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 10.59,
+  "row": -4.04,
+  "requires": [
+   "standing_thunder"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   },
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "stormbound",
+  "name": "폭풍에 묶인",
+  "description": "머무는 폭풍 범위 +25%, 머무는 폭풍 지속시간 +50%, 머무는 폭풍 피해 +30%.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "storm",
+  "column": 11.75,
+  "row": -3.09,
+  "requires": [
+   "storm_16"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "standing_storm",
+    "field": "areaPercent",
+    "value": 0.25
+   },
+   {
+    "skill": "standing_storm",
+    "field": "durationPercent",
+    "value": 0.5
+   },
+   {
+    "skill": "standing_storm",
+    "field": "damagePercent",
+    "value": 0.3
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_17",
+  "name": "접지됨",
+  "description": "최대 생명력 +12.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 13.2,
+  "row": -3.47,
+  "requires": [
+   "stormbound"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "charged_air",
+  "name": "살아 있는 공기",
+  "description": "머무는 폭풍이 친 적 하나당 생명력을 2 더 치유하고, 번개 스킬이 8% 더 빨리 충전된다.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "storm",
+  "column": 14.65,
+  "row": -3.85,
+  "requires": [
+   "storm_17"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "standing_storm",
+    "field": "lifeOnHit",
+    "value": 2
+   },
+   {
+    "group": "lightning",
+    "field": "cooldownPercent",
+    "value": -0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "static_step",
+  "name": "정전기 걸음",
+  "description": "회피 구르기가 25% 더 빨리 충전되고 20% 더 멀리 데려간다.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "storm",
+  "column": 9.31,
+  "row": -2.79,
+  "requires": [
+   "storm_6"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "dodge_roll",
+    "field": "cooldownPercent",
+    "value": -0.25
+   },
+   {
+    "skill": "dodge_roll",
+    "field": "rangePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_20",
+  "name": "날카로운 공기",
+  "description": "치명타 확률 +1.5%, 번개 스킬 피해 +8%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 3.49,
+  "row": -8.33,
+  "requires": [
+   "twice_told_bolt"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.015
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "overcharge",
+  "name": "과충전",
+  "description": "폭풍 번개 피해 +15%, 폭풍 번개 사거리 +15%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 4.07,
+  "row": -9.71,
+  "requires": [
+   "storm_20"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "storm_bolt",
+    "field": "damagePercent",
+    "value": 0.15
+   },
+   {
+    "skill": "storm_bolt",
+    "field": "rangePercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_21",
+  "name": "빠른 손",
+  "description": "공격 속도 +4%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 11.34,
+  "row": -10.76,
+  "requires": [
+   "storm_15"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_18",
+  "name": "빠른 손",
+  "description": "공격 속도 +4%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 14.62,
+  "row": -5.52,
+  "requires": [
+   "storm_26"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.04
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_26",
+  "name": "대전됨",
+  "description": "번개 스킬 피해 +10%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 13.22,
+  "row": -4.99,
+  "requires": [
+   "storm_11"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "high_voltage",
+  "name": "고전압",
+  "description": "치명타 피해 배율 +30%, 치명타 확률 +1.5%.",
+  "icon": "lightning",
+  "kind": "notable",
+  "path": "storm",
+  "column": 16.02,
+  "row": -6.05,
+  "requires": [
+   "storm_18"
+  ],
+  "statMods": [
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.3
+   },
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.015
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "arc_light",
+  "name": "아크 빛",
+  "description": "폭풍 번개 사거리 +20%, 폭풍 번개가 적을 1명 더 관통한다.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "storm",
+  "column": 18.82,
+  "row": -7.11,
+  "requires": [
+   "storm_19"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "storm_bolt",
+    "field": "rangePercent",
+    "value": 0.2
+   },
+   {
+    "skill": "storm_bolt",
+    "field": "pierce",
+    "value": 1
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_19",
+  "name": "접지됨",
+  "description": "최대 생명력 +12, 최대 마나 +6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 17.42,
+  "row": -6.58,
+  "requires": [
+   "high_voltage"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   },
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_22",
+  "name": "깊은 우물",
+  "description": "최대 마나 +10, 마나 재생 +0.6.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 13.38,
+  "row": -7.01,
+  "requires": [
+   "storm_13"
+  ],
+  "statMods": [
+   {
+    "stat": "maxMana",
+    "op": "add",
+    "value": 10
+   },
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.6
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_23",
+  "name": "날카로운 공기",
+  "description": "치명타 확률 +2%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 14.71,
+  "row": -7.71,
+  "requires": [
+   "storm_22"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.02
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_24",
+  "name": "접지됨",
+  "description": "최대 생명력 +12.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 16.04,
+  "row": -8.41,
+  "requires": [
+   "storm_23"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   }
+  ],
+  "skillMods": [],
+  "weapon": "staff"
+ },
+ {
+  "id": "storm_25",
+  "name": "광활한 하늘",
+  "description": "번개 스킬 범위 +8%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "storm",
+  "column": 17.37,
+  "row": -9.11,
+  "requires": [
+   "storm_24"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "lightning",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "staff"
+ },
+ {
+  "id": "echo_15",
+  "name": "남겨짐",
+  "description": "범위 스킬 지속시간 +10%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -3.8,
+  "row": -3.23,
+  "requires": [
+   "echo_1"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "spread",
+    "field": "durationPercent",
+    "value": 0.1
+   }
+  ]
+ },
+ {
+  "id": "echo_16",
+  "name": "응답하는 일격",
+  "description": "기본 공격 피해 +5%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -5.85,
+  "row": -6.6,
+  "requires": [
+   "twice_swung"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ]
+ },
+ {
+  "id": "echo_17",
+  "name": "응답하는 일격",
+  "description": "기본 공격 피해 +5%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -6.8,
+  "row": -6.2,
+  "requires": [
+   "echo_16"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ]
+ },
+ {
+  "id": "echo_20",
+  "name": "응답하는 일격",
+  "description": "기본 공격 피해 +5%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -7.75,
+  "row": -5.75,
+  "requires": [
+   "echo_17"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ]
+ },
+ {
+  "id": "second_voice",
+  "name": "두 번째 목소리",
+  "description": "기본 공격 피해 +12%, 치명타 확률 +2%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "echo",
+  "column": -8.75,
+  "row": -5.2,
+  "requires": [
+   "echo_20"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.02
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "damagePercent",
+    "value": 0.12
+   }
+  ]
+ },
+ {
+  "id": "blade_static_brand",
+  "name": "정전기 낙인",
+  "description": "처음 닿은 적을 대전시킨다. 그 적을 다른 무엇으로든 치면 전하가 주변에 터진다.",
+  "icon": "static_brand",
+  "kind": "notable",
+  "path": "echo",
+  "column": -5.9,
+  "row": -7.85,
+  "requires": [
+   "echo_7"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "static_brand"
+ },
+ {
+  "id": "echo_18",
+  "name": "유지된 전하",
+  "description": "낙인 폭발 피해 +20%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "echo",
+  "column": -7.1,
+  "row": -7.75,
+  "requires": [
+   "blade_static_brand"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "static_brand_burst",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ]
+ },
+ {
+  "id": "struck_mark",
+  "name": "쳐진 표",
+  "description": "낙인 폭발 범위 +25%, 정전기 낙인 재사용 시간 -20%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "echo",
+  "column": -8.3,
+  "row": -7.2,
+  "requires": [
+   "echo_18"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "static_brand_burst",
+    "field": "areaPercent",
+    "value": 0.25
+   },
+   {
+    "skill": "static_brand",
+    "field": "cooldownPercent",
+    "value": -0.2
+   }
+  ]
+ },
+ {
+  "id": "echo_19",
+  "name": "긴 갈래",
+  "description": "갈래 번개 연쇄 +1.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "echo",
+  "column": 0.05,
+  "row": -9.7,
+  "requires": [
+   "forked"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "forkline",
+    "field": "chains",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "twice_swung",
+  "name": "메아리",
+  "description": "기본 공격이 두 번 일어난다. 적중하고 잠시 뒤, 그 잔향이 50%의 피해로 같은 방식으로 친다. 유지하는 회전은 메아리치지 않는 대신 25% 더 세게 친다.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "echo",
+  "column": -4.55,
+  "row": -5.86,
+  "requires": [
+   "echo_4",
+   "stone_echo_mid",
+   "echo_storm_mid"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "main",
+    "field": "echo",
+    "value": 0.5
+   }
+  ]
+ },
+ {
+  "id": "wind_ghost_wave",
+  "name": "유령 파도",
+  "description": "유령 파도 습득: 창백한 파도가 앞으로 굴러가 길 위의 모든 것을 꿰뚫고, 잔향이 점점 옅어지며 따라온다.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "wind",
+  "column": 0.73,
+  "row": 1.4,
+  "requires": [],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "ghost_wave",
+  "weapon": "crossbow"
+ },
+ {
+  "id": "fanned_shot",
+  "name": "부채 사격",
+  "description": "쿼럴이 전방에 부채처럼 볼트를 흩뿌린다. 한 발 한 발은 단발보다 가볍다.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "wind",
+  "column": 3.89,
+  "row": 8.73,
+  "requires": [
+   "wind_14"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "quarrel",
+    "becomes": "quarrel_fan"
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_14",
+  "name": "화살깃",
+  "description": "쿼럴 피해 +8%, 쇠뇌 사격 피해 +5%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": 3.32,
+  "row": 7.45,
+  "requires": [
+   "wind_3"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "quarrel",
+    "field": "damagePercent",
+    "value": 0.08
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "long_shadow",
+  "name": "먼 사격",
+  "description": "쿼럴 피해 +15%, 쿼럴 사거리 +15%, 쇠뇌 사격 피해 +20%.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "wind",
+  "column": 4.46,
+  "row": 10.01,
+  "requires": [
+   "wind_14"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "quarrel",
+    "field": "damagePercent",
+    "value": 0.15
+   },
+   {
+    "skill": "quarrel",
+    "field": "rangePercent",
+    "value": 0.15
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "shadow_dancer",
+  "name": "그림자 무희",
+  "description": "회피 구르기와 그림자 걸음이 25% 더 빨리 충전되고 15% 더 멀리 데려간다.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "wind",
+  "column": -4.08,
+  "row": 9.57,
+  "requires": [
+   "wind_6"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "dodge_roll",
+    "field": "cooldownPercent",
+    "value": -0.25
+   },
+   {
+    "skill": "dodge_roll",
+    "field": "rangePercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_15",
+  "name": "가벼운 발",
+  "description": "이동 속도 +3%, 최대 생명력 +8, 쇠뇌 사격 피해 +5%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -5.44,
+  "row": 9.25,
+  "requires": [
+   "shadow_dancer"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "add",
+    "value": 0.03
+   },
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 8
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_16",
+  "name": "흔들리지 않는 조준",
+  "description": "치명타 확률 +1.5%, 피해 +8%, 쇠뇌 사격 피해 +5%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -6.84,
+  "row": 9.24,
+  "requires": [
+   "wind_15"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.015
+   },
+   {
+    "stat": "damagePercent",
+    "op": "add",
+    "value": 0.08
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_umbra",
+  "name": "암영",
+  "description": "암영 습득: 그림자가 주변에 퍼지고, 안의 적들은 피해를 15% 적게 입히며, 매초 그림자에 물린다.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "wind",
+  "column": -5.18,
+  "row": 13.1,
+  "requires": [
+   "wind_10"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "umbra",
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_17",
+  "name": "황혼",
+  "description": "최대 생명력 +12, 방어력 +6, 쇠뇌 사격 피해 +5%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "wind",
+  "column": -5.69,
+  "row": 14.4,
+  "requires": [
+   "wind_umbra"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   },
+   {
+    "stat": "armour",
+    "op": "add",
+    "value": 6
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "umbral_reach",
+  "name": "암영의 손길",
+  "description": "암영 범위 +30%, 암영 지속시간 +50%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "wind",
+  "column": -6.2,
+  "row": 15.7,
+  "requires": [
+   "wind_17"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "areaPercent",
+    "value": 0.3
+   },
+   {
+    "skill": "umbra",
+    "field": "durationPercent",
+    "value": 0.5
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_18",
+  "name": "황혼",
+  "description": "최대 생명력 +12, 초당 마나 재생 +0.5, 쇠뇌 사격 피해 +5%.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "wind",
+  "column": -6.71,
+  "row": 17.0,
+  "requires": [
+   "umbral_reach"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 12
+   },
+   {
+    "stat": "manaRegen",
+    "op": "add",
+    "value": 0.5
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "deep_umbra",
+  "name": "깊은 암영",
+  "description": "암영 피해 +40%, 암영이 문 적 하나당 생명력 1을 치유한다. 암영 재사용 시간 -20%, 쇠뇌 사격 피해 +20%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "wind",
+  "column": -7.22,
+  "row": 18.3,
+  "requires": [
+   "wind_18"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "damagePercent",
+    "value": 0.4
+   },
+   {
+    "skill": "umbra",
+    "field": "lifeOnHit",
+    "value": 1
+   },
+   {
+    "skill": "umbra",
+    "field": "cooldownPercent",
+    "value": -0.2
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_gate",
+  "name": "마지막 빛",
+  "description": "이동 속도 +3%, 쇠뇌 사격 피해 +6%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -13.2,
+  "row": 19.57,
+  "requires": [
+   "wind_18"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.03
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "hailfall_1",
+  "name": "우박",
+  "description": "쇠뇌 사격 피해 +6%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -12.9,
+  "row": 21.41,
+  "requires": [
+   "wind_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_2",
+  "name": "빠른 손",
+  "description": "공격 속도 +3%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -13.31,
+  "row": 22.57,
+  "requires": [
+   "hailfall_1"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.03
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_scatter",
+  "name": "흩뿌리기",
+  "description": "쇠뇌 사격 발사체 +1, 쇠뇌 사격 피해 +10%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "wind",
+  "column": -13.75,
+  "row": 23.7,
+  "requires": [
+   "hailfall_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "projectiles",
+    "value": 1
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_3",
+  "name": "우박",
+  "description": "쇠뇌 사격 피해 +6%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -14.22,
+  "row": 24.81,
+  "requires": [
+   "hailfall_scatter"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_4",
+  "name": "빠른 손",
+  "description": "공격 속도 +3%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -14.72,
+  "row": 25.91,
+  "requires": [
+   "hailfall_3"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.03
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_driving_hail",
+  "name": "몰아치는 우박",
+  "description": "쇠뇌 사격 관통 +1, 쇠뇌 사격 피해 +12%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "wind",
+  "column": -15.25,
+  "row": 26.99,
+  "requires": [
+   "hailfall_4"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "pierce",
+    "value": 1
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.12
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_5",
+  "name": "우박",
+  "description": "쇠뇌 사격 피해 +6%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -16.16,
+  "row": 27.85,
+  "requires": [
+   "hailfall_driving_hail"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_6",
+  "name": "빠른 손",
+  "description": "공격 속도 +3%.",
+  "icon": "gust",
+  "kind": "minor",
+  "path": "wind",
+  "column": -17.35,
+  "row": 28.54,
+  "requires": [
+   "hailfall_5"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.03
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_hail",
+  "name": "우박 폭풍",
+  "description": "쇠뇌 사격 세 번째 적중마다 맞은 적에게서 갈래 번개가 튀어 나온다(0.4초에 최대 한 번). 쇠뇌 사격 피해 -20%.",
+  "icon": "forked_bolt",
+  "kind": "keystone",
+  "path": "wind",
+  "column": -18.57,
+  "row": 29.2,
+  "requires": [
+   "hailfall_6"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": -0.2
+   }
+  ],
+  "triggers": [
+   {
+    "on": "hit",
+    "skill": {
+     "group": "shot"
+    },
+    "every": 3,
+    "cooldown": 0.4,
+    "effect": {
+     "type": "cast",
+     "skill": "forkline",
+     "at": "target"
+    }
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_7",
+  "name": "우박",
+  "description": "쇠뇌 사격 피해 +6%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -14.0,
+  "row": 27.99,
+  "requires": [
+   "hailfall_driving_hail"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.06
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "hailfall_sleet",
+  "name": "진눈깨비",
+  "description": "공격 속도 +8%.",
+  "icon": "gust",
+  "kind": "notable",
+  "path": "wind",
+  "column": -14.06,
+  "row": 29.19,
+  "requires": [
+   "hailfall_7"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": 0.08
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "hailfall"
+ },
+ {
+  "id": "penumbra_1",
+  "name": "어두워짐",
+  "description": "암영 범위 +8%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "wind",
+  "column": -14.33,
+  "row": 20.49,
+  "requires": [
+   "wind_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_2",
+  "name": "그림자",
+  "description": "최대 생명력 +10.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "wind",
+  "column": -15.32,
+  "row": 21.25,
+  "requires": [
+   "penumbra_1"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_long_dusk",
+  "name": "긴 황혼",
+  "description": "암영 지속시간 +30%, 암영 피해 +15%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "wind",
+  "column": -16.34,
+  "row": 21.99,
+  "requires": [
+   "penumbra_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "durationPercent",
+    "value": 0.3
+   },
+   {
+    "skill": "umbra",
+    "field": "damagePercent",
+    "value": 0.15
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_3",
+  "name": "어두워짐",
+  "description": "암영 범위 +8%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "wind",
+  "column": -17.39,
+  "row": 22.71,
+  "requires": [
+   "penumbra_long_dusk"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_4",
+  "name": "그림자",
+  "description": "최대 생명력 +10.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "wind",
+  "column": -18.45,
+  "row": 23.4,
+  "requires": [
+   "penumbra_3"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_shade_cloak",
+  "name": "그늘 외투",
+  "description": "최대 생명력 +20, 이동 속도 +6%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "wind",
+  "column": -19.55,
+  "row": 24.06,
+  "requires": [
+   "penumbra_4"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 20
+   },
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_5",
+  "name": "어두워짐",
+  "description": "암영 범위 +8%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "wind",
+  "column": -20.66,
+  "row": 24.7,
+  "requires": [
+   "penumbra_shade_cloak"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_6",
+  "name": "그림자",
+  "description": "최대 생명력 +10.",
+  "icon": "bulwark",
+  "kind": "minor",
+  "path": "wind",
+  "column": -21.8,
+  "row": 25.31,
+  "requires": [
+   "penumbra_5"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "add",
+    "value": 10
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_deep_penumbra",
+  "name": "깊은 반그림자",
+  "description": "처치할 때마다 주변에 암영이 일어난다(4초에 최대 한 번). 암영 범위 +30%, 최대 생명력 -15%.",
+  "icon": "echo",
+  "kind": "keystone",
+  "path": "wind",
+  "column": -22.96,
+  "row": 25.89,
+  "requires": [
+   "penumbra_6"
+  ],
+  "statMods": [
+   {
+    "stat": "maxLife",
+    "op": "percent",
+    "value": -0.15
+   }
+  ],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "areaPercent",
+    "value": 0.3
+   }
+  ],
+  "triggers": [
+   {
+    "on": "kill",
+    "cooldown": 4,
+    "effect": {
+     "type": "cast",
+     "skill": "umbra",
+     "at": "caster"
+    }
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_7",
+  "name": "어두워짐",
+  "description": "암영 범위 +8%.",
+  "icon": "echo",
+  "kind": "minor",
+  "path": "wind",
+  "column": -21.14,
+  "row": 23.08,
+  "requires": [
+   "penumbra_shade_cloak"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "areaPercent",
+    "value": 0.08
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "penumbra_gloaming",
+  "name": "어스름",
+  "description": "암영 재사용 시간 -20%.",
+  "icon": "echo",
+  "kind": "notable",
+  "path": "wind",
+  "column": -22.98,
+  "row": 22.84,
+  "requires": [
+   "penumbra_7"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "umbra",
+    "field": "cooldownPercent",
+    "value": -0.2
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "penumbra"
+ },
+ {
+  "id": "far_dark_1",
+  "name": "먼 시야",
+  "description": "쇠뇌 사격 사거리 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -15.69,
+  "row": 19.47,
+  "requires": [
+   "wind_gate"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "rangePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_2",
+  "name": "흔들리지 않는 조준",
+  "description": "치명타 확률 +1%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -17.2,
+  "row": 19.76,
+  "requires": [
+   "far_dark_1"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.01
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_far_mark",
+  "name": "먼 표적",
+  "description": "쇠뇌 사격 사거리 +25%, 쇠뇌 사격 피해 +10%.",
+  "icon": "forked_bolt",
+  "kind": "notable",
+  "path": "wind",
+  "column": -18.72,
+  "row": 20.01,
+  "requires": [
+   "far_dark_2"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "rangePercent",
+    "value": 0.25
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_3",
+  "name": "먼 시야",
+  "description": "쇠뇌 사격 사거리 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -20.24,
+  "row": 20.21,
+  "requires": [
+   "far_dark_far_mark"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "rangePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_4",
+  "name": "흔들리지 않는 조준",
+  "description": "치명타 확률 +1%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -21.76,
+  "row": 20.36,
+  "requires": [
+   "far_dark_3"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.01
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_heavy_bolt",
+  "name": "무거운 볼트",
+  "description": "중쿼럴 피해 +30%, 쇠뇌 사격 밀쳐내기 +20%.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "wind",
+  "column": -23.29,
+  "row": 20.46,
+  "requires": [
+   "far_dark_4"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "quarrel_heave",
+    "field": "damagePercent",
+    "value": 0.3
+   },
+   {
+    "group": "shot",
+    "field": "knockbackPercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_5",
+  "name": "먼 시야",
+  "description": "쇠뇌 사격 사거리 +10%.",
+  "icon": "forked_bolt",
+  "kind": "minor",
+  "path": "wind",
+  "column": -24.56,
+  "row": 20.83,
+  "requires": [
+   "far_dark_heavy_bolt"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "rangePercent",
+    "value": 0.1
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_6",
+  "name": "흔들리지 않는 조준",
+  "description": "치명타 확률 +1%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -25.65,
+  "row": 21.39,
+  "requires": [
+   "far_dark_5"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.01
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_dead_of_night",
+  "name": "깊은 밤",
+  "description": "쇠뇌 사격이 적을 3명 더 관통하고 더 멀리 날린다. 구르기 후 3초 동안 장막에 가려지며 쇠뇌 사격 피해가 40% 증가한다. 공격 속도 -15%.",
+  "icon": "echo",
+  "kind": "keystone",
+  "path": "wind",
+  "column": -26.76,
+  "row": 21.93,
+  "requires": [
+   "far_dark_6"
+  ],
+  "statMods": [
+   {
+    "stat": "attackSpeed",
+    "op": "add",
+    "value": -0.15
+   }
+  ],
+  "skillMods": [
+   {
+    "group": "shot",
+    "field": "pierce",
+    "value": 3
+   },
+   {
+    "group": "shot",
+    "field": "knockbackPercent",
+    "value": 0.5
+   }
+  ],
+  "triggers": [
+   {
+    "on": "use",
+    "skill": {
+     "group": "roll"
+    },
+    "effect": {
+     "type": "empower",
+     "skillMods": [
+      {
+       "group": "shot",
+       "field": "damagePercent",
+       "value": 0.4
+      }
+     ],
+     "duration": 3,
+     "look": {
+      "color": "#3b2470",
+      "shade": 0.26
+     }
+    }
+   }
+  ],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_7",
+  "name": "흔들리지 않는 조준",
+  "description": "치명타 확률 +1%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -24.67,
+  "row": 19.26,
+  "requires": [
+   "far_dark_heavy_bolt"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.01
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "far_dark_still_breath",
+  "name": "고요한 숨",
+  "description": "치명타 확률 +4%, 치명타 피해 +20%.",
+  "icon": "focus",
+  "kind": "notable",
+  "path": "wind",
+  "column": -26.34,
+  "row": 18.87,
+  "requires": [
+   "far_dark_7"
+  ],
+  "statMods": [
+   {
+    "stat": "critChance",
+    "op": "add",
+    "value": 0.04
+   },
+   {
+    "stat": "critMultiplier",
+    "op": "add",
+    "value": 0.2
+   }
+  ],
+  "skillMods": [],
+  "weapon": "crossbow",
+  "specialty": "far_dark"
+ },
+ {
+  "id": "heavy_shot",
+  "name": "무거운 사격",
+  "description": "쿼럴을 모을 수 있다. 놓으면 열을 관통하며 적들을 멀리 날리는 무거운 볼트 한 발이 나간다.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "wind",
+  "column": -8.23,
+  "row": 11.15,
+  "requires": [
+   "wind_11"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "quarrel",
+    "becomes": "quarrel_heave"
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wind_19",
+  "name": "화살깃",
+  "description": "쿼럴 피해 +12%, 쇠뇌 사격 피해 +5%.",
+  "icon": "focus",
+  "kind": "minor",
+  "path": "wind",
+  "column": -9.32,
+  "row": 12.02,
+  "requires": [
+   "heavy_shot"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "quarrel",
+    "field": "damagePercent",
+    "value": 0.12
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.05
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "wailing_wave",
+  "name": "울부짖는 파도",
+  "description": "유령 파도 피해 +20%, 유령 파도 범위 +20%, 쇠뇌 사격 피해 +20%.",
+  "icon": "thunder_ring",
+  "kind": "notable",
+  "path": "wind",
+  "column": 1.82,
+  "row": 7.28,
+  "requires": [
+   "shadow_veil"
+  ],
+  "statMods": [],
+  "skillMods": [
+   {
+    "skill": "ghost_wave",
+    "field": "damagePercent",
+    "value": 0.2
+   },
+   {
+    "skill": "ghost_wave",
+    "field": "areaPercent",
+    "value": 0.2
+   },
+   {
+    "group": "shot",
+    "field": "damagePercent",
+    "value": 0.2
+   }
+  ],
+  "weapon": "crossbow"
+ },
+ {
+  "id": "shoulder_through",
+  "name": "어깨치기",
+  "description": "회피 구르기가 어깨치기가 된다. 더 짧은 돌진이며, 멈춘 자리의 땅이 타올라 적들을 밀쳐내고 불붙인다. 이동 속도 +6%.",
+  "icon": "bulwark",
+  "kind": "notable",
+  "path": "stone",
+  "column": -3.05,
+  "row": 0.55,
+  "requires": [
+   "bedrock"
+  ],
+  "statMods": [
+   {
+    "stat": "moveSpeed",
+    "op": "percent",
+    "value": 0.06
+   }
+  ],
+  "skillMods": [],
+  "variants": [
+   {
+    "skill": "dodge_roll",
+    "becomes": "dodge_roll_shoulder"
+   }
+  ],
+  "triggers": [
+   {
+    "on": "use",
+    "skill": {
+     "skill": "dodge_roll_shoulder"
+    },
+    "effect": {
+     "type": "cast",
+     "skill": "shoulder_flare",
+     "at": "target"
+    }
+   }
+  ],
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_banked_fire",
+  "name": "덮어둔 불",
+  "description": "덮어둔 불 해금: 주변에 덮어둔 불이 매초 가까운 모든 것을 치며, 칠 때마다 뜨거워져 최대 두 배가 된다.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "stone",
+  "column": -10.4,
+  "row": 2.9,
+  "requires": [
+   "mountain_falls"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "banked_fire",
+  "weapon": "heavy"
+ },
+ {
+  "id": "stone_fire_burst",
+  "name": "화염 폭발",
+  "description": "화염 폭발 해금: 몇 걸음 앞의 땅에서 불꽃이 터지고, 닿은 것은 계속 타오른다.",
+  "icon": "heavy_strike",
+  "kind": "notable",
+  "path": "stone",
+  "column": -10.9,
+  "row": -3.0,
+  "requires": [
+   "heaving_cleave"
+  ],
+  "statMods": [],
+  "skillMods": [],
+  "unlock": "fire_burst",
+  "weapon": "heavy"
+ }
+]

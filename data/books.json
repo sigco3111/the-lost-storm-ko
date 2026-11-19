@@ -1,0 +1,21 @@
+[
+ {
+  "id": "journal",
+  "title": "낡은 일지",
+  "pages": [
+   {
+    "id": "do_not",
+    "lines": [
+     "하지 마시게."
+    ],
+    "address": "{name}에게.",
+    "unnamed": "그대에게.",
+    "voice": "journal_do_not",
+    "when": [],
+    "sets": {
+     "opening": "read"
+    }
+   }
+  ]
+ }
+]

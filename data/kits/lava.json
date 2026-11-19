@@ -1,0 +1,1087 @@
+{
+  "id": "lava",
+  "letters": {
+    "themes": [
+      "b",
+      "s",
+      "b",
+      "s",
+      "h"
+    ],
+    "passage": "s",
+    "pond": "v",
+    "shore": "c"
+  },
+  "shape": {
+    "radiusLeast": 5.5,
+    "radiusMost": 8,
+    "alcoves": 2,
+    "pondChance": 0.45
+  },
+  "walls": {
+    "band": 6,
+    "back": 1,
+    "side": 2,
+    "front": 4
+  },
+  "stairs": {
+    "prop": "basalt_stair",
+    "y": -0.9
+  },
+  "density": {
+    "props": 0.174,
+    "caches": 0.0221
+  },
+  "caches": [
+    "cache_basket",
+    "cache_coin_pile",
+    "cache_gold_bag",
+    "cache_jug",
+    "cache_satchel",
+    "cache_urn",
+    "cache_urn_square"
+  ],
+  "families": [
+    {
+      "members": [
+        {
+          "monster": "cinder_hound",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "ember_spitter",
+          "count": 1
+        },
+        {
+          "monster": "cinder_hound",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "slagback",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "cinder_mite",
+          "count": 6
+        }
+      ],
+      "waits": 6
+    },
+    {
+      "members": [
+        {
+          "monster": "slagback",
+          "count": 1
+        },
+        {
+          "monster": "ember_spitter",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "cinder_alpha",
+          "count": 0.6
+        },
+        {
+          "monster": "cinder_hound",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "spitter_matron",
+          "count": 0.6
+        },
+        {
+          "monster": "ember_spitter",
+          "count": 1
+        },
+        {
+          "monster": "cinder_mite",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "slagback_elder",
+          "count": 0.6
+        },
+        {
+          "monster": "cinder_hound",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "clusters": [
+    [
+      {
+        "prop": "lava_scree",
+        "dx": 3.93,
+        "dz": 2.34,
+        "turn": 28
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": 1.82,
+        "dz": 0.03,
+        "turn": 167
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": 0.26,
+        "dz": 3.74,
+        "turn": 154
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 1.69,
+        "dz": 5.3,
+        "turn": 250
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 5.8,
+        "dz": 4.36,
+        "turn": 55
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 7.63,
+        "dz": 3.33,
+        "turn": 354
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 4.21,
+        "dz": 4.87,
+        "turn": 112
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 0.17,
+        "dz": -1.43,
+        "turn": 292
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": -0.76,
+        "dz": 0.79,
+        "turn": 263
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -3.9,
+        "dz": -5.94,
+        "turn": 221
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -4.82,
+        "dz": -0.66,
+        "turn": 56
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -6.83,
+        "dz": -4.19,
+        "turn": 80
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -1.49,
+        "dz": -6.21,
+        "turn": 220
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -5.66,
+        "dz": -3.06,
+        "turn": 325
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": -2.02,
+        "dz": -3.33,
+        "turn": 235
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": -2.34,
+        "dz": -3.13,
+        "turn": 73
+      },
+      {
+        "prop": "lava_scree",
+        "dx": -5.44,
+        "dz": 2.56,
+        "turn": 72
+      },
+      {
+        "prop": "lava_scree",
+        "dx": -0.39,
+        "dz": 0.04,
+        "turn": 96
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": 4.39,
+        "dz": -0.56,
+        "turn": 116
+      },
+      {
+        "prop": "lava_scree",
+        "dx": -5.65,
+        "dz": -0.75,
+        "turn": 101
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 4.54,
+        "dz": -2.76,
+        "turn": 60
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 6.39,
+        "dz": -1.74,
+        "turn": 164
+      },
+      {
+        "prop": "lava_shards",
+        "dx": -7.36,
+        "dz": 4.63,
+        "turn": 53
+      },
+      {
+        "prop": "lava_chunk_a",
+        "dx": -2.65,
+        "dz": 1.73,
+        "turn": 65
+      },
+      {
+        "prop": "lava_chunk_a",
+        "dx": 2.72,
+        "dz": 0.94,
+        "turn": 150
+      },
+      {
+        "prop": "lava_chunk_a",
+        "dx": -3.77,
+        "dz": 4.9,
+        "turn": 10
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": -0.82,
+        "dz": -0.85,
+        "turn": 82
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": -0.33,
+        "dz": -6.1,
+        "turn": 218
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": -2.69,
+        "dz": 4.71,
+        "turn": 12
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": 2.36,
+        "dz": -6.1,
+        "turn": 178
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": 4.32,
+        "dz": -3.4,
+        "turn": 264
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -0.18,
+        "dz": 3.38,
+        "turn": 26
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -0.3,
+        "dz": 5.73,
+        "turn": 185
+      },
+      {
+        "prop": "ash_skull",
+        "dx": 2.02,
+        "dz": -3.69,
+        "turn": 136
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -1.84,
+        "dz": -3.07,
+        "turn": 242
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 0.11,
+        "dz": 1.57,
+        "turn": 296
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 1.91,
+        "dz": -1.76,
+        "turn": 248
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -1.76,
+        "dz": 2.16,
+        "turn": 66
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": 2.43,
+        "dz": 0.28,
+        "turn": 56
+      },
+      {
+        "prop": "lava_scree",
+        "dx": -2.16,
+        "dz": -2.37,
+        "turn": 343
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": -1.91,
+        "dz": -5.26,
+        "turn": 105
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": -4.44,
+        "dz": -8.26,
+        "turn": 145
+      },
+      {
+        "prop": "lava_rubble_shard",
+        "dx": 7.98,
+        "dz": 3.83,
+        "turn": 182
+      },
+      {
+        "prop": "lava_rubble_shard",
+        "dx": -2.77,
+        "dz": 1.52,
+        "turn": 175
+      },
+      {
+        "prop": "basalt_stub",
+        "dx": 2.83,
+        "dz": 3.55,
+        "turn": 322
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": 5.18,
+        "dz": 1.83,
+        "turn": 308
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": -0.0,
+        "dz": 2.39,
+        "turn": 261
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -4.97,
+        "dz": -6.04,
+        "turn": 63
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": -2.92,
+        "dz": 4.4,
+        "turn": 142
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 5.48,
+        "dz": 4.87,
+        "turn": 165
+      },
+      {
+        "prop": "lava_shards",
+        "dx": -4.7,
+        "dz": -0.78,
+        "turn": 152
+      }
+    ],
+    [
+      {
+        "prop": "lava_chunk_b",
+        "dx": -6.67,
+        "dz": -0.86,
+        "turn": 267
+      },
+      {
+        "prop": "lava_scree",
+        "dx": -4.26,
+        "dz": 0.21,
+        "turn": 314
+      },
+      {
+        "prop": "lava_scree",
+        "dx": 9.18,
+        "dz": -3.27,
+        "turn": 79
+      },
+      {
+        "prop": "lava_shards",
+        "dx": -2.15,
+        "dz": 1.66,
+        "turn": 290
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": -0.14,
+        "dz": -0.6,
+        "turn": 141
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": -1.37,
+        "dz": 4.93,
+        "turn": 320
+      },
+      {
+        "prop": "lava_chunk_b",
+        "dx": -3.01,
+        "dz": 0.18,
+        "turn": 115
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 3.69,
+        "dz": -5.68,
+        "turn": 163
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": -0.78,
+        "dz": 0.98,
+        "turn": 343
+      },
+      {
+        "prop": "lava_rubble_shard",
+        "dx": 1.66,
+        "dz": -1.37,
+        "turn": 266
+      },
+      {
+        "prop": "lava_rubble_shard",
+        "dx": 1.75,
+        "dz": 2.81,
+        "turn": 50
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": 0.13,
+        "dz": 5.79,
+        "turn": 353
+      },
+      {
+        "prop": "lava_shards",
+        "dx": -0.08,
+        "dz": -3.13,
+        "turn": 146
+      }
+    ],
+    [
+      {
+        "prop": "basalt_spires",
+        "dx": -2.06,
+        "dz": 1.48,
+        "turn": 75
+      },
+      {
+        "prop": "lava_shards",
+        "dx": -0.39,
+        "dz": -0.87,
+        "turn": 330
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 1.5,
+        "dz": -1.76,
+        "turn": 94
+      }
+    ],
+    [
+      {
+        "prop": "lava_chunk_a",
+        "dx": 2.15,
+        "dz": -3.11,
+        "turn": 256
+      },
+      {
+        "prop": "basalt_stub",
+        "dx": -4.29,
+        "dz": 0.95,
+        "turn": 326
+      },
+      {
+        "prop": "basalt_stub",
+        "dx": 0.93,
+        "dz": 2.0,
+        "turn": 38
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 2.78,
+        "dz": 0.02,
+        "turn": 234
+      },
+      {
+        "prop": "lava_shards",
+        "dx": -1.59,
+        "dz": 0.13,
+        "turn": 16
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": 3.59,
+        "dz": 0.29,
+        "turn": 106
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": 1.14,
+        "dz": 0.87,
+        "turn": 178
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": -3.53,
+        "dz": -0.08,
+        "turn": 326
+      }
+    ],
+    [
+      {
+        "prop": "basalt_stub",
+        "dx": -0.37,
+        "dz": -0.25,
+        "turn": 90
+      },
+      {
+        "prop": "lava_rubble_shard",
+        "dx": -1.69,
+        "dz": 2.96,
+        "turn": 233
+      },
+      {
+        "prop": "lava_rubble_shard",
+        "dx": 2.07,
+        "dz": -2.72,
+        "turn": 228
+      }
+    ],
+    [
+      {
+        "prop": "lava_chunk_a",
+        "dx": 1.74,
+        "dz": 0.82,
+        "turn": 23
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -0.7,
+        "dz": -1.29,
+        "turn": 340
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -1.05,
+        "dz": 0.47,
+        "turn": 152
+      }
+    ],
+    [
+      {
+        "prop": "lava_chunk_b",
+        "dx": 1.12,
+        "dz": -2.28,
+        "turn": 192
+      },
+      {
+        "prop": "ash_skull",
+        "dx": 0.28,
+        "dz": 0.06,
+        "turn": 144
+      }
+    ],
+    [
+      {
+        "prop": "lava_chunk_b",
+        "dx": -0.82,
+        "dz": -1.59,
+        "turn": 221
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -0.32,
+        "dz": 1.65,
+        "turn": 41
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": 0.14,
+        "dz": -2.78,
+        "turn": 9
+      },
+      {
+        "prop": "ash_skull",
+        "dx": -0.45,
+        "dz": -0.14,
+        "turn": 193
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 0.32,
+        "dz": 2.92,
+        "turn": 277
+      }
+    ],
+    [
+      {
+        "prop": "ash_ribs",
+        "dx": 0.11,
+        "dz": -0.84,
+        "turn": 195
+      },
+      {
+        "prop": "basalt_stub",
+        "dx": -0.11,
+        "dz": 0.84,
+        "turn": 186
+      }
+    ],
+    [
+      {
+        "prop": "basalt_stub",
+        "dx": 1.44,
+        "dz": 0.47,
+        "turn": 140
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": -1.44,
+        "dz": -0.47,
+        "turn": 79
+      }
+    ],
+    [
+      {
+        "prop": "basalt_stub",
+        "dx": 1.58,
+        "dz": -0.6,
+        "turn": 45
+      },
+      {
+        "prop": "ash_ribcage",
+        "dx": -1.59,
+        "dz": 0.6,
+        "turn": 18
+      }
+    ],
+    [
+      {
+        "prop": "lava_rubble_shard",
+        "dx": -1.26,
+        "dz": -1.04,
+        "turn": 262
+      },
+      {
+        "prop": "lava_shards",
+        "dx": 1.27,
+        "dz": 1.04,
+        "turn": 147
+      }
+    ],
+    [
+      {
+        "prop": "ash_ribcage",
+        "dx": -1.25,
+        "dz": 0.54,
+        "turn": 58
+      },
+      {
+        "prop": "ash_skull",
+        "dx": 1.25,
+        "dz": -0.54,
+        "turn": 194
+      }
+    ],
+    [
+      {
+        "prop": "lava_chunk_a",
+        "dx": -0.93,
+        "dz": -1.39,
+        "turn": 277
+      },
+      {
+        "prop": "lava_scree",
+        "dx": 0.93,
+        "dz": 1.38,
+        "turn": 77
+      }
+    ],
+    [
+      {
+        "prop": "lava_scree",
+        "dx": -0.26,
+        "dz": 1.55,
+        "turn": 25
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": 0.26,
+        "dz": -1.55,
+        "turn": 329
+      }
+    ],
+    [
+      {
+        "prop": "lava_shards",
+        "dx": -0.41,
+        "dz": 1.59,
+        "turn": 6
+      },
+      {
+        "prop": "basalt_spires",
+        "dx": 0.41,
+        "dz": -1.6,
+        "turn": 140
+      }
+    ],
+    [
+      {
+        "prop": "ash_skull",
+        "dx": 0.47,
+        "dz": 1.08,
+        "turn": 103
+      },
+      {
+        "prop": "ash_ribs",
+        "dx": -0.48,
+        "dz": -1.08,
+        "turn": 188
+      }
+    ]
+  ],
+  "zone": {
+    "markerSurfaces": {"stone": "scorched_stone"},
+    "kind": "wild",
+    "ranks": true,
+    "floors": {
+      "b": "basalt",
+      "s": "scorched_stone",
+      "h": "scorched_stone",
+      "c": "cooled_crust",
+      "L": "lava_bed",
+      "v": "vent_bed"
+    },
+    "outside": {
+      "surface": "scorch_bed",
+      "reach": 3,
+      "barrier": null
+    },
+    "walls": null,
+    "scatter": [
+      {
+        "type": "cliff",
+        "props": [
+          "lava_rubble_chip",
+          "lava_rubble_grit"
+        ],
+        "side": "foot",
+        "step": 1.3,
+        "drop": 2.5,
+        "cover": 0.6,
+        "tuck": 0.2,
+        "size": {
+          "least": 0.8,
+          "most": 1.1
+        }
+      },
+      {
+        "type": "around",
+        "props": [
+          "lava_rubble_chip",
+          "lava_rubble_grit"
+        ],
+        "anchors": [
+          "basalt_spire",
+          "lava_chunk_a",
+          "lava_chunk_b",
+          "lava_scree",
+          "lava_glow"
+        ],
+        "each": 10,
+        "spread": 0.8,
+        "size": {
+          "least": 0.95,
+          "most": 1.2
+        }
+      },
+      {
+        "type": "open",
+        "props": [
+          "lava_ash_drift_a",
+          "lava_ash_drift_b",
+          "lava_crust_patch"
+        ],
+        "count": 34,
+        "clump": 3,
+        "spread": 2.4,
+        "size": {
+          "least": 0.8,
+          "most": 1.3
+        },
+        "clear": 1.4
+      },
+      {
+        "type": "open",
+        "props": [
+          "lava_chain_coil",
+          "lava_pickaxe_heads",
+          "lava_spear_down"
+        ],
+        "count": 12,
+        "clump": 1,
+        "spread": 0,
+        "size": {
+          "least": 0.9,
+          "most": 1.1
+        },
+        "clear": 1.5
+      },
+      {
+        "type": "around",
+        "props": [
+          "lava_ash_drift_a",
+          "lava_ash_drift_b"
+        ],
+        "anchors": [
+          "basalt_spire",
+          "lava_chunk_a",
+          "lava_chunk_b",
+          "lava_scree",
+          "lava_glow"
+        ],
+        "each": 1,
+        "spread": 1.4,
+        "size": {
+          "least": 0.8,
+          "most": 1.2
+        }
+      }
+    ],
+    "packReturn": {
+      "after": 90,
+      "away": 30
+    },
+    "surge": null,
+    "ambience": {
+      "background": "#080403",
+      "abyss": "#1e0703",
+      "fogNear": 38,
+      "fogFar": 86,
+      "skyColor": "#4e5668",
+      "groundColor": "#a8481c",
+      "skyIntensity": 6.6,
+      "keyColor": "#d8a482",
+      "keyIntensity": 3.5
+    },
+    "weather": {
+      "lightning": null,
+      "rain": 0,
+      "wet": 0,
+      "mistWall": null,
+      "embers": 0.7
+    },
+    "heroLight": {
+      "strength": 19,
+      "radius": 22,
+      "height": 7,
+      "falloff": 1,
+      "rim": 0.5
+    },
+    "terrain": {
+      "rise": 1.84,
+      "groundStep": 0.6,
+      "cliff": "basalt_cliff",
+      "rough": {
+        "reach": 1.2,
+        "scale": 3,
+        "calm": [
+          "v",
+          "c"
+        ]
+      },
+      "blends": [
+        {
+          "surface": "ash",
+          "scale": 6,
+          "cover": 0.36
+        },
+        {
+          "surface": "cracked_basalt",
+          "scale": 6,
+          "cover": 0.2
+        },
+        {
+          "surface": "cooled_crust",
+          "scale": 4,
+          "cover": 0.17
+        },
+        {
+          "surface": "cooled_crust",
+          "scale": 1.5,
+          "cover": 0.8,
+          "near": "v",
+          "reach": 2.6
+        },
+        {
+          "surface": "lava",
+          "scale": 1.0,
+          "cover": 0.72,
+          "near": "v",
+          "reach": 1.7
+        },
+        {
+          "surface": "vent_ground",
+          "scale": 0.8,
+          "cover": 0.6,
+          "near": "v",
+          "reach": 0.9
+        }
+      ],
+      "cliffs": [
+        {
+          "props": [
+            "lava_rock_face_b",
+            "lava_boulder",
+            "lava_chunk_a",
+            "lava_boulder",
+            "lava_rock_face_a",
+            "lava_chunk_a"
+          ],
+          "side": "foot",
+          "step": 2.5,
+          "drop": 2.5,
+          "cover": 0.8,
+          "tuck": 0.6,
+          "size": {
+            "least": 0.7,
+            "most": 1.2
+          }
+        },
+        {
+          "props": [
+            "lava_chunk_a",
+            "lava_chunk_b",
+            "lava_shards",
+            "lava_shards",
+            "lava_chunk_b"
+          ],
+          "side": "rim",
+          "step": 2.6,
+          "drop": 2.5,
+          "cover": 0.7,
+          "tuck": 0.4,
+          "size": {
+            "least": 0.6,
+            "most": 1.1
+          }
+        },
+        {
+          "props": [
+            "lava_rubble_heap",
+            "lava_chunk_vent",
+            "lava_rubble_heap",
+            "lava_chunk_b",
+            "lava_chunk_vent"
+          ],
+          "side": "foot",
+          "step": 3.2,
+          "drop": 2.5,
+          "cover": 0.8,
+          "tuck": 0.9,
+          "size": {
+            "least": 0.85,
+            "most": 1.3
+          }
+        },
+        {
+          "props": [
+            "lava_plank_pile",
+            "lava_rubble_heap",
+            "lava_shield_broken",
+            "lava_plank_pile",
+            "lava_rubble_heap",
+            "lava_chain_coil"
+          ],
+          "side": "foot",
+          "step": 5,
+          "drop": 2.5,
+          "cover": 0.6,
+          "tuck": 0.8,
+          "size": {
+            "least": 0.8,
+            "most": 1.1
+          }
+        }
+      ]
+    }
+  }
+}

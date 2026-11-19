@@ -1,0 +1,285 @@
+import type { Object3D } from 'three';
+import { Color, PointLight } from 'three';
+import type { AreaDelivery } from '../../sim/content/shape-types.ts';
+import type { SkillDef } from '../../sim/content/types.ts';
+import type { VfxBurn, VfxFlare, VfxImpact } from '../../sim/content/vfx-types.ts';
+import { areaOf } from '../../sim/world/areas.ts';
+import type { Actor, AreaState, World, WorldEvent } from '../../sim/world/types.ts';
+import type { EffectKit } from './effect-kit.ts';
+import type { GroundLight } from './ground-light.ts';
+import { createGroundLight, GROUND_LIGHT } from './ground-light.ts';
+import type { BurstOptions } from './particles.ts';
+import { dustHeadings } from './punch.ts';
+import { floorUp } from './terrain-lift.ts';
+
+export const FIRE = {
+  flash: 0xfff1c2,
+  flame: 0xffb347,
+  ember: 0x9a2410,
+  soot: 0x3a2e26,
+  flareFade: 0.09,
+  fadeFrom: 0.55,
+  blastFade: 0.12,
+  blastGlow: 1.5,
+  burnGlow: 0.3,
+  flareGlow: 0.75,
+  groundFill: 0.35,
+  groundBand: 0.7,
+  groundWidth: 0.3,
+  groundWobble: 0.35,
+  groundGrain: 0.65,
+  blastLight: 80,
+  blastFlames: 46,
+  shoveLife: 0.55,
+  shoveSize: 0.9,
+  lights: 1,
+  lightRange: 11,
+  lightDecay: 1.6,
+  lightHeight: 1.4,
+  lightFlare: 0.7,
+  flameRate: 70,
+  flareFlames: 14,
+  flameCap: 10,
+  actorRate: 26,
+  actorFlare: 6,
+  actorHeight: 1.1,
+  actorSpread: 0.35,
+  tickEmbers: 5,
+  hotShare: 0.6,
+  flameFloor: 0.15,
+  flameDrift: 0.6,
+  flameLifeMin: 0.25,
+  flameLifeMax: 0.55,
+  flameSizeMin: 0.45,
+  flameSizeMax: 1,
+  flameRise: -1.5,
+  flameDrag: 1.5,
+  flameJitter: 0.35,
+  emberLifeMin: 0.5,
+  emberLifeMax: 1.1,
+  emberSizeMin: 0.08,
+  emberSizeMax: 0.18,
+  blastSpread: 0.6,
+  blastLift: 5,
+  burnLift: 2.5,
+  flareLift: 4,
+  flareSpread: 0.8,
+  flareEmbers: 0.3,
+  flareEmberHeight: 0.4,
+  idleFlames: 0.4,
+  actorLift: 2.2,
+  actorFlareLift: 3.5,
+} as const;
+
+export function flareLevel(flares: readonly VfxFlare[], since: number): number {
+  let level: number = 0;
+  for (const flare of flares) {
+    if (flare.at > since) break;
+    level += flare.strength * Math.exp(-(since - flare.at) / FIRE.flareFade);
+  }
+  return Math.min(1, level);
+}
+
+export function flaresCrossed(flares: readonly VfxFlare[], from: number, to: number): VfxFlare[] {
+  return flares.filter((flare: VfxFlare): boolean => flare.at > from && flare.at <= to);
+}
+
+export function burnFade(since: number, duration: number): number {
+  if (duration <= 0) return 0;
+  const share: number = since / duration;
+  const t: number = Math.min(1, Math.max(0, (share - FIRE.fadeFrom) / (1 - FIRE.fadeFrom)));
+  return since < 0 ? 0 : 1 - t * t * (3 - 2 * t);
+}
+
+export function rekindle(held: BurnClock | null, skill: string, duration: number): BurnClock {
+  if (held === null || held.skill !== skill) return { skill, duration, age: 0 };
+  return { skill, duration: held.age + duration, age: held.age };
+}
+
+export function blastLevel(age: number): number {
+  return age < 0 ? 0 : Math.exp(-age / FIRE.blastFade);
+}
+
+export interface FireKit {
+  readonly parent: Object3D;
+  readonly kit: EffectKit;
+  readonly spray: (x: number, y: number, z: number, color: Color, count: number, overrides: Partial<BurstOptions>) => void;
+  readonly flashLight: (x: number, y: number, z: number, color: Color, intensity: number) => void;
+  readonly colorOf: (hex: string) => Color;
+  readonly trauma: (amount: number) => void;
+}
+
+export interface FireBursts {
+  blast(area: AreaState): void;
+  ignite(targetId: number, skill: SkillDef, duration: number): void;
+  tick(x: number, z: number): void;
+  take(event: WorldEvent): void;
+  update(dt: number, world: World): void;
+  clear(): void;
+}
+
+interface Patch {
+  readonly ground: GroundLight;
+  readonly light: PointLight | null;
+  readonly look: VfxBurn;
+  readonly color: Color;
+  readonly x: number;
+  readonly z: number;
+  readonly radius: number;
+  readonly duration: number;
+  age: number;
+  owed: number;
+}
+
+export interface BurnClock {
+  readonly skill: string;
+  readonly duration: number;
+  readonly age: number;
+}
+
+interface Burning {
+  readonly skill: string;
+  readonly look: VfxBurn;
+  readonly color: Color;
+  readonly duration: number;
+  age: number;
+  owed: number;
+}
+
+const FLASH: Color = new Color(FIRE.flash);
+const FLAME: Color = new Color(FIRE.flame);
+const EMBER: Color = new Color(FIRE.ember);
+const SOOT: Color = new Color(FIRE.soot);
+
+function actorOf(world: World, id: number): Actor | null {
+  if (world.player.id === id) return world.player;
+  return world.monsters.find((monster: Actor): boolean => monster.id === id) ?? null;
+}
+
+export function createFireBursts(kit: FireKit): FireBursts {
+  const patches: Patch[] = [];
+  const burning: Map<number, Burning> = new Map<number, Burning>();
+  const lights: PointLight[] = [];
+  for (let index: number = 0; index < FIRE.lights; index += 1) {
+    const light: PointLight = new PointLight(FIRE.flame, 0, FIRE.lightRange, FIRE.lightDecay);
+    kit.parent.add(light);
+    lights.push(light);
+  }
+
+  const freeLight = (): PointLight | null => lights.find((light: PointLight): boolean => !patches.some((patch: Patch): boolean => patch.light === light)) ?? null;
+
+  const flames = (x: number, z: number, radius: number, color: Color, count: number, lift: number): void => {
+    for (let index: number = 0; index < count; index += 1) {
+      const angle: number = Math.random() * Math.PI * 2;
+      const reach: number = Math.sqrt(Math.random()) * radius;
+      const hot: boolean = Math.random() < FIRE.hotShare;
+      kit.spray(x + Math.sin(angle) * reach, FIRE.flameFloor, z + Math.cos(angle) * reach, hot ? FLAME : color, 1, { speed: { min: 0, max: FIRE.flameDrift }, lift: { min: lift * 0.5, max: lift }, life: { min: FIRE.flameLifeMin, max: FIRE.flameLifeMax }, size: { min: FIRE.flameSizeMin, max: FIRE.flameSizeMax }, gravity: FIRE.flameRise, drag: FIRE.flameDrag, jitter: FIRE.flameJitter });
+    }
+  };
+
+  const embers = (x: number, y: number, z: number, count: number): void => {
+    kit.spray(x, y, z, EMBER, count, { speed: { min: 0.2, max: 1.4 }, lift: { min: 1, max: 3 }, life: { min: FIRE.emberLifeMin, max: FIRE.emberLifeMax }, size: { min: FIRE.emberSizeMin, max: FIRE.emberSizeMax }, gravity: -0.6, drag: 0.8, jitter: 0.6 });
+  };
+
+  const dropPatch = (patch: Patch): void => {
+    patch.ground.mesh.removeFromParent();
+    patch.ground.dispose();
+    if (patch.light !== null) patch.light.intensity = 0;
+  };
+
+  const bursts: FireBursts = {
+    blast(area: AreaState): void {
+      const look: VfxBurn | null = area.skill.vfx.burn;
+      const delivery: AreaDelivery | null = areaOf(area.skill);
+      if (look === null || delivery === null) return;
+      const color: Color = kit.colorOf(area.skill.vfx.color);
+      const { x, z } = area.pos;
+      const impact: VfxImpact | null = area.skill.vfx.impact;
+      if (impact !== null) kit.kit.impact(x, z, color, impact, area.skill.vfx.light, 0);
+      kit.flashLight(x, FIRE.lightHeight, z, FLASH, FIRE.blastLight * area.skill.vfx.light);
+      kit.trauma(area.skill.shake);
+      flames(x, z, delivery.radius * FIRE.blastSpread, color, FIRE.blastFlames, FIRE.blastLift);
+      const punch = area.skill.vfx.punch;
+      if (punch !== null) {
+        for (const heading of dustHeadings(punch.dust, Math.random() * Math.PI * 2)) {
+          kit.spray(x, 0.2, z, SOOT, 1, { dirX: heading.x, dirZ: heading.z, spread: 0.4, speed: { min: punch.kick * 0.6, max: punch.kick }, lift: { min: 0.2, max: 1.2 }, life: { min: FIRE.shoveLife * 0.6, max: FIRE.shoveLife }, size: { min: FIRE.shoveSize * 0.6, max: FIRE.shoveSize }, gravity: 0.4, drag: 3, jitter: 0.3 });
+        }
+      }
+      const ground: GroundLight = createGroundLight(color, { kind: 'round', radius: delivery.radius, inner: 0, arc: Math.PI * 2 }, { fill: FIRE.groundFill, band: FIRE.groundBand, width: delivery.radius * FIRE.groundWidth, wobble: delivery.radius * FIRE.groundWobble, grain: FIRE.groundGrain });
+      ground.mesh.position.set(x, floorUp(x, GROUND_LIGHT.height, z), z);
+      ground.setNow(0);
+      kit.parent.add(ground.mesh);
+      const light: PointLight | null = freeLight();
+      if (light !== null) {
+        light.color.copy(color);
+        light.position.set(x, floorUp(x, FIRE.lightHeight, z), z);
+      }
+      patches.push({ ground, light, look, color, x, z, radius: delivery.radius, duration: delivery.duration, age: 0, owed: 0 });
+    },
+    ignite(targetId: number, skill: SkillDef, duration: number): void {
+      const look: VfxBurn | null = skill.vfx.burn;
+      if (look === null) return;
+      const held: Burning | null = burning.get(targetId) ?? null;
+      const clock: BurnClock = rekindle(held, skill.id, duration);
+      if (held !== null && held.skill === skill.id) {
+        burning.set(targetId, { ...held, duration: clock.duration });
+        return;
+      }
+      burning.set(targetId, { ...clock, look, color: kit.colorOf(skill.vfx.color), owed: 0 });
+    },
+    tick(x: number, z: number): void {
+      embers(x, FIRE.actorHeight, z, FIRE.tickEmbers);
+    },
+    take(event: WorldEvent): void {
+      if (event.type === 'damage' && event.burn) bursts.tick(event.pos.x, event.pos.z);
+      else if (event.type === 'area' && event.stage === 'start') bursts.blast(event.area);
+      else if (event.type === 'burn') bursts.ignite(event.targetId, event.skill, event.duration);
+    },
+    update(dt: number, world: World): void {
+      for (let index: number = patches.length - 1; index >= 0; index -= 1) {
+        const patch: Patch | undefined = patches[index];
+        if (patch === undefined) continue;
+        const before: number = patch.age;
+        patch.age += dt;
+        const fade: number = burnFade(patch.age, patch.duration);
+        const flare: number = flareLevel(patch.look.flares, patch.age);
+        const level: number = blastLevel(patch.age) * FIRE.blastGlow + fade * (FIRE.burnGlow + flare * FIRE.flareGlow);
+        patch.ground.pose(level, world.time);
+        if (patch.light !== null) patch.light.intensity = patch.look.light * fade * (1 + flare * FIRE.lightFlare);
+        patch.owed += FIRE.flameRate * fade * (FIRE.idleFlames + flare) * dt;
+        const due: number = Math.min(FIRE.flameCap, Math.floor(patch.owed));
+        patch.owed -= due;
+        if (due > 0) flames(patch.x, patch.z, patch.radius, patch.color, due, FIRE.burnLift);
+        for (const crossed of flaresCrossed(patch.look.flares, before, patch.age)) {
+          flames(patch.x, patch.z, patch.radius * FIRE.flareSpread, patch.color, Math.round(FIRE.flareFlames * crossed.strength), FIRE.flareLift);
+          embers(patch.x, FIRE.flareEmberHeight, patch.z, Math.round(patch.look.embers * crossed.strength * FIRE.flareEmbers));
+        }
+        if (patch.age >= patch.duration) {
+          dropPatch(patch);
+          patches.splice(index, 1);
+        }
+      }
+      for (const [id, burn] of burning) {
+        const actor: Actor | null = actorOf(world, id);
+        const before: number = burn.age;
+        burn.age += dt;
+        if (actor === null || !actor.alive || burn.age >= burn.duration) {
+          burning.delete(id);
+          continue;
+        }
+        const fade: number = burnFade(burn.age, burn.duration);
+        burn.owed += FIRE.actorRate * fade * dt;
+        const due: number = Math.floor(burn.owed);
+        burn.owed -= due;
+        if (due > 0) flames(actor.pos.x, actor.pos.z, FIRE.actorSpread, burn.color, due, FIRE.actorLift);
+        for (const crossed of flaresCrossed(burn.look.flares, before, burn.age)) flames(actor.pos.x, actor.pos.z, FIRE.actorSpread, burn.color, Math.round(FIRE.actorFlare * crossed.strength), FIRE.actorFlareLift);
+      }
+    },
+    clear(): void {
+      for (const patch of patches) dropPatch(patch);
+      patches.length = 0;
+      burning.clear();
+    },
+  };
+  return bursts;
+}

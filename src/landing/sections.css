@@ -1,0 +1,279 @@
+main {
+  position: relative;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section-title {
+  margin: 0 0 22px;
+  color: var(--faint);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.played {
+  padding: 40px 0 72px;
+}
+
+.clips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+figure {
+  margin: 0;
+}
+
+.clip-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #0b0e14;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.clip-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.clip-video.shown {
+  opacity: 1;
+}
+
+figcaption {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+figcaption b {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  letter-spacing: 0.05em;
+}
+
+.blocks {
+  display: grid;
+  gap: 64px;
+  padding: 8px 0 80px;
+}
+
+.block {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.block:nth-child(even) picture {
+  order: 2;
+}
+
+.block picture {
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #0b0e14;
+}
+
+.block img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.block:hover img {
+  transform: scale(1.02);
+}
+
+.block h2 {
+  margin: 0 0 12px;
+  font-size: clamp(22px, 2.2vw, 28px);
+}
+
+.block p {
+  margin: 0 0 12px;
+  max-width: 46ch;
+  color: var(--muted);
+}
+
+.live {
+  display: none;
+  max-width: 340px;
+  margin-top: 18px;
+  padding: 14px 16px 12px;
+  border-radius: 4px;
+  background: var(--panel);
+}
+
+.live.ready {
+  display: block;
+  animation: rise var(--spring-smooth-ms) var(--spring-smooth) both;
+}
+
+.live-head {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.live-head b {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.live h3 {
+  margin: 12px 0 6px;
+  color: var(--faint);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.live-top {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.live-top li {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.live-top li:first-child {
+  border-top: 0;
+}
+
+.live-rank {
+  color: var(--faint);
+  text-align: right;
+}
+
+.live-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.live-name.on::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 7px;
+  border-radius: 50%;
+  background: #7ddc8a;
+  vertical-align: 2px;
+}
+
+.live-level {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.live-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.alpha {
+  max-width: 680px;
+  padding: 48px 0 72px;
+  border-top: 1px solid var(--line);
+}
+
+.alpha h2 {
+  margin: 0 0 14px;
+  font-size: clamp(22px, 2.2vw, 28px);
+}
+
+.alpha p {
+  margin: 0 0 12px;
+  color: var(--muted);
+}
+
+.alpha .play {
+  margin-top: 14px;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 20px var(--gutter) calc(28px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+}
+
+footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .played {
+    padding: 32px 0 48px;
+  }
+
+  .clips {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .blocks {
+    gap: 44px;
+    padding-bottom: 56px;
+  }
+
+  .block {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .block:nth-child(even) picture {
+    order: 0;
+  }
+
+  .live-top li:nth-child(n + 6) {
+    display: none;
+  }
+
+  .alpha {
+    padding: 36px 0 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live,
+  .live.ready,
+  .block img {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "the-lost-storm",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "The Lost Storm: a free isometric action RPG that runs in the browser, on Three.js and TypeScript.",
+  "homepage": "https://theloststorm.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marginsystems/the-lost-storm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marginsystems/the-lost-storm/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build",
+    "build:portal": "tsc -p tsconfig.json && vite build --mode portal && node tools/pack-portal.ts",
+    "build:gamepix": "tsc -p tsconfig.json && vite build --mode gamepix && node tools/pack-portal.ts gamepix",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "oxlint --type-aware --deny-warnings",
+    "check": "npm run typecheck && npm run lint && npm test",
+    "test": "node tools/affected.ts --all --run",
+    "test:isolated": "node --test --test-concurrency=4 'sim/**/*.test.ts' 'src/**/*.test.ts' 'test/**/*.test.ts' 'tools/**/*.test.ts'",
+    "test:affected": "node tools/affected.ts --run",
+    "assets:inspect": "node tools/inspect-glb.ts",
+    "simulate": "node tools/simulate.ts",
+    "guide:refresh": "sh tools/guide/refresh.sh"
+  },
+  "dependencies": {
+    "@fontsource/alegreya-sans": "^5.3.0",
+    "@fontsource/cinzel": "^5.3.0",
+    "@fontsource/noto-sans-kr": "^5.3.1",
+    "@fontsource/noto-serif-kr": "^5.3.1",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
+    "@types/node": "22.20.5",
+    "@types/three": "0.186.0",
+    "meshoptimizer": "^1.3.0",
+    "oxlint": "^1.93.0",
+    "oxlint-tsgolint": "^7.0.2006",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  }
+}

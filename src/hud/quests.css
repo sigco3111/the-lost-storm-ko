@@ -1,0 +1,84 @@
+.hud-quests {
+  position: absolute;
+  top: 44px;
+  right: 18px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: right;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), visibility 0s;
+}
+
+.quest {
+  align-self: flex-end;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 5px 10px 6px;
+  border-radius: 4px;
+  background: var(--legible-plate);
+  opacity: 0;
+  transform: translateX(26px);
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), transform var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.quest.in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.quest.complete {
+  opacity: 0;
+  transform: translateX(26px);
+}
+
+.quest-name {
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--ember);
+  text-shadow: var(--legible-shadow);
+}
+
+.quest-goal {
+  margin-top: 2px;
+  max-height: 4.5em;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--text);
+  text-shadow: var(--legible-shadow);
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), transform var(--spring-smooth-ms) var(--spring-smooth), color var(--spring-smooth-ms) var(--spring-smooth), max-height var(--spring-smooth-ms) var(--spring-smooth), margin-top var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.quest-goal.shared {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+}
+
+.quest-goal.done {
+  opacity: 0;
+  transform: translateX(14px);
+  color: var(--storm);
+  text-decoration: line-through;
+}
+
+.quest-goal.next {
+  animation: quest-next var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+@keyframes quest-next {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.banner.quest .banner-title {
+  color: var(--ember);
+  font-size: 34px;
+}

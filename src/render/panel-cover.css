@@ -1,0 +1,21 @@
+#overlays .exit-label,
+#overlays .npc-label,
+#overlays .player-label,
+#overlays .damage-number {
+  transition: filter var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+#overlays .loot-label {
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    filter var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+#overlays .under-panel {
+  filter: opacity(0);
+  pointer-events: none;
+}
+
+#overlays .under-panel * {
+  pointer-events: none;
+}

@@ -1,0 +1,120 @@
+import { heightAt } from '../../sim/nav/terrain.ts';
+import type { Scene } from 'three';
+import { Color, Vector2 } from 'three';
+import type { ObjectiveTarget, TargetSource } from '../../sim/world/objective.ts';
+import { LIVE_TARGETS } from '../../sim/world/objective.ts';
+import { routeCorner } from '../../sim/world/route-corner.ts';
+import type { Vec2 } from '../../sim/math.ts';
+import type { World } from '../../sim/world/types.ts';
+import { el } from '../hud/dom.ts';
+import type { LightPool } from '../render/light-pool.ts';
+import { createLightPool } from '../render/light-pool.ts';
+import type { IsoCamera } from '../render/iso-camera.ts';
+import { arrowToward, bearingOf, easeBearing } from './arrow-geometry.ts';
+import { glowsAt } from './objective-glow.ts';
+import type { ArrowPlacement, Point, Rect } from './arrow-geometry.ts';
+import css from './objective.css?inline';
+import type { LabelGlide } from '../render/label-glide.ts';
+import { createGlide, glideToward } from '../render/label-glide.ts';
+
+export const OBJECTIVE = {
+  color: 0xe8b866,
+  glowStrength: 0.12,
+  pulseSpeed: 2.4,
+  pulseDepth: 0.25,
+  lift: 0.09,
+  ease: 6,
+  screenMargin: 56,
+  hudGap: 14,
+  hudReadSeconds: 0.25,
+  routeSeconds: 0.25,
+  hudBlockers: ['.hud-bottom', '.hud-globe-group', '.minimap', '.hud-quests', '.hud-top', '.hud-boss.visible', '.tc-btn', '.tc-stick', '.tc-rotate', '.npc-label > span'],
+  hintBoxes: ['.hud-hint.visible'],
+} as const;
+
+function hudRects(root: ParentNode, selectors: readonly string[]): Rect[] {
+  const rects: Rect[] = [];
+  for (const selector of selectors) {
+    for (const element of root.querySelectorAll(selector)) {
+      const box: DOMRect = element.getBoundingClientRect();
+      if (box.width > 0 && box.height > 0 && getComputedStyle(element).visibility !== 'hidden') rects.push({ left: box.left, top: box.top, right: box.right, bottom: box.bottom });
+    }
+  }
+  return rects;
+}
+
+export interface ObjectiveMarker {
+  readHud(dt: number): void;
+  update(dt: number, time: number, world: World): void;
+}
+
+function sameSpot(a: ObjectiveTarget | null, b: ObjectiveTarget | null): boolean {
+  return a !== null && b !== null && a.objective.id === b.objective.id && a.kind === b.kind;
+}
+
+export function createObjectiveMarker(scene: Scene, camera: IsoCamera, hud: HTMLElement, targets: TargetSource = LIVE_TARGETS): ObjectiveMarker {
+  const style: HTMLStyleElement = el('style', '', hud);
+  style.textContent = css;
+  const glow: LightPool = createLightPool(new Color(OBJECTIVE.color), false);
+  for (const part of glow.group.children) part.renderOrder = 5;
+  glow.group.visible = false;
+  scene.add(glow.group);
+  const arrow: HTMLDivElement = el('div', 'objective-arrow', hud);
+  el('div', 'objective-arrow-head', arrow);
+  const screen: Vector2 = new Vector2();
+  const project = (x: number, y: number, z: number): Point | null => (camera.project(x, y, z, screen) ? { x: screen.x, y: screen.y } : null);
+  let blockers: Rect[] = [];
+  let hints: Rect[] = [];
+  let sinceRead: number = Infinity;
+  let read: boolean = false;
+  let previous: ObjectiveTarget | null = null;
+  let level: number = 0;
+  let corner: Vec2 | null = null;
+  let sinceRoute: number = Infinity;
+  let bearing: number | null = null;
+  const glide: LabelGlide = createGlide();
+  const readBoxes = (): void => {
+    blockers = hudRects(document, OBJECTIVE.hudBlockers);
+    hints = hudRects(hud, OBJECTIVE.hintBoxes);
+    sinceRead = 0;
+    read = true;
+  };
+
+  return {
+    readHud(dt: number): void {
+      sinceRead += dt;
+      if (previous !== null && sinceRead >= OBJECTIVE.hudReadSeconds) readBoxes();
+    },
+    update(dt: number, time: number, world: World): void {
+      const target: ObjectiveTarget | null = world.player.alive ? targets.objective(world) : null;
+      if (!sameSpot(previous, target)) {
+        level = 0;
+        corner = null;
+        bearing = null;
+      }
+      previous = target;
+      const goal: number = glowsAt(target) ? 1 : 0;
+      level += (goal - level) * (1 - Math.exp(-OBJECTIVE.ease * dt));
+      if (target !== null) glow.place(target.pos.x, heightAt(world.zone, target.pos.x, target.pos.z) + OBJECTIVE.lift, target.pos.z, target.radius);
+      glow.group.visible = level > 0.01;
+      glow.set(level * OBJECTIVE.glowStrength * (1 + Math.sin(time * OBJECTIVE.pulseSpeed) * OBJECTIVE.pulseDepth), time);
+      let placement: ArrowPlacement | null = null;
+      sinceRoute += dt;
+      if (target !== null) {
+        if (corner === null || sinceRoute >= OBJECTIVE.routeSeconds) {
+          corner = routeCorner(world, target.pos);
+          sinceRoute = 0;
+        }
+        bearing = easeBearing(bearing, bearingOf(world.player.pos, corner), dt);
+        if (!read) readBoxes();
+        placement = arrowToward(project, world.player.pos, target.pos, bearing, heightAt(world.zone, world.player.pos.x, world.player.pos.z), { width: window.innerWidth, height: window.innerHeight, margin: OBJECTIVE.screenMargin, gap: OBJECTIVE.hudGap, blockers, hints });
+      }
+      arrow.classList.toggle('visible', placement !== null);
+      if (placement === null) glide.started = false;
+      else {
+        glideToward(glide, placement.x, placement.y, dt);
+        arrow.style.transform = `translate(${glide.x.toFixed(2)}px, ${glide.y.toFixed(2)}px) rotate(${placement.angle.toFixed(3)}rad)`;
+      }
+    },
+  };
+}

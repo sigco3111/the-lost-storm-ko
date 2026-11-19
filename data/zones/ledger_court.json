@@ -1,0 +1,291 @@
+{
+ "id": "ledger_court",
+ "name": "안쪽 전당",
+ "kind": "wild",
+ "level": 30,
+ "levelUpTo": 30,
+ "ranks": false,
+ "cellSize": 2,
+ "floorHeight": 0,
+ "tiles": [
+  "                   ",
+  " bbbbbbbbbbbbbbbbb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bffffffiiiffffffb ",
+  " bfffffiiiiifffffb ",
+  " bfffffiiiiifffffb ",
+  " bfffffiiiiifffffb ",
+  " bffffffiiiffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bfffffffffffffffb ",
+  " bbbbbbbbbbbbbbbbb ",
+  "                   "
+ ],
+ "floors": {
+  "f": "hall_floor",
+  "b": "hall_border",
+  "i": "hall_inlay"
+ },
+ "outside": null,
+ "walls": {
+  "tall": [
+   "hall_wall_a",
+   "hall_wall_b"
+  ],
+  "low": "hall_wall_low",
+  "corner": "hall_pier",
+  "halfThickness": 0.5
+ },
+ "scatter": [],
+ "playerStart": {
+  "x": 19.0,
+  "z": 32.0
+ },
+ "props": [
+  {
+   "prop": "hall_column",
+   "x": 24.43,
+   "z": 32.12,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 32.12,
+   "z": 24.43,
+   "y": 0,
+   "rotationDegrees": 45
+  },
+  {
+   "prop": "hall_column",
+   "x": 32.12,
+   "z": 13.57,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 24.43,
+   "z": 5.88,
+   "y": 0,
+   "rotationDegrees": 135
+  },
+  {
+   "prop": "hall_column",
+   "x": 13.57,
+   "z": 5.88,
+   "y": 0,
+   "rotationDegrees": 180
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 5.88,
+   "z": 13.57,
+   "y": 0,
+   "rotationDegrees": 225
+  },
+  {
+   "prop": "hall_column",
+   "x": 5.88,
+   "z": 24.43,
+   "y": 0,
+   "rotationDegrees": 270
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 13.57,
+   "z": 32.12,
+   "y": 0,
+   "rotationDegrees": 315
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 29.89,
+   "z": 29.89,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 29.89,
+   "z": 8.11,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 8.11,
+   "z": 8.11,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 8.11,
+   "z": 29.89,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "tally_stone",
+   "x": 2.7,
+   "z": 11,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "tally_stone",
+   "x": 2.7,
+   "z": 27,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "tally_stone",
+   "x": 35.3,
+   "z": 11,
+   "y": 0,
+   "rotationDegrees": 270
+  },
+  {
+   "prop": "tally_stone",
+   "x": 35.3,
+   "z": 27,
+   "y": 0,
+   "rotationDegrees": 270
+  },
+  {
+   "prop": "hall_statue_base",
+   "x": 19,
+   "z": 3.45,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_doors",
+   "x": 19,
+   "z": 36.8,
+   "y": 0,
+   "rotationDegrees": 180
+  }
+ ],
+ "packs": [
+  {
+   "x": 19.0,
+   "z": 15.0,
+   "members": [
+    {
+     "monster": "ledger_keeper",
+     "count": 1
+    }
+   ],
+   "when": [
+    {
+     "type": "defeated",
+     "monster": "ledger_keeper",
+     "not": true
+    }
+   ]
+  },
+  {
+   "x": 19.0,
+   "z": 19.0,
+   "members": [
+    {
+     "monster": "ledger_book",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "x": 19.0,
+   "z": 8.0,
+   "members": [
+    {
+     "monster": "count_clock_a",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "x": 19.0,
+   "z": 30.0,
+   "members": [
+    {
+     "monster": "count_clock_a",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "x": 30.0,
+   "z": 19.0,
+   "members": [
+    {
+     "monster": "count_clock_b",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "x": 8.0,
+   "z": 19.0,
+   "members": [
+    {
+     "monster": "count_clock_b",
+     "count": 1
+    }
+   ]
+  }
+ ],
+ "surge": null,
+ "exits": [
+  {
+   "id": "up",
+   "x": 19,
+   "z": 34.6,
+   "radius": 2.2,
+   "to": "ledger_hall_3",
+   "toExit": "down",
+   "arrival": {
+    "x": 19,
+    "z": 32
+   },
+   "requires": []
+  }
+ ],
+ "deathReturn": {
+  "zone": "ledger_hall_3",
+  "exit": "down"
+ },
+ "checkpoints": [],
+ "waypoint": null,
+ "markerSurfaces": {
+  "stone": "hall_marble"
+ },
+ "npcs": [],
+ "ambience": {
+  "background": "#0b0b0d",
+  "abyss": "#050506",
+  "fogNear": 34,
+  "fogFar": 110,
+  "skyColor": "#6a6458",
+  "groundColor": "#3a342c",
+  "skyIntensity": 5.2,
+  "keyColor": "#e8dcc6",
+  "keyIntensity": 3.6
+ },
+ "weather": {
+  "lightning": null,
+  "rain": 0,
+  "wet": 0,
+  "mistWall": null
+ }
+}

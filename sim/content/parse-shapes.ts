@@ -1,0 +1,195 @@
+import { conditions } from './parse-conditions.ts';
+import type { Fields } from './read.ts';
+import { choice, ContentError, each, fields, flag, fraction, nonNegative, positive, share, text } from './read.ts';
+import type { BeamDelivery, BlinkDelivery, BrandDef, BurnDef, ChainDelivery, AreaDelivery, AreaStoke, MomentumDef, MomentumSpend, MomentumTier, PressDef, SkillUnlock, SoakDef } from './shape-types.ts';
+import { AREA_ANCHORS } from './shape-types.ts';
+import type { Content, SkillBinding, SkillDef, SkillTreeNodeDef } from './types.ts';
+
+export const SHAPE_LIMITS = {
+  shortestPulse: 0.1,
+  shortestInterval: 0.05,
+} as const;
+
+export const SHAPE_TYPES = ['chain', 'area', 'blink', 'beam'] as const;
+export type ShapeType = (typeof SHAPE_TYPES)[number];
+export type ShapeDelivery = ChainDelivery | AreaDelivery | BlinkDelivery | BeamDelivery;
+
+function whole(source: Fields, key: string, where: string): number {
+  const value: number = nonNegative(source, key, where);
+  if (!Number.isInteger(value)) throw new ContentError(`${where}.${key}`, 'expected a whole number');
+  return value;
+}
+
+function stokeOf(value: unknown, where: string): AreaStoke {
+  const source: Fields = fields(value, where);
+  return { perPulse: positive(source, 'perPulse', where), max: positive(source, 'max', where) };
+}
+
+function area(source: Fields, where: string): AreaDelivery {
+  const duration: number = positive(source, 'duration', where);
+  const pulse: number = nonNegative(source, 'pulse', where);
+  if (pulse > duration) throw new ContentError(`${where}.pulse`, `expected at most the duration ${duration}`);
+  if (pulse > 0 && pulse < SHAPE_LIMITS.shortestPulse) throw new ContentError(`${where}.pulse`, `expected 0 or at least ${SHAPE_LIMITS.shortestPulse} seconds`);
+  const stoke: AreaStoke | null = source['stoke'] === undefined ? null : stokeOf(source['stoke'], `${where}.stoke`);
+  if (stoke !== null && pulse === 0) throw new ContentError(`${where}.stoke`, 'expected an area that pulses');
+  return {
+    type: 'area',
+    range: nonNegative(source, 'range', where),
+    radius: positive(source, 'radius', where),
+    duration,
+    pulse,
+    pull: nonNegative(source, 'pull', where),
+    slow: fraction(source, 'slow', where),
+    weaken: source['weaken'] === undefined ? 0 : share(source, 'weaken', where),
+    anchor: choice(source, 'anchor', AREA_ANCHORS, where),
+    opening: source['opening'] === undefined ? false : flag(source, 'opening', where),
+    stoke,
+  };
+}
+
+export function shapeDelivery(type: ShapeType, source: Fields, where: string): ShapeDelivery {
+  switch (type) {
+    case 'chain':
+      return { type, range: positive(source, 'range', where), jumps: whole(source, 'jumps', where), jumpRange: positive(source, 'jumpRange', where), falloff: fraction(source, 'falloff', where) };
+    case 'area':
+      return area(source, where);
+    case 'blink':
+      return { type, range: positive(source, 'range', where), radius: nonNegative(source, 'radius', where) };
+    case 'beam':
+      return { type, range: positive(source, 'range', where), width: positive(source, 'width', where) };
+  }
+  throw new ContentError(`${where}.type`, 'unknown delivery shape');
+}
+
+function pressHint(source: Fields, where: string): string | null {
+  return source['hint'] === undefined ? null : text(source, 'hint', where);
+}
+
+function press(value: unknown, where: string): PressDef | null {
+  if (value === undefined || value === null) return null;
+  const source: Fields = fields(value, where);
+  const type: PressDef['type'] = choice(source, 'type', ['charge', 'channel'] as const, where);
+  if (type === 'channel') {
+    const interval: number = positive(source, 'interval', where);
+    if (interval < SHAPE_LIMITS.shortestInterval) throw new ContentError(`${where}.interval`, `expected at least ${SHAPE_LIMITS.shortestInterval} seconds`);
+    return { type, interval, max: positive(source, 'max', where), move: source['move'] === undefined ? 0 : fraction(source, 'move', where), passThrough: source['passThrough'] === undefined ? false : flag(source, 'passThrough', where), hint: pressHint(source, where) };
+  }
+  return { type, max: positive(source, 'max', where), damageScale: positive(source, 'damageScale', where), areaScale: positive(source, 'areaScale', where), hint: pressHint(source, where) };
+}
+
+function brand(value: unknown, where: string): BrandDef | null {
+  if (value === undefined || value === null) return null;
+  const source: Fields = fields(value, where);
+  return { duration: positive(source, 'duration', where), burst: text(source, 'burst', where) };
+}
+
+function momentumTier(value: unknown, where: string): MomentumTier {
+  const source: Fields = fields(value, where);
+  return { at: positive(source, 'at', where), turn: positive(source, 'turn', where), reach: positive(source, 'reach', where) };
+}
+
+function momentum(value: unknown, where: string): MomentumDef | null {
+  if (value === undefined || value === null) return null;
+  const source: Fields = fields(value, where);
+  const cap: number = positive(source, 'cap', where);
+  const steady: number = nonNegative(source, 'steady', where);
+  if (steady > cap) throw new ContentError(`${where}.steady`, `expected at most the cap ${cap}`);
+  const tiers: MomentumTier[] = each(source['tiers'], `${where}.tiers`, momentumTier);
+  tiers.forEach((tier: MomentumTier, index: number): void => {
+    const before: MomentumTier | undefined = tiers[index - 1];
+    if (tier.at > cap) throw new ContentError(`${where}.tiers`, `a step at ${tier.at} is past the cap ${cap}`);
+    if (before !== undefined && (tier.at <= before.at || tier.turn < before.turn || tier.reach < before.reach)) throw new ContentError(`${where}.tiers`, 'steps must rise in order');
+  });
+  return {
+    perHit: positive(source, 'perHit', where),
+    cap,
+    grace: nonNegative(source, 'grace', where),
+    drain: positive(source, 'drain', where),
+    steady,
+    manaPerHit: nonNegative(source, 'manaPerHit', where),
+    lifePerHit: nonNegative(source, 'lifePerHit', where),
+    tiers,
+  };
+}
+
+function burn(value: unknown, where: string): BurnDef | null {
+  if (value === undefined || value === null) return null;
+  const source: Fields = fields(value, where);
+  const duration: number = positive(source, 'duration', where);
+  const tick: number = positive(source, 'tick', where);
+  if (tick < SHAPE_LIMITS.shortestInterval) throw new ContentError(`${where}.tick`, `expected at least ${SHAPE_LIMITS.shortestInterval} seconds`);
+  if (tick > duration) throw new ContentError(`${where}.tick`, `expected at most the duration ${duration}`);
+  return { duration, tick, share: fraction(source, 'share', where) };
+}
+
+function soak(value: unknown, where: string): SoakDef | null {
+  if (value === undefined || value === null) return null;
+  const source: Fields = fields(value, where);
+  return { tempo: fraction(source, 'tempo', where), duration: positive(source, 'duration', where) };
+}
+
+function spend(value: unknown, where: string): MomentumSpend | null {
+  if (value === undefined || value === null) return null;
+  const source: Fields = fields(value, where);
+  return { damage: nonNegative(source, 'damage', where), area: nonNegative(source, 'area', where), range: nonNegative(source, 'range', where), stun: source['stun'] === undefined ? 0 : nonNegative(source, 'stun', where) };
+}
+
+export interface SkillPress {
+  readonly press: PressDef | null;
+  readonly brand: BrandDef | null;
+  readonly momentum: MomentumDef | null;
+  readonly burn: BurnDef | null;
+  readonly soak: SoakDef | null;
+  readonly spend: MomentumSpend | null;
+  readonly spent: number;
+}
+
+export function skillPress(source: Fields, where: string): SkillPress {
+  return { press: press(source['press'], `${where}.press`), brand: brand(source['brand'], `${where}.brand`), momentum: momentum(source['momentum'], `${where}.momentum`), burn: burn(source['burn'], `${where}.burn`), soak: soak(source['soak'], `${where}.soak`), spend: spend(source['spend'], `${where}.spend`), spent: 0 };
+}
+
+export function shapeProblems(content: Content): string[] {
+  const problems: string[] = [];
+  const need = (ok: boolean, problem: string): void => {
+    if (!ok) problems.push(problem);
+  };
+  for (const used of content.skills.values()) {
+    if (used.press !== null) need(used.leap === null && used.delivery.type !== 'dash' && used.delivery.type !== 'blink', `skill ${used.id} moves the caster, so it cannot be held`);
+    if (used.press?.type === 'channel') need(used.combo === null && used.leap === null, `skill ${used.id} is channelled, so it cannot combo or leap`);
+    if (used.momentum !== null) need(used.press?.type === 'channel', `skill ${used.id} builds momentum, so it must be channelled`);
+    if (used.spend !== null) need(used.momentum === null && used.press === null, `skill ${used.id} spends momentum, so it can neither build it nor be held`);
+    if (used.brand === null) continue;
+    const burst: SkillDef | undefined = content.skills.get(used.brand.burst);
+    need(burst !== undefined, `skill ${used.id} brands with unknown burst skill ${used.brand.burst}`);
+    if (burst !== undefined) need(burst.delivery.type === 'nova' && burst.brand === null, `skill ${used.id} brands with ${burst.id}, which must be a nova that brands nothing itself`);
+  }
+  return problems;
+}
+
+export function skillUnlock(value: unknown, where: string): SkillUnlock {
+  const source: Fields = fields(value, where);
+  const level: number = positive(source, 'level', where);
+  if (!Number.isInteger(level)) throw new ContentError(`${where}.level`, 'expected a whole level');
+  return { skill: text(source, 'skill', where), level, when: conditions(source, 'when', where) };
+}
+
+export function bookProblems(content: Content): string[] {
+  const problems: string[] = [];
+  const need = (ok: boolean, problem: string): void => {
+    if (!ok) problems.push(problem);
+  };
+  const book: ReadonlyMap<string, number> = new Map<string, number>(content.player.skillBook.map((entry: SkillUnlock): [string, number] => [entry.skill, entry.level]));
+  need(book.size === content.player.skillBook.length, 'skill book lists a skill twice');
+  const slotted: string[] = content.player.skillBar.flatMap((binding: SkillBinding): string[] => (binding.skill === null ? [] : [binding.skill]));
+  need(new Set<string>(slotted).size === slotted.length, 'skill bar starts with a skill in two slots');
+  for (const skill of slotted) need(book.has(skill), `skill bar keeps a home slot for ${skill}, which is not in the skill book`);
+  need(content.player.skillBook.some((entry: SkillUnlock): boolean => entry.level === 1 && entry.when.length === 0), 'skill book teaches nothing at the start');
+  const unlocks: string[] = content.skillTree.flatMap((node: SkillTreeNodeDef): string[] => (node.unlock === null ? [] : [node.unlock]));
+  need(new Set<string>(unlocks).size === unlocks.length, 'two chart places unlock the same skill');
+  for (const skill of unlocks) {
+    need(content.skills.has(skill), `a chart place unlocks unknown skill ${skill}`);
+    need(!book.has(skill), `a chart place unlocks ${skill}, which the skill book already grants`);
+    need(content.skills.get(skill)?.category !== 'none', `${skill} is unlocked on the chart but has no category`);
+  }
+  return problems;
+}

@@ -1,0 +1,1518 @@
+{
+ "kind": "wild",
+ "ranks": true,
+ "floors": {
+  "f": "hall_floor",
+  "b": "hall_border",
+  "i": "hall_inlay",
+  "d": "hall_dust",
+  "m": "hall_marble",
+  "k": "hall_dark"
+ },
+ "outside": {
+  "surface": "hall_bed",
+  "reach": 3,
+  "barrier": null
+ },
+ "walls": null,
+ "scatter": [
+  {
+   "type": "around",
+   "props": [
+    "rubble_chip",
+    "rubble_shard"
+   ],
+   "anchors": [
+    "hall_column_broken",
+    "hall_column_fallen",
+    "hall_rubble_large",
+    "hall_loose_blocks"
+   ],
+   "each": 10,
+   "spread": 0.8,
+   "size": {
+    "least": 0.9,
+    "most": 1.2
+   }
+  }
+ ],
+ "packReturn": {
+  "after": 90,
+  "away": 30
+ },
+ "surge": null,
+ "ambience": {
+  "background": "#07080b",
+  "abyss": "#030305",
+  "fogNear": 36,
+  "fogFar": 96,
+  "skyColor": "#8494b4",
+  "groundColor": "#1e2129",
+  "skyIntensity": 4.6,
+  "keyColor": "#a8b8d8",
+  "keyIntensity": 1.7
+ },
+ "weather": {
+  "lightning": null,
+  "rain": 0,
+  "wet": 0.05,
+  "mistWall": null
+ },
+ "heroLight": {
+  "strength": 12,
+  "radius": 20,
+  "height": 7,
+  "falloff": 1,
+  "rim": 0.3
+ },
+ "id": "ledger_hall",
+ "name": "기둥의 전당",
+ "level": 25,
+ "levelUpTo": 27,
+ "cellSize": 2,
+ "floorHeight": 0,
+ "tiles": [
+  "                                                                                            ",
+  "                                                                                            ",
+  "                                                                                            ",
+  "                                                                                            ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                    ffffffffiiiiffffffff                                    ",
+  "                                          iiiiiiii                                          ",
+  "                                          iiiiiiii                                          ",
+  "                                          iiiiiiii                                          ",
+  "                                          iiiiiiii                                          ",
+  "                                          iiiiiiii                                          ",
+  "                                          iiiiiiii                                          ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                              ",
+  "      ffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                              ",
+  "      ffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                              ",
+  "      ffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "      ffffffffffffffffffffffffffffffffffffffffffffffffffffffff                              ",
+  "          ffffffffff                                                                        ",
+  "          ffffffffff                                                                        ",
+  "          ffffffffff                                                                        ",
+  "          ffffffffff                                                                        ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd                                          ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk    ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk    ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkkkkkkkk iiiiiiii kkkkkkkkkkkffffffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkkkkkkkk iiiiiiii kkkkkkkkkkkffffffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkkkkkkkk iiiiiiii kkkkkkkkkkkffffffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkk       iiiiiiii       kkkkkffffffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkkffffffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkkffffffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkk    ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkk    ffffffffffffffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiimmmmmmmmmmmmiiii kkkkk          ffiiiiff          ",
+  "      dddddddddddddddddddd      kkkkk iiiimmmmmmmmmmmmiiii kkkkk          ffiiiiff          ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk          ffiiiiff          ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk          ffiiiiff          ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      ddddddddddddddddddddffffffkkkkk iiiimmmmmmmmmmmmiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk iiiiiiiiiiiiiiiiiiii kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkk       iiiiiiii       kkkkk    ffffffffiiiiffffffff    ",
+  "      dddddddddddddddddddd      kkkkkkkkkkk iiiiiiii kkkkkkkkkkk    ffffffffiiiiffffffff    ",
+  "                                kkkkkkkkkkk iiiiiiii kkkkkkkkkkk    ffffffffiiiiffffffff    ",
+  "                                kkkkkkkkkkk iiiiiiii kkkkkkkkkkk    ffffffffiiiiffffffff    ",
+  "                                kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk    ffffffffiiiiffffffff    ",
+  "                                kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk    ffffffffiiiiffffffff    ",
+  "                                                                                  ii        ",
+  "                                                                                  ii        ",
+  "                                                                                  ii        ",
+  "                                                                                  ii        ",
+  "                                                                                  ii        ",
+  "                                                                                            ",
+  "                                                                                            ",
+  "                                                                                            "
+ ],
+ "terrain": {
+  "rise": 1.84,
+  "groundStep": 0.6,
+  "cliff": "hall_dark",
+  "rough": {
+   "reach": 1.2,
+   "scale": 3,
+   "calm": [
+    "f",
+    "b",
+    "i",
+    "d",
+    "m",
+    "k"
+   ]
+  },
+  "blends": [
+   {
+    "surface": "hall_dust",
+    "scale": 7,
+    "cover": 0.2
+   },
+   {
+    "surface": "hall_marble",
+    "scale": 5,
+    "cover": 0.16
+   },
+   {
+    "surface": "hall_inlay",
+    "scale": 3,
+    "cover": 0.6,
+    "near": "/",
+    "reach": 5
+   }
+  ],
+  "cliffs": [],
+  "levels": [
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllllllllllllllllllmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuulllllllllllllllllllllllmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllllllllllllllllllllmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuulllllllllllllllllllllllllmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuullllllkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuuulllllllllllllllllllllllllmmmmmooooookkkkkkkkoooooooooooluuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuuullllllllllllllllllllllllllllmmmooooolkkkkkkkkmoooooooolllmuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuuulllllllllllllllllllllllllllllllmoooollkkkkkkkkmmooooolllllmmuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uuulllllllllllllllllllllllllllllllllllllllkkkkkkkkmmmlllllllllmmmuuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "uullllllllllllllllllllllllllllllllllllllllkkkkkkkkmmllllllllllmmmmuuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "ulllllllllllllllllllllllllllllllllllllllllkkkkkkkkmlllllllllllmmmmmuuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmuuuuuuuuuuuuuuuuuuuuuuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmlllllllllllllllllllluuuu",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmmmmllllllllllllllllllllmuuu",
+   "ummmmmooookkkkkkkkkkooooooooooooooooooooooooooooooooooooooooooooooolllllllllllllllllllllmmuu",
+   "uummmmooolkkkkkkkkkkmooooooooooooooooooooooooooooooooooooooooooooollllllllllllllllllllllmmmu",
+   "uullllllllkkkkkkkkkkmmllllooooooooooooooooooooooooooooooooooooooolllllllllllllllllllllllmmmm",
+   "ulllllllllkkkkkkkkkkmlllllmmoooooooooooooooooooooooooooooooooooollllllllllllllllllllllllmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmooooooooooooooooooooooooooooooooolllllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmmooooooooooooooooooooooooooooooollllllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmmmllllllllllllllllllllllllllllllllllllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmmmllllllllllllllllllllllllllllllllllllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmmlllllllllllllllllllllllllllllllllllllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmmlllllllllllllllllllllllllllllllllllllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmllllllllllllllllllllllllllllllllllmlllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmmllllllllllllllllllllllllllllllllllmlllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmlllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkkkkkkko////////okkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkkkkkkkm////////mkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkkkkkkkm////////mkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkooooooj////////jooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkooookkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmoolkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmllllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmmmooooookkkkkkkkoooooooooo",
+   "llllllkkkkkkkkkkkkkkkkkkkkmlllllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmmmooooolkkkkkkkkmooooooooo",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmmlllllllkkkkkkkkmmllllmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmmlllllllkkkkkkkkmlllllmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkooooookkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmoooolkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmoollkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmiiiiiiiiiiiiiiiiiiiikkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkmmmmmmm////////mmmmmmlkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "llllllkkkkkkkkkkkkkkkkkkkkmmmlllkkkkkkkkkkkm////////mkkkkkkkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "ummmmmooooooooooooooooooooooolllkkkkkkkkkkkm////////mkkkkkkkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "uummmmoooooooooooooooooooooollllkkkkkkkkkkkm////////mkkkkkkkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "uuummmoooooooooooooooooooooollllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "uuuummooooooooooooooooooooolllllkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkmmllkkkkkkkkkkkkkkkkkkkkmmmm",
+   "uuuuumooooooooooooooooooooommmmmoooooooooooooooooooooooooooooooooommooooooooooooookkoooooooo",
+   "uuuuuuoooooooooooooooooooouummmmoooooooooooooooooooooooooooooooooommooooooooooooolkkmooooooo",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuummmoooooooooooooooooooooooooooooooooommoooooooooooollkkmmooooou",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuummoooooooooooooooooooooooooooooooooommooooooooooolllkkmmmooouu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuumooooooooooooooooooooooooooooooooouumoooooooooollllkkmmmmmmuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuoooooooooooooooooooooooooooooooouuuuoooooooooommmmooooooouuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuummmmoooooouuuu",
+   "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuummmooooouuuuu"
+  ]
+ },
+ "playerStart": {
+  "x": 90,
+  "z": 18
+ },
+ "props": [
+  {
+   "prop": "hall_doors",
+   "x": 90,
+   "z": 7.2,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 78,
+   "z": 14,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_statue_base",
+   "x": 78,
+   "z": 30,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 102,
+   "z": 14,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_statue_base",
+   "x": 102,
+   "z": 30,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 20,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 20,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 28,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 28,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 36,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 36,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 44,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 44,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 52,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 52,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 60,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 60,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 68,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 68,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 76,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 76,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 108,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 108,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 116,
+   "z": 57,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 116,
+   "z": 71,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_gallery",
+   "x": 18,
+   "z": 51.1,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_gallery",
+   "x": 42,
+   "z": 51.1,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_gallery",
+   "x": 66,
+   "z": 51.1,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_gallery",
+   "x": 114,
+   "z": 51.1,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 36,
+   "z": 64,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 60,
+   "z": 64,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 112,
+   "z": 64,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_plinth",
+   "x": 48,
+   "z": 64,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_clock_raised",
+   "x": 48,
+   "z": 64,
+   "y": 1,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "tally_stone",
+   "x": 28,
+   "z": 77.5,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "tally_stone",
+   "x": 76,
+   "z": 77.5,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_broken",
+   "x": 18,
+   "z": 96,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 18,
+   "z": 104,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_broken",
+   "x": 18,
+   "z": 120,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 18,
+   "z": 128,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_broken",
+   "x": 18,
+   "z": 144,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 46,
+   "z": 100,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_broken",
+   "x": 46,
+   "z": 116,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 46,
+   "z": 136,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_broken",
+   "x": 46,
+   "z": 148,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_fallen",
+   "x": 34,
+   "z": 118,
+   "y": 0,
+   "rotationDegrees": 70
+  },
+  {
+   "prop": "hall_column_fallen",
+   "x": 30,
+   "z": 140,
+   "y": 0,
+   "rotationDegrees": 105
+  },
+  {
+   "prop": "hall_rubble_large",
+   "x": 40,
+   "z": 108,
+   "y": 0,
+   "rotationDegrees": 30
+  },
+  {
+   "prop": "hall_rubble_large",
+   "x": 24,
+   "z": 150,
+   "y": 0,
+   "rotationDegrees": 15
+  },
+  {
+   "prop": "hall_clock_tilted",
+   "x": 16,
+   "z": 112,
+   "y": 0,
+   "rotationDegrees": 80
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 38,
+   "z": 96,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_tiers",
+   "x": 77.6,
+   "z": 128,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_tiers",
+   "x": 114.4,
+   "z": 128,
+   "y": 0,
+   "rotationDegrees": 270
+  },
+  {
+   "prop": "hall_tiers",
+   "x": 77.6,
+   "z": 136,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_tiers",
+   "x": 114.4,
+   "z": 136,
+   "y": 0,
+   "rotationDegrees": 270
+  },
+  {
+   "prop": "hall_tiers",
+   "x": 77.6,
+   "z": 144,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_tiers",
+   "x": 114.4,
+   "z": 144,
+   "y": 0,
+   "rotationDegrees": 270
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 89,
+   "z": 129,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 103,
+   "z": 129,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 89,
+   "z": 143,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 103,
+   "z": 143,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_plinth",
+   "x": 96,
+   "z": 133,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_clock_raised",
+   "x": 96,
+   "z": 133,
+   "y": 1,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 68,
+   "z": 109,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 68,
+   "z": 163,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 76,
+   "z": 109,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 76,
+   "z": 163,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 116,
+   "z": 109,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 116,
+   "z": 163,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 124,
+   "z": 109,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 124,
+   "z": 163,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 69.5,
+   "z": 115,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 122.5,
+   "z": 115,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 69.5,
+   "z": 123,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 122.5,
+   "z": 123,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 69.5,
+   "z": 131,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 122.5,
+   "z": 131,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 69.5,
+   "z": 139,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 122.5,
+   "z": 139,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 69.5,
+   "z": 147,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 122.5,
+   "z": 147,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 69.5,
+   "z": 155,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 122.5,
+   "z": 155,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_shelf",
+   "x": 148,
+   "z": 96,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_shelf",
+   "x": 164,
+   "z": 96,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_shelf",
+   "x": 148,
+   "z": 104,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_shelf",
+   "x": 164,
+   "z": 104,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_shelf",
+   "x": 148,
+   "z": 112,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "hall_shelf",
+   "x": 164,
+   "z": 112,
+   "y": 0,
+   "rotationDegrees": 90
+  },
+  {
+   "prop": "tally_stone",
+   "x": 156,
+   "z": 100,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 156,
+   "z": 121,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 141.5,
+   "z": 94,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column_dark",
+   "x": 141.5,
+   "z": 122,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 156,
+   "z": 160,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_brazier",
+   "x": 172,
+   "z": 160,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 148,
+   "z": 144,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "hall_column",
+   "x": 164,
+   "z": 144,
+   "y": 0,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "wide_stair",
+   "x": 96,
+   "z": 110,
+   "y": -0.9,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "wide_stair",
+   "x": 96,
+   "z": 114,
+   "y": -0.9,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "wide_stair",
+   "x": 96,
+   "z": 158,
+   "y": -0.9,
+   "rotationDegrees": 0
+  },
+  {
+   "prop": "wide_stair",
+   "x": 96,
+   "z": 162,
+   "y": -0.9,
+   "rotationDegrees": 0
+  }
+ ],
+ "tunnels": [],
+ "packs": [
+  {
+   "x": 104,
+   "z": 56,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    }
+   ],
+   "level": 25,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 90,
+   "z": 74,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    }
+   ],
+   "level": 25
+  },
+  {
+   "x": 118,
+   "z": 64,
+   "members": [
+    {
+     "monster": "timekeeper_duelist",
+     "count": 4
+    }
+   ],
+   "level": 25
+  },
+  {
+   "x": 72,
+   "z": 62,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    }
+   ],
+   "level": 25,
+   "row": {
+    "x": 0,
+    "z": 2.2
+   }
+  },
+  {
+   "x": 58,
+   "z": 76,
+   "members": [
+    {
+     "monster": "timekeeper_adept",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_binder",
+     "count": 2
+    }
+   ],
+   "level": 25,
+   "waits": {
+    "near": 8
+   }
+  },
+  {
+   "x": 22,
+   "z": 54,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    }
+   ],
+   "level": 25,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 20,
+   "z": 74,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 24,
+   "z": 114,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    }
+   ],
+   "level": 26,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 42,
+   "z": 128,
+   "members": [
+    {
+     "monster": "timekeeper_duelist",
+     "count": 4
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 22,
+   "z": 136,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 4
+    }
+   ],
+   "level": 26,
+   "waits": {
+    "near": 8
+   }
+  },
+  {
+   "x": 38,
+   "z": 152,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    }
+   ],
+   "level": 26,
+   "row": {
+    "x": 0,
+    "z": 2.2
+   }
+  },
+  {
+   "x": 20,
+   "z": 158,
+   "members": [
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_binder",
+     "count": 2
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 96,
+   "z": 142,
+   "members": [
+    {
+     "monster": "timekeeper_marshal",
+     "count": 1
+    },
+    {
+     "monster": "timekeeper_rank",
+     "count": 4
+    }
+   ],
+   "level": 27
+  },
+  {
+   "x": 86,
+   "z": 126,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 4
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 108,
+   "z": 126,
+   "members": [
+    {
+     "monster": "timekeeper_duelist",
+     "count": 4
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 108,
+   "z": 152,
+   "members": [
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_rank",
+     "count": 4
+    }
+   ],
+   "level": 27
+  },
+  {
+   "x": 84,
+   "z": 152,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    }
+   ],
+   "level": 27,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 120,
+   "z": 112,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    }
+   ],
+   "level": 26,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 73,
+   "z": 121,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_binder",
+     "count": 2
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 120,
+   "z": 160,
+   "members": [
+    {
+     "monster": "timekeeper_duelist",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    }
+   ],
+   "level": 27
+  },
+  {
+   "x": 152,
+   "z": 120,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    }
+   ],
+   "level": 27,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 170,
+   "z": 104,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_binder",
+     "count": 2
+    }
+   ],
+   "level": 27
+  },
+  {
+   "x": 166,
+   "z": 126,
+   "members": [
+    {
+     "monster": "timekeeper_duelist",
+     "count": 4
+    }
+   ],
+   "level": 27,
+   "waits": {
+    "near": 8
+   }
+  },
+  {
+   "x": 146,
+   "z": 142,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    },
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    }
+   ],
+   "level": 27,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 170,
+   "z": 140,
+   "members": [
+    {
+     "monster": "timekeeper_adept",
+     "count": 2
+    },
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    }
+   ],
+   "level": 27,
+   "waits": {
+    "near": 8
+   }
+  },
+  {
+   "x": 46,
+   "z": 112,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_tallier",
+     "count": 2
+    }
+   ],
+   "level": 26
+  },
+  {
+   "x": 140,
+   "z": 160,
+   "members": [
+    {
+     "monster": "timekeeper_duelist",
+     "count": 4
+    }
+   ],
+   "level": 27
+  },
+  {
+   "x": 72,
+   "z": 106,
+   "members": [
+    {
+     "monster": "timekeeper_rank",
+     "count": 5
+    }
+   ],
+   "level": 26,
+   "row": {
+    "x": 2.2,
+    "z": 0
+   }
+  },
+  {
+   "x": 124,
+   "z": 136,
+   "members": [
+    {
+     "monster": "timekeeper_tallier",
+     "count": 4
+    },
+    {
+     "monster": "timekeeper_custodian",
+     "count": 2
+    }
+   ],
+   "level": 27
+  }
+ ],
+ "exits": [
+  {
+   "id": "up",
+   "x": 90,
+   "z": 12.6,
+   "radius": 2.2,
+   "to": "lava_depths_3",
+   "toExit": "down",
+   "arrival": {
+    "x": 90,
+    "z": 18
+   },
+   "requires": []
+  },
+  {
+   "id": "down",
+   "x": 166,
+   "z": 175.4,
+   "radius": 2.2,
+   "to": "ledger_hall_2",
+   "toExit": "up",
+   "arrival": {
+    "x": 166,
+    "z": 165
+   },
+   "requires": []
+  }
+ ],
+ "checkpoints": [
+  {
+   "id": "ledger_hall_nave",
+   "x": 42,
+   "z": 64,
+   "radius": 2.5
+  },
+  {
+   "id": "ledger_hall_ruin",
+   "x": 32,
+   "z": 96,
+   "radius": 2.5
+  },
+  {
+   "id": "ledger_hall_court",
+   "x": 66,
+   "z": 140,
+   "radius": 2.5
+  },
+  {
+   "id": "ledger_hall_archive",
+   "x": 142,
+   "z": 100,
+   "radius": 2.5
+  }
+ ],
+ "waypoint": {
+  "x": 90,
+  "z": 27,
+  "radius": 1.8
+ },
+ "markerSurfaces": {
+  "stone": "hall_marble"
+ },
+ "deathReturn": null,
+ "npcs": []
+}

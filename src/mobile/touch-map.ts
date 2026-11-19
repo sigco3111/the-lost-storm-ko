@@ -1,0 +1,248 @@
+import type { Vec2 } from '../../sim/math.ts';
+import type { FlaskDef } from '../../sim/content/flasks.ts';
+import type { ManaShows, SkillDef } from '../../sim/content/types.ts';
+import { usable } from '../../sim/world/hud.ts';
+import type { PlayerState, SkillCommand, WalkCommand } from '../../sim/world/types.ts';
+
+export const TOUCH = {
+  stickRadius: 52,
+  deadzone: 0.2,
+  stickReach: 3.2,
+  aimRange: 9,
+  meleeRange: 2.6,
+  aimConeDegrees: 70,
+  repeatSeconds: 0.09,
+  moveSideShare: 0.45,
+  rotateHintMs: 5200,
+  phoneShortSide: 500,
+  phoneLongSide: 932,
+  talkingClass: 'ph-talking',
+  heldClass: 'held',
+  bagTab: '가방',
+  rotateSeenKey: 'the-lost-storm.rotate-hint.v1',
+  moveLearnedKey: 'the-lost-storm.move-learned.v1',
+  moveHint: '여기를 끌어 이동하거나 땅을 탭하라',
+  fullTurn: 360,
+  tapSlopPx: 12,
+  tapMs: 320,
+  pinchJoinMs: 160,
+} as const;
+
+export interface StickReading {
+  readonly x: number;
+  readonly y: number;
+  readonly magnitude: number;
+}
+
+export interface Candidate {
+  readonly id: number;
+  readonly pos: Vec2;
+  readonly alive: boolean;
+}
+
+export type TouchButton =
+  | { readonly kind: 'attack'; readonly slot: number; readonly filled: boolean }
+  | { readonly kind: 'skill'; readonly slot: number; readonly filled: boolean }
+  | { readonly kind: 'flask'; readonly slot: number; readonly label: string };
+
+export interface SkillBarEntry {
+  readonly bindings: readonly string[];
+  readonly filled: boolean;
+}
+
+export interface FlaskEntry {
+  readonly name: string;
+}
+
+export function prefersTouch(search: string, coarsePointer: boolean, shortSide: number, longSide: number): boolean {
+  const forced: string | null = new URLSearchParams(search).get('touch');
+  if (forced === '1') return true;
+  if (forced === '0') return false;
+  return coarsePointer || (shortSide <= TOUCH.phoneShortSide && longSide <= TOUCH.phoneLongSide);
+}
+
+export function readStick(dx: number, dy: number, radius: number = TOUCH.stickRadius): StickReading {
+  const length: number = Math.hypot(dx, dy);
+  if (length === 0 || radius <= 0) return { x: 0, y: 0, magnitude: 0 };
+  const magnitude: number = Math.min(1, length / radius);
+  return { x: (dx / length) * magnitude, y: (dy / length) * magnitude, magnitude };
+}
+
+export function clampKnob(dx: number, dy: number, radius: number = TOUCH.stickRadius): Vec2 {
+  const length: number = Math.hypot(dx, dy);
+  if (length <= radius) return { x: dx, z: dy };
+  return { x: (dx / length) * radius, z: (dy / length) * radius };
+}
+
+export function stickDirection(reading: StickReading, yaw: number): Vec2 | null {
+  if (reading.magnitude < TOUCH.deadzone) return null;
+  const sx: number = reading.x / reading.magnitude;
+  const sy: number = reading.y / reading.magnitude;
+  return { x: Math.cos(yaw) * sx + Math.sin(yaw) * sy, z: -Math.sin(yaw) * sx + Math.cos(yaw) * sy };
+}
+
+export function stickMove(from: Vec2, direction: Vec2 | null, wasMoving: boolean): WalkCommand | null {
+  if (direction === null) return null;
+  return { type: 'walk', held: wasMoving, dest: { x: from.x + direction.x * TOUCH.stickReach, z: from.z + direction.z * TOUCH.stickReach } };
+}
+
+export function glideAim(from: Vec2, direction: Vec2 | null): Vec2 {
+  if (direction === null) return { x: from.x, z: from.z };
+  return { x: from.x + direction.x * TOUCH.stickReach, z: from.z + direction.z * TOUCH.stickReach };
+}
+
+export function facingVector(facing: number): Vec2 {
+  return { x: Math.sin(facing), z: Math.cos(facing) };
+}
+
+export function autoAimTarget(candidates: readonly Candidate[], from: Vec2, ahead: Vec2): Candidate | null {
+  const coneCos: number = Math.cos((TOUCH.aimConeDegrees * Math.PI) / 180);
+  const aheadLength: number = Math.max(Math.hypot(ahead.x, ahead.z), Number.EPSILON);
+  let best: Candidate | null = null;
+  let bestDistance: number = Number.POSITIVE_INFINITY;
+  for (const candidate of candidates) {
+    if (!candidate.alive) continue;
+    const dx: number = candidate.pos.x - from.x;
+    const dz: number = candidate.pos.z - from.z;
+    const distance: number = Math.hypot(dx, dz);
+    if (distance > TOUCH.aimRange) continue;
+    const inFront: boolean = distance === 0 || (dx * ahead.x + dz * ahead.z) / (distance * aheadLength) >= coneCos;
+    if (!inFront && distance > TOUCH.meleeRange) continue;
+    if (distance < bestDistance) {
+      best = candidate;
+      bestDistance = distance;
+    }
+  }
+  return best;
+}
+
+export function aimedSkill(slot: number, from: Vec2, ahead: Vec2, target: Candidate | null): SkillCommand {
+  if (target !== null) return { type: 'skill', slot, aim: { x: target.pos.x, z: target.pos.z }, targetId: target.id };
+  const length: number = Math.max(Math.hypot(ahead.x, ahead.z), Number.EPSILON);
+  return { type: 'skill', slot, aim: { x: from.x + (ahead.x / length) * TOUCH.aimRange, z: from.z + (ahead.z / length) * TOUCH.aimRange }, targetId: null };
+}
+
+export function touchButtons(skillBar: readonly SkillBarEntry[], attackBinding: string, flasks: readonly (FlaskEntry | null)[]): TouchButton[] {
+  const buttons: TouchButton[] = [];
+  skillBar.forEach((entry: SkillBarEntry, slot: number): void => {
+    buttons.push(entry.bindings.includes(attackBinding) ? { kind: 'attack', slot, filled: entry.filled } : { kind: 'skill', slot, filled: entry.filled });
+  });
+  buttons.sort((a: TouchButton, b: TouchButton): number => (a.kind === 'attack' ? 0 : 1) - (b.kind === 'attack' ? 0 : 1));
+  flasks.forEach((flask: FlaskEntry | null, slot: number): void => {
+    if (flask !== null) buttons.push({ kind: 'flask', slot, label: flask.name });
+  });
+  return buttons;
+}
+
+export function buttonKey(button: TouchButton): string {
+  return `${button.kind}${button.slot}`;
+}
+
+export function movedIndex(before: readonly string[], after: readonly string[], index: number): number {
+  const key: string | undefined = before[index];
+  return key === undefined ? -1 : after.indexOf(key);
+}
+
+export interface ButtonPlan {
+  readonly kept: readonly string[];
+  readonly added: readonly string[];
+  readonly dropped: readonly string[];
+}
+
+export function planButtons(shown: readonly string[], next: readonly TouchButton[]): ButtonPlan {
+  const wanted: string[] = next.map(buttonKey);
+  return {
+    kept: wanted.filter((key: string): boolean => shown.includes(key)),
+    added: wanted.filter((key: string): boolean => !shown.includes(key)),
+    dropped: shown.filter((key: string): boolean => !wanted.includes(key)),
+  };
+}
+
+export function pinchWheelDelta(previous: number, next: number, zoomStep: number): number {
+  if (previous <= 0 || next <= 0 || zoomStep <= 0) return 0;
+  return (previous / next - 1) / zoomStep;
+}
+
+export function sideForPoint(x: number, viewportWidth: number): 'move' | 'world' {
+  return x < viewportWidth * TOUCH.moveSideShare ? 'move' : 'world';
+}
+
+export function startsStick(x: number, viewportWidth: number, stickDown: boolean, worldFingers: number): boolean {
+  return !stickDown && worldFingers === 0 && sideForPoint(x, viewportWidth) === 'move';
+}
+
+export function joinsPinch(stickMoved: boolean, msSinceStick: number): boolean {
+  return !stickMoved && msSinceStick <= TOUCH.pinchJoinMs;
+}
+
+export function rotateHintShows(portrait: boolean, msInPortrait: number, dismissed: boolean, playing: boolean): boolean {
+  return playing && portrait && !dismissed && msInPortrait < TOUCH.rotateHintMs;
+}
+
+export function cooldownTurn(remaining: number, total: number): number {
+  if (total <= 0 || remaining <= 0) return TOUCH.fullTurn;
+  return Math.round((1 - Math.min(1, remaining / total)) * TOUCH.fullTurn);
+}
+
+export function isTap(dx: number, dy: number, ms: number): boolean {
+  return Math.hypot(dx, dy) <= TOUCH.tapSlopPx && ms <= TOUCH.tapMs;
+}
+
+export interface ButtonInputs {
+  readonly slots: number[];
+  readonly flasks: FlaskDef[];
+  readonly bar: (string | null)[];
+  mana: boolean;
+  read: boolean;
+}
+
+export function createButtonInputs(): ButtonInputs {
+  return { slots: [], flasks: [], bar: [], mana: false, read: false };
+}
+
+function costly(skill: SkillDef | null): boolean {
+  return skill !== null && skill.manaCost > 0;
+}
+
+function sameSlots(kept: readonly number[], player: PlayerState): boolean {
+  let at: number = 0;
+  for (let slot: number = 0; slot < player.skills.length; slot += 1) {
+    const skill: SkillDef | null = player.skills[slot] ?? null;
+    if (skill === null || !usable(player, skill)) continue;
+    if (kept[at] !== slot) return false;
+    at += 1;
+  }
+  return at === kept.length;
+}
+
+function sameBar(kept: readonly (string | null)[], player: PlayerState): boolean {
+  if (kept.length !== player.bar.length) return false;
+  for (let index: number = 0; index < player.bar.length; index += 1) {
+    if (kept[index] !== player.bar[index]) return false;
+  }
+  return true;
+}
+
+function sameFlasks(kept: readonly FlaskDef[], player: PlayerState): boolean {
+  if (kept.length !== player.flasks.length) return false;
+  for (let index: number = 0; index < player.flasks.length; index += 1) {
+    if (kept[index] !== player.flasks[index]?.def) return false;
+  }
+  return true;
+}
+
+export function buttonInputsChanged(kept: ButtonInputs, player: PlayerState, manaShows: ManaShows): boolean {
+  const mana: boolean = manaShows === 'always' || player.skills.some(costly);
+  if (kept.read && kept.mana === mana && sameSlots(kept.slots, player) && sameBar(kept.bar, player) && sameFlasks(kept.flasks, player)) return false;
+  kept.read = true;
+  kept.mana = mana;
+  kept.slots.length = 0;
+  player.skills.forEach((skill: SkillDef | null, slot: number): void => {
+    if (skill !== null && usable(player, skill)) kept.slots.push(slot);
+  });
+  kept.bar.length = 0;
+  kept.bar.push(...player.bar);
+  kept.flasks.length = 0;
+  for (const flask of player.flasks) kept.flasks.push(flask.def);
+  return true;
+}

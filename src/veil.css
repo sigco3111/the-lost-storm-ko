@@ -1,0 +1,70 @@
+#fade {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 65;
+  pointer-events: none;
+  background: #05070b;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear var(--spring-smooth-ms);
+}
+
+#fade.on {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s;
+}
+
+#fade::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse 42% 30% at 32% 42%, rgba(128, 136, 148, 0.16), transparent),
+    radial-gradient(ellipse 36% 26% at 68% 62%, rgba(128, 136, 148, 0.12), transparent);
+  will-change: transform;
+  animation: veil-drift var(--drift-ms) var(--drift-ease) infinite alternate;
+}
+
+#fade:not(.on)::before {
+  animation-play-state: paused;
+}
+
+@keyframes veil-drift {
+  from {
+    transform: translate3d(-5%, -2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(5%, 2%, 0) scale(1.06);
+  }
+}
+
+.veil-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  translate: -50% -50%;
+}
+
+:where(.lobby-veil, .lobby-screen) {
+  opacity: 0;
+}
+
+:where(.lobby-screen) {
+  visibility: hidden;
+}
+
+html.lobby-resume .lobby-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 66;
+  background: #05070b;
+  opacity: 1;
+}

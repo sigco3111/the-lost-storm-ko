@@ -1,0 +1,147 @@
+[
+ {
+  "id": "unfinished_borrower_said_1",
+  "speaker": "unfinished_borrower",
+  "text": "발밑 조심해. 원래 늘 헐거웠으니까."
+ },
+ {
+  "id": "unfinished_borrower_said_2",
+  "speaker": "unfinished_borrower",
+  "text": "빵을 창틀에 두고 왔네. 누가 좀 거둬 줬으면."
+ },
+ {
+  "id": "unfinished_borrower_said_3",
+  "speaker": "unfinished_borrower",
+  "text": "그녀에게 전해주게. 어두워지기 전에 돌아간다고."
+ },
+ {
+  "id": "unfinished_borrower_said_4",
+  "speaker": "unfinished_borrower",
+  "text": "저건 내 외투야. 저 외투는 내가 알아."
+ },
+ {
+  "id": "unfinished_borrower_said_5",
+  "speaker": "unfinished_borrower",
+  "text": "누가 개를 풀어놨나?"
+ },
+ {
+  "id": "warden_guide_road",
+  "speaker": "warden_guide",
+  "text": "곁에 붙어 있게."
+ },
+ {
+  "id": "warden_trader_goods",
+  "speaker": "warden_trader",
+  "text": "오늘은 물건이 별로 없네."
+ },
+ {
+  "id": "warden_auctioneer_trade",
+  "speaker": "warden_auctioneer",
+  "text": "다른 이들이 두고 간 물건들이네. 값을 부르든, 그들이 부른 값을 내든."
+ },
+ {
+  "id": "warden_lookout_ahead",
+  "speaker": "warden_lookout",
+  "text": "눈을 부릅뜨고 있게."
+ },
+ {
+  "id": "warden_appraiser_read",
+  "speaker": "warden_appraiser",
+  "text": "읽을 수 없는 것이 있으면 가져오게."
+ },
+ {
+  "id": "warden_appraiser_short",
+  "speaker": "warden_appraiser",
+  "text": "그 물건에는 금이 모자라네."
+ },
+ {
+  "id": "warden_appraiser_good",
+  "speaker": "warden_appraiser",
+  "text": "그건 기다린 보람이 있었네."
+ },
+ {
+  "id": "warden_guide_lesson",
+  "speaker": "warden_guide",
+  "text": "그대는 폭풍을 품고 몽둥이처럼 휘두르고 있네. 휘두르지 말게. 던지게. 폭풍은 그대가 바라보는 곳으로 가네."
+ },
+ {
+  "id": "warden_guide_fell",
+  "speaker": "warden_guide",
+  "text": "그대는 제 자리에서 떨어져 나왔네. 나도 그랬지."
+ },
+ {
+  "id": "warden_guide_counted",
+  "speaker": "warden_guide",
+  "text": "두 순간 사이에는 아무것도 없어야 하네. 이제 그대가 있지. 그들이 그대를 찾아올 걸세."
+ },
+ {
+  "id": "warden_guide_born",
+  "speaker": "warden_guide",
+  "text": "그대는 태어났다고 생각하네. 어제가 있었다고 생각하지. 그저 기억할 뿐이야."
+ },
+ {
+  "id": "warden_guide_far_apart",
+  "speaker": "warden_guide",
+  "text": "순간, 그리고 아득히 떨어진 또 다른 순간. 각각이 이전을 기억하기에, 그것이 삶처럼 느껴지는 걸세."
+ },
+ {
+  "id": "warden_guide_gap",
+  "speaker": "warden_guide",
+  "text": "그대는 둘 사이의 틈에 서 있네. 나는 그 틈을 지키던 자였지. 이제는 사람들을 빼내네."
+ },
+ {
+  "id": "warden_guide_counting",
+  "speaker": "warden_guide",
+  "text": "그들은 시간을 만들지 않았네. 세는 법을 배웠을 뿐이지, 그리고 그것을 소유라 불렀네."
+ },
+ {
+  "id": "warden_guide_no_one",
+  "speaker": "warden_guide",
+  "text": "그 누구도 틈을 소유해선 안 되네. 그들도, 나도, 그대도."
+ },
+ {
+  "id": "warden_guide_ledger",
+  "speaker": "warden_guide",
+  "text": "나는 장부를 불태울 셈이네. 그러면 다시는 아무도 세어지지 않겠지."
+ },
+ {
+  "id": "warden_guide_reckoner",
+  "speaker": "warden_guide",
+  "text": "마지막 문에는 결산자가 서 있네. 그것이 그대를 제자리에 돌려놓을 걸세. 떠나온 적이 있다는 기억도 없이."
+ },
+ {
+  "id": "warden_guide_stronger",
+  "speaker": "warden_guide",
+  "text": "더 강해져서 돌아오게."
+ },
+ {
+  "id": "warden_guide_short",
+  "speaker": "warden_guide",
+  "text": "그것이 그대를 세다가 모자라게 되었네. 잘된 일이야."
+ },
+ {
+  "id": "timekeeper_gatekeeper_early",
+  "speaker": "timekeeper_gatekeeper",
+  "text": "그대는 이르군. 모두가 이르지."
+ },
+ {
+  "id": "timekeeper_gatekeeper_slower",
+  "speaker": "timekeeper_gatekeeper",
+  "text": "다시. 이번에는 더 천천히."
+ },
+ {
+  "id": "timekeeper_gatekeeper_count",
+  "speaker": "timekeeper_gatekeeper",
+  "text": "가만히 있게. 세어 보게 해주게."
+ },
+ {
+  "id": "timekeeper_gatekeeper_yours",
+  "speaker": "timekeeper_gatekeeper",
+  "text": "그렇다면 그 시간은 그대의 것이네."
+ },
+ {
+  "id": "journal_do_not",
+  "speaker": "journal",
+  "text": "하지 마시게."
+ }
+]

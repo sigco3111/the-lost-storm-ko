@@ -1,0 +1,1303 @@
+[
+  {
+    "id": "dirty_shirt",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#9c927c",
+    "hides": []
+  },
+  {
+    "id": "dirty_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#8f8676",
+    "hides": []
+  },
+  {
+    "id": "rag_shirt",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#6f6a5c",
+    "hides": []
+  },
+  {
+    "id": "rag_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#77726a",
+    "hides": []
+  },
+  {
+    "id": "linen_shirt",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#c9c0aa",
+    "hides": []
+  },
+  {
+    "id": "wool_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#b0a898",
+    "hides": []
+  },
+  {
+    "id": "worn_boots",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Feet"
+    ],
+    "region": "feet",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "leather_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#8a6648",
+    "hides": []
+  },
+  {
+    "id": "leather_vest",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#9a7452",
+    "hides": []
+  },
+  {
+    "id": "leather_bracers",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#7a583e",
+    "hides": []
+  },
+  {
+    "id": "leather_leggings",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Legs"
+    ],
+    "region": "legs",
+    "tint": "#8a745e",
+    "hides": []
+  },
+  {
+    "id": "leather_boots",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Feet"
+    ],
+    "region": "feet",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "mist_treader_boots",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Feet"
+    ],
+    "region": "feet",
+    "tint": "#b8c6d4",
+    "hides": []
+  },
+  {
+    "id": "sackcloth_robe",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "sackcloth_cowl",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "ringmail_hauberk",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms",
+      "Ranger_Pauldron"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "squall_hauberk",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms",
+      "Ranger_Pauldron"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#cfe0f2",
+    "hides": []
+  },
+  {
+    "id": "stormwarden_hauberk",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms",
+      "Ranger_Pauldron"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#5d6f86",
+    "hides": []
+  },
+  {
+    "id": "rough_breeches",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Legs"
+    ],
+    "region": "legs",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "tanned_gloves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "salvaged_mail",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms",
+      "Ranger_Pauldron"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#8a8378",
+    "hides": []
+  },
+  {
+    "id": "patched_tunic",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#7c5444",
+    "hides": []
+  },
+  {
+    "id": "stolen_jerkin",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#5b4634",
+    "hides": []
+  },
+  {
+    "id": "odd_breeches",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Legs"
+    ],
+    "region": "legs",
+    "tint": "#4b5860",
+    "hides": []
+  },
+  {
+    "id": "faded_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#8c7458",
+    "hides": []
+  },
+  {
+    "id": "cast_off_boots",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Feet"
+    ],
+    "region": "feet",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "torn_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#615444",
+    "hides": []
+  },
+  {
+    "id": "mismatched_gloves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#3c3a36",
+    "hides": []
+  },
+  {
+    "id": "still_shroud",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#d4dce6",
+    "hides": []
+  },
+  {
+    "id": "still_tunic",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#d4dce6",
+    "hides": []
+  },
+  {
+    "id": "still_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#c2cad4",
+    "hides": []
+  },
+  {
+    "id": "still_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#c6ced8",
+    "hides": []
+  },
+  {
+    "id": "mender_coat",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#3a3530",
+    "hides": []
+  },
+  {
+    "id": "mender_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#4a443c",
+    "hides": []
+  },
+  {
+    "id": "mender_gloves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#c9b9a0",
+    "hides": []
+  },
+  {
+    "id": "mender_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#3d3833",
+    "hides": []
+  },
+  {
+    "id": "stitched_tunic",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#77706a",
+    "hides": []
+  },
+  {
+    "id": "stitched_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#5f5a52",
+    "hides": []
+  },
+  {
+    "id": "ledger_mantle",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#c8963e",
+    "hides": []
+  },
+  {
+    "id": "keeper_robe",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#2f3a4a",
+    "hides": []
+  },
+  {
+    "id": "tally_robe",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#6e7079",
+    "hides": []
+  },
+  {
+    "id": "custodian_robe",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#d9dce3",
+    "hides": []
+  },
+  {
+    "id": "keeper_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#2b3542",
+    "hides": []
+  },
+  {
+    "id": "keeper_gloves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#6a5238",
+    "hides": []
+  },
+  {
+    "id": "warden_jerkin",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#6e5a40",
+    "hides": []
+  },
+  {
+    "id": "warden_breeches",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Legs"
+    ],
+    "region": "legs",
+    "tint": "#55503f",
+    "hides": []
+  },
+  {
+    "id": "warden_boots",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Feet"
+    ],
+    "region": "feet",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "warden_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#4f4a3a",
+    "hides": []
+  },
+  {
+    "id": "warden_gloves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "traveller_coat",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms"
+    ],
+    "region": "chest",
+    "fit": "coat",
+    "tint": "#d6bc9a",
+    "hides": []
+  },
+  {
+    "id": "traveller_trousers",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#a69a88",
+    "hides": []
+  },
+  {
+    "id": "traveller_boots",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Feet"
+    ],
+    "region": "feet",
+    "tint": "#d8bc9c",
+    "hides": []
+  },
+  {
+    "id": "traveller_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#c8b498",
+    "hides": []
+  },
+  {
+    "id": "militia_tunic",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#8c8472",
+    "hides": []
+  },
+  {
+    "id": "tunic_pauldron",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Pauldron"
+    ],
+    "region": "shoulders",
+    "tint": "#5f5040",
+    "hides": []
+  },
+  {
+    "id": "drover_smock",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body"
+    ],
+    "region": "chest",
+    "tint": "#6f7b6c",
+    "hides": []
+  },
+  {
+    "id": "long_sleeves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Arms"
+    ],
+    "region": "arms",
+    "tint": "#6a5644",
+    "hides": []
+  },
+  {
+    "id": "open_jerkin",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2"
+    ],
+    "region": "chest",
+    "tint": "#4f4538",
+    "hides": []
+  },
+  {
+    "id": "short_sleeves",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Arms"
+    ],
+    "region": "arms",
+    "tint": "#b5aa94",
+    "hides": []
+  },
+  {
+    "id": "blackened_plate",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Body",
+      "Ranger_Belt_1",
+      "Ranger_Belt_2",
+      "Ranger_Arms",
+      "Ranger_Pauldron"
+    ],
+    "region": "chest",
+    "tint": "#ffffff",
+    "hides": [],
+    "surfaces": {
+      "MI_Ranger": "mask_iron"
+    }
+  },
+  {
+    "id": "iron_vambraces",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Bracers"
+    ],
+    "region": "hands",
+    "iconWith": [
+      "Ranger_Arms"
+    ],
+    "tint": "#ffffff",
+    "hides": [],
+    "surfaces": {
+      "MI_Ranger": "helm_steel"
+    }
+  },
+  {
+    "id": "iron_greaves",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Legs"
+    ],
+    "region": "legs",
+    "tint": "#ffffff",
+    "hides": [],
+    "surfaces": {
+      "MI_Ranger": "mask_iron"
+    }
+  },
+  {
+    "id": "iron_sabatons",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Feet"
+    ],
+    "region": "feet",
+    "tint": "#ffffff",
+    "hides": [],
+    "surfaces": {
+      "MI_Ranger": "helm_steel"
+    }
+  },
+  {
+    "id": "hair_short",
+    "model": "models/wear/{frame}/hair.glb",
+    "pieces": [
+      "Hair_SimpleParted"
+    ],
+    "region": "hair",
+    "tint": "#6a523e",
+    "hides": [],
+    "wakeLamps": 0.45
+  },
+  {
+    "id": "hair_cropped",
+    "model": "models/wear/{frame}/hair.glb",
+    "pieces": [
+      "Hair_Buzzed"
+    ],
+    "region": "hair",
+    "tint": "#9a8070",
+    "hides": [],
+    "wakeLamps": 0.45
+  },
+  {
+    "id": "hair_swept",
+    "model": "models/wear/{frame}/hair.glb",
+    "pieces": [
+      "Hair_SimpleParted"
+    ],
+    "region": "hair",
+    "tint": "#8a6a48",
+    "hides": [],
+    "wakeLamps": 0.45
+  },
+  {
+    "id": "hair_ponytail",
+    "model": "models/wear/{frame}/hair.glb",
+    "pieces": [
+      "Hair_Long"
+    ],
+    "region": "hair",
+    "tint": "#4a3a30",
+    "hides": [],
+    "wakeLamps": 0.45
+  },
+  {
+    "id": "hair_braid",
+    "model": "models/wear/{frame}/hair.glb",
+    "pieces": [
+      "Hair_Buns"
+    ],
+    "region": "hair",
+    "tint": "#7c5c3e",
+    "hides": [],
+    "wakeLamps": 0.45
+  },
+  {
+    "id": "hair_bob",
+    "model": "models/wear/{frame}/hair.glb",
+    "pieces": [
+      "Hair_BuzzedFemale"
+    ],
+    "region": "hair",
+    "tint": "#54423a",
+    "hides": [],
+    "wakeLamps": 0.45
+  },
+  {
+    "id": "undertunic",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#b9ab8f",
+    "hides": []
+  },
+  {
+    "id": "undertunic_woman",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#b9ab8f",
+    "hides": []
+  },
+  {
+    "id": "braies",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#a99b80",
+    "hides": []
+  },
+  {
+    "id": "plain_shoes",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Feet"
+    ],
+    "region": "feet",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "lens_mask",
+    "model": "models/wear/{frame}/headgear.glb",
+    "pieces": [
+      "Lens_Mask"
+    ],
+    "region": "head",
+    "covers": [],
+    "surfaces": {
+      "plate": "lacquer",
+      "trim": "clean_bronze",
+      "strap": "dark_leather",
+      "lining": "dark_leather"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "slit_mask",
+    "model": "models/wear/{frame}/headgear.glb",
+    "pieces": [
+      "Slit_Mask"
+    ],
+    "region": "head",
+    "covers": [],
+    "surfaces": {
+      "plate": "mask_iron",
+      "lining": "dark_leather"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "iron_helm",
+    "model": "models/wear/{frame}/headgear.glb",
+    "pieces": [
+      "Iron_Helm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {
+      "plate": "helm_steel",
+      "trim": "mask_iron",
+      "lining": "dark_leather"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "spangenhelm",
+    "model": "models/wear/{frame}/helms/spangenhelm.glb",
+    "pieces": [
+      "Spangenhelm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "norman_helm",
+    "model": "models/wear/{frame}/helms/norman_helm.glb",
+    "pieces": [
+      "Norman_Helm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "sallet",
+    "model": "models/wear/{frame}/helms/sallet.glb",
+    "pieces": [
+      "Sallet"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "barbute",
+    "model": "models/wear/{frame}/helms/barbute.glb",
+    "pieces": [
+      "Barbute"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "visored_barbute",
+    "model": "models/wear/{frame}/helms/visored_barbute.glb",
+    "pieces": [
+      "Visored_Barbute"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "great_helm",
+    "model": "models/wear/{frame}/helms/great_helm.glb",
+    "pieces": [
+      "Great_Helm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "visored_bascinet",
+    "model": "models/wear/{frame}/helms/bascinet.glb",
+    "pieces": [
+      "Bascinet"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "hundsgugel",
+    "model": "models/wear/{frame}/helms/hundsgugel.glb",
+    "pieces": [
+      "Hundsgugel"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "gothic_bascinet",
+    "model": "models/wear/{frame}/helms/gothic_bascinet.glb",
+    "pieces": [
+      "Gothic_Bascinet"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "horned_helm",
+    "model": "models/wear/{frame}/helms/horned_helm.glb",
+    "pieces": [
+      "Horned_Helm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "spiked_war_helm",
+    "model": "models/wear/{frame}/helms/war_helm.glb",
+    "pieces": [
+      "War_Helm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "ornamented_great_helm",
+    "model": "models/wear/{frame}/helms/ornamented_great_helm.glb",
+    "pieces": [
+      "Ornamented_Great_Helm"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "surfaces": {},
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "circlet",
+    "model": "models/wear/{frame}/headgear.glb",
+    "pieces": [
+      "Circlet"
+    ],
+    "region": "head",
+    "covers": [],
+    "surfaces": {
+      "trim": "clean_bronze"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "keeper_loupe",
+    "model": "models/wear/{frame}/headgear.glb",
+    "pieces": [
+      "Keeper_Loupe"
+    ],
+    "region": "head",
+    "covers": [],
+    "surfaces": {
+      "trim": "clean_bronze"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "crown_tines",
+    "model": "models/wear/{frame}/headgear.glb",
+    "pieces": [
+      "Crown_Tines"
+    ],
+    "region": "head",
+    "covers": [],
+    "surfaces": {
+      "trim": "storm_gold",
+      "tip": "storm_tip",
+      "lining": "dark_leather"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "gale_charm",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Gale_Charm"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "gale_charm_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "gale_charm_coat",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Gale_Charm_Coat"
+    ],
+    "region": "neck",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "ember_charm",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Ember_Charm"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "ember_charm_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "ember_charm_coat",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Ember_Charm_Coat"
+    ],
+    "region": "neck",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "gilded_token",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Gilded_Token"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "gilded_token_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "gilded_token_coat",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Gilded_Token_Coat"
+    ],
+    "region": "neck",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "tidestone_charm",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Tidestone_Charm"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "tidestone_charm_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "tidestone_charm_coat",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Tidestone_Charm_Coat"
+    ],
+    "region": "neck",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "storm_idol",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Storm_Idol"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "storm_idol_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "storm_idol_coat",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Storm_Idol_Coat"
+    ],
+    "region": "neck",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "lantern_of_second_sounds",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Lantern_Charm"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "lantern_of_second_sounds_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "lantern_of_second_sounds_coat",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Lantern_Charm_Coat"
+    ],
+    "region": "neck",
+    "tint": "#ffffff",
+    "hides": []
+  },
+  {
+    "id": "appraiser_robe",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Body",
+      "Peasant_Arms"
+    ],
+    "region": "chest",
+    "tint": "#4a3352",
+    "hides": []
+  },
+  {
+    "id": "appraiser_skirt",
+    "model": "models/wear/{frame}/peasant.glb",
+    "pieces": [
+      "Peasant_Legs"
+    ],
+    "region": "legs",
+    "tint": "#35263c",
+    "hides": []
+  },
+  {
+    "id": "appraiser_hood",
+    "model": "models/wear/{frame}/ranger.glb",
+    "pieces": [
+      "Ranger_Hood"
+    ],
+    "region": "head",
+    "covers": [
+      "hair"
+    ],
+    "tint": "#3b2a44",
+    "hides": []
+  },
+  {
+    "id": "appraiser_charm",
+    "model": "models/wear/{frame}/charms.glb",
+    "pieces": [
+      "Gale_Charm"
+    ],
+    "region": "neck",
+    "fits": {
+      "coat": "gale_charm_coat"
+    },
+    "tint": "#ffffff",
+    "hides": []
+  }
+]

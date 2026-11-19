@@ -1,0 +1,93 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { botPlay, CAREFUL, createBot } from '../sim/bot.ts';
+import type { Bot, BotReport } from '../sim/bot.ts';
+import { loadContent } from '../sim/content/content.ts';
+import type { Content, ZoneDef, ZoneVoice } from '../sim/content/types.ts';
+import { toSave } from '../sim/save.ts';
+import { createWorld } from '../sim/world/create.ts';
+import { stepWorld } from '../sim/world/step.ts';
+import { enterZone } from '../sim/world/zones.ts';
+import type { Vec2 } from '../sim/math.ts';
+import type { World, WorldEvent } from '../sim/world/types.ts';
+import { OUTPOST_CONTENT } from '../test/road-support.ts';
+import { must } from '../test/support.ts';
+import { changesSave, urgentEvents } from './save-events.ts';
+
+const shipped: Content = loadContent();
+const town: ZoneDef = must(shipped.zones.get('hall_of_time'), 'town');
+const whisper: ZoneVoice = { id: 'well_whisper', x: 70, z: 31, radius: 6, lines: ['warden_trader_goods'], when: [] };
+const content: Content = { ...shipped, zones: new Map<string, ZoneDef>([...shipped.zones, [town.id, { ...town, voices: [whisper] }]]) };
+const PLAY = { seed: 11, dt: 1 / 60, fewestChanges: 50 } as const;
+
+function kept(world: World): string {
+  const { nextItemUid: _nextItemUid, tally: _tally, ...rest } = toSave(world);
+  return JSON.stringify(rest);
+}
+
+void test('a step that changes nothing a save holds does not ask for one', (): void => {
+  const world: World = createWorld(content, { seed: PLAY.seed, save: null });
+  stepWorld(world, [], PLAY.dt);
+  const before: string = kept(world);
+  const events: WorldEvent[] = stepWorld(world, [], PLAY.dt);
+  assert.equal(kept(world), before);
+  assert.equal(changesSave(events), false);
+  assert.equal(changesSave([]), false);
+});
+
+void test('through a whole play of the act, every step that changes what a save holds reports an event that asks for a save', (): void => {
+  const world: World = createWorld(content, { seed: PLAY.seed, save: null });
+  const voices: Set<string> = new Set<string>([...content.zones.values()].flatMap((zone: ZoneDef): string[] => zone.voices.map((voice): string => voice.id)));
+  const missed: string[] = [];
+  let before: string = kept(world);
+  let changes: number = 0;
+  const bot: Bot = createBot(world, CAREFUL, (events: readonly WorldEvent[]): void => {
+    const after: string = kept(world);
+    if (after === before) return;
+    before = after;
+    changes += 1;
+    if (!changesSave(events)) missed.push(`a step with only [${events.map((event: WorldEvent): string => event.type).join(', ')}] changed the save`);
+  });
+  const report: BotReport = botPlay(bot);
+  assert.equal(report.stuck, null);
+  assert.ok(changes >= PLAY.fewestChanges, `only ${changes} steps changed the save`);
+  assert.ok(voices.size === 0 || world.heard.some((id: string): boolean => voices.has(id)), 'the play never heard a voice tied to a place');
+  assert.deepEqual(missed, []);
+});
+
+void test('a respawn asks for a save because it can cost experience', (): void => {
+  assert.equal(changesSave([{ type: 'player_respawn' }]), true);
+});
+
+void test('drinking a flask and refilling flasks each ask for a save', (): void => {
+  const world: World = createWorld(OUTPOST_CONTENT, { seed: PLAY.seed, save: null });
+  enterZone(world, must(OUTPOST_CONTENT.zones.get('outpost'), 'outpost'), { type: 'start' });
+  world.monsters = [];
+  world.player.life = 1;
+  const before: string = kept(world);
+  const drink: WorldEvent[] = stepWorld(world, [{ type: 'flask', slot: 0 }], PLAY.dt);
+  assert.notEqual(kept(world), before);
+  assert.equal(changesSave(drink), true);
+  enterZone(world, must(OUTPOST_CONTENT.zones.get('hub'), 'hub'), { type: 'start' });
+  const spent: string = kept(world);
+  const refill: WorldEvent[] = stepWorld(world, [], PLAY.dt);
+  assert.notEqual(kept(world), spent);
+  assert.equal(changesSave(refill), true);
+  assert.equal(changesSave(stepWorld(world, [], PLAY.dt)), false);
+});
+
+void test('a save is urgent for a level, a boss, a quest step, an act, a zone, a change to the character or the hero dying, and for nothing else', (): void => {
+  const at: Vec2 = { x: 0, z: 0 };
+  const urgent: readonly WorldEvent[] = [
+    { type: 'level_up', level: 2 },
+    { type: 'boss_defeated', monsterId: 1, monster: 'warden', first: true, yielded: false },
+    { type: 'quest_started', quest: 'out_of_the_mist' },
+    { type: 'zone_changed', from: 'hall_of_time', to: 'outpost' },
+    { type: 'character_changed' },
+    { type: 'death', actorId: 0, team: 'player', pos: at, direction: at },
+  ];
+  for (const event of urgent) assert.equal(urgentEvents([event]), true, event.type);
+  assert.equal(urgentEvents([]), false);
+  assert.equal(urgentEvents([{ type: 'death', actorId: 7, team: 'monster', pos: at, direction: at }]), false);
+  assert.equal(urgentEvents([{ type: 'xp', amount: 5, reduced: null }, { type: 'explored', zone: 'hall_of_time' }, { type: 'flasks_refilled' }]), false);
+});

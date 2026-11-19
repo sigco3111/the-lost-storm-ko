@@ -1,0 +1,9 @@
+body.hud-torn #hud,
+body.hud-torn #overlays,
+body.hud-torn .tc {
+  filter: url(#hud-tear);
+}
+
+#vignette {
+  opacity: calc(1 - var(--tear-white, 0));
+}

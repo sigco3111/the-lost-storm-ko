@@ -1,0 +1,656 @@
+.hud-panel.tree-panel {
+  --tree-lit: #8fd8ff;
+  --tree-well: #090c12;
+}
+
+.hud-panel.tree-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background:
+    radial-gradient(1px 1px at 18px 24px, rgba(200, 225, 255, 0.5), transparent 1.5px),
+    radial-gradient(1px 1px at 92px 71px, rgba(200, 225, 255, 0.32), transparent 1.5px),
+    radial-gradient(1.5px 1.5px at 141px 133px, rgba(220, 235, 255, 0.4), transparent 2px),
+    radial-gradient(1px 1px at 57px 168px, rgba(200, 225, 255, 0.26), transparent 1.5px),
+    var(--dither),
+    radial-gradient(ellipse at 50% 46%, rgba(40, 62, 92, 0.34), rgba(5, 7, 11, 0) 68%),
+    #05070b;
+  background-size: 190px 190px, 190px 190px, 190px 190px, 190px 190px, var(--dither-size), 100% 100%, 100% 100%;
+  box-shadow: none;
+}
+
+.hud .hud-panel.hud-panel.tree-panel.tree-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  width: auto;
+  height: auto;
+  max-height: none;
+  border-radius: 0;
+  transform: none;
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s var(--spring-snappy) var(--spring-smooth-ms);
+}
+
+.hud .hud-panel.hud-panel.tree-panel.tree-panel.warming {
+  visibility: visible;
+  opacity: 0.01;
+  pointer-events: none;
+  transition: none;
+}
+
+.hud .hud-panel.hud-panel.tree-panel.tree-panel.open {
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s var(--spring-snappy) 0s;
+}
+
+.hud.chart-open .hud-quests,
+.hud.chart-open .minimap,
+.hud.chart-open .hud-hint {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    visibility 0s linear var(--spring-snappy-ms);
+}
+
+.tree-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 7px 10px 6px;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.tree-title {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+.tree-points {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+  transition: color var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-points-count {
+  min-width: 2ch;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.tree-points-word {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.tree-points-word::after {
+  content: 'points';
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.tree-points.spendable {
+  color: var(--tree-lit);
+}
+
+.tree-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 160px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+}
+
+.tree-viewport.dragging {
+  cursor: grabbing;
+}
+
+.tree-board {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.tree-board.releasing {
+  will-change: auto;
+}
+
+.tree-links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.tree-track {
+  stroke: color-mix(in srgb, var(--tint) 30%, transparent);
+  stroke-width: 3;
+  transition:
+    stroke var(--spring-smooth-ms) var(--spring-smooth),
+    stroke-width var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-track.route {
+  stroke: color-mix(in srgb, var(--ember) 70%, transparent);
+  stroke-width: 4;
+}
+
+.tree-flow {
+  stroke: var(--tree-lit);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  transition:
+    stroke-dashoffset var(--spring-smooth-ms) var(--spring-smooth),
+    stroke var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-flow.open {
+  stroke: var(--tint);
+  stroke-dashoffset: 0.45;
+  opacity: 0.5;
+}
+
+.tree-flow.lit {
+  stroke: color-mix(in srgb, var(--tint) 60%, #ffffff);
+  stroke-dashoffset: 0;
+  opacity: 0.95;
+}
+
+.tree-socket {
+  position: absolute;
+  width: var(--socket);
+  height: var(--socket);
+  margin: calc(var(--socket) / -2) 0 0 calc(var(--socket) / -2);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  outline: none;
+  cursor: default;
+  color: color-mix(in srgb, var(--tint) 60%, #9aa4b2);
+  transition:
+    transform var(--spring-bouncy-ms) var(--spring-bouncy),
+    filter var(--spring-smooth-ms) var(--spring-smooth),
+    color var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-socket.notable {
+  width: var(--notable);
+  height: var(--notable);
+  margin: calc(var(--notable) / -2) 0 0 calc(var(--notable) / -2);
+}
+
+.tree-socket.keystone {
+  width: var(--keystone);
+  height: var(--keystone);
+  margin: calc(var(--keystone) / -2) 0 0 calc(var(--keystone) / -2);
+}
+
+.tree-socket-rim,
+.tree-socket-well,
+.tree-socket-fill,
+.tree-socket-glyph {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.tree-socket-rim {
+  display: none;
+}
+
+.tree-socket.keystone .tree-socket-rim {
+  display: block;
+  inset: 3px;
+  border-radius: 0;
+  transform: rotate(45deg);
+  background: var(--tree-well);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  transition: box-shadow var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-socket-well {
+  background: radial-gradient(circle at 50% 30%, #161b25, var(--tree-well) 70%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 3px 6px rgba(0, 0, 0, 0.85),
+    0 0 0 0 rgba(143, 216, 255, 0);
+  transition: box-shadow var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-socket-fill {
+  inset: 2px;
+  opacity: 0;
+  transform: scale(0.4);
+  background: radial-gradient(circle at 50% 32%, color-mix(in srgb, var(--tint) 70%, #ffffff), color-mix(in srgb, var(--tint) 55%, #0e1e2e) 55%, rgba(14, 30, 46, 0.9));
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.tree-socket-glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tree-glyph {
+  width: 16px;
+  height: 16px;
+}
+
+.tree-socket.keystone .tree-glyph {
+  width: 18px;
+  height: 18px;
+}
+
+.tree-socket.locked {
+  opacity: 0.8;
+}
+
+.tree-socket.route {
+  opacity: 1;
+  color: color-mix(in srgb, var(--ember) 80%, transparent);
+}
+
+.tree-socket.no_points {
+  color: rgba(232, 184, 102, 0.42);
+}
+
+.tree-socket.no_points .tree-socket-well {
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 184, 102, 0.2),
+    inset 0 3px 6px rgba(0, 0, 0, 0.85),
+    0 0 0 0 rgba(143, 216, 255, 0);
+}
+
+.tree-socket.available {
+  cursor: pointer;
+  color: var(--ember);
+}
+
+.tree-socket.available .tree-socket-well {
+  animation: chart-breathe var(--drift-ms) var(--drift-ease) infinite;
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 184, 102, 0.5),
+    inset 0 3px 6px rgba(0, 0, 0, 0.85),
+    0 0 9px 0 rgba(232, 184, 102, 0.2);
+}
+
+.tree-socket.keystone.available .tree-socket-rim {
+  box-shadow: inset 0 0 0 1px rgba(232, 184, 102, 0.32);
+}
+
+.tree-socket.allocated {
+  color: #eaf7ff;
+}
+
+.tree-socket.allocated .tree-socket-well {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--tint) 55%, transparent),
+    inset 0 3px 6px rgba(0, 0, 0, 0.85),
+    0 0 11px 0 color-mix(in srgb, var(--tint) 30%, transparent);
+}
+
+.tree-socket.notable .tree-glyph {
+  width: 18px;
+  height: 18px;
+}
+
+.tree-socket.variant .tree-socket-rim {
+  display: block;
+  inset: calc(var(--variant-rim) * -1);
+  border-radius: 50%;
+  background: none;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tint) 28%, transparent);
+  transform: none;
+}
+
+.tree-socket.selected {
+  filter: brightness(1.3);
+}
+
+.tree-viewport.searching .tree-socket:not(.match) {
+  opacity: 0.22;
+}
+
+.tree-viewport.searching .tree-socket.match {
+  filter: brightness(1.3);
+}
+
+@keyframes chart-breathe {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.35);
+  }
+}
+
+.chart-path-name {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  white-space: nowrap;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--tint) 80%, #ffffff);
+  text-shadow: 0 0 10px #05070b, 0 0 3px #05070b;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.chart-path-name.pinned {
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .chart-path-name {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+  }
+}
+
+.chart-search {
+  flex: 1 1 140px;
+  min-width: 110px;
+  max-width: 240px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 3px;
+  outline: none;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  transition: background var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.chart-search:focus {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.chart-zoom,
+.chart-restart,
+.chart-action {
+  padding: 3px 9px;
+  border: 0;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition:
+    background var(--spring-smooth-ms) var(--spring-smooth),
+    color var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.chart-zoom:hover,
+.chart-restart:hover,
+.chart-action:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.chart-zoom:active,
+.chart-restart:active,
+.chart-action:active {
+  transform: scale(0.94);
+}
+
+.chart-close {
+  width: 30px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  font: inherit;
+  font-size: 19px;
+  line-height: 1;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition:
+    background var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.chart-close:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.chart-close:active {
+  transform: scale(0.92);
+}
+
+body.touch .chart-close {
+  display: none;
+}
+
+#overlays {
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), visibility 0s;
+}
+
+body:has(.hud.chart-open) #overlays {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    visibility 0s linear var(--spring-snappy-ms);
+}
+
+.chart-restart {
+  margin-left: auto;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chart-restart.shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chart-restart.free {
+  color: var(--storm);
+  background: rgba(134, 200, 240, 0.12);
+}
+
+.chart-restart.confirm {
+  color: var(--ember);
+  background: rgba(232, 184, 102, 0.14);
+}
+
+.chart-restart.deny,
+.chart-action.deny {
+  animation: tree-deny var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.chart-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  line-height: 1.32;
+}
+
+.chart-card-inner.refill {
+  animation: tree-refill var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+@keyframes tree-refill {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.chart-card-path {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tint, var(--text-dim));
+}
+
+.chart-action {
+  display: block;
+  max-height: 0;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chart-action.shown {
+  max-height: 30px;
+  margin-top: 7px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    max-height var(--spring-smooth-ms) var(--spring-smooth),
+    margin-top var(--spring-smooth-ms) var(--spring-smooth),
+    padding var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    background var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.chart-action.short {
+  color: #d98572;
+}
+
+.chart-card.deny .tree-tip-need {
+  margin-top: 3px;
+  font-size: 11px;
+  color: #d98572;
+}
+
+.tree-tip-status {
+  animation: tree-deny var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.tree-socket.allocated .tree-socket-fill {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tree-socket.keystone.allocated .tree-socket-rim {
+  box-shadow: inset 0 0 0 1px rgba(143, 216, 255, 0.45);
+}
+
+.tree-socket:hover,
+.tree-socket:focus-visible {
+  filter: brightness(1.25);
+}
+
+.tree-socket.available:active {
+  transform: scale(0.92);
+}
+
+.tree-socket.deny {
+  animation: tree-deny var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+@keyframes tree-deny {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-3px);
+  }
+  65% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.tree-tip-name {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ember);
+}
+
+.tree-tip-effect {
+  color: var(--text);
+}
+
+.tree-tip-requires,
+.tree-tip-cost {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.tree-tip-requires {
+  margin-top: 3px;
+}
+
+.tree-tip-cost.unmet {
+  color: #d98572;
+}
+
+.tree-tip-status {
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.tree-tip-status.available {
+  color: var(--ember);
+}
+
+.tree-tip-status.allocated {
+  color: var(--tree-lit);
+}
+
+.tree-tip-status.locked,
+.tree-tip-status.no_points {
+  color: #d98572;
+}
+
+

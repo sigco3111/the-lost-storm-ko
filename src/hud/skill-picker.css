@@ -1,0 +1,217 @@
+.hud-skillbar {
+  position: relative;
+}
+
+.slot {
+  cursor: pointer;
+}
+
+.slot.empty {
+  background: rgba(10, 13, 20, 0.4);
+}
+
+.slot.empty .slot-icon::after {
+  content: "";
+  opacity: 0;
+  transform: scale(0.6);
+  transition:
+    opacity var(--spring-smooth-ms) var(--spring-smooth),
+    transform var(--spring-bouncy-ms) var(--spring-bouncy);
+  position: absolute;
+  inset: 11px;
+  border-radius: 2px;
+  background:
+    linear-gradient(rgba(169, 226, 255, 0.28), rgba(169, 226, 255, 0.28)) center / 100% 1px no-repeat,
+    linear-gradient(rgba(169, 226, 255, 0.28), rgba(169, 226, 255, 0.28)) center / 1px 100% no-repeat;
+}
+
+.hud-skillbar.spare .slot.empty .slot-icon::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slot.learned {
+  animation: slot-learned calc(var(--spring-smooth-ms) * 4) var(--spring-smooth);
+}
+
+.slot.learned .slot-icon {
+  animation: hud-pop var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+@keyframes slot-learned {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(169, 226, 255, 0), 0 0 0 0 rgba(169, 226, 255, 0);
+  }
+  30% {
+    box-shadow: inset 0 0 14px 2px rgba(169, 226, 255, 0.35), 0 0 18px 2px rgba(120, 190, 255, 0.28);
+  }
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(169, 226, 255, 0), 0 0 0 0 rgba(169, 226, 255, 0);
+  }
+}
+
+.slot.swap .slot-icon {
+  animation: hud-pop var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.skill-picker {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: var(--picker-x, 50%);
+  width: 236px;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-edge);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 10px) scale(0.96);
+  transform-origin: 50% 100%;
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear var(--spring-snappy-ms);
+}
+
+.skill-picker.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0) scale(1);
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    visibility 0s linear 0s;
+}
+
+.skill-picker-title {
+  margin: 0 2px 6px;
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+}
+
+.skill-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.skill-choice {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  color: #a9e2ff;
+  background: linear-gradient(180deg, rgba(40, 52, 74, 0.55), rgba(10, 13, 20, 0.6));
+  cursor: pointer;
+  transition:
+    transform var(--spring-bouncy-ms) var(--spring-bouncy),
+    background var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.skill-choice:hover {
+  transform: scale(1.06);
+  background: linear-gradient(180deg, rgba(56, 74, 104, 0.65), rgba(14, 18, 28, 0.7));
+}
+
+.skill-choice:focus-visible {
+  outline: none;
+  transform: scale(1.06);
+  background: linear-gradient(180deg, rgba(56, 74, 104, 0.65), rgba(14, 18, 28, 0.7));
+}
+
+.skill-clear {
+  grid-column: span 2;
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 7px;
+  color: var(--text-dim);
+}
+
+.skill-clear-mark {
+  flex: none;
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: rgba(10, 13, 20, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(169, 226, 255, 0.16);
+}
+
+.skill-clear-mark::after {
+  content: "";
+  position: absolute;
+  inset: 6px 3px;
+  border-radius: 1px;
+  background: rgba(169, 226, 255, 0.34);
+}
+
+.skill-clear-name {
+  font-size: 10.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.skill-clear.current .skill-clear-name {
+  color: #a9e2ff;
+}
+
+.skill-choice-icon {
+  position: absolute;
+  inset: 7px;
+  filter: drop-shadow(0 0 4px rgba(127, 212, 255, 0.3));
+}
+
+.skill-choice-level {
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.skill-choice.current {
+  background: linear-gradient(180deg, rgba(70, 104, 140, 0.6), rgba(18, 28, 42, 0.7));
+}
+
+.skill-choice.elsewhere .skill-choice-icon {
+  opacity: 0.62;
+}
+
+.skill-choice.locked {
+  cursor: default;
+  color: rgba(239, 230, 214, 0.5);
+}
+
+.skill-choice.locked:hover {
+  transform: none;
+}
+
+.skill-choice.locked .skill-choice-icon {
+  opacity: 0.22;
+  filter: none;
+}
+
+.skill-choice.locked .skill-choice-level {
+  opacity: 1;
+}
+
+.tip-line.locked {
+  color: var(--ember);
+}
+
+.tip-line.stronger {
+  color: #a9d6ff;
+}

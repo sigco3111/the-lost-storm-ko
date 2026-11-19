@@ -1,0 +1,175 @@
+.hud-boss {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: min(560px, 62vw);
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, -22px) scale(0.96);
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), transform var(--spring-bouncy-ms) var(--spring-bouncy);
+}
+
+.hud-boss.visible {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.boss-name {
+  font-family: var(--serif);
+  font-size: 19px;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  color: var(--text);
+  text-shadow: var(--legible-shadow);
+}
+
+.boss-title {
+  margin-top: 1px;
+  max-height: 18px;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--text-dim);
+  text-shadow: var(--legible-shadow);
+  transition: max-height var(--spring-smooth-ms) var(--spring-smooth), opacity var(--spring-smooth-ms) var(--spring-smooth), margin-top var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.boss-title.absent {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+}
+
+.boss-track {
+  position: relative;
+  height: 7px;
+  margin-top: 6px;
+  overflow: hidden;
+  background: rgba(6, 8, 12, 0.82);
+}
+
+.boss-fill,
+.boss-chip {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+}
+
+.boss-fill {
+  background: #a8322b;
+  transition: transform var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.boss-chip {
+  background: rgba(240, 214, 184, 0.62);
+  transition: transform var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.boss-marks {
+  position: absolute;
+  inset: 0;
+}
+
+.boss-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(8, 10, 16, 0.75);
+}
+
+.hud-bark {
+  position: absolute;
+  left: 50%;
+  bottom: 124px;
+  width: min(640px, 86vw);
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  transition: opacity var(--spring-smooth-ms) var(--spring-smooth), transform var(--spring-bouncy-ms) var(--spring-bouncy), bottom var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.hud-bark.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.bark-name {
+  font-family: var(--serif);
+  font-size: 13.5px;
+  letter-spacing: 0.12em;
+  color: var(--ember);
+  text-shadow: var(--legible-shadow);
+}
+
+.bark-text {
+  margin-top: 2px;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--text);
+  text-shadow: var(--legible-shadow);
+}
+
+.bark-text.line {
+  animation: dialogue-line var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.bark-text.leaving {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity var(--spring-snappy-ms) var(--spring-snappy), transform var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.hud-dialogue.open ~ .hud-bark {
+  bottom: 252px;
+}
+
+body.touch .hud-boss {
+  top: var(--ph-target-y);
+  left: var(--ph-target-x);
+  width: var(--ph-target-w);
+  transform: translateY(-22px) scale(0.96);
+}
+
+body.touch .hud-boss.visible {
+  transform: none;
+}
+
+body.touch .hud-boss .boss-name {
+  overflow: hidden;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-indent: 0.1em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+body.touch .hud-boss .boss-title {
+  font-size: 11px;
+}
+
+body.touch .hud-bark {
+  left: var(--ph-bark-x);
+  bottom: var(--ph-bark-bottom);
+  width: var(--ph-bark-w);
+  transform: translateY(12px);
+}
+
+body.touch .hud-bark.visible {
+  transform: none;
+}
+
+body.touch .hud-dialogue.open ~ .hud-bark {
+  bottom: var(--ph-bark-talk-bottom);
+}
+
+body.touch .hud-bark .bark-name {
+  font-size: 12px;
+}
+
+body.touch .hud-bark .bark-text {
+  font-size: 15px;
+  line-height: 1.3;
+}

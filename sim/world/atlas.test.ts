@@ -1,0 +1,163 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { roadAct, roadZone } from '../../test/road-support.ts';
+import { finishQuests, must, worldIn, zoneOf } from '../../test/support.ts';
+import { actOf } from '../content/atlas.ts';
+import { loadContent } from '../content/content.ts';
+import type { ActDef, AtlasDef, AtlasRoad, Content, MapPlace, QuestDef, ZoneDef, ZoneExit, ZoneWaypoint } from '../content/types.ts';
+import { placeShown, placeState, roadState, roadWalked, shownPlaces, zoneMark } from './atlas.ts';
+import { createWorld } from './create.ts';
+import { canTeleport, onWaypoint } from './waypoints.ts';
+import type { World } from './types.ts';
+
+const content: Content = loadContent();
+const act: ActDef = must(actOf(content, 'hall_of_time'), 'act');
+
+function exitTo(to: string, requires: ZoneExit['requires'], hidden: boolean): ZoneExit {
+  return { id: `to_${to}`, x: 4, z: 4, radius: 1.6, to, toExit: 'back', arrival: { x: 8, z: 8 }, requires, lockedHint: 'Barred.', hiddenWhenLocked: hidden, look: 'ring', marker: null };
+}
+
+const errand: QuestDef = { id: 'errand', name: 'An Errand', requires: [], when: [], objectives: [{ id: 'go', type: 'reach', zone: 'hub', x: 8, z: 8, radius: 2, text: 'Go', waiting: '', when: [], sets: {} }] };
+const barred: ZoneExit['requires'] = [{ type: 'quest', quest: 'errand', is: 'done', not: false }];
+const hub: ZoneDef = roadZone({ id: 'hub', kind: 'town', exits: [{ ...exitTo('vale', [], false), id: 'to_vale' }, exitTo('keep', barred, false)] });
+const vale: ZoneDef = roadZone({ id: 'vale', exits: [exitTo('hub', [], false), exitTo('peak', [], false), exitTo('hollow', barred, true)] });
+const keep: ZoneDef = roadZone({ id: 'keep', exits: [exitTo('hub', [], false)] });
+const peak: ZoneDef = roadZone({ id: 'peak', exits: [exitTo('vale', [], false)] });
+const hollow: ZoneDef = roadZone({ id: 'hollow', exits: [exitTo('vale', [], false)] });
+const atlas: AtlasDef = {
+  ...act.atlas,
+  places: ['hub', 'vale', 'keep', 'peak', 'hollow'].map((zone: string, index: number): MapPlace => ({ zone, x: 100 + index * 100, y: 200, label: null, chain: null, when: [] })),
+  roads: [['hub', 'vale'], ['hub', 'keep'], ['vale', 'peak'], ['vale', 'hollow']].map(([from, to]): AtlasRoad => ({ from: from ?? '', to: to ?? '', via: [] })),
+};
+const mapped: Content = { ...roadAct([hub, vale, keep, peak, hollow], 'hub'), quests: new Map<string, QuestDef>([[errand.id, errand]]) };
+const staged: Content = { ...mapped, world: { ...mapped.world, acts: [{ ...act, atlas }] } };
+const mapRoad = (from: string, to: string): AtlasRoad => must(atlas.roads.find((entry: AtlasRoad): boolean => (entry.from === from && entry.to === to) || (entry.from === to && entry.to === from)), `road ${from} ${to}`);
+
+void test('a new hero sees the town lit, open neighbours dim, barred ones locked and the rest unknown', (): void => {
+  const world: World = createWorld(staged, { seed: 1, save: null });
+  assert.equal(placeState(world, 'hub'), 'here');
+  assert.equal(placeState(world, 'vale'), 'reachable');
+  assert.equal(placeState(world, 'keep'), 'locked');
+  assert.equal(placeState(world, 'peak'), 'unknown');
+  assert.equal(placeState(world, 'hollow'), 'unknown');
+  assert.equal(roadState(world, mapRoad('hub', 'vale')), 'open');
+  assert.equal(roadState(world, mapRoad('hub', 'keep')), 'locked');
+  assert.equal(roadState(world, mapRoad('vale', 'peak')), 'hidden');
+  const shipped: World = createWorld(content, { seed: 1, save: null });
+  assert.equal(placeState(shipped, 'hall_of_time'), 'here');
+  assert.equal(placeState(shipped, 'hideout'), 'reachable');
+});
+
+void test('quests open barred roads and walking a road lights the far end', (): void => {
+  const opened: World = finishQuests(createWorld(staged, { seed: 1, save: null }));
+  assert.equal(placeState(opened, 'keep'), 'reachable');
+  assert.equal(roadState(opened, mapRoad('hub', 'keep')), 'open');
+  const walked: World = worldIn(staged, 'vale', 1);
+  assert.equal(placeState(walked, 'vale'), 'here');
+  assert.equal(placeState(walked, 'hub'), 'visited');
+  assert.equal(placeState(walked, 'peak'), 'reachable');
+  assert.equal(roadState(walked, mapRoad('vale', 'peak')), 'open');
+  assert.equal(roadState(walked, mapRoad('vale', 'hollow')), 'hidden');
+  assert.equal(placeState(walked, 'hollow'), 'unknown');
+});
+
+void test('a zone is marked by its kind, and a zone with a boss pack is a boss zone', (): void => {
+  assert.equal(zoneMark(content, zoneOf(content, 'hall_of_time')), 'wild');
+  assert.equal(zoneMark(content, zoneOf(content, 'hideout')), 'town');
+  assert.equal(zoneMark(staged, vale), 'wild');
+  const lair: ZoneDef = roadZone({ id: 'lair', packs: [{ x: 8, z: 8, members: [{ monster: 'unfinished_colossus', count: 1, mods: [] }], when: [] }] });
+  const marks: string[] = [...staged.zones.values(), lair].map((zone): string => zoneMark(staged, zone));
+  assert.ok(marks.includes('boss'));
+  assert.equal(zoneMark(staged, lair), 'boss');
+});
+
+void test('a zone belongs to the act that places it', (): void => {
+  for (const zone of [...content.zones.values()].filter((def): boolean => def.kind !== 'void').map((def): string => def.id)) assert.ok(must(actOf(content, zone), 'act').atlas.places.some((place: MapPlace): boolean => place.zone === zone), zone);
+  const first: ActDef = { ...act, atlas };
+  const without = (zone: string): ActDef => ({ ...first, atlas: { ...atlas, places: atlas.places.filter((place: MapPlace): boolean => place.zone !== zone) } });
+  const second: ActDef = { ...first, id: 'act_2', atlas: { ...atlas, places: atlas.places.filter((place: MapPlace): boolean => place.zone === 'vale') } };
+  const split: Content = { ...staged, world: { ...staged.world, acts: [without('vale'), second] } };
+  assert.equal(must(actOf(split, 'vale'), 'act').id, 'act_2');
+  assert.equal(must(actOf(split, 'hub'), 'act').id, 'act_1');
+});
+
+void test('a zone no act places falls back to the first act', (): void => {
+  const trimmed: ActDef = { ...act, atlas: { ...act.atlas, places: act.atlas.places.filter((place: MapPlace): boolean => place.zone !== 'hall_of_time') } };
+  const lost: Content = { ...content, world: { ...content.world, acts: [trimmed] } };
+  const found: ActDef = must(actOf(lost, 'hall_of_time'), 'act');
+  assert.equal(found, lost.world.acts[0]);
+  assert.ok(!found.atlas.places.some((place: MapPlace): boolean => place.zone === 'hall_of_time'));
+});
+
+void test('the act shows the In-Between, the Hall of Time and the Hideout west to east, joined in the order the hero walks them, with the boss lair north of the Hall', (): void => {
+  const road: MapPlace[] = act.atlas.places.filter((place: MapPlace): boolean => place.zone !== 'keepers_gate' && !place.zone.startsWith('under_hall') && !place.zone.startsWith('ledger_') && !place.zone.startsWith('lava_depths'));
+  assert.deepEqual(
+    road.map((place: MapPlace): string => place.zone),
+    ['between', 'hall_of_time', 'hideout'],
+  );
+  for (const place of act.atlas.places) assert.ok(content.zones.has(place.zone), place.zone);
+  const xs: number[] = road.map((place: MapPlace): number => place.x);
+  assert.deepEqual(xs, xs.toSorted((a: number, b: number): number => a - b));
+  assert.deepEqual(
+    act.atlas.roads.map((joined: AtlasRoad): string => `${joined.from} ${joined.to}`),
+    ['between hall_of_time', 'hall_of_time hideout', 'hall_of_time keepers_gate', 'keepers_gate under_hall', 'under_hall under_hall_2', 'under_hall_2 under_hall_3', 'under_hall_3 lava_depths', 'lava_depths lava_depths_2', 'lava_depths_2 lava_depths_3', 'lava_depths_3 ledger_hall', 'ledger_hall ledger_hall_2', 'ledger_hall_2 ledger_hall_3', 'ledger_hall_3 ledger_court'],
+  );
+  const hall: MapPlace = must(act.atlas.places.find((place: MapPlace): boolean => place.zone === 'hall_of_time'), 'hall');
+  const lair: MapPlace = must(act.atlas.places.find((place: MapPlace): boolean => place.zone === 'keepers_gate'), 'lair');
+  assert.ok(lair.y < hall.y, 'the lair is not north of the Hall');
+  assert.equal(zoneMark(content, zoneOf(content, 'keepers_gate')), 'boss');
+  const placed: Set<string> = new Set<string>(act.atlas.places.map((place: MapPlace): string => place.zone));
+  for (const joined of act.atlas.roads) assert.ok(placed.has(joined.from) && placed.has(joined.to), `${joined.from} ${joined.to}`);
+});
+
+void test('you are here in each of the three zones, the In-Between included', (): void => {
+  for (const zone of ['between', 'hall_of_time', 'hideout']) {
+    const world: World = worldIn(content, zone, 1);
+    assert.equal(must(actOf(content, zone), 'act'), act);
+    assert.equal(placeState(world, zone), 'here', zone);
+    for (const other of act.atlas.places.filter((place: MapPlace): boolean => place.zone !== zone)) assert.notEqual(placeState(world, other.zone), 'here');
+  }
+});
+
+void test('the In-Between is marked a void and is never offered for travel, even from a lit waypoint', (): void => {
+  assert.equal(zoneMark(content, zoneOf(content, 'between')), 'void');
+  const town: World = worldIn(content, 'hideout', 1);
+  const stone: ZoneWaypoint = must(town.zone.waypoint, 'hideout waypoint');
+  town.player.pos = { x: stone.x, z: stone.z };
+  town.waypoints.push('between', 'hall_of_time', 'hideout');
+  assert.ok(onWaypoint(town));
+  assert.equal(canTeleport(town, 'between'), false);
+  assert.equal(zoneOf(content, 'between').waypoint, null);
+});
+
+void test('a road is walked only once both its ends are visited', (): void => {
+  const fresh: World = createWorld(staged, { seed: 1, save: null });
+  assert.equal(roadWalked(fresh, mapRoad('hub', 'vale')), false);
+  const walked: World = worldIn(staged, 'vale', 1);
+  assert.equal(roadWalked(walked, mapRoad('hub', 'vale')), true);
+  assert.equal(roadWalked(walked, mapRoad('vale', 'peak')), false);
+});
+
+void test('a hero who woke in the In-Between has walked no road of act 1, and one who has been everywhere has walked every one', (): void => {
+  const woke: World = worldIn(content, 'between', 1);
+  woke.visited.splice(0, woke.visited.length, 'between');
+  for (const road of act.atlas.roads) assert.equal(roadWalked(woke, road), false, `${road.from} ${road.to}`);
+  const intoHall: AtlasRoad = must(act.atlas.roads.find((road: AtlasRoad): boolean => road.from === 'between' && road.to === 'hall_of_time'), 'road into the hall');
+  assert.equal(roadState(woke, intoHall), 'hidden');
+  const travelled: World = worldIn(content, 'hideout', 1);
+  travelled.visited.splice(0, travelled.visited.length, 'between', 'hall_of_time', 'hideout', 'keepers_gate', 'under_hall', 'ledger_hall', 'under_hall_2', 'under_hall_3', 'ledger_hall_2', 'ledger_hall_3', 'lava_depths', 'lava_depths_2', 'lava_depths_3', 'ledger_court');
+  for (const road of act.atlas.roads) assert.equal(roadWalked(travelled, road), true, `${road.from} ${road.to}`);
+});
+
+void test('the cave under the Hall has no place on the map until the keeper of the Last Gate falls, and then its road opens', (): void => {
+  const cave: MapPlace = must(act.atlas.places.find((place: MapPlace): boolean => place.zone === 'under_hall'), 'cave place');
+  const travelled: World = worldIn(content, 'keepers_gate', 20);
+  assert.equal(placeShown(travelled, cave), false);
+  assert.ok(!shownPlaces(travelled, act.atlas.places).includes(cave));
+  assert.equal(placeState(travelled, 'under_hall'), 'unknown');
+  const road: AtlasRoad = must(act.atlas.roads.find((joined: AtlasRoad): boolean => joined.to === 'under_hall'), 'cave road');
+  assert.equal(roadState(travelled, road), 'hidden');
+  travelled.flags['keeper_defeated'] = 'defeated';
+  assert.equal(placeShown(travelled, cave), true);
+  assert.equal(roadState(travelled, road), 'open');
+});

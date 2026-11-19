@@ -1,0 +1,136 @@
+.kicker .alpha-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px 0;
+  border-radius: 2px;
+  background: rgba(232, 184, 102, 0.16);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  vertical-align: 1px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.actions .play.quiet {
+  background: rgba(239, 230, 214, 0.08);
+  color: var(--text);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.actions .play.quiet:hover,
+.actions .play.quiet:focus-visible {
+  background: rgba(239, 230, 214, 0.14);
+  color: var(--text);
+  box-shadow: none;
+}
+
+footer {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 8px;
+}
+
+footer nav {
+  display: flex;
+  align-items: center;
+}
+
+footer .legal {
+  gap: 7px;
+  font-size: 13px;
+  color: rgba(239, 230, 214, 0.28);
+}
+
+footer .legal a {
+  color: rgba(239, 230, 214, 0.48);
+}
+
+footer .socials {
+  gap: 4px;
+}
+
+footer .socials .copy {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+footer a:hover,
+footer a:focus-visible,
+.copy:hover,
+.copy:focus-visible {
+  outline: none;
+  color: var(--text);
+}
+
+footer a {
+  transition: color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.icon-link {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  transition:
+    color var(--spring-snappy-ms) var(--spring-snappy),
+    background-color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.icon-link:hover,
+.icon-link:focus-visible {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.icon-link .icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.copy {
+  display: inline-grid;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  transition: color var(--spring-snappy-ms) var(--spring-snappy);
+}
+
+.copy > span {
+  grid-area: 1 / 1;
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.copy .copy-done {
+  opacity: 0;
+  transform: translateY(6px);
+  color: var(--ember);
+}
+
+.copy.copied .copy-idle {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.copy.copied .copy-done {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 720px) {
+  .actions {
+    flex-direction: column;
+  }
+}

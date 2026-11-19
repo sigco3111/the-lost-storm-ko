@@ -1,0 +1,150 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { OUTPOST_ZONE } from '../../test/road-support.ts';
+import { must } from '../../test/support.ts';
+import { loadContent } from '../content/content.ts';
+import type { Content, ZoneDef } from '../content/types.ts';
+import type { Vec2 } from '../math.ts';
+import { buildNavGrid, cellCenter, cellIndex, isWalkable, lineWalkable, paceAt } from './grid.ts';
+import { ROAD_CONTENT, roadContent, roadZone } from '../../test/road-support.ts';
+import type { NavGrid } from './grid.ts';
+import { findPath, nearestReached, nearFace, reachFrom } from './path.ts';
+
+const content: Content = loadContent();
+const grid: NavGrid = buildNavGrid(OUTPOST_ZONE, content.props, content.surfaces, content.player.radius);
+
+function follow(from: Vec2, path: readonly Vec2[]): number {
+  let length: number = 0;
+  let anchor: Vec2 = from;
+  for (const point of path) {
+    assert.ok(lineWalkable(grid, anchor, point), `segment to ${point.x},${point.z}`);
+    length += Math.hypot(point.x - anchor.x, point.z - anchor.z);
+    anchor = point;
+  }
+  return length;
+}
+
+void test('a clear line gives a single-step path', (): void => {
+  const goal: Vec2 = { x: 28, z: 20 };
+  assert.deepEqual(findPath(grid, { x: 28, z: 37 }, goal), [goal]);
+});
+
+void test('findPath goes around a pillar', (): void => {
+  const from: Vec2 = { x: 16, z: 14 };
+  const goal: Vec2 = { x: 24, z: 14 };
+  assert.ok(!lineWalkable(grid, from, goal));
+  const path: Vec2[] = findPath(grid, from, goal);
+  assert.ok(path.length > 1);
+  const length: number = follow(from, path);
+  assert.deepEqual(must(path.at(-1), 'goal'), goal);
+  assert.ok(length > 8);
+  assert.ok(length < 14);
+});
+
+void test('an unwalkable destination snaps to a nearby walkable point', (): void => {
+  const from: Vec2 = { x: 28, z: 22 };
+  const path: Vec2[] = findPath(grid, from, { x: 20, z: 14 });
+  assert.ok(path.length > 0);
+  const end: Vec2 = must(path.at(-1), 'end');
+  assert.ok(isWalkable(grid, end.x, end.z));
+  assert.ok(Math.hypot(end.x - 20, end.z - 14) <= 4);
+  follow(from, path);
+});
+
+void test('a destination far outside the arena gives no path', (): void => {
+  assert.deepEqual(findPath(grid, { x: 28, z: 22 }, { x: -80, z: -80 }), []);
+});
+
+void test('paths exist between distant corners of the arena', (): void => {
+  const from: Vec2 = { x: 7, z: 23 };
+  const goal: Vec2 = { x: 49, z: 25 };
+  const path: Vec2[] = findPath(grid, from, goal);
+  assert.deepEqual(must(path.at(-1), 'goal'), goal);
+  follow(from, path);
+});
+
+void test('a path takes the firm way round rather than wading straight across slow ground', (): void => {
+  const zone: ZoneDef = roadZone({ tiles: ['wwwwwwww', 'wsssssww', 'wsssssww', 'wsssssww', 'wwwwwwww'] });
+  const local: NavGrid = buildNavGrid(zone, ROAD_CONTENT.props, roadContent(zone).surfaces, ROAD_CONTENT.player.radius);
+  const path: Vec2[] = findPath(local, { x: 2, z: 10 }, { x: 26, z: 10 });
+  assert.ok(path.length > 1);
+  const wading: number = path.filter((point: Vec2): boolean => paceAt(local, point.x, point.z) < 1).length;
+  assert.equal(wading, 0);
+  assert.ok(path.some((point: Vec2): boolean => point.z < 4 || point.z > 16));
+});
+
+void test('the near face of a blocked point is the last walkable point on the straight line toward it, and an open point has none', (): void => {
+  const open: Vec2 = { x: 28, z: 22 };
+  assert.equal(nearFace(grid, open, { x: 28.5, z: 22 }), null);
+  const blocked: Vec2 = { x: -3, z: 22 };
+  const face: Vec2 = must(nearFace(grid, open, blocked), 'near face');
+  assert.ok(isWalkable(grid, face.x, face.z));
+  assert.ok(Math.abs(face.z - 22) < 1e-9);
+  assert.ok(face.x < 2 && face.x > blocked.x);
+  assert.equal(isWalkable(grid, face.x - 0.1, face.z), false);
+});
+
+function sealedRound(open: NavGrid, centre: Vec2, ring: number): NavGrid {
+  const walkable: Uint8Array = Uint8Array.from(open.walkable);
+  const column: number = Math.floor(centre.x / open.cellSize);
+  const row: number = Math.floor(centre.z / open.cellSize);
+  for (let dr: number = -ring; dr <= ring; dr += 1) {
+    for (let dc: number = -ring; dc <= ring; dc += 1) {
+      if (Math.max(Math.abs(dr), Math.abs(dc)) === ring) walkable[(row + dr) * open.columns + column + dc] = 0;
+    }
+  }
+  return { ...open, walkable, routed: true };
+}
+
+void test('the cells reached from a point are the ones a path can get to, and a sealed pocket is not among them', (): void => {
+  const pocket: Vec2 = { x: 28, z: 30 };
+  const sealed: NavGrid = sealedRound(grid, pocket, 2);
+  const from: Vec2 = { x: 28, z: 20 };
+  const reach: Uint8Array = reachFrom(sealed, from);
+  assert.equal(reach[cellIndex(sealed, from.x, from.z)], 1);
+  assert.equal(reach[cellIndex(sealed, 28, 37)], 1);
+  assert.equal(reach[cellIndex(sealed, pocket.x, pocket.z)], 0);
+});
+
+void test('no path forms into or out of a sealed pocket, and a path around the seal still does', (): void => {
+  const pocket: Vec2 = { x: 28, z: 30 };
+  const sealed: NavGrid = sealedRound(grid, pocket, 2);
+  const outside: Vec2 = { x: 28, z: 20 };
+  assert.deepEqual(findPath(sealed, outside, pocket), []);
+  assert.deepEqual(findPath(sealed, pocket, outside), []);
+  const beyond: Vec2 = { x: 28, z: 37 };
+  const around: Vec2[] = findPath(sealed, outside, beyond);
+  assert.deepEqual(must(around.at(-1), 'the far side'), beyond);
+  assert.ok(around.length > 1);
+});
+
+void test('the nearest reached spot to a sealed point lies just outside the seal, and a reached point stays where it is', (): void => {
+  const pocket: Vec2 = { x: 28, z: 30 };
+  const sealed: NavGrid = sealedRound(grid, pocket, 2);
+  const reach: Uint8Array = reachFrom(sealed, { x: 28, z: 20 });
+  const out: Vec2 = must(nearestReached(sealed, reach, pocket, 6), 'a way out');
+  assert.equal(reach[cellIndex(sealed, out.x, out.z)], 1);
+  assert.ok(isWalkable(sealed, out.x, out.z));
+  assert.ok(Math.hypot(out.x - pocket.x, out.z - pocket.z) <= 3.5 * sealed.cellSize * Math.SQRT2);
+  assert.deepEqual(nearestReached(sealed, reach, { x: 28, z: 20 }, 6), { x: 28, z: 20 });
+  assert.equal(nearestReached(sealed, new Uint8Array(reach.length), pocket, 6), null);
+  assert.deepEqual(cellCenter(sealed, cellIndex(sealed, out.x, out.z)), out);
+});
+
+void test('a search on a larger grid in between leaves the next search on a smaller one unchanged', (): void => {
+  const from: Vec2 = { x: 16, z: 14 };
+  const goal: Vec2 = { x: 24, z: 14 };
+  const corners: readonly [Vec2, Vec2] = [{ x: 7, z: 23 }, { x: 49, z: 25 }];
+  const first: Vec2[] = findPath(grid, from, goal);
+  const across: Vec2[] = findPath(grid, corners[0], corners[1]);
+  assert.ok(first.length > 1);
+  assert.ok(across.length > 0);
+  const wide: NavGrid = buildNavGrid(must(content.zones.get('lava_depths'), 'lava_depths'), content.props, content.surfaces, content.player.radius);
+  assert.ok(wide.columns * wide.rows > grid.columns * grid.rows);
+  const ends: readonly [Vec2, Vec2] = [cellCenter(wide, wide.walkable.indexOf(1)), cellCenter(wide, wide.walkable.lastIndexOf(1))];
+  const far: Vec2[] = findPath(wide, ends[0], ends[1]);
+  assert.deepEqual(findPath(grid, from, goal), first);
+  assert.deepEqual(findPath(grid, corners[0], corners[1]), across);
+  assert.deepEqual(findPath(wide, ends[0], ends[1]), far);
+  for (let again: number = 0; again < 3; again += 1) assert.deepEqual(findPath(grid, from, goal), first);
+});

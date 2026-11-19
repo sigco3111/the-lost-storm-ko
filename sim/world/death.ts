@@ -1,0 +1,132 @@
+import type { DeathPenalty, XpCurve, ZoneCheckpoint, ZoneDef, ZoneReturn } from '../content/types.ts';
+import { distance } from '../math.ts';
+import { xpToNextLevel } from '../progression.ts';
+import { clearAreas } from './areas.ts';
+import { clearHazards } from './hazards.ts';
+import { clearProjectiles } from './skills.ts';
+import type { MonsterState, PlayerState, RespawnChoice, RespawnPoint, World, WorldEvent } from './types.ts';
+import { enterZone, placePlayer, townZone } from './zones.ts';
+import { restEchoes } from './moments.ts';
+
+export interface DeathState {
+  readonly killer: string;
+  readonly skill: string;
+  elapsed: number;
+  readonly xpLost: number;
+}
+
+export function choicesOpen(world: World): boolean {
+  return !world.player.alive && world.death !== null && world.death.elapsed >= world.content.player.respawnDelay;
+}
+
+export function penaltyFor(penalty: DeathPenalty, curve: XpCurve, level: number, xp: number): number {
+  if (level < penalty.minLevel) return 0;
+  return Math.max(0, Math.min(xp, Math.round(xpToNextLevel(curve, level) * penalty.xpPercent)));
+}
+
+function resetMonster(monster: MonsterState): void {
+  monster.aggro = false;
+  monster.life = monster.maxLife;
+  monster.pos = { x: monster.home.x, z: monster.home.z };
+  monster.knock = { x: 0, z: 0 };
+  monster.action = null;
+  monster.brand = null;
+  monster.burn = null;
+  monster.path = [];
+  monster.stance = 'approach';
+  monster.blindTime = 0;
+  monster.stuckTime = 0;
+  monster.restTime = 0;
+  monster.stalledFor = null;
+  monster.leashTime = 0;
+  monster.returning = false;
+  monster.lastPos = { x: monster.pos.x, z: monster.pos.z };
+  monster.lastTravel = 0;
+  monster.stagger = 0;
+  monster.interrupts = 0;
+  monster.phase = 0;
+  monster.nextSkill = null;
+  monster.cooldowns = {};
+  monster.foeId = null;
+  monster.tempo = 1;
+  monster.tempoTime = 0;
+  monster.unison = { seen: false, lookUntil: 0, flinchUntil: 0 };
+  monster.recovery = { guard: 0, strain: 0, unbroken: 0, stunned: 0 };
+}
+
+function revive(world: World): void {
+  const player: PlayerState = world.player;
+  player.alive = true;
+  player.life = player.maxLife;
+  player.mana = player.stats.maxMana;
+  player.cooldowns = {};
+  player.combo = null;
+  player.stagger = 0;
+  player.interrupts = 0;
+  player.root = 0;
+  player.tempo = 1;
+  player.tempoTime = 0;
+  player.brand = null;
+  player.burn = null;
+  player.held = [];
+  player.momentum = { skill: null, value: 0, quiet: 0 };
+  player.invulnerable = world.content.player.respawnInvulnerability;
+  world.death = null;
+}
+
+function returnZone(world: World): ZoneDef | null {
+  const back: ZoneReturn | null = world.zone.deathReturn;
+  return back === null ? null : (world.content.zones.get(back.zone) ?? null);
+}
+
+export function restPoint(world: World): RespawnPoint {
+  if (world.respawn.type === 'checkpoint' || world.respawn.type === 'waypoint') return world.respawn;
+  const from = world.player.pos;
+  const nearest: ZoneCheckpoint | undefined = world.zone.checkpoints.toSorted((a: ZoneCheckpoint, b: ZoneCheckpoint): number => distance(from, a) - distance(from, b))[0];
+  return nearest === undefined ? world.respawn : { type: 'checkpoint', checkpoint: nearest.id };
+}
+
+export function respawnPlayer(world: World, choice: RespawnChoice): void {
+  if (!choicesOpen(world)) return;
+  const town = world.zone.kind === 'town' ? world.zone : townZone(world.content);
+  const outside: ZoneDef | null = choice === 'checkpoint' ? returnZone(world) : null;
+  const away: boolean = choice === 'town' && town.id !== world.zone.id;
+  if (choice === 'town' && !away) world.respawn = { type: 'start' };
+  revive(world);
+  const from: string = world.zone.id;
+  if (outside !== null && world.zone.deathReturn !== null) {
+    enterZone(world, outside, { type: 'exit', exit: world.zone.deathReturn.exit }, true);
+    world.events.push({ type: 'zone_changed', from, to: outside.id });
+  } else if (away) {
+    enterZone(world, town, { type: 'start' }, true);
+    world.events.push({ type: 'zone_changed', from, to: town.id });
+  } else {
+    if (choice === 'checkpoint') world.respawn = restPoint(world);
+    placePlayer(world);
+    clearProjectiles(world);
+    clearHazards(world);
+    clearAreas(world);
+    for (const monster of world.monsters) if (monster.alive) resetMonster(monster);
+    restEchoes(world);
+  }
+  world.events.push({ type: 'player_respawn' });
+}
+
+function recordDeath(world: World, event: Extract<WorldEvent, { readonly type: 'damage' }>): void {
+  if (world.death !== null) return;
+  const source: MonsterState | undefined = world.monsters.find((monster: MonsterState): boolean => monster.id === event.sourceId);
+  const player: PlayerState = world.player;
+  const xpLost: number = penaltyFor(world.content.player.deathPenalty, world.content.player.xp, player.level, player.xp);
+  player.xp -= xpLost;
+  world.death = { killer: source?.def.name ?? 'The storm', skill: event.skill.name, elapsed: 0, xpLost };
+  for (const monster of world.monsters) monster.aggro = false;
+}
+
+export function stepDeath(world: World, dt: number): void {
+  const player: PlayerState = world.player;
+  player.invulnerable = Math.max(0, player.invulnerable - dt);
+  if (!player.alive && world.death !== null) world.death.elapsed += dt;
+  for (const event of world.events) {
+    if (event.type === 'damage' && event.killed && event.targetId === player.id) recordDeath(world, event);
+  }
+}

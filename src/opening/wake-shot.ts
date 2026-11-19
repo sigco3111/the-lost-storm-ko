@@ -1,0 +1,80 @@
+import type { ZoneWake } from '../../sim/content/story-types.ts';
+import { wakeLength } from '../../sim/world/wake.ts';
+import type { CameraShot, ShotPose } from '../render/iso-camera.ts';
+import { throughKnots } from '../render/wake-pose.ts';
+
+export const WAKE_SHOT = {
+  start: { distance: 5.0, pitchDegrees: 20, yawDegrees: 82, lookHeight: 0.35, fitWidth: 3.2 },
+  push: 0.35,
+  pullAt: 0.25,
+  pullPower: 1.8,
+  sway: { amount: 0.045, lift: 0.025, rates: [0.21, 0.34, 0.57], phases: [0.4, 2.1, 4.3], liftPhase: 1.05 },
+  soft: 1,
+  lids: [
+    { at: 0, value: 1 },
+    { at: 0.14, value: 1 },
+    { at: 0.42, value: 0.58 },
+    { at: 0.6, value: 0.94 },
+    { at: 1.1, value: 0 },
+  ],
+  blur: [
+    { at: 0, value: 1 },
+    { at: 0.42, value: 0.7 },
+    { at: 0.6, value: 0.8 },
+    { at: 1.6, value: 0 },
+  ],
+  blurPixels: 9,
+} as const;
+
+export interface WakeFrame {
+  readonly shot: CameraShot;
+  readonly soft: number;
+  readonly lids: number;
+  readonly blur: number;
+}
+
+function clamp01(value: number): number {
+  return Math.min(1, Math.max(0, value));
+}
+
+export function smootherstep(value: number): number {
+  const t: number = clamp01(value);
+  return t * t * t * (t * (t * 6 - 15) + 10);
+}
+
+function sway(elapsed: number, offset: number): number {
+  const { rates, phases } = WAKE_SHOT.sway;
+  let total: number = 0;
+  rates.forEach((rate: number, index: number): void => {
+    total += Math.sin(elapsed * rate * Math.PI * 2 + (phases[index] ?? 0) + offset) / (index + 1);
+  });
+  return total / rates.length;
+}
+
+export function pullStart(plan: ZoneWake): number {
+  return plan.still + plan.stir + plan.rise * WAKE_SHOT.pullAt;
+}
+
+export function lidsClosed(plan: ZoneWake, elapsed: number): number {
+  return plan.still > 0 ? throughKnots(WAKE_SHOT.lids, elapsed / plan.still) : 0;
+}
+
+export function wakeBlur(plan: ZoneWake, elapsed: number): number {
+  return plan.still > 0 ? throughKnots(WAKE_SHOT.blur, elapsed / plan.still) : 0;
+}
+
+export function wakeFrame(plan: ZoneWake, elapsed: number): WakeFrame {
+  const from: number = pullStart(plan);
+  const end: number = wakeLength(plan);
+  const blend: number = smootherstep((elapsed - from) / (end - from)) ** WAKE_SHOT.pullPower;
+  const pushed: number = from > 0 ? smootherstep(elapsed / from) : 1;
+  const start = WAKE_SHOT.start;
+  const pose: ShotPose = { distance: start.distance - WAKE_SHOT.push * pushed, pitchDegrees: start.pitchDegrees, yawDegrees: start.yawDegrees, lookHeight: start.lookHeight, fitWidth: start.fitWidth };
+  const still: number = 1 - blend;
+  return {
+    shot: { pose, blend, swayX: sway(elapsed, 0) * WAKE_SHOT.sway.amount * still, swayY: sway(elapsed, WAKE_SHOT.sway.liftPhase) * WAKE_SHOT.sway.lift * still },
+    soft: WAKE_SHOT.soft * still,
+    lids: lidsClosed(plan, elapsed),
+    blur: wakeBlur(plan, elapsed) * WAKE_SHOT.blurPixels,
+  };
+}

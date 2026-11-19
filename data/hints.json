@@ -1,0 +1,243 @@
+{
+ "hints": [
+  {
+   "id": "move",
+   "trigger": {
+    "type": "game_started"
+   },
+   "text": "땅을 클릭해 이동",
+   "touch": "Drag on the left side of the screen to move",
+   "done": {
+    "type": "moved",
+    "distance": 3
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "talk",
+   "trigger": {
+    "type": "objective_person"
+   },
+   "text": "표시된 사람을 클릭해 대화",
+   "touch": "Tap the marked person to talk",
+   "done": {
+    "type": "talked"
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "attack",
+   "trigger": {
+    "type": "monster_near",
+    "range": 16
+   },
+   "text": "몬스터를 클릭해 공격",
+   "touch": "Tap a monster to attack",
+   "done": {
+    "type": "skills_used",
+    "slots": [
+     0
+    ]
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": true
+  },
+  {
+   "id": "roll",
+   "trigger": {
+    "type": "skill_learned",
+    "skill": "dodge_roll"
+   },
+   "text": "{slot_6}를 눌러 구르기",
+   "touch": "Tap {slot_6} to roll",
+   "done": {
+    "type": "skills_used",
+    "slots": [
+     5
+    ]
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "skills",
+   "trigger": {
+    "type": "slot_filled",
+    "slot": 1
+   },
+   "text": "{slot_2}로 새 스킬 사용",
+   "touch": "Cast your new skill with {slot_2}",
+   "done": {
+    "type": "skills_used",
+    "slots": [
+     1
+    ]
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "bolt",
+   "trigger": {
+    "type": "slot_filled",
+    "slot": 2
+   },
+   "text": "{slot_3}로 두 번째 스킬 사용",
+   "touch": "Cast your second skill with {slot_3}",
+   "done": {
+    "type": "skills_used",
+    "slots": [
+     2
+    ]
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "loot",
+   "trigger": {
+    "type": "item_near",
+    "range": 12
+   },
+   "text": "아이템을 클릭해 줍기",
+   "touch": "Tap an item to pick it up",
+   "done": {
+    "type": "picked_up"
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "names",
+   "trigger": {
+    "type": "item_near",
+    "range": 12
+   },
+   "text": "{names}를 누르고 있으면 모든 아이템의 이름 표시",
+   "touch": "Tap {names} at the top to show every item's name",
+   "done": {
+    "type": "picked_up"
+   },
+   "after": [
+    "loot"
+   ],
+   "forNewPlayers": false,
+   "lapses": false
+  },
+  {
+   "id": "inventory",
+   "trigger": {
+    "type": "gear_in_bag"
+   },
+   "text": "{inventory}를 눌러 소지품 열기",
+   "touch": "Tap {inventory} at the top to open your inventory",
+   "done": {
+    "type": "panel",
+    "panel": "inventory"
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "equip",
+   "trigger": {
+    "type": "gear_in_bag"
+   },
+   "text": "가방의 아이템을 클릭해 장착",
+   "touch": "Tap an item in your bag to equip it",
+   "done": {
+    "type": "equipped"
+   },
+   "after": [
+    "inventory"
+   ],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "skill_point",
+   "trigger": {
+    "type": "skill_point"
+   },
+   "text": "{tree}를 눌러 스킬 트리에 포인트 사용",
+   "touch": "Tap {tree} at the top to spend your points on the Skill Tree",
+   "done": {
+    "type": "allocated"
+   },
+   "after": [],
+   "forNewPlayers": false,
+   "lapses": false
+  },
+  {
+   "id": "low_life",
+   "trigger": {
+    "type": "low_life",
+    "fraction": 0.5,
+    "flask": "life"
+   },
+   "text": "{flask}를 눌러 마시기",
+   "touch": "Tap {flask} to drink",
+   "done": {
+    "type": "drank",
+    "flask": "life"
+   },
+   "after": [],
+   "forNewPlayers": false,
+   "lapses": false
+  },
+  {
+   "id": "moment_edge",
+   "trigger": {
+    "type": "in_moment"
+   },
+   "text": "순간을 떠나면 사라진다",
+   "touch": "Leave a moment and it is gone",
+   "done": {
+    "type": "moment_over"
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  },
+  {
+   "id": "flask_upgrade",
+   "trigger": {
+    "type": "flask_upgrade",
+    "range": 18
+   },
+   "text": "관리인 상인에게 약병 강화가 준비되어 있다",
+   "touch": "A flask upgrade is ready at the Warden Trader",
+   "done": {
+    "type": "flask_upgraded"
+   },
+   "after": [],
+   "forNewPlayers": false,
+   "lapses": false,
+   "perSession": true
+  },
+  {
+   "id": "moment_chest",
+   "trigger": {
+    "type": "chest_moment"
+   },
+   "text": "상자를 클릭해 열기",
+   "touch": "Tap the chest to open it",
+   "done": {
+    "type": "moment_over"
+   },
+   "after": [],
+   "forNewPlayers": true,
+   "lapses": false
+  }
+ ]
+}

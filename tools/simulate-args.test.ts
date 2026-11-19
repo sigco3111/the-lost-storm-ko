@@ -1,0 +1,85 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import type { Command } from './simulate-args.ts';
+import { DEFAULTS, parseArgs } from './simulate-args.ts';
+import { POLICIES } from './simulate-policies.ts';
+
+const MOMENTS: ReadonlySet<string> = new Set<string>(['campfire']);
+
+function parse(args: readonly string[]): Command {
+  return parseArgs(args, POLICIES, MOMENTS, 16);
+}
+
+void test('a farm runs every default skill policy on the mixed build with half the cores', (): void => {
+  const command: Command = parse(['farm', '--minutes', '10', '--runs', '2']);
+  assert.equal(command.kind, 'simulate');
+  assert.deepEqual(command.scenario, { kind: 'farm', minutes: 10 });
+  assert.equal(command.workers, 8);
+  assert.equal(command.jobs.length, DEFAULTS.skills.length * 2);
+  assert.deepEqual(
+    command.jobs.map((job): number => job.seed),
+    [1, 2, 1, 2, 1, 2],
+  );
+});
+
+void test('fight, level and replay take their argument, and all expands to every policy', (): void => {
+  const fight: Command = parse(['fight', 'campfire', '--repeats', '3', '--build', 'all', '--skill', 'poor']);
+  assert.ok(fight.kind === 'simulate');
+  assert.deepEqual(fight.scenario, { kind: 'fight', moment: 'campfire', repeats: 3 });
+  assert.equal(fight.jobs.length, POLICIES.builds.size * DEFAULTS.runs);
+  const level: Command = parse(['level', '5']);
+  assert.ok(level.kind === 'simulate' && level.scenario.kind === 'level' && level.scenario.level === 5);
+  const over: Command = parse(['over', '9', '--zone', '1', '--minutes', '20']);
+  assert.ok(over.kind === 'simulate');
+  assert.deepEqual(over.scenario, { kind: 'over', hero: 9, zone: 1, minutes: 20 });
+  assert.deepEqual(parse(['replay', 'a.jsonl', 'b.jsonl']), { kind: 'replay', files: ['a.jsonl', 'b.jsonl'], out: null });
+});
+
+void test('bad input explains itself instead of running', (): void => {
+  for (const args of [[], ['fight'], ['fight', 'nowhere'], ['level', '1'], ['farm', '--runs', 'x'], ['farm', '--skill', 'expert'], ['dance'], ['replay'], ['farm', '--runs'], ['fight', 'campfire', '--repeats'], ['farm', '--skill', '--runs', '2'], ['farm', '--run', '20'], ['over'], ['over', '9', '--zone', '0']]) {
+    assert.equal(parse(args).kind, 'help', args.join(' '));
+  }
+});
+
+void test('a danger factor reaches every job, and a bad one is refused', (): void => {
+  const normal: Command = parse(['level', '5']);
+  assert.ok(normal.kind === 'simulate' && normal.jobs.every((job): boolean => job.danger === 1));
+  const hard: Command = parse(['level', '5', '--danger', '2.5']);
+  assert.ok(hard.kind === 'simulate' && hard.jobs.every((job): boolean => job.danger === 2.5));
+  for (const bad of ['0', '-1', 'x']) assert.equal(parse(['level', '5', '--danger', bad]).kind, 'help', bad);
+  assert.equal(parse(['level', '5', '--danger']).kind, 'help');
+});
+
+void test('a toughness factor reaches every job beside the danger factor, and a bad one is refused', (): void => {
+  const both: Command = parse(['level', '5', '--danger', '2', '--toughness', '0.5']);
+  assert.ok(both.kind === 'simulate' && both.jobs.every((job): boolean => job.danger === 2 && job.toughness === 0.5));
+  const plain: Command = parse(['level', '5']);
+  assert.ok(plain.kind === 'simulate' && plain.jobs.every((job): boolean => job.toughness === 1));
+  for (const bad of ['0', '-2', 'x']) assert.equal(parse(['level', '5', '--toughness', bad]).kind, 'help', bad);
+  assert.equal(parse(['level', '5', '--toughness']).kind, 'help');
+});
+
+void test('boss takes rising hero levels and a repeat count, and says why when the levels are wrong', (): void => {
+  const boss: Command = parse(['boss', '8,10,12', '--repeats', '4']);
+  assert.ok(boss.kind === 'simulate');
+  assert.deepEqual(boss.scenario, { kind: 'boss', levels: [8, 10, 12], repeats: 4, minutes: boss.scenario.kind === 'boss' ? boss.scenario.minutes : 0 });
+  assert.deepEqual(parse(['boss', '10,8']), { kind: 'help', problem: 'boss levels must rise, such as 8,10,12' });
+  assert.deepEqual(parse(['boss']), { kind: 'help', problem: 'boss needs hero levels, such as 8,10,12' });
+});
+
+void test('pack names a monster, rising hero levels, a pack size and a repeat count, and says why when one is missing', (): void => {
+  const pack: Command = parse(['pack', 'wolf', '9,11,13', '--count', '5', '--repeats', '3']);
+  assert.ok(pack.kind === 'simulate');
+  assert.deepEqual(pack.scenario, { kind: 'pack', monster: 'wolf', count: 5, levels: [9, 11, 13], repeats: 3, minutes: pack.scenario.kind === 'pack' ? pack.scenario.minutes : 0, groups: 1, gap: 8 });
+  const spread: Command = parse(['pack', 'wolf', '9', '--groups', '3', '--gap', '16']);
+  assert.ok(spread.kind === 'simulate' && spread.scenario.kind === 'pack' && spread.scenario.groups === 3 && spread.scenario.gap === 16);
+  assert.deepEqual(parse(['pack', 'wolf', '9', '--gap', 'far']), { kind: 'help', problem: '--groups and --gap must be whole numbers' });
+  const plain: Command = parse(['pack', 'wolf', '9']);
+  assert.ok(plain.kind === 'simulate' && plain.scenario.kind === 'pack' && plain.scenario.count === 4 && plain.scenario.repeats === 5);
+  assert.deepEqual(parse(['pack']), { kind: 'help', problem: 'pack needs a monster id and hero levels, such as wolf 9,11,13' });
+  assert.deepEqual(parse(['pack', 'wolf']), { kind: 'help', problem: 'pack needs hero levels, such as 8,10,12' });
+  assert.deepEqual(parse(['pack', 'wolf', '13,9']), { kind: 'help', problem: 'pack levels must rise, such as 8,10,12' });
+  assert.ok(parse(['pack', 'wolf:3+spider:1', '9']).kind === 'simulate');
+  assert.deepEqual(parse(['pack', 'wolf:0', '9']), { kind: 'help', problem: 'pack names monster ids joined by +, each with an optional count, such as wolf:3+spider:1' });
+  assert.deepEqual(parse(['pack', 'wolf', '9', '--count', 'many']), { kind: 'help', problem: '--count and --repeats must be whole numbers' });
+});

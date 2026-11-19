@@ -1,0 +1,555 @@
+{
+  "id": "ledger_hall",
+  "letters": {
+    "themes": [
+      "f",
+      "i",
+      "m",
+      "k",
+      "f",
+      "d"
+    ],
+    "passage": "b",
+    "pond": "d",
+    "shore": "d"
+  },
+  "shape": {
+    "radiusLeast": 6,
+    "radiusMost": 8.5,
+    "alcoves": 1,
+    "pondChance": 0
+  },
+  "walls": {
+    "band": 6,
+    "back": 1,
+    "side": 2,
+    "front": 4
+  },
+  "stairs": {
+    "prop": "wide_stair",
+    "y": -0.9
+  },
+  "density": {
+    "props": 0.06,
+    "caches": 0.018
+  },
+  "caches": [
+    "cache_coin_pile",
+    "cache_gold_bag",
+    "cache_urn",
+    "cache_urn_square",
+    "cache_satchel"
+  ],
+  "families": [
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_tallier",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_duelist",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_tallier",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_custodian",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_adept",
+          "count": 1
+        },
+        {
+          "monster": "timekeeper_binder",
+          "count": 1
+        }
+      ],
+      "waits": 8
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_custodian",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_duelist",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_tallier",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_tallier",
+          "count": 1
+        },
+        {
+          "monster": "timekeeper_binder",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_tallier",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_duelist",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_custodian",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_adept",
+          "count": 1
+        },
+        {
+          "monster": "timekeeper_tallier",
+          "count": 1
+        }
+      ],
+      "waits": 8
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_tallier",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_custodian",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 2
+        },
+        {
+          "monster": "timekeeper_duelist",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_binder",
+          "count": 1
+        },
+        {
+          "monster": "timekeeper_tallier",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_rank",
+          "count": 3
+        },
+        {
+          "monster": "timekeeper_custodian",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "members": [
+        {
+          "monster": "timekeeper_marshal",
+          "count": 1
+        },
+        {
+          "monster": "timekeeper_rank",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "clusters": [
+    [
+      {
+        "prop": "hall_column",
+        "dx": -8,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column",
+        "dx": 0,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column",
+        "dx": 8,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_brazier",
+        "dx": -4,
+        "dz": 1.5,
+        "turn": 0
+      },
+      {
+        "prop": "hall_brazier",
+        "dx": 4,
+        "dz": 1.5,
+        "turn": 0
+      }
+    ],
+    [
+      {
+        "prop": "hall_column_dark",
+        "dx": -6,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column_broken",
+        "dx": 2,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column_fallen",
+        "dx": 5,
+        "dz": 2.5,
+        "turn": 80
+      },
+      {
+        "prop": "hall_rubble_large",
+        "dx": -1,
+        "dz": 2.2,
+        "turn": 30
+      },
+      {
+        "prop": "hall_loose_blocks",
+        "dx": 7,
+        "dz": -1,
+        "turn": 120
+      }
+    ],
+    [
+      {
+        "prop": "tally_stone",
+        "dx": -2.4,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "tally_stone",
+        "dx": 0,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "tally_stone",
+        "dx": 2.4,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_shelf",
+        "dx": -6,
+        "dz": -0.6,
+        "turn": 0
+      },
+      {
+        "prop": "hall_shelf",
+        "dx": 6,
+        "dz": -0.6,
+        "turn": 0
+      }
+    ],
+    [
+      {
+        "prop": "hall_statue_base",
+        "dx": 0,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_brazier",
+        "dx": -3.5,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_brazier",
+        "dx": 3.5,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "tally_stone",
+        "dx": 0,
+        "dz": 3.2,
+        "turn": 180
+      }
+    ],
+    [
+      {
+        "prop": "hall_column",
+        "dx": -4,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column",
+        "dx": 4,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_clock_tilted",
+        "dx": 0,
+        "dz": 1.5,
+        "turn": 200
+      },
+      {
+        "prop": "hall_rubble_large",
+        "dx": 2,
+        "dz": 3,
+        "turn": 60
+      }
+    ],
+    [
+      {
+        "prop": "hall_column_broken",
+        "dx": -3,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_loose_blocks",
+        "dx": 0,
+        "dz": 1.5,
+        "turn": 40
+      },
+      {
+        "prop": "hall_column_fallen",
+        "dx": 3,
+        "dz": 2,
+        "turn": 160
+      },
+      {
+        "prop": "tally_stone",
+        "dx": -5,
+        "dz": 2.5,
+        "turn": 90
+      }
+    ],
+    [
+      {
+        "prop": "hall_shelf",
+        "dx": -2,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_shelf",
+        "dx": 2,
+        "dz": 0,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column_dark",
+        "dx": -5.5,
+        "dz": 0.8,
+        "turn": 0
+      },
+      {
+        "prop": "hall_column_dark",
+        "dx": 5.5,
+        "dz": 0.8,
+        "turn": 0
+      }
+    ]
+  ],
+  "zone": {
+    "markerSurfaces": {"stone": "hall_marble"},
+    "kind": "wild",
+    "ranks": true,
+    "floors": {
+      "f": "hall_floor",
+      "b": "hall_border",
+      "i": "hall_inlay",
+      "d": "hall_dust",
+      "m": "hall_marble",
+      "k": "hall_dark"
+    },
+    "outside": {
+      "surface": "hall_bed",
+      "reach": 3,
+      "barrier": null
+    },
+    "walls": null,
+    "scatter": [
+      {
+        "type": "around",
+        "props": [
+          "rubble_chip",
+          "rubble_shard"
+        ],
+        "anchors": [
+          "hall_column_broken",
+          "hall_column_fallen",
+          "hall_rubble_large",
+          "hall_loose_blocks"
+        ],
+        "each": 10,
+        "spread": 0.8,
+        "size": {
+          "least": 0.9,
+          "most": 1.2
+        }
+      }
+    ],
+    "packReturn": {
+      "after": 90,
+      "away": 30
+    },
+    "surge": null,
+    "ambience": {
+      "background": "#07080b",
+      "abyss": "#030305",
+      "fogNear": 36,
+      "fogFar": 96,
+      "skyColor": "#8494b4",
+      "groundColor": "#1e2129",
+      "skyIntensity": 4.6,
+      "keyColor": "#a8b8d8",
+      "keyIntensity": 1.7
+    },
+    "weather": {
+      "lightning": null,
+      "rain": 0,
+      "wet": 0.05,
+      "mistWall": null
+    },
+    "heroLight": {
+      "strength": 12,
+      "radius": 20,
+      "height": 7,
+      "falloff": 1,
+      "rim": 0.3
+    },
+    "terrain": {
+      "rise": 1.84,
+      "groundStep": 0.6,
+      "cliff": "hall_dark",
+      "rough": {
+        "reach": 1.2,
+        "scale": 3,
+        "calm": [
+          "f",
+          "b",
+          "i",
+          "d",
+          "m",
+          "k"
+        ]
+      },
+      "blends": [
+        {
+          "surface": "hall_dust",
+          "scale": 7,
+          "cover": 0.2
+        },
+        {
+          "surface": "hall_marble",
+          "scale": 5,
+          "cover": 0.16
+        },
+        {
+          "surface": "hall_inlay",
+          "scale": 3,
+          "cover": 0.6,
+          "near": "/",
+          "reach": 5
+        }
+      ],
+      "cliffs": []
+    }
+  }
+}

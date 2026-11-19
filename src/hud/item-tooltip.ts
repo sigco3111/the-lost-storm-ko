@@ -1,0 +1,166 @@
+import type { ArmourMaterial, Content, ItemBaseDef, ItemSlot, ItemUse, RarityDef, WeaponGroup, ZoneDef } from '../../sim/content/types.ts';
+import { isUnidentified } from '../../sim/identify.ts';
+import { readItem, readingLines } from '../../sim/item-reading.ts';
+import type { Headline, ItemReading, ReadingRow } from '../../sim/item-reading.ts';
+import { itemVerdict, verdictNote, verdictParts } from '../../sim/item-verdict.ts';
+import type { Verdict, VerdictKind } from '../../sim/item-verdict.ts';
+import { baseOf, itemName, rarityOf, SLOT_NAMES, slotOf } from '../../sim/items.ts';
+import { familyReading } from '../../sim/powers.ts';
+import type { FamilyPiece, FamilyReading } from '../../sim/powers.ts';
+import { countOf } from '../../sim/stacks.ts';
+import { threatNear } from '../../sim/threat.ts';
+import type { Threat } from '../../sim/threat.ts';
+import type { ItemInstance } from '../../sim/world/types.ts';
+import { heldText } from './cell-count.ts';
+import { el, label } from './dom.ts';
+import type { HudApi } from './hud-api.ts';
+import { setPicture } from './item-picture.ts';
+import { baseFamily, familyLine, familyRow } from './weapon-family.ts';
+
+interface KnownThreat {
+  readonly content: Content;
+  readonly visited: string;
+  readonly zone: string;
+  readonly level: number;
+  readonly threat: Threat;
+}
+
+let knownThreat: KnownThreat | null = null;
+
+export function threatFor(content: Content, visited: readonly string[], zone: ZoneDef, level: number): Threat {
+  const seen: string = visited.join('\n');
+  const known: KnownThreat | null = knownThreat;
+  if (known !== null && known.content === content && known.visited === seen && known.zone === zone.id && known.level === level) return known.threat;
+  const threat: Threat = threatNear(content, visited, zone, level);
+  knownThreat = { content, visited: seen, zone: zone.id, level, threat };
+  return threat;
+}
+
+export const TOOLTIP_WORDS: { readonly unverified: string; readonly unidentified: string; readonly unread: string } = {
+  unverified: '미확인',
+  unidentified: '미감정',
+  unread: '은신처의 감정사가 읽어 주기 전까지는 문구가 숨겨져 있다.',
+};
+
+const MATERIAL_NAMES: Readonly<Record<ArmourMaterial, string>> = {
+  cloth: '천',
+  leather: '가죽',
+  mail: '사슬',
+  plate: '판금',
+};
+
+export const USE_WORDS: Readonly<Record<ItemUse['type'], string>> = {
+  portal: '은신처로 가는 길을 연다. 다시 밟으면 여기로 돌아온다.',
+};
+
+const VERDICT_WORDS: Readonly<Record<VerdictKind, string>> = {
+  better: '더 좋음',
+  worse: '더 나쁨',
+  trade: '거래',
+  same: '동일',
+  switch: '다른 무기',
+};
+
+function deltaClass(delta: number | null): string {
+  if (delta === null || delta === 0) return '';
+  return delta > 0 ? ' 더 좋음' : ' 더 나쁨';
+}
+
+function appendRow(parent: HTMLElement, row: ReadingRow, className: string): void {
+  const line: HTMLDivElement = el('div', `tip-row ${className}`, parent);
+  label('tip-row-text', row.text, line);
+  if (row.deltaText !== null) label(`tip-delta${deltaClass(row.delta)}`, row.deltaText, line);
+}
+
+function appendHeadline(parent: HTMLElement, headline: Headline): void {
+  if (headline.kind === 'none') return;
+  const block: HTMLDivElement = el('div', 'tip-headline', parent);
+  if (headline.kind === 'damage') {
+    label('tip-headline-value', `${Math.round(headline.min)}–${Math.round(headline.max)}`, block);
+    label('tip-headline-name', '피해', block);
+    if (headline.delta !== null && headline.delta !== 0) label(`tip-delta${deltaClass(headline.delta)}`, `${headline.delta > 0 ? '+' : '−'}${Math.abs(headline.delta)} base hit`, block);
+    return;
+  }
+  label('tip-headline-value', headline.row.text, block);
+  if (headline.row.deltaText !== null) label(`tip-delta${deltaClass(headline.row.delta)}`, headline.row.deltaText, block);
+}
+
+function appendVerdict(parent: HTMLElement, verdict: Verdict): void {
+  const line: HTMLDivElement = el('div', `tip-verdict ${verdict.kind}`, parent);
+  label('tip-verdict-word', VERDICT_WORDS[verdict.kind], line);
+  const parts: readonly string[] = verdictParts(verdict);
+  if (parts.length > 0) label('tip-verdict-detail', parts.join(' · '), line);
+  const note: string | null = verdictNote(verdict);
+  if (note !== null) label('tip-verdict-note', note, line);
+}
+
+function appendReading(parent: HTMLElement, reading: ItemReading): void {
+  appendHeadline(parent, reading.headline);
+  if (reading.rows.length + reading.lost.length === 0) return;
+  el('div', 'tip-sep', parent);
+  for (const line of readingLines(reading)) appendRow(parent, line.row, line.lost ? 'lost' : 'own');
+}
+
+function appendPower(parent: HTMLElement, family: FamilyReading): void {
+  const block: HTMLDivElement = el('div', 'tip-power', parent);
+  label('tip-power-text', family.text, block);
+  const line: HTMLDivElement = el('div', 'tip-family', parent);
+  label('tip-family-name', `${family.name} ${family.count}/${family.pieces.length}`, line);
+  family.pieces.forEach((piece: FamilyPiece): void => {
+    label(piece.worn ? 'tip-family-piece worn' : 'tip-family-piece', piece.name, line);
+  });
+}
+
+function itemCard(api: HudApi, item: ItemInstance, equipped: ItemInstance | null, compare: boolean, hint: string | null, className: string): HTMLElement {
+  const content: Content = api.world.content;
+  const root: HTMLDivElement = el('div', className, null);
+  const rarity: RarityDef = rarityOf(content, item);
+  const slot: ItemSlot | null = slotOf(content, item);
+  const base: ItemBaseDef | null = baseOf(content, item);
+  const head: HTMLDivElement = el('div', 'tip-head', root);
+  const picture: HTMLDivElement = el('div', 'tip-picture', head);
+  picture.style.setProperty('--rarity', rarity.color);
+  setPicture(picture, api.itemImage(item), base);
+  const heading: HTMLDivElement = el('div', 'tip-heading', head);
+  const title: HTMLDivElement = label('tip-title', itemName(content, item), heading);
+  title.style.color = rarity.color;
+  const material: ArmourMaterial | null = base?.material ?? null;
+  const kind: string = slot === null ? '' : material === null ? SLOT_NAMES[slot] : `${MATERIAL_NAMES[material]} ${SLOT_NAMES[slot]}`;
+  label('tip-sub', slot === null ? rarity.name : `${rarity.name} ${kind}`, heading);
+  label('tip-sub', `아이템 레벨 ${item.level}`, heading);
+  if (base !== null && base.stack > 1) label('tip-sub', heldText(countOf(item), base.stack), heading);
+  if (api.unverified(item)) label('tip-sub tip-unverified', TOOLTIP_WORDS.unverified, heading);
+  if (isUnidentified(item)) {
+    label('tip-sub tip-unidentified', TOOLTIP_WORDS.unidentified, heading);
+    el('div', 'tip-sep', root);
+    label('tip-line unread', TOOLTIP_WORDS.unread, root);
+    if (hint !== null) label('tip-hint', hint, root);
+    return root;
+  }
+  el('div', 'tip-sep', root);
+  const weaponFamily: WeaponGroup | null = baseFamily(content, base);
+  if (weaponFamily !== null) familyRow(weaponFamily, 'tip-weapon-family', familyLine(content, weaponFamily), root);
+  appendReading(root, readItem(content, item, equipped));
+  const use: ItemUse | null = base?.use ?? null;
+  if (use !== null) label('tip-line use', USE_WORDS[use.type], root);
+  const family: FamilyReading | null = familyReading(content, item, api.world.player.equipped);
+  if (family !== null) appendPower(root, family);
+  if (compare) {
+    const verdict: Verdict | null = itemVerdict(content, api.world.player, threatFor(content, api.world.visited, api.world.zone, api.world.player.level), item);
+    if (verdict !== null) appendVerdict(root, verdict);
+  }
+  if (hint !== null) label('tip-hint', hint, root);
+  return root;
+}
+
+export function itemTooltip(api: HudApi, item: ItemInstance, equipped: ItemInstance | null, hint: string): HTMLElement {
+  const pair: HTMLDivElement = el('div', 'tip-pair', null);
+  const worn: boolean = Object.values(api.world.player.equipped).some((held: ItemInstance | null): boolean => held !== null && held.uid === item.uid);
+  pair.append(itemCard(api, item, equipped, !worn, hint, 'tip'));
+  if (equipped !== null && !isUnidentified(item)) {
+    const side: HTMLElement = itemCard(api, equipped, null, false, null, 'tip tip-equipped');
+    label('tip-sub', '장착 중', side);
+    pair.append(side);
+  }
+  return pair;
+}

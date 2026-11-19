@@ -1,0 +1,44 @@
+.chart-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: min(250px, calc(100% - 20px));
+  padding: 8px 10px 9px;
+  border-radius: 4px;
+  background: rgba(7, 9, 14, 0.94);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 3px 0 0 color-mix(in srgb, var(--tint, #8fd8ff) 45%, transparent);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition:
+    opacity var(--spring-exit-ms) var(--spring-exit),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    box-shadow var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.chart-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    box-shadow var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.chart-card.gliding {
+  transition:
+    opacity var(--spring-exit-ms) var(--spring-exit),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    box-shadow var(--spring-smooth-ms) var(--spring-smooth),
+    translate var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.chart-card.gliding.visible {
+  transition:
+    opacity var(--spring-snappy-ms) var(--spring-snappy),
+    transform var(--spring-smooth-ms) var(--spring-smooth),
+    box-shadow var(--spring-smooth-ms) var(--spring-smooth),
+    translate var(--spring-smooth-ms) var(--spring-smooth);
+}

@@ -1,0 +1,62 @@
+.tree-socket.closed {
+  opacity: 0.26;
+  filter: saturate(0.25);
+  color: color-mix(in srgb, var(--tint) 30%, #6c7480);
+}
+
+.tree-socket.closed .tree-socket-well {
+  background: radial-gradient(circle at 50% 30%, #12161e, #06080c 70%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 3px 6px rgba(0, 0, 0, 0.85);
+}
+
+.tree-track {
+  transition:
+    stroke var(--spring-smooth-ms) var(--spring-smooth),
+    stroke-width var(--spring-smooth-ms) var(--spring-smooth),
+    opacity var(--spring-smooth-ms) var(--spring-smooth);
+}
+
+.tree-track.closed {
+  opacity: 0.25;
+}
+
+.tree-flow.closed {
+  opacity: 0;
+}
+
+.tree-socket.common {
+  color: color-mix(in srgb, var(--tint) 70%, #8a929e);
+}
+
+.chart-path-name.specialty {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  opacity: 0.72;
+}
+
+.chart-path-name.specialty.chosen {
+  opacity: 0.95;
+}
+
+.chart-path-name.specialty.closed {
+  opacity: 0.2;
+}
+
+.chart-path-name.specialty.pinned {
+  opacity: 0;
+}
+
+.tree-tip-specialty {
+  font-size: 11px;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--tint) 45%, #b9c2cc);
+}
+
+@media (max-width: 600px) {
+  .chart-path-name.specialty {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+}

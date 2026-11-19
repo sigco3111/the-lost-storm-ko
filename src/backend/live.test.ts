@@ -1,0 +1,488 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { createFakeClock, createFakeTimers } from '../../test/backend-support.ts';
+import type { FakeClock, FakeTimers } from '../../test/backend-support.ts';
+import { createLive, LIVE, retryDelayMs } from './live.ts';
+import type { Live, LiveEvent, SocketHandlers, Stand } from './live.ts';
+import { createPlay } from './play.ts';
+import { isFields } from '../../sim/content/read.ts';
+import { helloFrame } from './live-protocol.ts';
+import type { Play } from './play.ts';
+
+interface FakeSocket {
+  readonly url: string;
+  readonly sent: unknown[];
+  readonly handlers: SocketHandlers;
+  closed: boolean;
+}
+
+interface Harness {
+  readonly live: Live;
+  readonly clock: FakeClock;
+  readonly timers: FakeTimers;
+  readonly sockets: FakeSocket[];
+  readonly events: LiveEvent[];
+  token: string | null;
+  refuseOpen: boolean;
+}
+
+const HIDEOUT: Stand = { zone: 'hideout', x: 20, z: 18, facing: 0 };
+const ROAD: Stand = { zone: 'road', x: 20, z: 18, facing: 0 };
+const PLAYER: Readonly<Record<string, unknown>> = { id: 'h1', name: 'Wren', hero: null, worn: {}, x: 21, z: 18, facing: 0 };
+
+function harness(play: Play | null = null): Harness {
+  const clock: FakeClock = createFakeClock();
+  const timers: FakeTimers = createFakeTimers(clock);
+  const sockets: FakeSocket[] = [];
+  const events: LiveEvent[] = [];
+  const state: Harness = {
+    clock,
+    timers,
+    sockets,
+    events,
+    token: 'secret-token',
+    refuseOpen: false,
+    live: createLive({
+      serverUrl: 'http://localhost:8787',
+      open: (url: string, handlers: SocketHandlers) => {
+        if (state.refuseOpen) throw new Error('refused');
+        const socket: FakeSocket = { url, sent: [], handlers, closed: false };
+        sockets.push(socket);
+        return {
+          send: (text: string): void => {
+            socket.sent.push(JSON.parse(text));
+          },
+          close: (): void => {
+            socket.closed = true;
+          },
+        };
+      },
+      token: (): string | null => state.token,
+      clock: clock.read,
+      timers: timers.timers,
+      random: (): number => 1,
+      ...(play === null ? {} : { play }),
+    }),
+  };
+  state.live.subscribe((event: LiveEvent): void => {
+    events.push(event);
+  });
+  return state;
+}
+
+function last(h: Harness): FakeSocket {
+  const socket: FakeSocket | undefined = h.sockets[h.sockets.length - 1];
+  assert.ok(socket !== undefined, 'a socket was opened');
+  return socket;
+}
+
+function say(socket: FakeSocket, frame: unknown): void {
+  socket.handlers.message(JSON.stringify(frame));
+}
+
+function welcomed(h: Harness, stand: Stand = HIDEOUT): FakeSocket {
+  h.live.update(stand);
+  const socket: FakeSocket = last(h);
+  socket.handlers.open();
+  say(socket, { type: 'welcome' });
+  h.live.update(stand);
+  return socket;
+}
+
+void test('out of play no socket is opened', (): void => {
+  const h: Harness = harness();
+  h.live.update({ ...HIDEOUT, zone: null });
+  assert.equal(h.sockets.length, 0);
+});
+
+void test('outside the Hideout a socket opens to learn the server, and an older server without chat everywhere is closed and not tried again there', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h, ROAD);
+  assert.equal(socket.closed, true);
+  assert.deepEqual(h.events, []);
+  h.live.update(ROAD);
+  h.live.update(ROAD);
+  assert.equal(h.sockets.length, 1);
+  assert.equal(h.live.say('hello'), false);
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, 2);
+});
+
+void test('the token goes only in the first frame and enter follows the welcome', (): void => {
+  const h: Harness = harness();
+  h.live.update(HIDEOUT);
+  const socket: FakeSocket = last(h);
+  assert.equal(socket.url, 'ws://localhost:8787/v1/live');
+  assert.ok(!socket.url.includes('secret'));
+  h.live.update(HIDEOUT);
+  assert.deepEqual(socket.sent, []);
+  socket.handlers.open();
+  assert.deepEqual(socket.sent, [{ type: 'hello', token: 'secret-token', chat: 1, trade: 1 }]);
+  h.live.update(HIDEOUT);
+  assert.equal(socket.sent.length, 1);
+  say(socket, { type: 'welcome' });
+  h.live.update(HIDEOUT);
+  assert.deepEqual(socket.sent[1], { type: 'enter', zone: 'hideout', x: 20, z: 18, facing: 0 });
+});
+
+void test('moves go out at most every 100 ms and only when the place changed', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  const before: number = socket.sent.length;
+  h.clock.now += LIVE.moveEveryMs / 2;
+  h.live.update({ ...HIDEOUT, x: 20.5 });
+  assert.equal(socket.sent.length, before);
+  h.clock.now += LIVE.moveEveryMs / 2;
+  h.live.update({ ...HIDEOUT, x: 20.5 });
+  assert.deepEqual(socket.sent[before], { type: 'move', x: 20.5, z: 18, facing: 0 });
+  h.clock.now += LIVE.moveEveryMs * 3;
+  h.live.update({ ...HIDEOUT, x: 20.5 });
+  assert.equal(socket.sent.length, before + 1);
+  h.live.update({ ...HIDEOUT, x: 20.5, facing: 1 });
+  assert.deepEqual(socket.sent[before + 1], { type: 'move', x: 20.5, z: 18, facing: 1 });
+});
+
+void test('leaving the Hideout says leave, closes the socket and lets the others go', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  say(socket, { type: 'present', zone: 'hideout', you: 'me', players: [PLAYER, { ...PLAYER, id: 'me' }] });
+  assert.deepEqual(h.events.map((event: LiveEvent): string => event.type), ['present']);
+  const present: LiveEvent | undefined = h.events[0];
+  assert.equal(present?.type === 'present' ? present.players.length : -1, 1);
+  assert.equal(present?.type === 'present' ? present.you : '', 'me');
+  h.live.update(ROAD);
+  assert.deepEqual(socket.sent[socket.sent.length - 1], { type: 'leave' });
+  assert.equal(socket.closed, true);
+  assert.deepEqual(h.events.map((event: LiveEvent): string => event.type), ['present', 'gone']);
+  h.live.update(ROAD);
+  assert.equal(h.sockets.length, 1);
+});
+
+async function dropAndWait(h: Harness, wait: number): Promise<void> {
+  last(h).handlers.closed(1006);
+  const opened: number = h.sockets.length;
+  assert.equal(h.timers.nextDelay(), wait);
+  await h.timers.advance(wait - 1);
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, opened);
+  await h.timers.advance(1);
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, opened + 1);
+}
+
+void test('a dropped socket reconnects after 1 s, then 2 s, doubling to 30 s', async (): Promise<void> => {
+  const h: Harness = harness();
+  h.live.update(HIDEOUT);
+  await dropAndWait(h, 1000);
+  await dropAndWait(h, 2000);
+  await dropAndWait(h, 4000);
+  await dropAndWait(h, 8000);
+  await dropAndWait(h, 16_000);
+  await dropAndWait(h, 30_000);
+  await dropAndWait(h, 30_000);
+  const socket: FakeSocket = last(h);
+  socket.handlers.open();
+  say(socket, { type: 'welcome' });
+  socket.handlers.closed(1006);
+  assert.equal(h.timers.nextDelay(), 1000);
+});
+
+void test('the retry waits are spread by jitter', (): void => {
+  assert.equal(retryDelayMs(0, 1), 1000);
+  assert.equal(retryDelayMs(0, 0), 500);
+  assert.equal(retryDelayMs(3, 0.5), 6000);
+  assert.equal(retryDelayMs(40, 1), 30_000);
+});
+
+void test('a server that refuses the upgrade or a socket that cannot be made never throws', async (): Promise<void> => {
+  const h: Harness = harness();
+  h.refuseOpen = true;
+  assert.doesNotThrow((): void => h.live.update(HIDEOUT));
+  assert.equal(h.timers.nextDelay(), 1000);
+  h.refuseOpen = false;
+  await h.timers.advance(1000);
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, 1);
+});
+
+void test('with no token yet it waits instead of connecting', async (): Promise<void> => {
+  const h: Harness = harness();
+  h.token = null;
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, 0);
+  h.token = 'later';
+  await h.timers.advance(LIVE.tokenWaitMs);
+  h.live.update(HIDEOUT);
+  last(h).handlers.open();
+  assert.deepEqual(last(h).sent, [{ type: 'hello', token: 'later', chat: 1, trade: 1 }]);
+});
+
+void test('a full Hideout or a second tab stands down until the player comes back', (): void => {
+  for (const type of ['full', 'replaced']) {
+    const h: Harness = harness();
+    const socket: FakeSocket = welcomed(h);
+    say(socket, { type: 'present', zone: 'hideout', you: 'me', players: [PLAYER] });
+    say(socket, { type });
+    assert.equal(socket.closed, true);
+    assert.equal(h.events[h.events.length - 1]?.type, 'gone');
+    socket.handlers.closed(1000);
+    h.live.update(HIDEOUT);
+    assert.equal(h.sockets.length, 1);
+    assert.equal(h.timers.pending(), 0);
+    h.live.update(ROAD);
+    h.live.update(HIDEOUT);
+    assert.equal(h.sockets.length, 2);
+  }
+});
+
+void test('a refused enter is tried again after the backoff', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  say(socket, { type: 'refused', reason: 'no_character' });
+  const sent: number = socket.sent.length;
+  h.clock.now += 999;
+  h.live.update(HIDEOUT);
+  assert.equal(socket.sent.length, sent);
+  h.clock.now += 1;
+  h.live.update(HIDEOUT);
+  assert.deepEqual(socket.sent[sent], { type: 'enter', zone: 'hideout', x: 20, z: 18, facing: 0 });
+});
+
+void test('moves are stamped with the time they arrived and junk frames are ignored', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  socket.handlers.message('not json');
+  socket.handlers.message({ type: 'moves' });
+  say(socket, { type: 'teleport' });
+  assert.deepEqual(h.events, []);
+  say(socket, { type: 'moves', players: [['h1', 1, 2, 3]] });
+  assert.deepEqual(h.events, [{ type: 'moves', moves: [{ id: 'h1', x: 1, z: 2, facing: 3 }], at: h.clock.now }]);
+});
+
+void test('a listener that throws does not stop the others or the socket', (): void => {
+  const h: Harness = harness();
+  h.live.subscribe((): void => {
+    throw new Error('listener broke');
+  });
+  const socket: FakeSocket = welcomed(h);
+  assert.doesNotThrow((): void => say(socket, { type: 'joined', player: PLAYER }));
+  assert.equal(h.events.length, 1);
+});
+
+void test('frames from a socket that was replaced by a newer one are ignored', (): void => {
+  const h: Harness = harness();
+  const first: FakeSocket = welcomed(h);
+  first.handlers.closed(1006);
+  say(first, { type: 'joined', player: PLAYER });
+  assert.deepEqual(h.events, []);
+});
+
+void test('a line is said only once the player is present, and chat refusals reach the chat', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  assert.equal(h.live.say('too early'), false);
+  say(socket, { type: 'present', zone: 'hideout', you: 'me', players: [] });
+  assert.equal(h.live.say('a server without chat'), false);
+  say(socket, { type: 'present', zone: 'hideout', you: 'me', players: [], chat: [] });
+  assert.equal(h.live.say('   '), false);
+  assert.equal(h.live.say('  hello  '), true);
+  assert.deepEqual(socket.sent[socket.sent.length - 1], { type: 'say', text: 'hello' });
+  say(socket, { type: 'refused', reason: 'slow_down' });
+  assert.deepEqual(h.events[h.events.length - 1], { type: 'refused', reason: 'slow_down' });
+  say(socket, { type: 'said', line: { id: 1, from: 'me', name: 'Wren', text: 'hello', at: '2026-11-14T10:00:00.000Z' } });
+  assert.equal(h.events[h.events.length - 1]?.type, 'said');
+  h.live.update(ROAD);
+  assert.equal(h.live.say('gone'), false);
+});
+
+void test('a friends nudge is passed on and keeps the socket open', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  say(socket, { type: 'friends' });
+  assert.equal(h.events[h.events.length - 1]?.type, 'friends');
+  assert.equal(socket.closed, false);
+});
+
+void test('a new look passes on the name it carries', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = welcomed(h);
+  say(socket, { type: 'look', id: 'h1', name: 'Rook', hero: 'man', worn: {} });
+  assert.deepEqual(h.events[h.events.length - 1], { type: 'look', id: 'h1', name: 'Rook', hero: 'man', worn: {} });
+});
+
+const WELCOME: Readonly<Record<string, unknown>> = { type: 'welcome', you: 'c1', chat: [{ id: 4, from: null, name: 'Ash', text: 'hi', at: '2026-11-14T10:00:00.000Z', own: false }] };
+
+function roaming(h: Harness, stand: Stand = HIDEOUT): FakeSocket {
+  h.live.update(stand);
+  const socket: FakeSocket = last(h);
+  socket.handlers.open();
+  say(socket, WELCOME);
+  h.live.update(stand);
+  return socket;
+}
+
+void test('a server with chat everywhere welcomes with the General lines and gets the mute list at once', (): void => {
+  const h: Harness = harness();
+  h.live.mute(['ash walker']);
+  const socket: FakeSocket = roaming(h, ROAD);
+  assert.deepEqual(h.events, [{ type: 'welcome', you: 'c1', chat: [{ id: 4, from: null, name: 'Ash', text: 'hi', at: '2026-11-14T10:00:00.000Z', own: false }] }]);
+  assert.deepEqual(socket.sent[1], { type: 'mutes', names: ['ash walker'] });
+  assert.equal(socket.closed, false);
+  assert.equal(h.live.say('  from the road  '), true);
+  assert.deepEqual(socket.sent.at(-1), { type: 'say', text: 'from the road' });
+  assert.ok(!socket.sent.some((frame: unknown): boolean => typeof frame === 'object' && frame !== null && 'type' in frame && frame.type === 'enter'));
+});
+
+void test('with chat everywhere, leaving the Hideout says leave and lets the others go but keeps the connection', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = roaming(h);
+  assert.deepEqual(socket.sent.at(-1), { type: 'enter', zone: 'hideout', x: 20, z: 18, facing: 0 });
+  say(socket, { type: 'present', zone: 'hideout', you: 'h9', players: [PLAYER], chat: [] });
+  h.live.update(ROAD);
+  assert.deepEqual(socket.sent.at(-1), { type: 'leave' });
+  assert.equal(socket.closed, false);
+  assert.equal(h.events.at(-1)?.type, 'away');
+  h.live.update(ROAD);
+  assert.equal(h.sockets.length, 1);
+  assert.equal(h.live.say('still talking'), true);
+  h.live.update(HIDEOUT);
+  assert.deepEqual(socket.sent.at(-1), { type: 'enter', zone: 'hideout', x: 20, z: 18, facing: 0 });
+  h.live.update({ ...ROAD, zone: null });
+  assert.equal(socket.closed, true);
+});
+
+void test('with chat everywhere a full Hideout or a second tab steps out of the Hideout but keeps the chat', (): void => {
+  for (const type of ['full', 'replaced']) {
+    const h: Harness = harness();
+    const socket: FakeSocket = roaming(h);
+    say(socket, { type: 'present', zone: 'hideout', you: 'h9', players: [PLAYER], chat: [] });
+    say(socket, { type });
+    assert.equal(socket.closed, false);
+    assert.equal(h.events.at(-1)?.type, 'away');
+    const sent: number = socket.sent.length;
+    h.live.update(HIDEOUT);
+    assert.equal(socket.sent.length, sent);
+    assert.equal(h.live.say('still here'), true);
+    h.live.update(ROAD);
+    h.live.update(HIDEOUT);
+    assert.deepEqual(socket.sent.at(-1), { type: 'enter', zone: 'hideout', x: 20, z: 18, facing: 0 });
+  }
+});
+
+void test('whispers and mutes go out only to a server with chat everywhere, and its answers reach the chat', (): void => {
+  const old: Harness = harness();
+  welcomed(old);
+  assert.equal(old.live.whisper('Bo', 'hi'), false);
+  const h: Harness = harness();
+  assert.equal(h.live.whisper('Bo', 'hi'), false);
+  const socket: FakeSocket = roaming(h, ROAD);
+  assert.equal(h.live.whisper('Bo Reed', '   '), false);
+  assert.equal(h.live.whisper('', 'hi'), false);
+  assert.equal(h.live.whisper('Bo Reed', '  hi there '), true);
+  assert.deepEqual(socket.sent.at(-1), { type: 'whisper', to: 'Bo Reed', text: 'hi there' });
+  h.live.mute(['cold fen']);
+  assert.deepEqual(socket.sent.at(-1), { type: 'mutes', names: ['cold fen'] });
+  const line: Readonly<Record<string, unknown>> = { id: 9, from: 'c2', name: 'Bo Reed', text: 'yo', at: '2026-11-14T10:00:00.000Z', own: false };
+  say(socket, { type: 'whisper', dir: 'from', with: 'Bo Reed', line });
+  assert.deepEqual(h.events.at(-1), { type: 'whisper', dir: 'from', with: 'Bo Reed', line });
+  say(socket, { type: 'unsent', reason: 'offline', to: 'Cy' });
+  assert.deepEqual(h.events.at(-1), { type: 'unsent', reason: 'offline', to: 'Cy' });
+});
+
+void test('trading opens only against a server that welcomes it and only while standing in the Hideout', (): void => {
+  const h: Harness = harness();
+  h.live.update(HIDEOUT);
+  const socket: FakeSocket = last(h);
+  socket.handlers.open();
+  const hello: unknown = socket.sent[0];
+  assert.ok(typeof hello === 'object' && hello !== null && 'trade' in hello && hello.trade === 1);
+  say(socket, { ...WELCOME, trade: 1 });
+  h.live.update(HIDEOUT);
+  assert.equal(h.live.canTrade(), false);
+  assert.equal(h.live.trade('{"type":"trade_cancel"}'), false);
+  say(socket, { type: 'present', zone: 'hideout', you: 'me', players: [], chat: [] });
+  assert.equal(h.live.canTrade(), true);
+  assert.equal(h.live.trade('{"type":"trade_cancel"}'), true);
+  assert.deepEqual(socket.sent.at(-1), { type: 'trade_cancel' });
+  say(socket, { type: 'trade_closed', reason: 'left' });
+  assert.deepEqual(h.events.at(-1), { type: 'trade', frame: { type: 'trade_closed', reason: 'left' } });
+  h.live.update(ROAD);
+  assert.equal(h.live.canTrade(), false);
+});
+
+void test('an older server that does not welcome trading is never sent a trade frame', (): void => {
+  const h: Harness = harness();
+  const socket: FakeSocket = roaming(h);
+  say(socket, { type: 'present', zone: 'hideout', you: 'me', players: [], chat: [] });
+  const before: number = socket.sent.length;
+  assert.equal(h.live.canTrade(), false);
+  assert.equal(h.live.trade('{"type":"trade_cancel"}'), false);
+  assert.equal(socket.sent.length, before);
+});
+
+void test('the hello names the page only when the page has a play id', (): void => {
+  const named: Harness = harness(createPlay('page-a'));
+  welcomed(named);
+  const hello: unknown = last(named).sent[0];
+  assert.deepEqual(hello, JSON.parse(helloFrame('secret-token', { id: 'page-a', claim: true })));
+  assert.ok(isFields(hello) && hello['play'] === 'page-a');
+  const plain: Harness = harness();
+  welcomed(plain);
+  const bare: unknown = last(plain).sent[0];
+  assert.ok(isFields(bare) && !('play' in bare));
+});
+
+function joined(h: Harness, welcome: Readonly<Record<string, unknown>>): FakeSocket {
+  h.live.update(ROAD);
+  const socket: FakeSocket = last(h);
+  socket.handlers.open();
+  say(socket, welcome);
+  return socket;
+}
+
+void test('a fresh page claims in its hello, so it is never judged before it has claimed, and a welcome that says so ends the claim', async (): Promise<void> => {
+  const play: Play = createPlay('page-a');
+  const h: Harness = harness(play);
+  const first: FakeSocket = joined(h, { type: 'welcome', you: 'c1', chat: [], claimed: true });
+  assert.deepEqual(first.sent[0], { type: 'hello', token: 'secret-token', chat: 1, trade: 1, play: 'page-a', claim: true });
+  assert.deepEqual(play.stamp(), { id: 'page-a', claim: false });
+  first.handlers.closed(1006);
+  await h.timers.advance(LIVE.longestRetryMs);
+  h.live.update(ROAD);
+  const again: FakeSocket = last(h);
+  assert.notEqual(again, first);
+  again.handlers.open();
+  assert.deepEqual(again.sent[0], { type: 'hello', token: 'secret-token', chat: 1, trade: 1, play: 'page-a' });
+});
+
+void test('a welcome from an older server that does not say it claimed leaves the claim to the first save', (): void => {
+  const play: Play = createPlay('page-a');
+  const h: Harness = harness(play);
+  joined(h, { type: 'welcome', you: 'c1', chat: [] });
+  assert.deepEqual(play.stamp(), { id: 'page-a', claim: true });
+});
+
+void test('played elsewhere replaces the page, closes the socket and never opens another', (): void => {
+  const play: Play = createPlay('page-a');
+  const h: Harness = harness(play);
+  const socket: FakeSocket = roaming(h);
+  say(socket, { type: 'elsewhere' });
+  assert.equal(play.replaced(), true);
+  assert.equal(socket.closed, true);
+  socket.handlers.closed(1000);
+  h.live.update(ROAD);
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, 1);
+  assert.equal(h.timers.pending(), 0);
+  assert.equal(h.live.say('hello'), false);
+});
+
+void test('a page refused a save drops its live socket too, with no reconnect', (): void => {
+  const play: Play = createPlay('page-a');
+  const h: Harness = harness(play);
+  const socket: FakeSocket = welcomed(h);
+  play.replace();
+  assert.equal(socket.closed, true);
+  h.live.update(HIDEOUT);
+  assert.equal(h.sockets.length, 1);
+});
