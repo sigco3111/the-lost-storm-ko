@@ -5,7 +5,7 @@ import type { GuideData } from './data.ts';
 import { levelForPlace, place, route, topLevel } from './data.ts';
 import { guideRoute } from './builds.ts';
 import { buildMeasure as buildMeasureOf, buildSpec, pointsAtLevel } from './data.ts';
-import { decimal, esc, list, percent } from './html.ts';
+import { decimal, esc, list, percent , josa} from './html.ts';
 import type { BuildMeasure } from './measures.ts';
 import { bossAt, levelMinutes } from './pages/measured-view.ts';
 
@@ -72,7 +72,7 @@ export function afterRouteText(data: GuideData, buildId: string, advice: string)
   const next: readonly SkillTreeNodeDef[] = nextPlaces(data, buildId, 4);
   const top: number = topLevel(data.spec);
   if (next.length === 0) return `레벨 ${top} 이후에도 포인트는 계속 오지만, 이 경로는 더 찍을 곳이 없다. ${advice}`;
-  return `레벨 ${top} 이후에도 포인트는 계속 온다. 경로는 ${esc(list(next.map((node: SkillTreeNodeDef): string => node.name)))}(으)로 이어진다. ${advice}`;
+  return `레벨 ${top} 이후에도 포인트는 계속 온다. 경로는 ${esc(list(next.map((node: SkillTreeNodeDef): string => node.name)))}${josa(esc(list(next.map((node: SkillTreeNodeDef): string => node.name))),'으','로')} 이어진다. ${advice}`;
 }
 
 export type Metric = (measure: BuildMeasure) => number | null;

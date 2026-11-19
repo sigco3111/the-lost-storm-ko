@@ -30,9 +30,17 @@ export function minutes(value: number): string {
   return rest === 0 ? `${hours}시간` : `${hours}시간 ${rest}분`;
 }
 
+export function josa(word: string, withBatchim: string, withoutBatchim: string): string {
+  const code: number = word.charCodeAt(word.length - 1);
+  if (code >= 0xac00 && code <= 0xd7a3) return (code - 0xac00) % 28 === 0 ? withoutBatchim : withBatchim;
+  return withoutBatchim;
+}
+
 export function list(parts: readonly string[]): string {
   if (parts.length <= 1) return parts.join('');
-  return `${parts.slice(0, -1).join(', ')}와(과) ${parts[parts.length - 1] ?? ''}`;
+  const last: string = parts[parts.length - 1] ?? '';
+  const beforeLast: string = parts[parts.length - 2] ?? '';
+  return `${parts.slice(0, -1).join(', ')}${josa(beforeLast, '와', '과')} ${last}`;
 }
 
 export function para(...lines: readonly string[]): string {

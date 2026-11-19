@@ -4,7 +4,7 @@ import { statLabel } from '../../../sim/stat-text.ts';
 import { ARMOUR_HALF_POINT, armourReduction } from '../../../sim/stats.ts';
 import type { GuideData } from '../data.ts';
 import { capPercent, SLOT_NAMES, statAmount, statCap } from '../facts.ts';
-import { decimal, esc, link, list, para, percent, section, table } from '../html.ts';
+import { decimal, esc, link, list, para, percent, section, table , josa} from '../html.ts';
 import { familyPieces, leanWeapons, leanZones, legendaryShare, placesFor } from '../legendaries.ts';
 import { whereLikely } from './build-page.ts';
 import type { PageBody } from '../layout.ts';
@@ -121,7 +121,7 @@ function weaponRows(data: GuideData): string[][] {
       const high: number = base.implicit.find((mod): boolean => mod.stat === 'damageMax')?.value ?? 0;
       const speed: number = base.implicit.find((mod): boolean => mod.stat === 'attackSpeed')?.value ?? 0;
       const changes: string = base.variants.map((variant): string => data.content.skills.get(variant.becomes)?.name ?? '').filter((name: string): boolean => name.length > 0).join(', ');
-      return [esc(base.name), String(base.minLevel), `${low} to ${high}`, speed === 0 ? '' : `${speed > 0 ? '+' : '−'}${percent(Math.abs(speed))}`, changes.length === 0 ? '' : `휘두르기가 ${esc(changes)}(으)로`];
+      return [esc(base.name), String(base.minLevel), `${low} to ${high}`, speed === 0 ? '' : `${speed > 0 ? '+' : '−'}${percent(Math.abs(speed))}`, changes.length === 0 ? '' : `휘두르기가 ${esc(changes)}${josa(esc(changes),'으','로')}`];
     });
 }
 
@@ -152,7 +152,7 @@ export function itemsPage(data: GuideData): PageBody {
         'weapons',
         '무기',
         [
-          para(`무거운 무기일수록 느리게 휘두르고 더 세게 때린다. ${quarrel === undefined ? '' : `쇠뇌는 휘두르기를 사격인 ${esc(quarrel.name)}(으)로 바꾼다.`} 아래 피해는 1레벨 아이템 기준이며, 아이템 레벨에 따라 커진다.`),
+          para(`무거운 무기일수록 느리게 휘두르고 더 세게 때린다. ${quarrel === undefined ? '' : `쇠뇌는 휘두르기를 사격인 ${esc(quarrel.name)}${josa(esc(quarrel.name),'으','로')} 바꾼다.`} 아래 피해는 1레벨 아이템 기준이며, 아이템 레벨에 따라 커진다.`),
           table({ head: ['무기', '등장 레벨', '피해', '공격 속도', '변경'], rows: weaponRows(data), className: 'wide' }),
         ].join('\n'),
       ),

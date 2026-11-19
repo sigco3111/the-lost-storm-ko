@@ -4,7 +4,7 @@ import type { ActionDef, SlotDefault } from '../../../src/settings/bindings.ts';
 import { actionTable } from '../../../src/settings/bindings.ts';
 import type { GuideData } from '../data.ts';
 import { item, skill, zone } from '../data.ts';
-import { bullets, esc, kbd, link, list, note, para, percent, section, seconds, subsection, table, terms } from '../html.ts';
+import { bullets, esc, kbd, link, list, note, para, percent, section, seconds, subsection, table, terms , josa} from '../html.ts';
 import type { PageBody } from '../layout.ts';
 
 const KEY_NAMES: Readonly<Record<string, string>> = {
@@ -102,11 +102,11 @@ export function startPage(data: GuideData): PageBody {
         '처음 10분',
         [
           para(
-            `빈손으로 ${esc(zone(data, 'between').name)}에서 깨어난다. ${esc(item(data, 'worn_journal').name)}을(를) 읽으면 무기가 나타난다: 남자는 ${esc(item(data, 'rusted_blade').name)}을(를), 여자는 ${esc(item(data, 'worn_crossbow').name)}을(를) 찾는다. 둘을 가지면 나가는 길이 열린다.`,
-            `${esc(zone(data, 'hall_of_time').name)}은(는) 싸움이 있는 곳이다. ${kbd('Space')}로 구르는 법을 가르쳐 준다: ${esc(skill(data, 'dodge_roll').description)} 써라. 타이밍 맞는 구르기는 어떤 약병보다 많은 생명력을 아껴준다.`,
+            `빈손으로 ${esc(zone(data, 'between').name)}에서 깨어난다. ${esc(item(data, 'worn_journal').name)}${josa(esc(item(data, 'worn_journal').name),'을','를')} 읽으면 무기가 나타난다: 남자는 ${esc(item(data, 'rusted_blade').name)}${josa(esc(item(data, 'rusted_blade').name),'을','를')}, 여자는 ${esc(item(data, 'worn_crossbow').name)}${josa(esc(item(data, 'worn_crossbow').name),'을','를')} 찾는다. 둘을 가지면 나가는 길이 열린다.`,
+            `${esc(zone(data, 'hall_of_time').name)}${josa(esc(zone(data, 'hall_of_time').name),'은','는')} 싸움이 있는 곳이다. ${kbd('Space')}로 구르는 법을 가르쳐 준다: ${esc(skill(data, 'dodge_roll').description)} 써라. 타이밍 맞는 구르기는 어떤 약병보다 많은 생명력을 아껴준다.`,
             '적은 무리로 몰려오고 레벨이 당신을 따라오므로, 시간의 전당은 성장하는 내내 정정당당한 싸움이다. 어딘가에서 첫 순간을 찾게 된다: 공중의 거품. 들어서면 당신을 두르고 닫히고, 안의 것들이 달려든다. 정리해야 나갈 수 있다. 일찍 나가면 사라졌다가 몇 초 뒤 다시 나타난다.',
             `첫 순간과 관리인의 첫 가르침은 각각 레벨 포인트에 더해 ${link('/guide/tree/', '스킬 트리')} 포인트를 하나씩 준다. 써라. 아껴둘 이유가 없다.`,
-            `전당 동쪽에는 ${esc(zone(data, 'hideout').name)}이(가) 있다. 우두머리가 기다리는 ${esc(zone(data, 'keepers_gate').name)}(으)로 가는 길은 레벨 ${gate}까지 열리지 않는다.`,
+            `전당 동쪽에는 ${esc(zone(data, 'hideout').name)}${josa(esc(zone(data, 'hideout').name),'이','가')} 있다. 우두머리가 기다리는 ${esc(zone(data, 'keepers_gate').name)}${josa(esc(zone(data, 'keepers_gate').name),'으','로')} 가는 길은 레벨 ${gate}까지 열리지 않는다.`,
           ),
           para(`퀘스트 순서: ${list(questNames(data))}. 금색 ${kbd('!')}이 현재 단계가 가리키는 사람이나 장소를 표시한다. 관리인에게 다시 말을 걸면 놓친 말을 다시 들려준다.`),
         ].join('\n'),
@@ -125,7 +125,7 @@ export function startPage(data: GuideData): PageBody {
         'hideout',
         '은신처',
         [
-          para(`${esc(zone(data, 'hideout').name)}은(는) 유일하게 안전한 곳이다. 적은 닿지 못한다. ${list(hideoutPeople(data))}이(가) 있고, 아이템 ${trade.stashSize}개를 넣는 보관함과 웨이포인트가 있다. 게임이 서버에 연결되어 있으면 다른 플레이어들도 보이고 대화할 수 있다: ${kbd('Enter')}를 눌러 대화하라.`),
+          para(`${esc(zone(data, 'hideout').name)}${josa(esc(zone(data, 'hideout').name),'은','는')} 유일하게 안전한 곳이다. 적은 닿지 못한다. ${list(hideoutPeople(data))}${josa(list(hideoutPeople(data)),'이','가')} 있고, 아이템 ${trade.stashSize}개를 넣는 보관함과 웨이포인트가 있다. 게임이 서버에 연결되어 있으면 다른 플레이어들도 보이고 대화할 수 있다: ${kbd('Enter')}를 눌러 대화하라.`),
           para(`죽으면 다음 레벨까지 필요한 경험치의 ${penalty}를 잃고(레벨 자체는 절대 내려가지 않는다) 잠시 후 돌아오며, ${seconds(data.content.player.respawnInvulnerability)} 동안은 아무것도 당신을 해칠 수 없다. 마지막으로 지난 체크포인트나 은신처 모닥불 곁에서 되살아날 수 있다.`),
         ].join('\n'),
       ),

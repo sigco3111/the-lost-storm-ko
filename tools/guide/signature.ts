@@ -3,7 +3,7 @@ import { findNode, placeLinks, startingPlaces } from '../../sim/progression.ts';
 import type { GuideData } from './data.ts';
 import { path, place, skill } from './data.ts';
 import { droppedWeapons, weaponNames } from './facts.ts';
-import { esc, para, section } from './html.ts';
+import { esc, josa, para, section } from './html.ts';
 
 export interface Signature {
   readonly place: string;
@@ -80,14 +80,14 @@ export function signatureFacts(content: Content, id: string): SignatureFacts {
 function skillWords(data: GuideData, facts: SignatureFacts): string {
   if (facts.held === null) return '';
   const held: string = esc(skill(data, facts.held).name);
-  const worn: string = facts.worn === null || facts.worn === facts.held || facts.family === null ? '' : `(${esc(facts.family.needs)}이(가) ${esc(skill(data, facts.worn).name)}(으)로 바꿔준다)`;
+  const worn: string = facts.worn === null || facts.worn === facts.held || facts.family === null ? '' : `(${esc(facts.family.needs)}${josa(esc(facts.family.needs),'이','가')} ${esc(skill(data, facts.worn).name)}${josa(esc(skill(data, facts.worn).name),'으','로')} 바꿔준다)`;
   return `, 스킬 바에는 ${held}${worn}`;
 }
 
 function outcome(data: GuideData, facts: SignatureFacts): string {
-  if (facts.becomes === null) return `${esc(facts.node.name)}은(는) 당신의 것이다`;
+  if (facts.becomes === null) return `${esc(facts.node.name)}${josa(esc(facts.node.name),'은','는')} 당신의 것이다`;
   const from: string = facts.worn === null ? esc(facts.node.name) : esc(skill(data, facts.worn).name);
-  return `${from}이(가) ${esc(skill(data, facts.becomes).name)}(으)로 바뀐다`;
+  return `${from}${josa(from,'이','가')} ${esc(skill(data, facts.becomes).name)}${josa(esc(skill(data, facts.becomes).name),'으','로')} 바뀐다`;
 }
 
 export function signatureSection(data: GuideData, id: string): string {
@@ -96,9 +96,9 @@ export function signatureSection(data: GuideData, id: string): string {
   const weapons: string =
     facts.family === null
       ? `${arm}의 모든 장소는 어떤 무기로도 작동하니, 가장 세게 때리는 것을 입어라.`
-      : `${arm}의 모든 스킬은 어떤 무기로도 작동하고 ${esc(facts.family.needs)}을(를) 쥐면 더 강하다: ${weaponNames(droppedWeapons(data, (base: ItemBaseDef): boolean => base.weaponKind !== null && (facts.family?.kinds.includes(base.weaponKind) ?? false)))}. 무기 피해 줄은 그 무기에만 반응한다.`;
+      : `${arm}의 모든 스킬은 어떤 무기로도 작동하고 ${esc(facts.family.needs)}${josa(esc(facts.family.needs),'을','를')} 쥐면 더 강하다: ${weaponNames(droppedWeapons(data, (base: ItemBaseDef): boolean => base.weaponKind !== null && (facts.family?.kinds.includes(base.weaponKind) ?? false)))}. 무기 피해 줄은 그 무기에만 반응한다.`;
   const names: string[] = facts.route.map((step: string): string => esc(place(data, step).name));
-  const wear: string = facts.family === null ? '아무 무기나 들고' : `${esc(facts.family.needs)}을(를) 쥐고`;
+  const wear: string = facts.family === null ? '아무 무기나 들고' : `${esc(facts.family.needs)}${josa(esc(facts.family.needs),'을','를')} 쥐고`;
   const steps: string = `<ol class="signature-route">${names.map((name: string): string => `<li>${name}</li>`).join('')}</ol>`;
   return section(
     'signature',

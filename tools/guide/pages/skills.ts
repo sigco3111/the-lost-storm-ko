@@ -2,7 +2,7 @@ import type { ChartGroup, ItemBaseDef, SkillDef, SkillMod, SkillTreeNodeDef, Ski
 import type { SkillUnlock } from '../../../sim/content/shape-types.ts';
 import type { GuideData } from '../data.ts';
 import { path, playerSkills, skill, unlockPlace } from '../data.ts';
-import { decimal, esc, link, list, para, section, table } from '../html.ts';
+import { decimal, esc, link, list, para, section, table , josa} from '../html.ts';
 import type { PageBody } from '../layout.ts';
 
 export interface SkillChange {
@@ -103,7 +103,7 @@ export function skillsPage(data: GuideData): PageBody {
         'how',
         '스킬의 작동 방식',
         para(
-          `${esc(skill(data, 'cleave').name)}을(를) 가지고 시작하고, 시간의 전당에서 ${esc(skill(data, 'dodge_roll').name)}을(를) 배운다. 나머지 모든 스킬은 ${link('/guide/tree/', '스킬 트리')}의 한 장소다: 찍으면 스킬이 첫 번째 빈 슬롯에 들어간다.`,
+          `${esc(skill(data, 'cleave').name)}${josa(esc(skill(data, 'cleave').name),'을','를')} 가지고 시작하고, 시간의 전당에서 ${esc(skill(data, 'dodge_roll').name)}${josa(esc(skill(data, 'dodge_roll').name),'을','를')} 배운다. 나머지 모든 스킬은 ${link('/guide/tree/', '스킬 트리')}의 한 장소다: 찍으면 스킬이 첫 번째 빈 슬롯에 들어간다.`,
           '스킬은 트리의 장소나 손에 쥔 무기에 의해 다른 것으로 바뀔 수 있다. 트리에서는 하나의 스킬을 한 번에 한 장소만 바꿀 수 있다. 무기의 변경은 그 위에 얹힌다: 쇠뇌를 들면 다른 것과 관계없이 베기가 볼트가 된다.',
           '"취급 분류"는 그 스킬이 어떤 종류로 취급되는지를 말한다. "번개 스킬 피해"라고 적힌 장소는 번개 스킬로 취급되는 모든 스킬에 적용된다.',
         ),

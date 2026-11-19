@@ -6,7 +6,7 @@ import { ARMOUR_HALF_POINT, armourReduction } from '../../../sim/stats.ts';
 import type { GuideData } from '../data.ts';
 import { monster, skill, zone } from '../data.ts';
 import { capPercent } from '../facts.ts';
-import { bullets, decimal, esc, link, list, note, para, percent, section, subsection, table, terms } from '../html.ts';
+import { bullets, decimal, esc, link, list, note, para, percent, section, subsection, table, terms , josa} from '../html.ts';
 import type { PageBody } from '../layout.ts';
 import { gateLevel } from './start.ts';
 
@@ -192,7 +192,7 @@ export function combatPage(data: GuideData): PageBody {
         `우두머리: ${boss.name}`,
         [
           para(
-            `${esc(boss.name)}은(는) 레벨 ${gateLevel(data)}에 열리는 문 너머, ${esc(zone(data, 'keepers_gate').name)}에서 기다리고 있다. 느리고, 당신을 따라오며, 생명력을 잃을수록 싸우는 방식을 두 번 바꾼다. 아무것도 모르고 만나고 싶다면 여기서 읽기를 멈춰라.`,
+            `${esc(boss.name)}${josa(esc(boss.name),'은','는')} 레벨 ${gateLevel(data)}에 열리는 문 너머, ${esc(zone(data, 'keepers_gate').name)}에서 기다리고 있다. 느리고, 당신을 따라오며, 생명력을 잃을수록 싸우는 방식을 두 번 바꾼다. 아무것도 모르고 만나고 싶다면 여기서 읽기를 멈춰라.`,
           ),
           bullets(bossDef.phases.map((phase: BossPhase, index: number): string => phaseText(data, phase, index, bossDef.phases))),
           para(

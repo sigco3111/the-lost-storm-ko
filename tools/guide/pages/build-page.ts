@@ -7,7 +7,7 @@ import { namedSkill } from '../builds.ts';
 import type { GuideData } from '../data.ts';
 import { buildMeasure, focusSkill, levelForPlace, measuredNow, path, place, route, topLevel } from '../data.ts';
 import { SLOT_NAMES } from '../facts.ts';
-import { bullets, decimal, esc, list, minutes, note, para, percent, section, signedPercent, table } from '../html.ts';
+import { bullets, decimal, esc, list, minutes, note, para, percent, section, signedPercent, table , josa} from '../html.ts';
 import type { LegendaryPlaces } from '../legendaries.ts';
 import { legendary, legendaryShare, placesFor } from '../legendaries.ts';
 import { signatureSection } from '../signature.ts';
@@ -158,7 +158,7 @@ function legendariesSection(data: GuideData, notes: BuildNotes): string {
         '모든 지역에서 모든 전설이 나온다. 마지막 열은 각각이 가장 잘 나오는 곳이다: 그 지역에서 그 종류가 더 자주 나온다.',
       ),
       table({ head: ['아이템', '슬롯', '고유 힘', '바뀌는 것', '잘 나오는 곳'], rows: notes.legendaries.map((entry: LegendaryNote): string[] => legendaryRow(data, entry)), className: 'wide' }),
-      first === undefined ? '' : para(`${withArticle(firstName)}을(를) 먼저 노려라. ${notes.chase}`),
+      first === undefined ? '' : para(`${withArticle(firstName)}${josa(withArticle(firstName),'을','를')} 먼저 노려라. ${notes.chase}`),
     ].join('\n'),
   );
 }

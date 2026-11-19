@@ -140,7 +140,7 @@ export function createFeedbackCard(root: HTMLElement, name: string, hooks: CardH
     anchor.href = link.href;
     anchor.target = '_blank';
     anchor.rel = 'noopener';
-    anchor.textContent = link.id === 'discord' ? 'Discord 참여' : link.label;
+    anchor.textContent = link.id === 'discord' ? '원작 Discord 커뮤니티' : link.label;
   }
   const copy: HTMLButtonElement | null = row === null || hooks.site === null ? null : shareButton(row, hooks.site);
   const done: HTMLButtonElement = el('button', 'fb-done', thanks);
