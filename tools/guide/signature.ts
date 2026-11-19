@@ -80,14 +80,14 @@ export function signatureFacts(content: Content, id: string): SignatureFacts {
 function skillWords(data: GuideData, facts: SignatureFacts): string {
   if (facts.held === null) return '';
   const held: string = esc(skill(data, facts.held).name);
-  const worn: string = facts.worn === null || facts.worn === facts.held || facts.family === null ? '' : `, which ${esc(facts.family.needs)} turns into ${esc(skill(data, facts.worn).name)}`;
-  return ` and ${held} on the bar${worn}`;
+  const worn: string = facts.worn === null || facts.worn === facts.held || facts.family === null ? '' : `(${esc(facts.family.needs)}이(가) ${esc(skill(data, facts.worn).name)}(으)로 바꿔준다)`;
+  return `, 스킬 바에는 ${held}${worn}`;
 }
 
 function outcome(data: GuideData, facts: SignatureFacts): string {
-  if (facts.becomes === null) return `${esc(facts.node.name)} is yours`;
+  if (facts.becomes === null) return `${esc(facts.node.name)}은(는) 당신의 것이다`;
   const from: string = facts.worn === null ? esc(facts.node.name) : esc(skill(data, facts.worn).name);
-  return `${from} becomes ${esc(skill(data, facts.becomes).name)}`;
+  return `${from}이(가) ${esc(skill(data, facts.becomes).name)}(으)로 바뀐다`;
 }
 
 export function signatureSection(data: GuideData, id: string): string {
@@ -95,19 +95,19 @@ export function signatureSection(data: GuideData, id: string): string {
   const arm: string = esc(path(data, facts.node.path).name);
   const weapons: string =
     facts.family === null
-      ? `Every place on ${arm} works with any weapon, so wear whatever hits hardest.`
-      : `Every skill on ${arm} works with any weapon and is stronger with ${esc(facts.family.needs)} in your hands: ${weaponNames(droppedWeapons(data, (base: ItemBaseDef): boolean => base.weaponKind !== null && (facts.family?.kinds.includes(base.weaponKind) ?? false)))}. Its weapon damage lines answer only to that weapon.`;
+      ? `${arm}의 모든 장소는 어떤 무기로도 작동하니, 가장 세게 때리는 것을 입어라.`
+      : `${arm}의 모든 스킬은 어떤 무기로도 작동하고 ${esc(facts.family.needs)}을(를) 쥐면 더 강하다: ${weaponNames(droppedWeapons(data, (base: ItemBaseDef): boolean => base.weaponKind !== null && (facts.family?.kinds.includes(base.weaponKind) ?? false)))}. 무기 피해 줄은 그 무기에만 반응한다.`;
   const names: string[] = facts.route.map((step: string): string => esc(place(data, step).name));
-  const wear: string = facts.family === null ? 'any weapon' : `${esc(facts.family.needs)} worn`;
+  const wear: string = facts.family === null ? '아무 무기나 들고' : `${esc(facts.family.needs)}을(를) 쥐고`;
   const steps: string = `<ol class="signature-route">${names.map((name: string): string => `<li>${name}</li>`).join('')}</ol>`;
   return section(
     'signature',
-    'Weapons and the signature',
+    '무기와 시그니처',
     [
       para(weapons),
-      para(`The signature of this build is ${esc(facts.node.name)}: ${esc(facts.node.description)}`),
+      para(`이 빌드의 시그니처는 ${esc(facts.node.name)}: ${esc(facts.node.description)}`),
       steps,
-      para(`The shortest way there is these ${names.length} places, in this order, with ${wear}${skillWords(data, facts)}. Then ${outcome(data, facts)}.`),
+      para(`가장 빠른 길은 이 ${names.length}개 장소를 이 순서대로 밟는 것이다. ${wear}${skillWords(data, facts)}. 그러면 ${outcome(data, facts)}.`),
     ].join('\n'),
   );
 }

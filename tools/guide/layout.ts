@@ -49,6 +49,6 @@ ${next}
 </main>
 <footer class="foot">
 <p>Written for the alpha. Every number on these pages is read from the game itself when the site is built, so a change to the game changes the guide with it.</p>
-<p><a href="/the-lost-storm-ko/guide/">Guide</a><span aria-hidden="true">·</span><a href="/the-lost-storm-ko/privacy.html">Privacy</a><span aria-hidden="true">·</span><a href="/the-lost-storm-ko/terms.html">Terms</a><span aria-hidden="true">·</span><a href="https://mergestorm.ai">원작 Mergestorm</a></p>
+<p><a href="/the-lost-storm-ko/guide/">안내서</a><span aria-hidden="true">·</span><a href="/the-lost-storm-ko/privacy.html">개인정보</a><span aria-hidden="true">·</span><a href="/the-lost-storm-ko/terms.html">약관</a><span aria-hidden="true">·</span><a href="https://mergestorm.ai">원작 Mergestorm</a></p>
 </footer>`;
 }

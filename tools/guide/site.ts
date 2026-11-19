@@ -35,18 +35,18 @@ function buildEntry(notes: BuildNotes): GuidePage {
     href: buildHref(notes.id),
     label: notes.name,
     measured: true,
-    render: (data: GuideData): PageBody => ({ kicker: `Build · ${notes.kind}`, title: notes.name, lede: notes.forWho, description: `${notes.name}, ${indefinite(notes.kind)} ${notes.kind.toLowerCase()} build for The Lost Storm: the route through the Skill Tree, the skill to lean on, gear and measured numbers.`, body: buildPage(data, notes) }),
+    render: (data: GuideData): PageBody => ({ kicker: `빌드 · ${notes.kind}`, title: notes.name, lede: notes.forWho, description: `${notes.name}, The Lost Storm의 ${notes.kind} 빌드: 스킬 트리 경로, 의지할 스킬, 장비와 실측 수치.`, body: buildPage(data, notes) }),
   };
 }
 
 export const GUIDE_PAGES: readonly GuidePage[] = [
-  { key: 'home', href: '/guide/', label: 'Guide', render: homePage, measured: false },
-  { key: 'start', href: '/guide/start/', label: 'Getting started', render: startPage, measured: false },
-  { key: 'combat', href: '/guide/combat/', label: 'Combat', render: combatPage, measured: false },
-  { key: 'skills', href: '/guide/skills/', label: 'Skills', render: skillsPage, measured: false },
-  { key: 'tree', href: '/guide/tree/', label: 'Skill Tree', render: treePage, measured: false },
-  { key: 'items', href: '/guide/items/', label: 'Items', render: itemsPage, measured: false },
-  { key: 'builds', href: '/guide/builds/', label: 'Builds', render: buildsPage, measured: true },
+  { key: 'home', href: '/guide/', label: '안내서', render: homePage, measured: false },
+  { key: 'start', href: '/guide/start/', label: '시작하기', render: startPage, measured: false },
+  { key: 'combat', href: '/guide/combat/', label: '전투', render: combatPage, measured: false },
+  { key: 'skills', href: '/guide/skills/', label: '스킬', render: skillsPage, measured: false },
+  { key: 'tree', href: '/guide/tree/', label: '스킬 트리', render: treePage, measured: false },
+  { key: 'items', href: '/guide/items/', label: '아이템', render: itemsPage, measured: false },
+  { key: 'builds', href: '/guide/builds/', label: '빌드', render: buildsPage, measured: true },
   ...BUILD_NOTES.map(buildEntry),
 ];
 
@@ -92,7 +92,7 @@ export function shellHtml(key: string): string {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>The Lost Storm · Guide</title>
+    <title>폭풍의 잔향 · 안내서</title>
     <meta name="theme-color" content="#05070b" />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />

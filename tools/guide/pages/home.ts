@@ -31,7 +31,7 @@ export function homePage(data: GuideData): PageBody {
     description: '폭풍의 잔향 플레이어 안내서: 시작하기, 전투의 작동 방식, 모든 스킬, 스킬 트리, 아이템과 실측 빌드 다섯 가지.',
     body: [
       section('contents', '이 안내서의 내용', `<ul class="cards">${GUIDE_TOPICS.map(topicCard).join('')}</ul>`),
-      section('builds', 'Builds', [para(`포인트를 어디에 쓸지 모르겠다면? 나에게 맞아 보이는 빌드를 골라 그 경로를 따라가면 된다. ${link('/guide/builds/', '다섯 빌드 비교하기')}.`), buildCards(data, BUILD_NOTES)].join('\n')),
+      section('builds', '빌드', [para(`포인트를 어디에 쓸지 모르겠다면? 나에게 맞아 보이는 빌드를 골라 그 경로를 따라가면 된다. ${link('/guide/builds/', '다섯 빌드 비교하기')}.`), buildCards(data, BUILD_NOTES)].join('\n')),
       section('alpha', '이 안내서에 대해', para('폭풍의 잔향은 알파 단계이고 자주 바뀐다. 이 안내서는 오늘 게임에 있는 것만 다룬다. 모든 수치, 이름, 비용, 경로는 사이트를 빌드할 때 게임에서 직접 읽어 오므로, 게임이 바뀌면 안내서도 함께 바뀐다.')),
     ].join('\n'),
   };
