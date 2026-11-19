@@ -48,7 +48,7 @@ ${page.body}
 ${next}
 </main>
 <footer class="foot">
-<p>Written for the alpha. Every number on these pages is read from the game itself when the site is built, so a change to the game changes the guide with it.</p>
+<p>알파 기준으로 작성되었다. 이 페이지의 모든 수치는 사이트를 빌드할 때 게임에서 직접 읽어 오므로, 게임이 바뀌면 안내서도 함께 바뀐다.</p>
 <p><a href="/the-lost-storm-ko/guide/">안내서</a><span aria-hidden="true">·</span><a href="/the-lost-storm-ko/privacy.html">개인정보</a><span aria-hidden="true">·</span><a href="/the-lost-storm-ko/terms.html">약관</a><span aria-hidden="true">·</span><a href="https://mergestorm.ai">원작 Mergestorm</a></p>
 </footer>`;
 }
