@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (function () {
+        var quiet = function () {};
+        var guard = function (event) {
+          var transition = event.viewTransition;
+          if (!transition) return;
+          ['ready', 'finished', 'updateCallbackDone'].forEach(function (key) {
+            var promise = transition[key];
+            if (promise && typeof promise.catch === 'function') promise.catch(quiet);
+          });
+          if (document.visibilityState === 'hidden' && typeof transition.skipTransition === 'function') transition.skipTransition();
+        };
+        window.addEventListener('pageswap', guard);
+        window.addEventListener('pagereveal', guard);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>폭풍의 잔향 · 브라우저에서 즐기는 무료 액션 RPG</title>
+    <meta name="description" content="폭풍의 잔향은 브라우저에서 바로 즐기는 무료 핵앤슬래시 액션 RPG다. 밤의 폭풍 속에서 싸우고, 전리품을 찾고, 레벨을 올려라. 얼리 알파, 다운로드 불필요." />
+    <meta name="theme-color" content="#05070b" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://sigco3111.github.io/the-lost-storm-ko/" />
+    <link rel="icon" href="/the-lost-storm-ko/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/the-lost-storm-ko/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/the-lost-storm-ko/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/the-lost-storm-ko/apple-touch-icon.png" />
+    <link rel="manifest" href="/the-lost-storm-ko/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="폭풍의 잔향" />
+    <meta property="og:url" content="https://sigco3111.github.io/the-lost-storm-ko/" />
+    <meta property="og:title" content="폭풍의 잔향 · 브라우저에서 즐기는 무료 액션 RPG" />
+    <meta property="og:description" content="폭풍의 잔향은 브라우저에서 바로 즐기는 무료 핵앤슬래시 액션 RPG다. 밤의 폭풍 속에서 싸우고, 전리품을 찾고, 레벨을 올려라. 얼리 알파, 다운로드 불필요." />
+    <meta property="og:image" content="https://sigco3111.github.io/the-lost-storm-ko/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="영웅이 안개 속 창백한 빛줄기 아래 검을 들고 서 있고, 곁에 폭풍의 잔향이라는 글자가 있다." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="폭풍의 잔향 · 브라우저에서 즐기는 무료 액션 RPG" />
+    <meta name="twitter:description" content="폭풍의 잔향은 브라우저에서 바로 즐기는 무료 핵앤슬래시 액션 RPG다. 밤의 폭풍 속에서 싸우고, 전리품을 찾고, 레벨을 올려라. 얼리 알파, 다운로드 불필요." />
+    <meta name="twitter:image" content="https://sigco3111.github.io/the-lost-storm-ko/og.jpg" />
+    <meta name="twitter:image:alt" content="영웅이 안개 속 창백한 빛줄기 아래 검을 들고 서 있고, 곁에 폭풍의 잔향이라는 글자가 있다." />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"폭풍의 잔향","url":"https://sigco3111.github.io/the-lost-storm-ko/","@id":"https://sigco3111.github.io/the-lost-storm-ko/#website","alternateName":["The Lost Storm 한국어판","Lost Storm"],"description":"폭풍의 잔향은 브라우저에서 바로 즐기는 무료 핵앤슬래시 액션 RPG의 비공식 한국어판이다. 밤의 폭풍 속에서 싸우고, 전리품을 찾고, 레벨을 올려라. 얼리 알파, 다운로드 불필요.","inLanguage":"ko","publisher":{"@type":"Organization","name":"Mergestorm","url":"https://mergestorm.ai"}},{"@type":"Organization","@id":"https://sigco3111.github.io/the-lost-storm-ko/#brand","name":"폭풍의 잔향","alternateName":["The Lost Storm 한국어판","Lost Storm"],"url":"https://sigco3111.github.io/the-lost-storm-ko/","logo":{"@type":"ImageObject","url":"https://sigco3111.github.io/the-lost-storm-ko/icon-512.png","contentUrl":"https://sigco3111.github.io/the-lost-storm-ko/icon-512.png","width":512,"height":512},"image":"https://sigco3111.github.io/the-lost-storm-ko/og.jpg","sameAs":["https://discord.gg/XTRePF4HJs","https://github.com/sigco3111/the-lost-storm-ko"],"parentOrganization":{"@type":"Organization","name":"Mergestorm","url":"https://mergestorm.ai"}},{"@type":"VideoGame","name":"폭풍의 잔향","url":"https://sigco3111.github.io/the-lost-storm-ko/","@id":"https://sigco3111.github.io/the-lost-storm-ko/#game","description":"폭풍의 잔향은 브라우저에서 바로 즐기는 무료 핵앤슬래시 액션 RPG의 비공식 한국어판이다. 밤의 폭풍 속에서 싸우고, 전리품을 찾고, 레벨을 올려라. 얼리 알파, 다운로드 불필요.","image":"https://sigco3111.github.io/the-lost-storm-ko/og.jpg","genre":["Action role-playing game","Hack and slash"],"gamePlatform":"Web browser","operatingSystem":"Any","applicationCategory":"GameApplication","inLanguage":"ko","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","url":"https://sigco3111.github.io/the-lost-storm-ko/play/"},"screenshot":[{"@type":"ImageObject","contentUrl":"https://sigco3111.github.io/the-lost-storm-ko/landing/tree-1200.webp","url":"https://sigco3111.github.io/the-lost-storm-ko/landing/tree-1200.webp","width":1200,"height":675,"caption":"스킬 트리. 다섯 갈래 길이 중심에서 나선으로 뻗어 나가고, 번개 빌드가 모이는 폭풍을 밝힌다."},{"@type":"ImageObject","contentUrl":"https://sigco3111.github.io/the-lost-storm-ko/landing/hideout-1200.webp","url":"https://sigco3111.github.io/the-lost-storm-ko/landing/hideout-1200.webp","width":1200,"height":675,"caption":"밤의 은신처. 모닥불과 등불, 거래와 경매, 웨이포인트를 지키는 관리인들."}],"trailer":{"@type":"VideoObject","name":"폭풍의 잔향 플레이: 시간의 전당에서의 전투","description":"시간의 전당의 검은 기슭에 내리는 비 속에서, 영웅이 창백한 메아리 무리를 베어 넘긴다. 피해 숫자가 오르고 그 자리에 장비가 떨어진다.","thumbnailUrl":["https://sigco3111.github.io/the-lost-storm-ko/landing/fight-poster.webp"],"uploadDate":"2026-11-14T23:50:53Z","duration":"PT6.6S","contentUrl":"https://sigco3111.github.io/the-lost-storm-ko/landing/fight.mp4","width":1280,"height":720,"inLanguage":"ko"},"sameAs":["https://discord.gg/XTRePF4HJs","https://github.com/sigco3111/the-lost-storm-ko"],"publisher":{"@type":"Organization","name":"Mergestorm","url":"https://mergestorm.ai"}}]}</script>
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/the-lost-storm-ko/assets/cinzel-latin-700-normal-Dkw14w9r.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/the-lost-storm-ko/assets/alegreya-sans-latin-400-normal-DtLlO8BS.woff2" />
+    <link rel="preload" as="image" type="image/avif" href="/the-lost-storm-ko/landing/hero-man.avif" fetchpriority="high" />
+    <script type="module" crossorigin src="/the-lost-storm-ko/assets/landing-ZvtAfcsm.js"></script>
+    <link rel="modulepreload" crossorigin href="/the-lost-storm-ko/assets/leave-DW8Jme-v.js">
+    <link rel="stylesheet" crossorigin href="/the-lost-storm-ko/assets/landing-BywVuha9.css">
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <div class="hero-stage" id="hero-stage" data-hero="man">
+        <picture class="hero-still" data-hero-still="man">
+          <source type="image/avif" srcset="./landing/hero-man.avif" />
+          <img src="./landing/hero-man.webp" width="840" height="1120" alt="영웅이 검은 바위 위 한 줄기 빛 속에 서 있고, 안개가 그 주위를 흐른다." fetchpriority="high" decoding="async" />
+        </picture>
+        <picture class="hero-still" data-hero-still="woman">
+          <source type="image/avif" data-srcset="./landing/hero-woman.avif" />
+          <img data-src="./landing/hero-woman.webp" width="840" height="1120" alt="여영웅이 검은 바위 위 한 줄기 빛 속에 서 있고, 안개가 그녀 주위를 흐른다." decoding="async" />
+        </picture>
+        <video class="hero-loop" data-hero-loop="man" muted loop playsinline disablepictureinpicture preload="none" width="840" height="1120" aria-hidden="true">
+          <source data-src="./landing/hero-man.webm" type="video/webm; codecs=av01.0.05M.08" />
+          <source data-src="./landing/hero-man.mp4" type="video/mp4" />
+        </video>
+        <video class="hero-loop" data-hero-loop="woman" muted loop playsinline disablepictureinpicture preload="none" width="840" height="1120" aria-hidden="true">
+          <source data-src="./landing/hero-woman.webm" type="video/webm; codecs=av01.0.05M.08" />
+          <source data-src="./landing/hero-woman.mp4" type="video/mp4" />
+        </video>
+        <script>
+          (function () {
+            var art = document.querySelector('.hero-still img[src]');
+            if (!art || art.complete) return;
+            art.classList.add('waiting');
+            var show = function () {
+              art.classList.remove('waiting');
+            };
+            art.addEventListener('load', show);
+            art.addEventListener('error', show);
+          })();
+        </script>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-body">
+        <p class="kicker">무료 <span class="alpha-tag">얼리 알파</span></p>
+        <h1>폭풍의 잔향</h1>
+        <p class="lede">브라우저에서 바로 즐기는 핵앤슬래시 액션 RPG. 폭풍이 남긴 것과 싸우고, 떨어진 것을 주워, 나만의 영웅을 키워라.</p>
+        <div class="actions">
+          <a class="play" href="./play/">무료 플레이</a>
+          <a class="play quiet" href="https://discord.gg/XTRePF4HJs" target="_blank" rel="noopener">원작 Discord 커뮤니티</a>
+        </div>
+        <p class="fine">컴퓨터든 휴대폰이든 브라우저에서. 다운로드도 계정도 필요 없다.</p>
+        <p class="live-now" id="live-now" aria-live="polite"><span class="live-dot" aria-hidden="true"></span><b id="live-now-count">0</b>명 플레이 중</p>
+      </div>
+      <div class="hero-pick" role="group" aria-label="누가 깨어나는가">
+        <button type="button" class="hero-pick-option" data-pick="man" aria-pressed="true">남자</button>
+        <button type="button" class="hero-pick-option" data-pick="woman" aria-pressed="false">여자</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="played" aria-labelledby="played-title">
+        <h2 id="played-title" class="section-title">플레이 모습</h2>
+        <div class="clips">
+          <figure class="clip">
+            <div class="clip-frame">
+              <video class="clip-video" muted loop playsinline disablepictureinpicture preload="none" width="1280" height="720" data-poster="./landing/fight-poster.webp" aria-label="시간의 전당의 검은 기슭에 내리는 비 속에서, 영웅이 창백한 메아리 무리를 베어 넘긴다. 피해 숫자가 오르고 그 자리에 장비가 떨어진다.">
+                <source data-src="./landing/fight.webm" type="video/webm; codecs=av01.0.05M.08" />
+                <source data-src="./landing/fight.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>시간의 전당</b> 밤의 폭풍 아래 검은 기슭. 번개가 순간을 남기고, 순간마다 전투가 깨어난다.</figcaption>
+          </figure>
+          <figure class="clip">
+            <div class="clip-frame">
+              <video class="clip-video" muted loop playsinline disablepictureinpicture preload="none" width="1280" height="720" data-poster="./landing/spin-poster.webp" aria-label="물레방아 빌드가 메아리 무리를 휘돌며 지나가고, 베어 넘길 때마다 탄력이 커진다.">
+                <source data-src="./landing/spin.webm" type="video/webm; codecs=av01.0.05M.08" />
+                <source data-src="./landing/spin.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>물레방아</b> 안내서에 실린 빌드 중 하나. 베기가 눌러 두는 회전으로 바뀌고, 적을 벨 때마다 빨라진다.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="blocks" aria-label="무엇을 하는가">
+        <article class="block">
+          <picture>
+            <source type="image/avif" srcset="/the-lost-storm-ko/assets/loot-640-DiwGskNr.avif 640w, /the-lost-storm-ko/assets/loot-1200-Ck8yFVc4.avif 1200w" sizes="(max-width: 720px) 100vw, 540px" />
+            <source type="image/webp" srcset="/the-lost-storm-ko/assets/loot-640-CBPiwi_8.webp 640w, /the-lost-storm-ko/assets/loot-1200-E8AKQ5qp.webp 1200w" sizes="(max-width: 720px) 100vw, 540px" />
+            <img src="/the-lost-storm-ko/assets/loot-640-CBPiwi_8.webp" width="1200" height="675" loading="lazy" decoding="async" alt="빛기둥이 메아리들이 떨어뜨린 장비를 비추고, 질풍 부적과 바지, 가죽 옷이 이름과 함께 땅에 놓여 있다." />
+          </picture>
+          <div class="block-text">
+            <h2>싸우고, 줍고, 레벨 업</h2>
+            <p>클릭으로 이동하고 휘두르거나, 휴대폰에서는 터치로. 몬스터는 무작위 옵션이 붙은 골드와 장비를 떨어뜨린다. 더 좋은 쪽을 입어라. 레벨마다 스킬 트리 포인트가 하나씩.</p>
+          </div>
+        </article>
+        <article class="block">
+          <picture>
+            <source type="image/avif" srcset="./landing/tree-640.avif 640w, /the-lost-storm-ko/landing/tree-1200.avif 1200w" sizes="(max-width: 720px) 100vw, 540px" />
+            <source type="image/webp" srcset="./landing/tree-640.webp 640w, /the-lost-storm-ko/landing/tree-1200.webp 1200w" sizes="(max-width: 720px) 100vw, 540px" />
+            <img src="./landing/tree-640.webp" width="1200" height="675" loading="lazy" decoding="async" alt="스킬 트리. 다섯 갈래 길이 중심에서 나선으로 뻗어 나가고, 번개 빌드가 모이는 폭풍을 밝힌다." />
+          </picture>
+          <div class="block-text">
+            <h2>영웅을 빚어라</h2>
+            <p>포인트를 스킬 트리에 써라. 어떤 장소는 스킬의 작동을 바꾼다. 베기는 회전이 되고, 번갯불은 갈라진다. <a href="./guide/">플레이어 안내서</a>가 다섯 빌드를 게임에서 잰 숫자와 함께 안내한다.</p>
+          </div>
+        </article>
+        <article class="block">
+          <picture>
+            <source type="image/avif" srcset="./landing/hideout-640.avif 640w, /the-lost-storm-ko/landing/hideout-1200.avif 1200w" sizes="(max-width: 720px) 100vw, 540px" />
+            <source type="image/webp" srcset="./landing/hideout-640.webp 640w, /the-lost-storm-ko/landing/hideout-1200.webp 1200w" sizes="(max-width: 720px) 100vw, 540px" />
+            <img src="./landing/hideout-640.webp" width="1200" height="675" loading="lazy" decoding="async" alt="밤의 은신처. 모닥불과 등불, 그리고 거래와 경매, 웨이포인트를 지키는 관리인들." />
+          </picture>
+          <div class="block-text">
+            <h2>모닥불 앞은 혼자가 아니다</h2>
+            <p>은신처에는 상인과 보관함, 웨이포인트가 있다.</p>
+            
+            <aside class="live" id="live" aria-label="플레이어와 순위">
+              <p class="live-head"><span class="live-dot" aria-hidden="true"></span><b id="live-online">0</b>명 플레이 중</p>
+              <h3>순위</h3>
+              <ol class="live-top" id="live-top"></ol>
+              <p class="live-empty" id="live-empty" hidden>아직 순위에 아무도 없다. 첫 번째가 되어라.</p>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="alpha" aria-labelledby="alpha-title">
+        <h2 id="alpha-title">얼리 알파, 매일 바뀐다</h2>
+        <p>지금 있는 것: 깨어나는 하얀 안개. 밤의 폭풍 아래 검은 기슭, 시간의 전당. 전당 옆의 은신처. 그리고 심판자가 기다리는 최후의 문. 고를 수 있는 두 영웅, 스킬 트리, 구르기, 생명력·마나 약병, 옵션과 레벨이 붙은 전리품.</p>
+        <p>대부분의 날 새것이 오고, 어떤 날은 무언가 부서진다. 진행은 플레이하는 동안 저절로 저장된다. 알파 기간에는 초기화될 수 있다.</p>
+        
+        <p>원작 게임은 MIT 라이선스의 오픈 소스다. <a href="https://github.com/marginsystems/the-lost-storm">GitHub</a>에서 코드를 읽을 수 있다. 모델과 애니메이션, 텍스처는 <a href="https://github.com/marginsystems/the-lost-storm/blob/main/ASSETS.md">에셋 크레딧</a>에 정리된 자유 라이브러리에서 왔다.</p>
+        <a class="play" href="./play/">무료 플레이</a>
+      </section>
+    </main>
+
+    <footer>
+      <nav class="legal" aria-label="안내와 약관">
+        <a href="./guide/">플레이어 안내서</a><span aria-hidden="true">·</span><a href="./privacy.html">개인정보</a><span aria-hidden="true">·</span><a href="./terms.html">약관</a><span aria-hidden="true">·</span><a href="https://mergestorm.ai">원작 Mergestorm</a><span aria-hidden="true">·</span><span>폭풍의 잔향은 The Lost Storm의 비공식 한국어 팬 번역</span>
+      </nav>
+      <nav class="socials" aria-label="다른 곳">
+        <button class="copy" type="button" data-copy="https://sigco3111.github.io/the-lost-storm-ko"><span class="copy-idle">링크 복사</span><span class="copy-done" aria-hidden="true">복사됨</span></button>
+        <a class="icon-link" href="https://discord.gg/XTRePF4HJs" target="_blank" rel="noopener" aria-label="Discord"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>
+        <a class="icon-link" href="https://github.com/sigco3111/the-lost-storm-ko" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        
+      </nav>
+    </footer>
+  </body>
+</html>
