@@ -3830,7 +3830,7 @@
    },
    "power": {
     "family": "forkweather",
-    "text": "An echo you kill releases a Forkline from where it stood.",
+    "text": "당신이 쓰러뜨린 잔상이 서 있던 자리에서 갈래 번개를 뿜는다.",
     "triggers": [
      {
       "on": "kill",
@@ -3877,7 +3877,7 @@
    },
    "power": {
     "family": "forkweather",
-    "text": "Lightning chains +2. Each hop hits harder instead of weaker.",
+    "text": "폭풍 번개의 연쇄 +2. 튕길 때마다 약해지는 대신 더 강하게 적중한다.",
     "skillMods": [
      {
       "group": "lightning",
@@ -3918,7 +3918,7 @@
    ],
    "power": {
     "family": "forkweather",
-    "text": "Storm Bolt splits into a Forkline on its first hit.",
+    "text": "폭풍 번개가 첫 적중에서 갈래 번개로 갈라진다.",
     "triggers": [
      {
       "on": "hit",
@@ -3972,7 +3972,7 @@
    },
    "power": {
     "family": "millwheel",
-    "text": "Cleave becomes the Millwheel: hold it to keep turning as you run, and every enemy struck builds momentum.",
+    "text": "휘두르기가 물레방아로 바뀐다: 누르고 있으면 달리면서 계속 돌고, 맞은 적마다 가속이 쌓인다.",
     "variants": [
      {
       "skill": "cleave",
@@ -4015,7 +4015,7 @@
    },
    "power": {
     "family": "millwheel",
-    "text": "Each enemy a Cleave form hits gives +3% attack speed and +2% damage for 3 s (stacks 10).",
+    "text": "휘두르기 계열이 적중한 적마다 3초 동안 공격 속도 +3%, 피해 +2%(최대 10중첩).",
     "triggers": [
      {
       "on": "hit",
@@ -4087,7 +4087,7 @@
    },
    "power": {
     "family": "millwheel",
-    "text": "While spinning you pull enemies in, and every third turn lets out a Thunderclap.",
+    "text": "도는 동안 적을 끌어당기고, 세 번째 회전마다 천둥박수를 내뿜는다.",
     "skillMods": [
      {
       "group": "spin",
@@ -4164,7 +4164,7 @@
    ],
    "power": {
     "family": "quietshot",
-    "text": "Quarrels pass through two more enemies, and for 3 s after a Dodge Roll you deal +60% damage.",
+    "text": "쿼럴이 적 두 명을 더 관통하고, 회피 구르기 후 3초 동안 피해 +60%.",
     "skillMods": [
      {
       "skill": "quarrel",
@@ -4229,7 +4229,7 @@
    },
    "power": {
     "family": "quietshot",
-    "text": "For 2 s after a Dodge Roll, every Quarrel looses two more bolts in a fan beside it.",
+    "text": "회피 구르기 후 2초 동안, 모든 쿼럴이 옆으로 부채꼴의 볼트 두 발을 더 쏜다.",
     "triggers": [
      {
       "on": "use",
@@ -4299,7 +4299,7 @@
    },
    "power": {
     "family": "quietshot",
-    "text": "Quarrels fly 40% further and hit 25% harder, and every shot throws what it strikes three times as far back.",
+    "text": "쿼럴이 40% 더 멀리 날아가 25% 더 강하게 적중하고, 매 사격이 맞은 것을 세 배 더 멀리 날려 보낸다.",
     "skillMods": [
      {
       "skill": "quarrel",
@@ -4371,7 +4371,7 @@
    },
    "power": {
     "family": "groundbreaker",
-    "text": "Every third enemy Cleave strikes is hit by a Thunderclap, and each strike gives +5 Armour for 4 s (stacks 10).",
+    "text": "휘두르기가 적중하는 세 번째 적마다 천둥박수가 떨어지고, 적중할 때마다 4초 동안 방어구 +5(최대 10중첩).",
     "triggers": [
      {
       "on": "hit",
@@ -4441,7 +4441,7 @@
    },
    "power": {
     "family": "groundbreaker",
-    "text": "Every fourth blow that lands on you answers with a Thunderclap around you, and Thunderclap reaches 20% wider.",
+    "text": "당신에게 떨어지는 네 번째 타격마다 주위에 천둥박수로 응수하고, 천둥박수의 범위가 20% 넓어진다.",
     "skillMods": [
      {
       "skill": "thunderclap",
@@ -4502,7 +4502,7 @@
    },
    "power": {
     "family": "groundbreaker",
-    "text": "Letting go of a Heaving Cleave also slams a Thunderclap around you, and each enemy a Thunderclap strikes gives +4 Armour for 5 s (stacks 15).",
+    "text": "들어 올려 베기를 놓을 때도 주위에 천둥박수를 내리꽂고, 천둥박수가 적중한 적마다 5초 동안 방어구 +4(최대 15중첩).",
     "triggers": [
      {
       "on": "use",
@@ -4575,7 +4575,7 @@
    },
    "power": {
     "family": "rainmaker",
-    "text": "Every Squall you call also breaks over you, and area skills last 20% longer.",
+    "text": "부르는 소나기 폭풍마다 당신 위에도 쏟아지고, 범위 스킬이 20% 더 오래 지속된다.",
     "skillMods": [
      {
       "group": "spread",
@@ -4642,7 +4642,7 @@
    },
    "power": {
     "family": "mist_treader",
-    "text": "Every roll leaves an Undertow where you land, at most once a second, and your roll comes back 15% sooner.",
+    "text": "구르기마다 착지한 자리에 밑물살을 남기고(초당 최대 한 번), 구르기가 15% 더 빨리 돌아온다.",
     "skillMods": [
      {
       "group": "roll",
@@ -4670,7 +4670,7 @@
  "affixes": [
   {
    "id": "honed",
-   "label": "Honed",
+   "label": "연마된",
    "slots": [
     "weapon",
     "hands",
@@ -4684,7 +4684,7 @@
   },
   {
    "id": "quick",
-   "label": "Quick",
+   "label": "날쌘",
    "slots": [
     "weapon",
     "hands",
@@ -4698,7 +4698,7 @@
   },
   {
    "id": "keen",
-   "label": "Keen",
+   "label": "예리한",
    "slots": [
     "weapon",
     "head",
@@ -4712,7 +4712,7 @@
   },
   {
    "id": "hale",
-   "label": "Hale",
+   "label": "튼튼한",
    "slots": [
     "head",
     "chest",
@@ -4729,7 +4729,7 @@
   },
   {
    "id": "plated",
-   "label": "Plated",
+   "label": "판금의",
    "slots": [
     "head",
     "chest",
@@ -4745,7 +4745,7 @@
   },
   {
    "id": "grounded",
-   "label": "Grounded",
+   "label": "폭풍막이",
    "slots": [
     "head",
     "chest",
@@ -4762,7 +4762,7 @@
   },
   {
    "id": "hearthwarm",
-   "label": "Hearthwarm",
+   "label": "화롯불의",
    "slots": [
     "head",
     "chest",
@@ -4779,7 +4779,7 @@
   },
   {
    "id": "fleet",
-   "label": "Fleet",
+   "label": "바람 같은",
    "slots": [
     "legs",
     "feet"
@@ -4792,7 +4792,7 @@
   },
   {
    "id": "brimming",
-   "label": "Brimming",
+   "label": "넘치는",
    "slots": [
     "weapon",
     "head",
@@ -4807,7 +4807,7 @@
   },
   {
    "id": "mending",
-   "label": "Mending",
+   "label": "아무는",
    "slots": [
     "head",
     "chest",
@@ -4822,7 +4822,7 @@
   },
   {
    "id": "clear",
-   "label": "Clear",
+   "label": "맑은",
    "slots": [
     "weapon",
     "head",
@@ -4837,7 +4837,7 @@
   },
   {
    "id": "cruel",
-   "label": "Cruel",
+   "label": "잔인한",
    "slots": [
     "weapon",
     "hands",
@@ -4851,7 +4851,7 @@
   },
   {
    "id": "sturdy",
-   "label": "Sturdy",
+   "label": "견고한",
    "slots": [
     "chest",
     "hands",
@@ -4866,7 +4866,7 @@
   },
   {
    "id": "jagged",
-   "label": "Jagged",
+   "label": "톱니의",
    "slots": [
     "weapon"
    ],
@@ -4878,7 +4878,7 @@
   },
   {
    "id": "vital",
-   "label": "Vital",
+   "label": "생명의",
    "slots": [
     "chest",
     "legs",

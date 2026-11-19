@@ -10,7 +10,7 @@ export const LADDER = {
   mainBinding: 'mouse_left',
 } as const;
 
-export const DAMAGE_EXPLAINED: string = 'Damage per second of your main attack against an unarmoured target';
+export const DAMAGE_EXPLAINED: string = '방어구가 없는 대상에 대한 주 공격의 초당 피해';
 
 export const DAMAGE_NAME: string = 'Damage per second';
 

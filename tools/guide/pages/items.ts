@@ -10,30 +10,30 @@ import { whereLikely } from './build-page.ts';
 import type { PageBody } from '../layout.ts';
 
 const STAT_MEANINGS: Readonly<Record<StatId, string>> = {
-  maxLife: 'How much you can take before you fall.',
-  maxMana: 'How much you can spend on skills before you wait.',
-  lifeRegen: 'Life that comes back every second, in a fight or out of it.',
-  manaRegen: 'Mana that comes back every second.',
-  damageMin: 'The low end of the damage range. Adds to every hit of every skill.',
-  damageMax: 'The high end of the damage range. Adds to every hit of every skill.',
-  damagePercent: 'A bonus on all your damage, from every skill.',
-  attackSpeed: 'How quickly you swing and shoot. Spells do not cast faster for it.',
-  critChance: 'The chance that a hit is a critical strike.',
-  critMultiplier: 'How much harder a critical strike lands.',
-  moveSpeed: 'How fast you walk.',
-  armour: 'Takes a share off every hit you take.',
-  goldFind: 'More gold from every pile.',
-  stormResist: 'Takes a share off storm hits, after armour.',
-  frostResist: 'Takes a share off frost hits, after armour.',
+  maxLife: '쓰러지기 전까지 버틸 수 있는 양.',
+  maxMana: '기다리기 전까지 스킬에 쓸 수 있는 양.',
+  lifeRegen: '싸우는 중이든 아니든 매초 돌아오는 생명력.',
+  manaRegen: '매초 돌아오는 마나.',
+  damageMin: '피해 범위의 낮은 쪽. 모든 스킬의 모든 적중에 더해진다.',
+  damageMax: '피해 범위의 높은 쪽. 모든 스킬의 모든 적중에 더해진다.',
+  damagePercent: '모든 스킬의 모든 피해에 적용되는 보너스.',
+  attackSpeed: '휘두르고 쏘는 속도. 주문은 이것으로 더 빨리 시전되지 않는다.',
+  critChance: '적중이 치명타가 될 확률.',
+  critMultiplier: '치명타가 얼마나 더 세게 떨어지는지.',
+  moveSpeed: '걷는 속도.',
+  armour: '받는 모든 적중에서 일정 비율을 깎는다.',
+  goldFind: '모든 더미에서 더 많은 골드.',
+  stormResist: '방어구 다음에 폭풍 적중에서 비율을 깎는다.',
+  frostResist: '방어구 다음에 냉기 적중에서 비율을 깎는다.',
 };
 
 function capNote(data: GuideData, stat: StatId): string {
-  if (stat === 'armour') return `Up to ${percent(data.content.player.resistance.armourCap)} off; ${ARMOUR_HALF_POINT} armour is ${percent(armourReduction(ARMOUR_HALF_POINT, data.content.player.resistance.armourCap))}`;
-  if (stat === 'stormResist' || stat === 'frostResist') return `Stops at ${percent(data.content.player.resistance.cap)}`;
+  if (stat === 'armour') return `최대 ${percent(data.content.player.resistance.armourCap)}까지 감소; 방어구 ${ARMOUR_HALF_POINT}가 ${percent(armourReduction(ARMOUR_HALF_POINT, data.content.player.resistance.armourCap))}`;
+  if (stat === 'stormResist' || stat === 'frostResist') return `${percent(data.content.player.resistance.cap)}에서 멈춤`;
   const cap: number | null = statCap(data, stat);
   if (cap === null) return '';
-  if (stat === 'moveSpeed') return 'Has a top speed';
-  return `Stops at ${capPercent(data, stat)}`;
+  if (stat === 'moveSpeed') return '최고 속도가 있음';
+  return `${capPercent(data, stat)}에서 멈춤`;
 }
 
 function rarityRows(data: GuideData): string[][] {
@@ -41,7 +41,7 @@ function rarityRows(data: GuideData): string[][] {
   return data.content.rarities.map((rarity: RarityDef): string[] => [
     `<span style="color: ${esc(rarity.color)}">${esc(rarity.name)}</span>`,
     percent(rarity.weight / total),
-    rarity.affixMax === 0 ? 'None' : rarity.affixMin === rarity.affixMax ? String(rarity.affixMin) : `${rarity.affixMin} to ${rarity.affixMax}`,
+    rarity.affixMax === 0 ? '없음' : rarity.affixMin === rarity.affixMax ? String(rarity.affixMin) : `${rarity.affixMin}~${rarity.affixMax}`,
   ]);
 }
 
@@ -57,7 +57,7 @@ function legendaryRows(data: GuideData): string[][] {
 
 function favouredWeapons(data: GuideData, lean: DropLean): string {
   const groups: string[] = leanWeapons(data.content, lean).map((group: WeaponGroup): string => group.needs);
-  const slots: string[] = lean.slots.map((slot: ItemSlot): string => `${SLOT_NAMES[slot]} pieces`);
+  const slots: string[] = lean.slots.map((slot: ItemSlot): string => `${SLOT_NAMES[slot]} 부위`);
   return esc(list([...groups, ...slots]));
 }
 
@@ -69,7 +69,7 @@ function levelsOf(data: GuideData, lean: DropLean): string {
   const levels: number[] = leanZones(data.content, lean).map((zone: ZoneDef): number => zone.level);
   const low: number = Math.min(...levels);
   const high: number = Math.max(...levels);
-  return low === high ? String(low) : `${low} to ${high}`;
+  return low === high ? String(low) : `${low}~${high}`;
 }
 
 function leanRows(data: GuideData): string[][] {
@@ -78,7 +78,7 @@ function leanRows(data: GuideData): string[][] {
     levelsOf(data, lean),
     lean.share > 1 ? favouredWeapons(data, lean) : '',
     lean.share > 1 ? favouredFamilies(data, lean) : '',
-    lean.legendary > 1 ? `×${decimal(lean.legendary, 0)} legendaries` : '',
+    lean.legendary > 1 ? `전설 ×${decimal(lean.legendary, 0)}` : '',
   ]);
 }
 
@@ -87,20 +87,20 @@ function bossLine(data: GuideData): string {
   if (court === undefined) return '';
   const floorId: string | undefined = [...data.content.monsters.values()].find((monster: MonsterDef): boolean => monster.boss !== null)?.boss?.drop.floor;
   const floor: RarityDef | undefined = data.content.rarities.find((rarity: RarityDef): boolean => rarity.id === floorId);
-  const floorName: string = floor?.name.toLowerCase() ?? 'rare';
-  return `In ${esc(court.name)} every legendary is ${decimal(court.legendary, 0)} times as likely as anywhere else. A boss always drops ${esc(floorName)} items or better, and there ${percent(legendaryShare(data.content, court, floor?.id ?? null))} of them are legendary, against ${percent(legendaryShare(data.content, null, floor?.id ?? null))} elsewhere.`;
+  const floorName: string = floor?.name ?? '희귀';
+  return `${esc(court.name)}에서는 모든 전설 아이템이 다른 곳보다 ${decimal(court.legendary, 0)}배 잘 나온다. 우두머리는 항상 ${esc(floorName)} 등급 이상의 아이템을 떨어뜨리고, 그중 전설 비율은 ${percent(legendaryShare(data.content, court, floor?.id ?? null))}로 다른 곳의 ${percent(legendaryShare(data.content, null, floor?.id ?? null))}와 비교된다.`;
 }
 
 function shareWord(data: GuideData): string {
   const shares: number[] = [...new Set(data.content.leans.filter((lean: DropLean): boolean => lean.share > 1).map((lean: DropLean): number => lean.share))];
-  return shares.length === 1 ? `${decimal(shares[0] ?? 1, 1)} times` : 'several times';
+  return shares.length === 1 ? `${decimal(shares[0] ?? 1, 1)}배` : '몇 배';
 }
 
 function affixRows(data: GuideData): string[][] {
   return [...data.content.affixes.values()].map((affix: AffixDef): string[] => [
     esc(affix.label),
-    esc(affix.op === 'percent' ? `more ${statLabel(affix.stat)}` : statLabel(affix.stat)),
-    `+${statAmount(affix.stat, affix.op, affix.min)} to ${statAmount(affix.stat, affix.op, affix.max)}`,
+    esc(statLabel(affix.stat)),
+    `+${statAmount(affix.stat, affix.op, affix.min)}~${statAmount(affix.stat, affix.op, affix.max)}`,
     esc(list(affix.slots.map((slot: ItemSlot): string => SLOT_NAMES[slot]))),
   ]);
 }
@@ -121,7 +121,7 @@ function weaponRows(data: GuideData): string[][] {
       const high: number = base.implicit.find((mod): boolean => mod.stat === 'damageMax')?.value ?? 0;
       const speed: number = base.implicit.find((mod): boolean => mod.stat === 'attackSpeed')?.value ?? 0;
       const changes: string = base.variants.map((variant): string => data.content.skills.get(variant.becomes)?.name ?? '').filter((name: string): boolean => name.length > 0).join(', ');
-      return [esc(base.name), String(base.minLevel), `${low} to ${high}`, speed === 0 ? '' : `${speed > 0 ? '+' : '−'}${percent(Math.abs(speed))}`, changes.length === 0 ? '' : `Cleave becomes ${esc(changes)}`];
+      return [esc(base.name), String(base.minLevel), `${low} to ${high}`, speed === 0 ? '' : `${speed > 0 ? '+' : '−'}${percent(Math.abs(speed))}`, changes.length === 0 ? '' : `휘두르기가 ${esc(changes)}(으)로`];
     });
 }
 
@@ -135,71 +135,71 @@ export function itemsPage(data: GuideData): PageBody {
   const growth: string = percent(data.content.itemScaling.implicitPerLevel);
   const quarrel: SkillDef | undefined = data.content.skills.get('quarrel');
   return {
-    kicker: 'Guide',
-    title: 'Items',
-    lede: 'What you can wear, how rare things are, and what every line on an item does for you.',
-    description: 'Items in The Lost Storm: slots, rarities and drop odds, every affix and weapon, the legendaries by family, where each kind drops most, and what each stat does.',
+    kicker: '안내서',
+    title: '아이템',
+    lede: '무엇을 입을 수 있는지, 얼마나 드문지, 그리고 아이템의 각 옵션이 무엇을 해주는지.',
+    description: '폭풍의 잔향의 아이템: 슬롯, 등급과 드롭 확률, 모든 부여 옵션과 무기, 가문별 전설 아이템, 각 종류가 잘 나오는 곳, 각 능력치의 역할.',
     body: [
       section(
         'slots',
-        'What you wear',
+        '착용 슬롯',
         para(
-          `You have ${ITEM_SLOTS.length} slots: ${esc(list(ITEM_SLOTS.map((slot: ItemSlot): string => SLOT_NAMES[slot])))}. Your weapon sets your damage range, and every skill you use starts from it, so it is the slot that matters most. Everything else adds life, armour, speed and the rest.`,
-          `Every item has a level, about the level you were when it dropped. Its own lines (the ones every item of that kind has) grow by ${growth} for every level above the first, and so do its rolled lines. A drawback, such as the slower swing of a heavy weapon or the slower step of plate, stays the same at every level. A level 15 sword is a much better sword than a level 2 one.`,
+          `슬롯은 ${ITEM_SLOTS.length}개: ${esc(list(ITEM_SLOTS.map((slot: ItemSlot): string => SLOT_NAMES[slot])))}. 무기가 피해 범위를 정하고 쓰는 모든 스킬이 거기서 출발하므로 가장 중요한 슬롯이다. 나머지는 생명력, 방어구, 속도 등을 더한다.`,
+          `모든 아이템에는 레벨이 있고, 대략 떨어졌을 때의 당신의 레벨이다. 고유 옵션(그 종류의 모든 아이템이 가진 것)은 첫 레벨 이후 레벨마다 ${growth}씩 커지고, 부여 옵션도 마찬가지다. 중량 무기의 느린 휘두르기나 판금의 느린 걸음 같은 단점은 레벨과 관계없이 같다. 15레벨 검은 2레벨 검보다 훨씬 좋은 검이다.`,
         ),
       ),
       section(
         'weapons',
-        'Weapons',
+        '무기',
         [
-          para(`The heavier weapons swing slower and hit harder. ${quarrel === undefined ? '' : `A crossbow turns Cleave into ${esc(quarrel.name)}, a shot.`} The damage below is for a level 1 item; it grows with the item's level.`),
-          table({ head: ['Weapon', 'From level', 'Damage', 'Attack speed', 'Changes'], rows: weaponRows(data), className: 'wide' }),
+          para(`무거운 무기일수록 느리게 휘두르고 더 세게 때린다. ${quarrel === undefined ? '' : `쇠뇌는 휘두르기를 사격인 ${esc(quarrel.name)}(으)로 바꾼다.`} 아래 피해는 1레벨 아이템 기준이며, 아이템 레벨에 따라 커진다.`),
+          table({ head: ['무기', '등장 레벨', '피해', '공격 속도', '변경'], rows: weaponRows(data), className: 'wide' }),
         ].join('\n'),
       ),
       section(
         'rarity',
-        'Rarity',
+        '등급',
         [
-          para('Most of what drops is common. Magic and rare items carry extra rolled lines on top of what every item of their kind has. Magic and rare packs drop more, and a rare leader always drops something at least magic.'),
-          table({ head: ['Rarity', 'Share of drops', 'Rolled lines'], rows: rarityRows(data) }),
+          para('떨어지는 것의 대부분은 일반 등급이다. 마법·희귀 아이템은 그 종류가 공통으로 가진 것 위에 추가 부여 옵션을 얹는다. 마법·희귀 무리는 더 많이 떨어뜨리고, 희귀 우두머리는 항상 최소 마법 등급 이상을 떨어뜨린다.'),
+          table({ head: ['등급', '드롭 비율', '부여 옵션 수'], rows: rarityRows(data) }),
         ].join('\n'),
       ),
       section(
         'legendary',
-        'Legendaries',
+        '전설 아이템',
         [
           para(
-            `A ${esc(legendary?.name.toLowerCase() ?? 'legendary')} item is one of a handful of named pieces, each with a power no other item has. You can wear ${legendary?.wornLimit ?? 0} at once at most. They come in ${families.length} families, ${esc(list(families.map((family: FamilyDef): string => family.name)))}, whose powers work together.`,
+            `${esc(legendary?.name ?? '전설')} 아이템은 각각 다른 아이템에 없는 고유한 힘을 가진 몇 안 되는 이름 있는 장비다. 최대 ${legendary?.wornLimit ?? 0}개까지 동시에 착용할 수 있다. 힘이 서로 맞물리는 ${families.length}개 가문, ${esc(list(families.map((family: FamilyDef): string => family.name)))}으로 나뉜다.`,
           ),
-          table({ head: ['Family', 'Item', 'Slot', 'Power', 'Most likely in'], rows: legendaryRows(data), className: 'wide' }),
-          para(`Each ${link('/guide/builds/', 'build page')} lists the legendaries made for it, what each changes, and which to chase first.`),
+          table({ head: ['가문', '아이템', '슬롯', '고유 힘', '잘 나오는 곳'], rows: legendaryRows(data), className: 'wide' }),
+          para(`각 ${link('/guide/builds/', '빌드 페이지')}에 그 빌드를 위한 전설 아이템, 각각이 바꾸는 것, 먼저 노릴 것이 정리되어 있다.`),
         ].join('\n'),
       ),
       section(
         'where',
-        'Where things drop',
+        '드롭 지역',
         [
           para(
-            `Every area drops every item. Some areas lean toward certain kinds: there, each favoured kind of weapon drops about ${shareWord(data)} as often as it does elsewhere, measured against the other kinds, and a legendary from a favoured family gets the same lift. No area drops more items for it, and none drops rarer ones, except where the table says so.`,
+            `모든 지역에서 모든 아이템이 나온다. 어떤 지역은 특정 종류를 더 선호한다: 그곳에서는 선호 무기 종류가 다른 종류와 비교해 약 ${shareWord(data)} 더 자주 나오고, 선호 가문의 전설 아이템도 같은 혜택을 받는다. 그렇다고 아이템이 더 많이 나오거나 더 높은 등급이 나오는 지역은 없다. 표에 적힌 경우만 예외다.`,
             bossLine(data),
           ),
-          table({ head: ['Area', 'Monster levels', 'Favours', 'Legendaries favoured', 'Rarer drops'], rows: leanRows(data), className: 'wide' }),
+          table({ head: ['지역', '몬스터 레벨', '선호 무기', '선호 전설', '높은 등급'], rows: leanRows(data), className: 'wide' }),
         ].join('\n'),
       ),
       section(
         'affixes',
-        'Rolled lines',
+        '부여 옵션',
         [
-          para('These are the lines a magic, rare or legendary item can roll. The range is for a level 1 item; higher-level items roll higher. No item rolls the same stat twice.'),
-          table({ head: ['Line', 'Gives', 'Range at level 1', 'Can appear on'], rows: affixRows(data), className: 'wide' }),
+          para('마법·희귀·전설 아이템에 붙을 수 있는 옵션들이다. 범위는 1레벨 아이템 기준이고, 높은 레벨 아이템은 더 높게 붙는다. 같은 능력치가 두 번 붙는 아이템은 없다.'),
+          table({ head: ['옵션', '효과', '1레벨 범위', '붙는 부위'], rows: affixRows(data), className: 'wide' }),
         ].join('\n'),
       ),
       section(
         'stats',
-        'What each stat does',
+        '각 능력치의 역할',
         [
-          table({ head: ['Stat', 'What it does', 'Limit'], rows: statsInPlay(data).map((stat: StatId): string[] => [esc(statLabel(stat)), esc(STAT_MEANINGS[stat]), esc(capNote(data, stat))]) }),
-          para(`How damage, armour and resistances work together is on the ${link('/guide/combat/', 'combat')} page.`),
+          table({ head: ['능력치', '역할', '한계'], rows: statsInPlay(data).map((stat: StatId): string[] => [esc(statLabel(stat)), esc(STAT_MEANINGS[stat]), esc(capNote(data, stat))]) }),
+          para(`피해, 방어구, 저항이 어떻게 함께 작동하는지는 ${link('/guide/combat/', '전투')} 페이지에 있다.`),
         ].join('\n'),
       ),
     ].join('\n'),

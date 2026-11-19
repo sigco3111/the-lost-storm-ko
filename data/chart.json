@@ -1,403 +1,403 @@
 {
- "title": "The Skill Tree",
- "pointsPerLevel": 2,
- "revision": 8,
- "twist": 0.08,
- "respec": {
-  "goldPerPoint": 10,
-  "goldPerLevel": 3
- },
- "paths": [
-  {
-   "id": "storm",
-   "name": "모여드는 폭풍",
-   "tint": "#86c8f0",
-   "description": "더 멀리 닿고, 더 넓게 갈라지고, 더 세게 내리치는 번개."
+  "title": "스킬 트리",
+  "pointsPerLevel": 2,
+  "revision": 8,
+  "twist": 0.08,
+  "respec": {
+    "goldPerPoint": 10,
+    "goldPerLevel": 3
   },
-  {
-   "id": "blade",
-   "name": "도는 물때",
-   "tint": "#7ab6d4",
-   "description": "멈추지 않고 도는 칼날. 적들 사이를 돌며, 밑으로 끌어당기고, 싸움을 마신다."
-  },
-  {
-   "id": "wind",
-   "name": "긴 그림자",
-   "tint": "#8a6fd1",
-   "description": "어둠을 가로질러 걷고 그 속에서 쏜다. 장막, 암영, 그리고 먼 사격."
-  },
-  {
-   "id": "stone",
-   "name": "덮어둔 불",
-   "tint": "#e0773a",
-   "description": "자리를 지키고 적들을 불 안에 두라. 불태우는 무거운 일격, 주변에 덮어둔 불, 그리고 그 안에 설 생명력."
-  },
-  {
-   "id": "echo",
-   "name": "메아리",
-   "tint": "#bdb2f2",
-   "description": "한 번 일어난 일은 다시 일어난다. 메아리, 붙잡힌 순간, 그리고 긴 폭풍."
-  }
- ],
- "common": {
-  "name": "일반",
-  "tint": "#c9ccd1",
-  "places": [
-   {
-    "id": "hardy",
-    "name": "단단함",
-    "description": "최대 생명력 +10.",
-    "icon": "common_life",
-    "statMods": [
-     {
-      "stat": "maxLife",
-      "op": "add",
-      "value": 10
-     }
-    ]
-   },
-   {
-    "id": "clear_head",
-    "name": "맑은 머리",
-    "description": "최대 마나 +8.",
-    "icon": "common_mana",
-    "statMods": [
-     {
-      "stat": "maxMana",
-      "op": "add",
-      "value": 8
-     }
-    ]
-   },
-   {
-    "id": "even_keel",
-    "name": "평형",
-    "description": "최대 생명력 +6, 최대 마나 +5.",
-    "icon": "common_both",
-    "statMods": [
-     {
-      "stat": "maxLife",
-      "op": "add",
-      "value": 6
-     },
-     {
-      "stat": "maxMana",
-      "op": "add",
-      "value": 5
-     }
-    ]
-   },
-   {
-    "id": "weathered",
-    "name": "풍파를 겪은",
-    "description": "방어력 +12.",
-    "icon": "common_armour",
-    "statMods": [
-     {
-      "stat": "armour",
-      "op": "add",
-      "value": 12
-     }
-    ]
-   },
-   {
-    "id": "sheltered",
-    "name": "피난처",
-    "description": "폭풍 저항 +6%, 냉기 저항 +6%.",
-    "icon": "common_shelter",
-    "statMods": [
-     {
-      "stat": "stormResist",
-      "op": "add",
-      "value": 0.06
-     },
-     {
-      "stat": "frostResist",
-      "op": "add",
-      "value": 0.06
-     }
-    ]
-   },
-   {
-    "id": "light_step",
-    "name": "가벼운 걸음",
-    "description": "이동 속도 +3%.",
-    "icon": "common_step",
-    "statMods": [
-     {
-      "stat": "moveSpeed",
-      "op": "percent",
-      "value": 0.03
-     }
-    ]
-   }
-  ]
- },
- "specialties": [
-  {
-   "id": "hearth",
-   "name": "난로",
-   "path": "stone",
-   "description": "불 속에 서서 견뎌내라. 생명력, 방어력, 그리고 일격마다 되받아 타오르는 난로."
-  },
-  {
-   "id": "kiln",
-   "name": "가마",
-   "path": "stone",
-   "description": "그대가 치는 모든 것이 계속 타오른다. 더 세게 내리꽂히는 불, 그리고 적들의 발밑에 남는 불타는 땅."
-  },
-  {
-   "id": "rockfall",
-   "name": "낙석",
-   "path": "stone",
-   "description": "산비탈을 무너뜨리는 무거운 일격. 더 느리지만 더 세게 치고, 멀리 날려 버리는 휘두르기."
-  },
-  {
-   "id": "maelstrom",
-   "name": "대소용돌이",
-   "path": "blade",
-   "description": "방 전체를 끌어들이는 회전. 물레방아가 적들을 끌어당기고, 넓어지며, 곁에 붙잡아 둔다."
-  },
-  {
-   "id": "spring_tide",
-   "name": "사리",
-   "path": "blade",
-   "description": "싸움을 마셔라. 일격마다 돌려받고, 약병은 마르지 않는다."
-  },
-  {
-   "id": "tidal_bore",
-   "name": "밀물 급류",
-   "path": "blade",
-   "description": "물결을 타고 들어가라. 구를 때마다 앞으로 물이 솟고, 물살이 멀리 빠르게 달린다."
-  },
-  {
-   "id": "squall_line",
-   "name": "소나기 선",
-   "path": "storm",
-   "description": "그대와 함께 걷는 폭풍. 곁에 머물고, 따라오고, 치유하는 폭풍."
-  },
-  {
-   "id": "forked_sky",
-   "name": "갈라진 하늘",
-   "path": "storm",
-   "description": "하나에 멈추지 않는 번개. 더 많은 연쇄, 더 많은 발사체, 처치할 때마다 다시 갈라진다."
-  },
-  {
-   "id": "static_front",
-   "name": "정전기 전선",
-   "path": "storm",
-   "description": "터지기 전 공기 속의 전하. 깊은 마나, 무거운 낙인, 그리고 맞을 때 응답하는 번개."
-  },
-  {
-   "id": "hailfall",
-   "name": "우박 폭풍",
-   "path": "wind",
-   "description": "무리 위로 쏟아지는 연발. 더 많은 볼트, 더 넓은 부채, 그리고 튀어 이어지는 사격."
-  },
-  {
-   "id": "penumbra",
-   "name": "반그림자",
-   "path": "wind",
-   "description": "어둠을 데리고 다녀라. 자라고, 지속되고, 처치할 때마다 다시 일어나는 암영."
-  },
-  {
-   "id": "far_dark",
-   "name": "먼 어둠",
-   "path": "wind",
-   "description": "깊은 은폐에서의 먼 사격. 모든 것을 꿰뚫는 볼트, 그리고 구를 때마다의 장막."
-  }
- ],
- "groups": [
-  {
-   "id": "lightning",
-   "name": "번개 스킬",
-   "skills": [
-    "storm_bolt",
-    "forkline",
-    "squall",
-    "static_brand",
-    "thunderhead",
-    "standing_storm"
-   ]
-  },
-  {
-   "id": "weapon",
-   "name": "무기 스킬",
-   "skills": [
-    "cleave",
-    "thunderhead",
-    "thunderclap"
-   ]
-  },
-  {
-   "id": "motion",
-   "name": "이동 스킬",
-   "skills": [
-    "dodge_roll",
-    "mist_step",
-    "downdraught"
-   ]
-  },
-  {
-   "id": "spread",
-   "name": "범위 스킬",
-   "skills": [
-    "thunderclap",
-    "squall",
-    "downdraught",
-    "forkline",
-    "umbra",
-    "millrace",
-    "banked_fire"
-   ]
-  },
-  {
-   "id": "missile",
-   "name": "번개류 스킬",
-   "skills": [
-    "storm_bolt",
-    "static_brand",
-    "forkline",
-    "quarrel"
-   ]
-  },
-  {
-   "id": "roll",
-   "name": "구르기",
-   "skills": [
-    "dodge_roll",
-    "dodge_roll_slip",
-    "dodge_roll_riptide",
-    "dodge_roll_shoulder"
-   ]
-  },
-  {
-   "id": "spin",
-   "name": "회전 스킬",
-   "skills": [
-    "cleave_whirl",
-    "cleave_millwheel"
-   ]
-  },
-  {
-   "id": "fire",
-   "name": "화염 스킬",
-   "skills": [
-    "thunderclap",
-    "fire_burst",
-    "banked_fire"
-   ]
-  },
-  {
-   "id": "shot",
-   "name": "쇠뇌 사격",
-   "skills": [
-    "quarrel",
-    "quarrel_fan",
-    "quarrel_heave",
-    "ghost_wave"
-   ]
-  },
-  {
-   "id": "main",
-   "name": "기본 공격",
-   "skills": [
-    "cleave",
-    "cleave_whirl",
-    "cleave_millwheel",
-    "cleave_heave",
-    "quarrel",
-    "quarrel_fan",
-    "quarrel_heave",
-    "storm_bolt",
-    "storm_bolt_echo",
-    "storm_bolt_lance",
-    "spell_strike"
-   ]
-  }
- ],
- "weaponGroups": [
-  {
-   "id": "blade",
-   "name": "검",
-   "kinds": [
-    "blade",
-    "axe"
-   ],
-   "starter": "warden_shortsword",
-   "needs": "a blade",
-   "icon": "sword",
-   "holds": "swords, sabres, knives, dirks and axes",
-   "path": "blade"
-  },
-  {
-   "id": "heavy",
-   "name": "중량 무기",
-   "kinds": [
-    "greatsword",
-    "blunt"
-   ],
-   "starter": "tempest_greatsword",
-   "needs": "a heavy weapon",
-   "icon": "greatsword",
-   "holds": "greatswords, maces and mauls",
-   "path": "stone"
-  },
-  {
-   "id": "crossbow",
-   "name": "쇠뇌",
-   "kinds": [
-    "crossbow"
-   ],
-   "starter": "hand_crossbow",
-   "needs": "a crossbow",
-   "icon": "crossbow",
-   "holds": "crossbows, arbalests and repeaters",
-   "path": "wind"
-  },
-  {
-   "id": "staff",
-   "name": "지팡이",
-   "kinds": [
-    "staff"
-   ],
-   "starter": "driftwood_staff",
-   "needs": "a staff",
-   "icon": "staff",
-   "holds": "staves and rods",
-   "path": "storm"
-  }
- ],
- "grants": [
-  {
-   "id": "first_moment",
-   "when": [
+  "paths": [
     {
-     "type": "flag",
-     "flag": "first_moment",
-     "is": "cleared"
-    }
-   ],
-   "points": 1
-  },
-  {
-   "id": "fire_lesson",
-   "when": [
+      "id": "storm",
+      "name": "모여드는 폭풍",
+      "tint": "#86c8f0",
+      "description": "더 멀리 닿고, 더 넓게 갈라지고, 더 세게 내리치는 번개."
+    },
     {
-     "type": "flag",
-     "flag": "fire_lesson",
-     "is": "given"
+      "id": "blade",
+      "name": "도는 물때",
+      "tint": "#7ab6d4",
+      "description": "멈추지 않고 도는 칼날. 적들 사이를 돌며, 밑으로 끌어당기고, 싸움을 마신다."
+    },
+    {
+      "id": "wind",
+      "name": "긴 그림자",
+      "tint": "#8a6fd1",
+      "description": "어둠을 가로질러 걷고 그 속에서 쏜다. 장막, 암영, 그리고 먼 사격."
+    },
+    {
+      "id": "stone",
+      "name": "덮어둔 불",
+      "tint": "#e0773a",
+      "description": "자리를 지키고 적들을 불 안에 두라. 불태우는 무거운 일격, 주변에 덮어둔 불, 그리고 그 안에 설 생명력."
+    },
+    {
+      "id": "echo",
+      "name": "메아리",
+      "tint": "#bdb2f2",
+      "description": "한 번 일어난 일은 다시 일어난다. 메아리, 붙잡힌 순간, 그리고 긴 폭풍."
     }
-   ],
-   "points": 1
-  }
- ],
- "retired": {
-  "places": {
-   "blade_still_water": "blade_millrace"
+  ],
+  "common": {
+    "name": "일반",
+    "tint": "#c9ccd1",
+    "places": [
+      {
+        "id": "hardy",
+        "name": "단단함",
+        "description": "최대 생명력 +10.",
+        "icon": "common_life",
+        "statMods": [
+          {
+            "stat": "maxLife",
+            "op": "add",
+            "value": 10
+          }
+        ]
+      },
+      {
+        "id": "clear_head",
+        "name": "맑은 머리",
+        "description": "최대 마나 +8.",
+        "icon": "common_mana",
+        "statMods": [
+          {
+            "stat": "maxMana",
+            "op": "add",
+            "value": 8
+          }
+        ]
+      },
+      {
+        "id": "even_keel",
+        "name": "평형",
+        "description": "최대 생명력 +6, 최대 마나 +5.",
+        "icon": "common_both",
+        "statMods": [
+          {
+            "stat": "maxLife",
+            "op": "add",
+            "value": 6
+          },
+          {
+            "stat": "maxMana",
+            "op": "add",
+            "value": 5
+          }
+        ]
+      },
+      {
+        "id": "weathered",
+        "name": "풍파를 겪은",
+        "description": "방어력 +12.",
+        "icon": "common_armour",
+        "statMods": [
+          {
+            "stat": "armour",
+            "op": "add",
+            "value": 12
+          }
+        ]
+      },
+      {
+        "id": "sheltered",
+        "name": "피난처",
+        "description": "폭풍 저항 +6%, 냉기 저항 +6%.",
+        "icon": "common_shelter",
+        "statMods": [
+          {
+            "stat": "stormResist",
+            "op": "add",
+            "value": 0.06
+          },
+          {
+            "stat": "frostResist",
+            "op": "add",
+            "value": 0.06
+          }
+        ]
+      },
+      {
+        "id": "light_step",
+        "name": "가벼운 걸음",
+        "description": "이동 속도 +3%.",
+        "icon": "common_step",
+        "statMods": [
+          {
+            "stat": "moveSpeed",
+            "op": "percent",
+            "value": 0.03
+          }
+        ]
+      }
+    ]
   },
-  "skills": {
-   "still_water": "millrace"
+  "specialties": [
+    {
+      "id": "hearth",
+      "name": "난로",
+      "path": "stone",
+      "description": "불 속에 서서 견뎌내라. 생명력, 방어력, 그리고 일격마다 되받아 타오르는 난로."
+    },
+    {
+      "id": "kiln",
+      "name": "가마",
+      "path": "stone",
+      "description": "그대가 치는 모든 것이 계속 타오른다. 더 세게 내리꽂히는 불, 그리고 적들의 발밑에 남는 불타는 땅."
+    },
+    {
+      "id": "rockfall",
+      "name": "낙석",
+      "path": "stone",
+      "description": "산비탈을 무너뜨리는 무거운 일격. 더 느리지만 더 세게 치고, 멀리 날려 버리는 휘두르기."
+    },
+    {
+      "id": "maelstrom",
+      "name": "대소용돌이",
+      "path": "blade",
+      "description": "방 전체를 끌어들이는 회전. 물레방아가 적들을 끌어당기고, 넓어지며, 곁에 붙잡아 둔다."
+    },
+    {
+      "id": "spring_tide",
+      "name": "사리",
+      "path": "blade",
+      "description": "싸움을 마셔라. 일격마다 돌려받고, 약병은 마르지 않는다."
+    },
+    {
+      "id": "tidal_bore",
+      "name": "밀물 급류",
+      "path": "blade",
+      "description": "물결을 타고 들어가라. 구를 때마다 앞으로 물이 솟고, 물살이 멀리 빠르게 달린다."
+    },
+    {
+      "id": "squall_line",
+      "name": "소나기 선",
+      "path": "storm",
+      "description": "그대와 함께 걷는 폭풍. 곁에 머물고, 따라오고, 치유하는 폭풍."
+    },
+    {
+      "id": "forked_sky",
+      "name": "갈라진 하늘",
+      "path": "storm",
+      "description": "하나에 멈추지 않는 번개. 더 많은 연쇄, 더 많은 발사체, 처치할 때마다 다시 갈라진다."
+    },
+    {
+      "id": "static_front",
+      "name": "정전기 전선",
+      "path": "storm",
+      "description": "터지기 전 공기 속의 전하. 깊은 마나, 무거운 낙인, 그리고 맞을 때 응답하는 번개."
+    },
+    {
+      "id": "hailfall",
+      "name": "우박 폭풍",
+      "path": "wind",
+      "description": "무리 위로 쏟아지는 연발. 더 많은 볼트, 더 넓은 부채, 그리고 튀어 이어지는 사격."
+    },
+    {
+      "id": "penumbra",
+      "name": "반그림자",
+      "path": "wind",
+      "description": "어둠을 데리고 다녀라. 자라고, 지속되고, 처치할 때마다 다시 일어나는 암영."
+    },
+    {
+      "id": "far_dark",
+      "name": "먼 어둠",
+      "path": "wind",
+      "description": "깊은 은폐에서의 먼 사격. 모든 것을 꿰뚫는 볼트, 그리고 구를 때마다의 장막."
+    }
+  ],
+  "groups": [
+    {
+      "id": "lightning",
+      "name": "번개 스킬",
+      "skills": [
+        "storm_bolt",
+        "forkline",
+        "squall",
+        "static_brand",
+        "thunderhead",
+        "standing_storm"
+      ]
+    },
+    {
+      "id": "weapon",
+      "name": "무기 스킬",
+      "skills": [
+        "cleave",
+        "thunderhead",
+        "thunderclap"
+      ]
+    },
+    {
+      "id": "motion",
+      "name": "이동 스킬",
+      "skills": [
+        "dodge_roll",
+        "mist_step",
+        "downdraught"
+      ]
+    },
+    {
+      "id": "spread",
+      "name": "범위 스킬",
+      "skills": [
+        "thunderclap",
+        "squall",
+        "downdraught",
+        "forkline",
+        "umbra",
+        "millrace",
+        "banked_fire"
+      ]
+    },
+    {
+      "id": "missile",
+      "name": "번개류 스킬",
+      "skills": [
+        "storm_bolt",
+        "static_brand",
+        "forkline",
+        "quarrel"
+      ]
+    },
+    {
+      "id": "roll",
+      "name": "구르기",
+      "skills": [
+        "dodge_roll",
+        "dodge_roll_slip",
+        "dodge_roll_riptide",
+        "dodge_roll_shoulder"
+      ]
+    },
+    {
+      "id": "spin",
+      "name": "회전 스킬",
+      "skills": [
+        "cleave_whirl",
+        "cleave_millwheel"
+      ]
+    },
+    {
+      "id": "fire",
+      "name": "화염 스킬",
+      "skills": [
+        "thunderclap",
+        "fire_burst",
+        "banked_fire"
+      ]
+    },
+    {
+      "id": "shot",
+      "name": "쇠뇌 사격",
+      "skills": [
+        "quarrel",
+        "quarrel_fan",
+        "quarrel_heave",
+        "ghost_wave"
+      ]
+    },
+    {
+      "id": "main",
+      "name": "기본 공격",
+      "skills": [
+        "cleave",
+        "cleave_whirl",
+        "cleave_millwheel",
+        "cleave_heave",
+        "quarrel",
+        "quarrel_fan",
+        "quarrel_heave",
+        "storm_bolt",
+        "storm_bolt_echo",
+        "storm_bolt_lance",
+        "spell_strike"
+      ]
+    }
+  ],
+  "weaponGroups": [
+    {
+      "id": "blade",
+      "name": "검",
+      "kinds": [
+        "blade",
+        "axe"
+      ],
+      "starter": "warden_shortsword",
+      "needs": "도검",
+      "icon": "sword",
+      "holds": "검, 세이버, 나이프, 단검, 도끼",
+      "path": "blade"
+    },
+    {
+      "id": "heavy",
+      "name": "중량 무기",
+      "kinds": [
+        "greatsword",
+        "blunt"
+      ],
+      "starter": "tempest_greatsword",
+      "needs": "중량 무기",
+      "icon": "greatsword",
+      "holds": "대검, 철퇴, 대형 망치",
+      "path": "stone"
+    },
+    {
+      "id": "crossbow",
+      "name": "쇠뇌",
+      "kinds": [
+        "crossbow"
+      ],
+      "starter": "hand_crossbow",
+      "needs": "쇠뇌",
+      "icon": "crossbow",
+      "holds": "쇠뇌, 아발레스트, 연발 쇠뇌",
+      "path": "wind"
+    },
+    {
+      "id": "staff",
+      "name": "지팡이",
+      "kinds": [
+        "staff"
+      ],
+      "starter": "driftwood_staff",
+      "needs": "지팡이",
+      "icon": "staff",
+      "holds": "지팡이, 완드",
+      "path": "storm"
+    }
+  ],
+  "grants": [
+    {
+      "id": "first_moment",
+      "when": [
+        {
+          "type": "flag",
+          "flag": "first_moment",
+          "is": "cleared"
+        }
+      ],
+      "points": 1
+    },
+    {
+      "id": "fire_lesson",
+      "when": [
+        {
+          "type": "flag",
+          "flag": "fire_lesson",
+          "is": "given"
+        }
+      ],
+      "points": 1
+    }
+  ],
+  "retired": {
+    "places": {
+      "blade_still_water": "blade_millrace"
+    },
+    "skills": {
+      "still_water": "millrace"
+    }
   }
- }
 }

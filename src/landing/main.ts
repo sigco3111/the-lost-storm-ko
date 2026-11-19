@@ -24,7 +24,7 @@ function row(entry: BoardRow): HTMLLIElement {
   name.textContent = entry.name;
   const level: HTMLSpanElement = document.createElement('span');
   level.className = 'live-level';
-  level.textContent = `Level ${entry.level}`;
+  level.textContent = `레벨 ${entry.level}`;
   item.append(rank, name, level);
   return item;
 }

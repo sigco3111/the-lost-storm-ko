@@ -4,21 +4,21 @@ const RATIO_STATS: ReadonlySet<StatId> = new Set<StatId>(['damagePercent', 'atta
 const DECIMAL_STATS: ReadonlySet<StatId> = new Set<StatId>(['lifeRegen', 'manaRegen']);
 
 const STAT_LABELS: Readonly<Record<StatId, string>> = {
-  maxLife: 'Maximum Life',
-  maxMana: 'Maximum Mana',
-  lifeRegen: 'Life Regenerated per Second',
-  manaRegen: 'Mana Regenerated per Second',
-  damageMin: 'Minimum Damage',
-  damageMax: 'Maximum Damage',
-  damagePercent: 'Damage',
-  attackSpeed: 'Attack Speed',
-  critChance: 'Critical Strike Chance',
-  critMultiplier: 'Critical Strike Damage',
-  moveSpeed: 'Movement Speed',
-  armour: 'Armour',
-  goldFind: 'Gold Found',
-  stormResist: 'Storm Resistance',
-  frostResist: 'Frost Resistance',
+  maxLife: '최대 생명력',
+  maxMana: '최대 마나',
+  lifeRegen: '초당 생명력 회복',
+  manaRegen: '초당 마나 회복',
+  damageMin: '최소 피해',
+  damageMax: '최대 피해',
+  damagePercent: '피해',
+  attackSpeed: '공격 속도',
+  critChance: '치명타 확률',
+  critMultiplier: '치명타 피해',
+  moveSpeed: '이동 속도',
+  armour: '방어구',
+  goldFind: '골드 획득',
+  stormResist: '폭풍 저항',
+  frostResist: '냉기 저항',
 };
 
 export function statLabel(stat: StatId): string {

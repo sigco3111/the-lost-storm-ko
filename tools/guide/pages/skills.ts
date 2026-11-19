@@ -24,11 +24,11 @@ export function mergedChanges(changes: readonly SkillChange[]): SkillChange[] {
 }
 
 function cost(entry: SkillDef): string {
-  return entry.manaCost === 0 ? 'None' : `${decimal(entry.manaCost, 1)} mana`;
+  return entry.manaCost === 0 ? '없음' : `마나 ${decimal(entry.manaCost, 1)}`;
 }
 
 function wait(entry: SkillDef): string {
-  return entry.cooldown === 0 ? 'None' : `${decimal(entry.cooldown, 2)} s`;
+  return entry.cooldown === 0 ? '없음' : `${decimal(entry.cooldown, 2)}초`;
 }
 
 export function groupsOf(data: GuideData, skillId: string): ChartGroup[] {
@@ -37,11 +37,11 @@ export function groupsOf(data: GuideData, skillId: string): ChartGroup[] {
 
 export function howToGet(data: GuideData, entry: SkillDef): string {
   const place: SkillTreeNodeDef | null = unlockPlace(data, entry.id);
-  if (place !== null) return `Take ${esc(place.name)} on ${esc(path(data, place.path).name)}`;
+  if (place !== null) return `${esc(path(data, place.path).name)}에서 ${esc(place.name)} 찍기`;
   const book: SkillUnlock | undefined = data.content.player.skillBook.find((own: SkillUnlock): boolean => own.skill === entry.id);
-  if (book !== undefined) return book.when.length === 0 ? 'You start with it' : 'Learned in the Hall of Time';
+  if (book !== undefined) return book.when.length === 0 ? '처음부터 보유' : '시간의 전당에서 습득';
   const weapon: ItemBaseDef | undefined = variantSources(data, entry.id)[0];
-  return weapon === undefined ? 'Not yet in the game' : 'Hold a crossbow';
+  return weapon === undefined ? '아직 게임에 없음' : '쇠뇌를 든다';
 }
 
 function variantSources(data: GuideData, becomes: string): ItemBaseDef[] {
@@ -57,7 +57,7 @@ export function placeChanges(data: GuideData, skillId: string): SkillChange[] {
 export function itemChanges(data: GuideData, skillId: string): SkillChange[] {
   return [...data.content.itemBases.values()].flatMap((base: ItemBaseDef): SkillChange[] => {
     const own: readonly SkillVariant[] = [...base.variants, ...(base.power?.variants ?? [])];
-    return own.filter((variant: SkillVariant): boolean => variant.skill === skillId).map((variant: SkillVariant): SkillChange => ({ source: base.power === null ? base.name : `${base.name}, a legendary`, becomes: skill(data, variant.becomes) }));
+    return own.filter((variant: SkillVariant): boolean => variant.skill === skillId).map((variant: SkillVariant): SkillChange => ({ source: base.power === null ? base.name : `전설 아이템 ${base.name}`, becomes: skill(data, variant.becomes) }));
   });
 }
 
@@ -66,8 +66,8 @@ function strengthenedBy(data: GuideData, skillId: string): SkillTreeNodeDef[] {
 }
 
 function changeLine(change: SkillChange): string {
-  const costs: string = change.becomes.manaCost === 0 && change.becomes.cooldown === 0 ? '' : ` <span class="small">(${[change.becomes.manaCost === 0 ? '' : `${decimal(change.becomes.manaCost, 1)} mana`, change.becomes.cooldown === 0 ? '' : `${decimal(change.becomes.cooldown, 2)} s wait`].filter((part: string): boolean => part.length > 0).join(', ')})</span>`;
-  return `<li><b>${esc(change.becomes.name)}</b>, from ${esc(change.source)}: ${esc(change.becomes.description)}${costs}</li>`;
+  const costs: string = change.becomes.manaCost === 0 && change.becomes.cooldown === 0 ? '' : ` <span class="small">(${[change.becomes.manaCost === 0 ? '' : `마나 ${decimal(change.becomes.manaCost, 1)}`, change.becomes.cooldown === 0 ? '' : `대기 ${decimal(change.becomes.cooldown, 2)}초`].filter((part: string): boolean => part.length > 0).join(', ')})</span>`;
+  return `<li><b>${esc(change.becomes.name)}</b>, ${esc(change.source)}에서: ${esc(change.becomes.description)}${costs}</li>`;
 }
 
 function skillCard(data: GuideData, entry: SkillDef): string {
@@ -75,13 +75,13 @@ function skillCard(data: GuideData, entry: SkillDef): string {
   const changes: SkillChange[] = mergedChanges([...placeChanges(data, entry.id), ...itemChanges(data, entry.id)]);
   const stronger: string[] = strengthenedBy(data, entry.id).map((node: SkillTreeNodeDef): string => node.name);
   const facts: string[] = [
-    `<div><dt>Cost</dt><dd>${cost(entry)}</dd></div>`,
-    `<div><dt>Wait</dt><dd>${wait(entry)}</dd></div>`,
-    `<div><dt>How you get it</dt><dd>${howToGet(data, entry)}</dd></div>`,
-    `<div><dt>Counts as</dt><dd>${groups.length === 0 ? 'Nothing else' : esc(list(groups))}</dd></div>`,
+    `<div><dt>비용</dt><dd>${cost(entry)}</dd></div>`,
+    `<div><dt>대기</dt><dd>${wait(entry)}</dd></div>`,
+    `<div><dt>얻는 방법</dt><dd>${howToGet(data, entry)}</dd></div>`,
+    `<div><dt>취급 분류</dt><dd>${groups.length === 0 ? '해당 없음' : esc(list(groups))}</dd></div>`,
   ];
-  const changed: string = changes.length === 0 ? '' : `<p class="label">What can change it</p><ul class="changes">${changes.map(changeLine).join('')}</ul>`;
-  const helped: string = stronger.length === 0 ? '' : `<p class="label">Places made for it</p><p>${esc(list(stronger))}</p>`;
+  const changed: string = changes.length === 0 ? '' : `<p class="label">이 스킬을 바꾸는 것</p><ul class="changes">${changes.map(changeLine).join('')}</ul>`;
+  const helped: string = stronger.length === 0 ? '' : `<p class="label">이 스킬을 위한 장소</p><p>${esc(list(stronger))}</p>`;
   return `<article class="skill" id="${esc(entry.id.replace(/_/g, '-'))}">
 <h3>${esc(entry.name)}</h3>
 <p>${esc(entry.description)}</p>
@@ -94,26 +94,26 @@ ${helped}
 export function skillsPage(data: GuideData): PageBody {
   const skills: SkillDef[] = [...playerSkills(data), skill(data, 'quarrel')];
   return {
-    kicker: 'Guide',
-    title: 'Skills',
-    lede: 'Every skill you can use today: what it does, what it costs, how you get it and what can change it.',
-    description: 'Every skill in The Lost Storm: what it does, its mana cost and cooldown, where on the Skill Tree you get it, and every place and item that changes it.',
+    kicker: '안내서',
+    title: '스킬',
+    lede: '오늘 쓸 수 있는 모든 스킬: 무엇을 하는지, 무엇이 드는지, 어떻게 얻고 무엇이 바꾸는지.',
+    description: '폭풍의 잔향의 모든 스킬: 효과, 마나 비용과 재사용 대기, 스킬 트리에서 얻는 위치, 그리고 그것을 바꾸는 모든 장소와 아이템.',
     body: [
       section(
         'how',
-        'How skills work',
+        '스킬의 작동 방식',
         para(
-          `You start with ${esc(skill(data, 'cleave').name)} and learn ${esc(skill(data, 'dodge_roll').name)} in the Hall of Time. Every other skill is a place on the ${link('/guide/tree/', 'Skill Tree')}: take it and the skill goes on your first empty slot.`,
-          'A skill can be changed into something else, by a place on the tree or by the weapon you hold. Only one place on the tree may change a given skill at a time. A weapon\'s change comes on top: hold a crossbow and Cleave becomes Quarrel, whatever else you have.',
-          '"Counts as" says which kinds of skill it is. A place that says "damage for lightning skills" helps every skill that counts as a lightning skill.',
+          `${esc(skill(data, 'cleave').name)}을(를) 가지고 시작하고, 시간의 전당에서 ${esc(skill(data, 'dodge_roll').name)}을(를) 배운다. 나머지 모든 스킬은 ${link('/guide/tree/', '스킬 트리')}의 한 장소다: 찍으면 스킬이 첫 번째 빈 슬롯에 들어간다.`,
+          '스킬은 트리의 장소나 손에 쥔 무기에 의해 다른 것으로 바뀔 수 있다. 트리에서는 하나의 스킬을 한 번에 한 장소만 바꿀 수 있다. 무기의 변경은 그 위에 얹힌다: 쇠뇌를 들면 다른 것과 관계없이 베기가 볼트가 된다.',
+          '"취급 분류"는 그 스킬이 어떤 종류로 취급되는지를 말한다. "번개 스킬 피해"라고 적힌 장소는 번개 스킬로 취급되는 모든 스킬에 적용된다.',
         ),
       ),
       section(
         'table',
-        'At a glance',
-        table({ head: ['Skill', 'Cost', 'Wait', 'How you get it'], rows: skills.map((entry: SkillDef): string[] => [`<a href="#${esc(entry.id.replace(/_/g, '-'))}">${esc(entry.name)}</a>`, cost(entry), wait(entry), howToGet(data, entry)]) }),
+        '한눈에 보기',
+        table({ head: ['스킬', '비용', '대기', '얻는 방법'], rows: skills.map((entry: SkillDef): string[] => [`<a href="#${esc(entry.id.replace(/_/g, '-'))}">${esc(entry.name)}</a>`, cost(entry), wait(entry), howToGet(data, entry)]) }),
       ),
-      section('all', 'Every skill', skills.map((entry: SkillDef): string => skillCard(data, entry)).join('\n')),
+      section('all', '모든 스킬', skills.map((entry: SkillDef): string => skillCard(data, entry)).join('\n')),
     ].join('\n'),
   };
 }

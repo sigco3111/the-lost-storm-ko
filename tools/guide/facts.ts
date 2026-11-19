@@ -10,13 +10,13 @@ import type { BuildMeasure } from './measures.ts';
 import { bossAt, levelMinutes } from './pages/measured-view.ts';
 
 export const SLOT_NAMES: Readonly<Record<ItemSlot, string>> = {
-  weapon: 'weapon',
-  head: 'head',
-  chest: 'chest',
-  hands: 'hands',
-  legs: 'legs',
-  feet: 'feet',
-  charm: 'charm',
+  weapon: '무기',
+  head: '머리',
+  chest: '가슴',
+  hands: '손',
+  legs: '다리',
+  feet: '발',
+  charm: '장신구',
 };
 
 const PERCENT_STATS: ReadonlySet<StatId> = new Set<StatId>(['damagePercent', 'attackSpeed', 'critChance', 'critMultiplier', 'goldFind', 'stormResist', 'frostResist']);
@@ -48,9 +48,8 @@ export function affix(data: GuideData, id: string): AffixDef {
 
 export function affixLine(data: GuideData, id: string): string {
   const entry: AffixDef = affix(data, id);
-  const range: string = `${statAmount(entry.stat, entry.op, entry.min)} to ${statAmount(entry.stat, entry.op, entry.max)}`;
-  const kind: string = entry.op === 'percent' ? `more ${statLabel(entry.stat)}` : statLabel(entry.stat);
-  return `<b>${esc(entry.label)}</b>: +${range} ${esc(kind)}, more on higher-level items (${esc(list(entry.slots.map((slot: ItemSlot): string => SLOT_NAMES[slot])))})`;
+  const range: string = `${statAmount(entry.stat, entry.op, entry.min)}~${statAmount(entry.stat, entry.op, entry.max)}`;
+  return `<b>${esc(entry.label)}</b>: ${esc(statLabel(entry.stat))} +${range}, 높은 레벨 아이템은 더 큼 (${esc(list(entry.slots.map((slot: ItemSlot): string => SLOT_NAMES[slot])))})`;
 }
 
 export function statCap(data: GuideData, stat: StatId): number | null {
@@ -72,8 +71,8 @@ export function nextPlaces(data: GuideData, buildId: string, count: number): Ski
 export function afterRouteText(data: GuideData, buildId: string, advice: string): string {
   const next: readonly SkillTreeNodeDef[] = nextPlaces(data, buildId, 4);
   const top: number = topLevel(data.spec);
-  if (next.length === 0) return `Past level ${top} the points keep coming, but this route has nothing left to take. ${advice}`;
-  return `Past level ${top} the points keep coming. The route goes on with ${esc(list(next.map((node: SkillTreeNodeDef): string => node.name)))}. ${advice}`;
+  if (next.length === 0) return `레벨 ${top} 이후에도 포인트는 계속 오지만, 이 경로는 더 찍을 곳이 없다. ${advice}`;
+  return `레벨 ${top} 이후에도 포인트는 계속 온다. 경로는 ${esc(list(next.map((node: SkillTreeNodeDef): string => node.name)))}(으)로 이어진다. ${advice}`;
 }
 
 export type Metric = (measure: BuildMeasure) => number | null;
@@ -88,21 +87,21 @@ export function rankOf(data: GuideData, buildId: string, metric: Metric, higherI
   return index < 0 ? values.length + 1 : index + 1;
 }
 
-const ORDINALS: readonly string[] = ['the', 'the second', 'the third', 'the fourth', 'the fifth', 'the sixth', 'the seventh', 'the eighth'];
+const ORDINALS: readonly string[] = ['가장', '두 번째로', '세 번째로', '네 번째로', '다섯 번째로', '여섯 번째로', '일곱 번째로', '여덟 번째로'];
 
 export function rankWords(rank: number, best: string, worst: string, count: number): string {
-  if (rank === count) return `the ${worst}`;
-  return `${ORDINALS[rank - 1] ?? `number ${rank}`} ${best}`;
+  if (rank === count) return `가장 ${worst}`;
+  return `${ORDINALS[rank - 1] ?? `${rank}번째로`} ${best}`;
 }
 
 export function speedRank(data: GuideData, buildId: string, level: number): string {
   const metric: Metric = (measure: BuildMeasure): number | null => levelMinutes(measure.steady, level);
-  return rankWords(rankOf(data, buildId, metric, false), 'fastest', 'slowest', data.measured.builds.length);
+  return rankWords(rankOf(data, buildId, metric, false), '빠르게', '느리게', data.measured.builds.length);
 }
 
 export function bossSpeedRank(data: GuideData, buildId: string, level: number): string {
   const metric: Metric = (measure: BuildMeasure): number | null => bossAt(measure.steady, level)?.seconds ?? null;
-  return rankWords(rankOf(data, buildId, metric, false), 'fastest', 'slowest', data.measured.builds.length);
+  return rankWords(rankOf(data, buildId, metric, false), '빠르게', '느리게', data.measured.builds.length);
 }
 
 export function carelessBossShare(data: GuideData, buildId: string, level: number): number {
@@ -159,7 +158,7 @@ export function manaWeapons(data: GuideData): ItemBaseDef[] {
 export function legendaryLine(data: GuideData, id: string): string {
   const base: ItemBaseDef | undefined = data.content.itemBases.get(id);
   if (base?.power === null || base?.power === undefined) throw new Error(`${id} is not a legendary`);
-  return esc(`The ${base.name}, a legendary: ${base.power.text}`);
+  return esc(`전설 ${base.name}: ${base.power.text}`);
 }
 
 export function familyNames(data: GuideData, family: string): string {
@@ -169,7 +168,7 @@ export function familyNames(data: GuideData, family: string): string {
 }
 
 export function weaponNames(bases: readonly ItemBaseDef[]): string {
-  return esc(list(bases.map((base: ItemBaseDef): string => `the ${base.name}`)));
+  return esc(list(bases.map((base: ItemBaseDef): string => base.name)));
 }
 
 export function variantName(data: GuideData, baseId: string, skillId: string): string {
@@ -185,7 +184,7 @@ export function steadyBossShare(data: GuideData, buildId: string, level: number)
 }
 
 export function deathWords(perHour: number): string {
-  return perHour === 0 ? 'never died' : `died about ${decimal(perHour, 1)} times an hour`;
+  return perHour === 0 ? '한 번도 죽지 않았다' : `시간당 약 ${decimal(perHour, 1)}번 죽었다`;
 }
 
 export function steadyDeaths(data: GuideData, buildId: string): number {

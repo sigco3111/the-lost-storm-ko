@@ -1,1165 +1,1165 @@
 {
- "id": "hall_of_time",
- "name": "시간의 전당",
- "kind": "wild",
- "level": 1,
- "levelUpTo": 20,
- "ranks": true,
- "cellSize": 4,
- "floorHeight": 0,
- "tiles": [
-  "                    ",
-  "  rrrrrr rrr rrr    ",
-  "  rrrrrrrrrrrrrrrrr ",
-  "rrrrrrrrrrrrrrrrrrrr",
-  "rrrrrrrrrrrrrrrsssss",
-  "rrrrrrrrrrrrrrrsssss",
-  "sssssrrrprrprrrsssss",
-  "sssssrpprrprrprsssss",
-  "sssssrrrrrrrrrrsssss",
-  "rrrrrrrrrrrrrrrsssss",
-  "rrrrrrrrrrrrrrrsssss",
-  "rrrrrrrrrrrrrrrrrrrr",
-  "  rrrrrrrrrrrrrrrrr ",
-  "  rrrrrrr rrrrrr    ",
-  "                    "
- ],
- "floors": {
-  "s": "black_ledge",
-  "r": "black_rock",
-  "p": "ruined_road"
- },
- "outside": {
-  "surface": "crag_ground",
-  "reach": 6,
-  "barrier": {
-   "nearSides": [
-    "south",
-    "east"
-   ],
-   "exitClear": 3,
-   "rows": [
-    {
-     "far": {
-      "props": [
-       "crag_a_wide",
-       "crag_b_wide",
-       "crag_spire_wide"
+  "id": "hall_of_time",
+  "name": "시간의 전당",
+  "kind": "wild",
+  "level": 1,
+  "levelUpTo": 20,
+  "ranks": true,
+  "cellSize": 4,
+  "floorHeight": 0,
+  "tiles": [
+    "                    ",
+    "  rrrrrr rrr rrr    ",
+    "  rrrrrrrrrrrrrrrrr ",
+    "rrrrrrrrrrrrrrrrrrrr",
+    "rrrrrrrrrrrrrrrsssss",
+    "rrrrrrrrrrrrrrrsssss",
+    "sssssrrrprrprrrsssss",
+    "sssssrpprrprrprsssss",
+    "sssssrrrrrrrrrrsssss",
+    "rrrrrrrrrrrrrrrsssss",
+    "rrrrrrrrrrrrrrrsssss",
+    "rrrrrrrrrrrrrrrrrrrr",
+    "  rrrrrrrrrrrrrrrrr ",
+    "  rrrrrrr rrrrrr    ",
+    "                    "
+  ],
+  "floors": {
+    "s": "black_ledge",
+    "r": "black_rock",
+    "p": "ruined_road"
+  },
+  "outside": {
+    "surface": "crag_ground",
+    "reach": 6,
+    "barrier": {
+      "nearSides": [
+        "south",
+        "east"
       ],
-      "out": -0.9,
-      "step": 2.6,
-      "turn": 70
-     },
-     "near": {
+      "exitClear": 3,
+      "rows": [
+        {
+          "far": {
+            "props": [
+              "crag_a_wide",
+              "crag_b_wide",
+              "crag_spire_wide"
+            ],
+            "out": -0.9,
+            "step": 2.6,
+            "turn": 70
+          },
+          "near": {
+            "props": [
+              "edge_low_a_wide",
+              "edge_low_b_wide"
+            ],
+            "out": -0.6,
+            "step": 1.1,
+            "turn": 90
+          },
+          "collide": true,
+          "shadow": true
+        },
+        {
+          "far": {
+            "props": [
+              "ridge_a_wide",
+              "ridge_b_wide"
+            ],
+            "out": 4,
+            "step": 5,
+            "turn": 120
+          },
+          "near": {
+            "props": [
+              "crag_low_wide"
+            ],
+            "out": 2.2,
+            "step": 2.6,
+            "turn": 90
+          },
+          "collide": false,
+          "shadow": false
+        },
+        {
+          "far": {
+            "props": [
+              "ridge_far_wide"
+            ],
+            "out": 10,
+            "step": 9,
+            "turn": 180
+          },
+          "near": {
+            "props": [
+              "crag_a_wide",
+              "crag_b_wide"
+            ],
+            "out": 3.6,
+            "step": 4,
+            "turn": 120
+          },
+          "collide": false,
+          "shadow": false
+        }
+      ]
+    }
+  },
+  "walls": null,
+  "scatter": [
+    {
+      "type": "around",
       "props": [
-       "edge_low_a_wide",
-       "edge_low_b_wide"
+        "rubble_chip",
+        "rubble_shard"
       ],
-      "out": -0.6,
-      "step": 1.1,
-      "turn": 90
-     },
-     "collide": true,
-     "shadow": true
-    },
-    {
-     "far": {
-      "props": [
-       "ridge_a_wide",
-       "ridge_b_wide"
+      "anchors": [
+        "castle_wall_ruin",
+        "castle_column_broken",
+        "castle_rubble_large",
+        "castle_rubble_small",
+        "castle_loose_blocks_wide",
+        "castle_statue_base",
+        "mossy_wall_low",
+        "castle_pillar",
+        "castle_column"
       ],
-      "out": 4,
-      "step": 5,
-      "turn": 120
-     },
-     "near": {
-      "props": [
-       "crag_low_wide"
-      ],
-      "out": 2.2,
-      "step": 2.6,
-      "turn": 90
-     },
-     "collide": false,
-     "shadow": false
-    },
-    {
-     "far": {
-      "props": [
-       "ridge_far_wide"
-      ],
-      "out": 10,
-      "step": 9,
-      "turn": 180
-     },
-     "near": {
-      "props": [
-       "crag_a_wide",
-       "crag_b_wide"
-      ],
-      "out": 3.6,
-      "step": 4,
-      "turn": 120
-     },
-     "collide": false,
-     "shadow": false
+      "each": 12,
+      "spread": 0.7,
+      "size": {
+        "least": 0.95,
+        "most": 1.2
+      }
     }
-   ]
-  }
- },
- "walls": null,
- "scatter": [
-  {
-   "type": "around",
-   "props": [
-    "rubble_chip",
-    "rubble_shard"
-   ],
-   "anchors": [
-    "castle_wall_ruin",
-    "castle_column_broken",
-    "castle_rubble_large",
-    "castle_rubble_small",
-    "castle_loose_blocks_wide",
-    "castle_statue_base",
-    "mossy_wall_low",
-    "castle_pillar",
-    "castle_column"
-   ],
-   "each": 12,
-   "spread": 0.7,
-   "size": {
-    "least": 0.95,
-    "most": 1.2
-   }
-  }
- ],
- "playerStart": {
-  "x": 8,
-  "z": 30
- },
- "props": [
-  {
-   "prop": "castle_column",
-   "x": 13.88,
-   "z": 16.5,
-   "y": 0,
-   "rotationDegrees": 90
-  },
-  {
-   "prop": "castle_column_broken",
-   "x": 14.47,
-   "z": 43.39,
-   "y": 0,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "castle_column",
-   "x": 23.62,
-   "z": 16.81,
-   "y": 0,
-   "rotationDegrees": 120
-  },
-  {
-   "prop": "castle_pillar",
-   "x": 23.52,
-   "z": 43.81,
-   "y": 0,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "castle_column",
-   "x": 34.05,
-   "z": 16.32,
-   "y": 0,
-   "rotationDegrees": 60
-  },
-  {
-   "prop": "castle_column_broken",
-   "x": 33.67,
-   "z": 43.21,
-   "y": 0,
-   "rotationDegrees": 60
-  },
-  {
-   "prop": "castle_column_broken",
-   "x": 43.47,
-   "z": 16.53,
-   "y": 0,
-   "rotationDegrees": 150
-  },
-  {
-   "prop": "castle_pillar",
-   "x": 43.58,
-   "z": 43.35,
-   "y": 0,
-   "rotationDegrees": 210
-  },
-  {
-   "prop": "castle_column",
-   "x": 54.28,
-   "z": 16.5,
-   "y": 0,
-   "rotationDegrees": 210
-  },
-  {
-   "prop": "castle_pillar",
-   "x": 54.41,
-   "z": 43.7,
-   "y": 0,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 30.0,
-   "z": 41.5,
-   "y": 0,
-   "rotationDegrees": 20
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 46.5,
-   "z": 26.5,
-   "y": 0,
-   "rotationDegrees": 140
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 22.0,
-   "z": 50.5,
-   "y": 0,
-   "rotationDegrees": 60
-  },
-  {
-   "prop": "castle_rubble_large",
-   "x": 40.0,
-   "z": 10.0,
-   "y": 0,
-   "rotationDegrees": 30
-  },
-  {
-   "prop": "castle_wall_ruin",
-   "x": 50.0,
-   "z": 5.5,
-   "y": 0,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "castle_rubble_small",
-   "x": 18.0,
-   "z": 38.0,
-   "y": 0,
-   "rotationDegrees": 80
-  },
-  {
-   "prop": "castle_loose_blocks_wide",
-   "x": 58.0,
-   "z": 50.0,
-   "y": 0,
-   "rotationDegrees": 200
-  },
-  {
-   "prop": "castle_statue_base",
-   "x": 38.0,
-   "z": 46.0,
-   "y": 0,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "mossy_wall_low",
-   "x": 26.0,
-   "z": 9.5,
-   "y": 0,
-   "rotationDegrees": 90
-  },
-  {
-   "prop": "castle_wall_ruin",
-   "x": 66.5,
-   "z": 14.0,
-   "y": 0,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "castle_wall_ruin",
-   "x": 74.5,
-   "z": 13.0,
-   "y": 0,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "castle_column",
-   "x": 62.0,
-   "z": 16.5,
-   "y": 0,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "castle_column_broken",
-   "x": 79.5,
-   "z": 18.5,
-   "y": 0,
-   "rotationDegrees": 40
-  },
-  {
-   "prop": "tree_dead_large",
-   "x": 6.0,
-   "z": 46.0,
-   "y": 0,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "tree_dead_medium",
-   "x": 12.0,
-   "z": 7.5,
-   "y": 0,
-   "rotationDegrees": 40
-  },
-  {
-   "prop": "dead_log",
-   "x": 56.0,
-   "z": 40.5,
-   "y": 0,
-   "rotationDegrees": 70
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 84.81,
-   "z": 27.68,
-   "y": -0.05,
-   "rotationDegrees": 75
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 48.92,
-   "z": 61.47,
-   "y": -0.05,
-   "rotationDegrees": 30
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 38.92,
-   "z": 62.39,
-   "y": -0.05,
-   "rotationDegrees": 270
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": -4.22,
-   "z": 43.88,
-   "y": -0.05,
-   "rotationDegrees": 120
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 10.94,
-   "z": -0.36,
-   "y": -0.05,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -6.49,
-   "z": 47.76,
-   "y": -0.05,
-   "rotationDegrees": 345
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 35.55,
-   "z": 62.81,
-   "y": -0.05,
-   "rotationDegrees": 165
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -11.52,
-   "z": 33.74,
-   "y": -0.05,
-   "rotationDegrees": 135
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 77.24,
-   "z": 4.36,
-   "y": -0.05,
-   "rotationDegrees": 315
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 77.88,
-   "z": 1.05,
-   "y": -0.05,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -0.02,
-   "z": 67.17,
-   "y": -0.05,
-   "rotationDegrees": 150
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 58.84,
-   "z": 67.63,
-   "y": -0.05,
-   "rotationDegrees": 90
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -6.48,
-   "z": 36.35,
-   "y": -0.05,
-   "rotationDegrees": 180
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": -2.39,
-   "z": 22.48,
-   "y": -0.05,
-   "rotationDegrees": 105
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 46.93,
-   "z": 59.56,
-   "y": -0.05,
-   "rotationDegrees": 60
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 55.34,
-   "z": 1.27,
-   "y": -0.05,
-   "rotationDegrees": 30
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 79.24,
-   "z": 55.78,
-   "y": -0.05,
-   "rotationDegrees": 195
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": -6.6,
-   "z": 43.92,
-   "y": -0.05,
-   "rotationDegrees": 30
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 14.94,
-   "z": 60.18,
-   "y": -0.05,
-   "rotationDegrees": 75
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 27.34,
-   "z": -7.73,
-   "y": -0.05,
-   "rotationDegrees": 180
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 78.56,
-   "z": -3.65,
-   "y": -0.05,
-   "rotationDegrees": 255
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 19.24,
-   "z": 0.72,
-   "y": -0.05,
-   "rotationDegrees": 285
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 37.03,
-   "z": -2.29,
-   "y": -0.05,
-   "rotationDegrees": 90
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 90.01,
-   "z": 56.25,
-   "y": -0.05,
-   "rotationDegrees": 75
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 65.17,
-   "z": -4.64,
-   "y": -0.05,
-   "rotationDegrees": 15
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 0.7,
-   "z": -6.71,
-   "y": -0.05,
-   "rotationDegrees": 75
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 83.91,
-   "z": 56.93,
-   "y": -0.05,
-   "rotationDegrees": 45
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 72.48,
-   "z": 60.53,
-   "y": -0.05,
-   "rotationDegrees": 240
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 56.21,
-   "z": 65.91,
-   "y": -0.05,
-   "rotationDegrees": 135
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": 34.17,
-   "z": -4.51,
-   "y": -0.05,
-   "rotationDegrees": 255
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 27.75,
-   "z": -4.77,
-   "y": -0.05,
-   "rotationDegrees": 15
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": -5.51,
-   "z": 32.05,
-   "y": -0.05,
-   "rotationDegrees": 270
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 2.76,
-   "z": 7.25,
-   "y": -0.05,
-   "rotationDegrees": 210
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 3.67,
-   "z": 6.15,
-   "y": -0.05,
-   "rotationDegrees": 330
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -0.44,
-   "z": -2.21,
-   "y": -0.05,
-   "rotationDegrees": 180
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 87.51,
-   "z": 19.05,
-   "y": -0.05,
-   "rotationDegrees": 165
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 81.42,
-   "z": 6.53,
-   "y": -0.05,
-   "rotationDegrees": 75
-  },
-  {
-   "prop": "rock_5_wide",
-   "x": 84.89,
-   "z": -1.21,
-   "y": -0.05,
-   "rotationDegrees": 345
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": 48.11,
-   "z": -6.22,
-   "y": -0.05,
-   "rotationDegrees": 255
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -8.31,
-   "z": 15.72,
-   "y": -0.05,
-   "rotationDegrees": 180
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 79.1,
-   "z": 54.09,
-   "y": -0.05,
-   "rotationDegrees": 255
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 59.4,
-   "z": -4.77,
-   "y": -0.05,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "rock_5_wide",
-   "x": 36.86,
-   "z": -4.93,
-   "y": -0.05,
-   "rotationDegrees": 105
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 52.99,
-   "z": 67.21,
-   "y": -0.05,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 89.46,
-   "z": 0.57,
-   "y": -0.05,
-   "rotationDegrees": 30
-  },
-  {
-   "prop": "rock_5_wide",
-   "x": 38.49,
-   "z": 2.29,
-   "y": -0.05,
-   "rotationDegrees": 285
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": -8.43,
-   "z": 1.37,
-   "y": -0.05,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": 49.34,
-   "z": 1.67,
-   "y": -0.05,
-   "rotationDegrees": 330
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": -2.26,
-   "z": 63.84,
-   "y": -0.05,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 39.18,
-   "z": -4.62,
-   "y": -0.05,
-   "rotationDegrees": 210
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 85.75,
-   "z": 30.53,
-   "y": -0.05,
-   "rotationDegrees": 180
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 38.54,
-   "z": -1.54,
-   "y": -0.05,
-   "rotationDegrees": 105
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": -4.88,
-   "z": 35.01,
-   "y": -0.05,
-   "rotationDegrees": 75
-  },
-  {
-   "prop": "rock_5_wide",
-   "x": 79.27,
-   "z": 53.17,
-   "y": -0.05,
-   "rotationDegrees": 315
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 6.55,
-   "z": -0.68,
-   "y": -0.05,
-   "rotationDegrees": 285
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 87.16,
-   "z": 22.34,
-   "y": -0.05,
-   "rotationDegrees": 30
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 61.83,
-   "z": 64.28,
-   "y": -0.05,
-   "rotationDegrees": 150
-  },
-  {
-   "prop": "rock_5_wide",
-   "x": 48.28,
-   "z": 65.67,
-   "y": -0.05,
-   "rotationDegrees": 330
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": -4.35,
-   "z": 0.03,
-   "y": -0.05,
-   "rotationDegrees": 345
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 66.16,
-   "z": 0.37,
-   "y": -0.05,
-   "rotationDegrees": 240
-  },
-  {
-   "prop": "rock_4_wide",
-   "x": 3.21,
-   "z": 57.63,
-   "y": -0.05,
-   "rotationDegrees": 330
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 80.16,
-   "z": 59.55,
-   "y": -0.05,
-   "rotationDegrees": 90
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 75.77,
-   "z": 5.09,
-   "y": -0.05,
-   "rotationDegrees": 270
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": 49.52,
-   "z": -1.28,
-   "y": -0.05,
-   "rotationDegrees": 45
-  },
-  {
-   "prop": "crag_a_wide",
-   "x": 12.25,
-   "z": 61.45,
-   "y": -0.05,
-   "rotationDegrees": 285
-  },
-  {
-   "prop": "crag_low_wide",
-   "x": 33.09,
-   "z": 59.59,
-   "y": -0.05,
-   "rotationDegrees": 315
-  },
-  {
-   "prop": "crag_b_wide",
-   "x": 28.62,
-   "z": -4.34,
-   "y": -0.05,
-   "rotationDegrees": 0
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 78.28,
-   "z": 63.6,
-   "y": -0.05,
-   "rotationDegrees": 270
-  },
-  {
-   "prop": "crag_spire_wide",
-   "x": 61.3,
-   "z": -2.62,
-   "y": -0.05,
-   "rotationDegrees": 345
-  },
-  {
-   "prop": "boulder_2_wide",
-   "x": -7.94,
-   "z": 28.29,
-   "y": -0.05,
-   "rotationDegrees": 300
-  },
-  {
-   "prop": "castle_column",
-   "x": 39.2,
-   "z": 4.3,
-   "y": 0,
-   "rotationDegrees": 15
-  },
-  {
-   "prop": "castle_column",
-   "x": 44.8,
-   "z": 4.3,
-   "y": 0,
-   "rotationDegrees": 195
-  }
- ],
- "packs": [
-  {
-   "x": 38,
-   "z": 22,
-   "members": [
-    {
-     "monster": "unfinished_taker",
-     "count": 1
-    }
-   ]
-  },
-  {
-   "x": 46,
-   "z": 11,
-   "members": [
-    {
-     "monster": "unfinished_taker",
-     "count": 1
-    },
-    {
-     "monster": "unfinished_thrower",
-     "count": 1
-    }
-   ]
-  },
-  {
-   "x": 58,
-   "z": 22,
-   "members": [
-    {
-     "monster": "unfinished_taker",
-     "count": 2
-    }
-   ]
-  },
-  {
-   "x": 60,
-   "z": 10,
-   "members": [
-    {
-     "monster": "unfinished_brute",
-     "count": 1
-    },
-    {
-     "monster": "unfinished_taker",
-     "count": 2
-    },
-    {
-     "monster": "unfinished_thrower",
-     "count": 1
-    }
-   ]
-  },
-  {
-   "x": 70,
-   "z": 50,
-   "members": [
-    {
-     "monster": "unfinished_brute",
-     "count": 1
-    },
-    {
-     "monster": "unfinished_taker",
-     "count": 1
-    },
-    {
-     "monster": "unfinished_thrower",
-     "count": 1
-    }
-   ]
-  }
- ],
- "packReturn": {
-  "after": 45,
-  "away": 18
- },
- "surge": null,
- "exits": [
-  {
-   "id": "mist",
-   "x": 1.6,
-   "z": 30,
-   "radius": 2.2,
-   "to": "between",
-   "toExit": "into_the_hall",
-   "arrival": {
+  ],
+  "playerStart": {
     "x": 8,
     "z": 30
-   },
-   "requires": [],
-   "look": "mist"
   },
-  {
-   "id": "east",
-   "x": 78.4,
-   "z": 30,
-   "radius": 2.2,
-   "to": "hideout",
-   "toExit": "west",
-   "arrival": {
-    "x": 72,
-    "z": 30
-   },
-   "requires": []
-  },
-  {
-   "id": "gate",
-   "x": 42,
-   "z": 5.6,
-   "radius": 2.2,
-   "to": "keepers_gate",
-   "toExit": "hall",
-   "arrival": {
-    "x": 44,
-    "z": 11
-   },
-   "requires": [
+  "props": [
     {
-     "type": "level",
-     "atLeast": 8
-    }
-   ],
-   "lockedHint": "The gate will not open for you yet. Come back at level 8."
-  }
- ],
- "checkpoints": [
-  {
-   "id": "hall_road",
-   "x": 26,
-   "z": 30,
-   "radius": 2.5
-  }
- ],
- "waypoint": {
-  "x": 14,
-  "z": 30,
-  "radius": 1.8
- },
- "markerSurfaces": {
-  "stone": "hall_stone"
- },
- "npcs": [],
- "scenes": [
-  {
-   "id": "warden_meeting",
-   "npc": "warden_guide",
-   "when": [
-    {
-     "type": "visited",
-     "zone": "hideout",
-     "not": true
+      "prop": "castle_column",
+      "x": 13.88,
+      "z": 16.5,
+      "y": 0,
+      "rotationDegrees": 90
     },
     {
-     "type": "flag",
-     "flag": "warden_met",
-     "not": true
+      "prop": "castle_column_broken",
+      "x": 14.47,
+      "z": 43.39,
+      "y": 0,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "castle_column",
+      "x": 23.62,
+      "z": 16.81,
+      "y": 0,
+      "rotationDegrees": 120
+    },
+    {
+      "prop": "castle_pillar",
+      "x": 23.52,
+      "z": 43.81,
+      "y": 0,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "castle_column",
+      "x": 34.05,
+      "z": 16.32,
+      "y": 0,
+      "rotationDegrees": 60
+    },
+    {
+      "prop": "castle_column_broken",
+      "x": 33.67,
+      "z": 43.21,
+      "y": 0,
+      "rotationDegrees": 60
+    },
+    {
+      "prop": "castle_column_broken",
+      "x": 43.47,
+      "z": 16.53,
+      "y": 0,
+      "rotationDegrees": 150
+    },
+    {
+      "prop": "castle_pillar",
+      "x": 43.58,
+      "z": 43.35,
+      "y": 0,
+      "rotationDegrees": 210
+    },
+    {
+      "prop": "castle_column",
+      "x": 54.28,
+      "z": 16.5,
+      "y": 0,
+      "rotationDegrees": 210
+    },
+    {
+      "prop": "castle_pillar",
+      "x": 54.41,
+      "z": 43.7,
+      "y": 0,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 30.0,
+      "z": 41.5,
+      "y": 0,
+      "rotationDegrees": 20
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 46.5,
+      "z": 26.5,
+      "y": 0,
+      "rotationDegrees": 140
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 22.0,
+      "z": 50.5,
+      "y": 0,
+      "rotationDegrees": 60
+    },
+    {
+      "prop": "castle_rubble_large",
+      "x": 40.0,
+      "z": 10.0,
+      "y": 0,
+      "rotationDegrees": 30
+    },
+    {
+      "prop": "castle_wall_ruin",
+      "x": 50.0,
+      "z": 5.5,
+      "y": 0,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "castle_rubble_small",
+      "x": 18.0,
+      "z": 38.0,
+      "y": 0,
+      "rotationDegrees": 80
+    },
+    {
+      "prop": "castle_loose_blocks_wide",
+      "x": 58.0,
+      "z": 50.0,
+      "y": 0,
+      "rotationDegrees": 200
+    },
+    {
+      "prop": "castle_statue_base",
+      "x": 38.0,
+      "z": 46.0,
+      "y": 0,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "mossy_wall_low",
+      "x": 26.0,
+      "z": 9.5,
+      "y": 0,
+      "rotationDegrees": 90
+    },
+    {
+      "prop": "castle_wall_ruin",
+      "x": 66.5,
+      "z": 14.0,
+      "y": 0,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "castle_wall_ruin",
+      "x": 74.5,
+      "z": 13.0,
+      "y": 0,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "castle_column",
+      "x": 62.0,
+      "z": 16.5,
+      "y": 0,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "castle_column_broken",
+      "x": 79.5,
+      "z": 18.5,
+      "y": 0,
+      "rotationDegrees": 40
+    },
+    {
+      "prop": "tree_dead_large",
+      "x": 6.0,
+      "z": 46.0,
+      "y": 0,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "tree_dead_medium",
+      "x": 12.0,
+      "z": 7.5,
+      "y": 0,
+      "rotationDegrees": 40
+    },
+    {
+      "prop": "dead_log",
+      "x": 56.0,
+      "z": 40.5,
+      "y": 0,
+      "rotationDegrees": 70
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 84.81,
+      "z": 27.68,
+      "y": -0.05,
+      "rotationDegrees": 75
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 48.92,
+      "z": 61.47,
+      "y": -0.05,
+      "rotationDegrees": 30
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 38.92,
+      "z": 62.39,
+      "y": -0.05,
+      "rotationDegrees": 270
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": -4.22,
+      "z": 43.88,
+      "y": -0.05,
+      "rotationDegrees": 120
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 10.94,
+      "z": -0.36,
+      "y": -0.05,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -6.49,
+      "z": 47.76,
+      "y": -0.05,
+      "rotationDegrees": 345
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 35.55,
+      "z": 62.81,
+      "y": -0.05,
+      "rotationDegrees": 165
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -11.52,
+      "z": 33.74,
+      "y": -0.05,
+      "rotationDegrees": 135
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 77.24,
+      "z": 4.36,
+      "y": -0.05,
+      "rotationDegrees": 315
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 77.88,
+      "z": 1.05,
+      "y": -0.05,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -0.02,
+      "z": 67.17,
+      "y": -0.05,
+      "rotationDegrees": 150
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 58.84,
+      "z": 67.63,
+      "y": -0.05,
+      "rotationDegrees": 90
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -6.48,
+      "z": 36.35,
+      "y": -0.05,
+      "rotationDegrees": 180
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": -2.39,
+      "z": 22.48,
+      "y": -0.05,
+      "rotationDegrees": 105
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 46.93,
+      "z": 59.56,
+      "y": -0.05,
+      "rotationDegrees": 60
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 55.34,
+      "z": 1.27,
+      "y": -0.05,
+      "rotationDegrees": 30
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 79.24,
+      "z": 55.78,
+      "y": -0.05,
+      "rotationDegrees": 195
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": -6.6,
+      "z": 43.92,
+      "y": -0.05,
+      "rotationDegrees": 30
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 14.94,
+      "z": 60.18,
+      "y": -0.05,
+      "rotationDegrees": 75
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 27.34,
+      "z": -7.73,
+      "y": -0.05,
+      "rotationDegrees": 180
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 78.56,
+      "z": -3.65,
+      "y": -0.05,
+      "rotationDegrees": 255
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 19.24,
+      "z": 0.72,
+      "y": -0.05,
+      "rotationDegrees": 285
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 37.03,
+      "z": -2.29,
+      "y": -0.05,
+      "rotationDegrees": 90
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 90.01,
+      "z": 56.25,
+      "y": -0.05,
+      "rotationDegrees": 75
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 65.17,
+      "z": -4.64,
+      "y": -0.05,
+      "rotationDegrees": 15
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 0.7,
+      "z": -6.71,
+      "y": -0.05,
+      "rotationDegrees": 75
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 83.91,
+      "z": 56.93,
+      "y": -0.05,
+      "rotationDegrees": 45
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 72.48,
+      "z": 60.53,
+      "y": -0.05,
+      "rotationDegrees": 240
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 56.21,
+      "z": 65.91,
+      "y": -0.05,
+      "rotationDegrees": 135
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": 34.17,
+      "z": -4.51,
+      "y": -0.05,
+      "rotationDegrees": 255
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 27.75,
+      "z": -4.77,
+      "y": -0.05,
+      "rotationDegrees": 15
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": -5.51,
+      "z": 32.05,
+      "y": -0.05,
+      "rotationDegrees": 270
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 2.76,
+      "z": 7.25,
+      "y": -0.05,
+      "rotationDegrees": 210
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 3.67,
+      "z": 6.15,
+      "y": -0.05,
+      "rotationDegrees": 330
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -0.44,
+      "z": -2.21,
+      "y": -0.05,
+      "rotationDegrees": 180
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 87.51,
+      "z": 19.05,
+      "y": -0.05,
+      "rotationDegrees": 165
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 81.42,
+      "z": 6.53,
+      "y": -0.05,
+      "rotationDegrees": 75
+    },
+    {
+      "prop": "rock_5_wide",
+      "x": 84.89,
+      "z": -1.21,
+      "y": -0.05,
+      "rotationDegrees": 345
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": 48.11,
+      "z": -6.22,
+      "y": -0.05,
+      "rotationDegrees": 255
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -8.31,
+      "z": 15.72,
+      "y": -0.05,
+      "rotationDegrees": 180
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 79.1,
+      "z": 54.09,
+      "y": -0.05,
+      "rotationDegrees": 255
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 59.4,
+      "z": -4.77,
+      "y": -0.05,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "rock_5_wide",
+      "x": 36.86,
+      "z": -4.93,
+      "y": -0.05,
+      "rotationDegrees": 105
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 52.99,
+      "z": 67.21,
+      "y": -0.05,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 89.46,
+      "z": 0.57,
+      "y": -0.05,
+      "rotationDegrees": 30
+    },
+    {
+      "prop": "rock_5_wide",
+      "x": 38.49,
+      "z": 2.29,
+      "y": -0.05,
+      "rotationDegrees": 285
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": -8.43,
+      "z": 1.37,
+      "y": -0.05,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": 49.34,
+      "z": 1.67,
+      "y": -0.05,
+      "rotationDegrees": 330
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": -2.26,
+      "z": 63.84,
+      "y": -0.05,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 39.18,
+      "z": -4.62,
+      "y": -0.05,
+      "rotationDegrees": 210
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 85.75,
+      "z": 30.53,
+      "y": -0.05,
+      "rotationDegrees": 180
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 38.54,
+      "z": -1.54,
+      "y": -0.05,
+      "rotationDegrees": 105
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": -4.88,
+      "z": 35.01,
+      "y": -0.05,
+      "rotationDegrees": 75
+    },
+    {
+      "prop": "rock_5_wide",
+      "x": 79.27,
+      "z": 53.17,
+      "y": -0.05,
+      "rotationDegrees": 315
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 6.55,
+      "z": -0.68,
+      "y": -0.05,
+      "rotationDegrees": 285
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 87.16,
+      "z": 22.34,
+      "y": -0.05,
+      "rotationDegrees": 30
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 61.83,
+      "z": 64.28,
+      "y": -0.05,
+      "rotationDegrees": 150
+    },
+    {
+      "prop": "rock_5_wide",
+      "x": 48.28,
+      "z": 65.67,
+      "y": -0.05,
+      "rotationDegrees": 330
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": -4.35,
+      "z": 0.03,
+      "y": -0.05,
+      "rotationDegrees": 345
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 66.16,
+      "z": 0.37,
+      "y": -0.05,
+      "rotationDegrees": 240
+    },
+    {
+      "prop": "rock_4_wide",
+      "x": 3.21,
+      "z": 57.63,
+      "y": -0.05,
+      "rotationDegrees": 330
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 80.16,
+      "z": 59.55,
+      "y": -0.05,
+      "rotationDegrees": 90
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 75.77,
+      "z": 5.09,
+      "y": -0.05,
+      "rotationDegrees": 270
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": 49.52,
+      "z": -1.28,
+      "y": -0.05,
+      "rotationDegrees": 45
+    },
+    {
+      "prop": "crag_a_wide",
+      "x": 12.25,
+      "z": 61.45,
+      "y": -0.05,
+      "rotationDegrees": 285
+    },
+    {
+      "prop": "crag_low_wide",
+      "x": 33.09,
+      "z": 59.59,
+      "y": -0.05,
+      "rotationDegrees": 315
+    },
+    {
+      "prop": "crag_b_wide",
+      "x": 28.62,
+      "z": -4.34,
+      "y": -0.05,
+      "rotationDegrees": 0
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 78.28,
+      "z": 63.6,
+      "y": -0.05,
+      "rotationDegrees": 270
+    },
+    {
+      "prop": "crag_spire_wide",
+      "x": 61.3,
+      "z": -2.62,
+      "y": -0.05,
+      "rotationDegrees": 345
+    },
+    {
+      "prop": "boulder_2_wide",
+      "x": -7.94,
+      "z": 28.29,
+      "y": -0.05,
+      "rotationDegrees": 300
+    },
+    {
+      "prop": "castle_column",
+      "x": 39.2,
+      "z": 4.3,
+      "y": 0,
+      "rotationDegrees": 15
+    },
+    {
+      "prop": "castle_column",
+      "x": 44.8,
+      "z": 4.3,
+      "y": 0,
+      "rotationDegrees": 195
     }
-   ],
-   "x": 72,
-   "z": 30,
-   "radius": 9,
-   "moment": "campfire",
-   "fight": 2.5,
-   "arrive": 1.6,
-   "strike": "warden_sweep",
-   "talk": "warden_guide_first",
-   "ward": {
-    "radius": 4.5,
-    "rise": 0.8,
-    "fall": 0.8,
-    "lifetime": 60,
-    "admits": [
-     "player"
+  ],
+  "packs": [
+    {
+      "x": 38,
+      "z": 22,
+      "members": [
+        {
+          "monster": "unfinished_taker",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "x": 46,
+      "z": 11,
+      "members": [
+        {
+          "monster": "unfinished_taker",
+          "count": 1
+        },
+        {
+          "monster": "unfinished_thrower",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "x": 58,
+      "z": 22,
+      "members": [
+        {
+          "monster": "unfinished_taker",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "x": 60,
+      "z": 10,
+      "members": [
+        {
+          "monster": "unfinished_brute",
+          "count": 1
+        },
+        {
+          "monster": "unfinished_taker",
+          "count": 2
+        },
+        {
+          "monster": "unfinished_thrower",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "x": 70,
+      "z": 50,
+      "members": [
+        {
+          "monster": "unfinished_brute",
+          "count": 1
+        },
+        {
+          "monster": "unfinished_taker",
+          "count": 1
+        },
+        {
+          "monster": "unfinished_thrower",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "packReturn": {
+    "after": 45,
+    "away": 18
+  },
+  "surge": null,
+  "exits": [
+    {
+      "id": "mist",
+      "x": 1.6,
+      "z": 30,
+      "radius": 2.2,
+      "to": "between",
+      "toExit": "into_the_hall",
+      "arrival": {
+        "x": 8,
+        "z": 30
+      },
+      "requires": [],
+      "look": "mist"
+    },
+    {
+      "id": "east",
+      "x": 78.4,
+      "z": 30,
+      "radius": 2.2,
+      "to": "hideout",
+      "toExit": "west",
+      "arrival": {
+        "x": 72,
+        "z": 30
+      },
+      "requires": []
+    },
+    {
+      "id": "gate",
+      "x": 42,
+      "z": 5.6,
+      "radius": 2.2,
+      "to": "keepers_gate",
+      "toExit": "hall",
+      "arrival": {
+        "x": 44,
+        "z": 11
+      },
+      "requires": [
+        {
+          "type": "level",
+          "atLeast": 8
+        }
+      ],
+      "lockedHint": "문은 아직 너를 위해 열리지 않는다. 레벨 8에 돌아와라."
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "hall_road",
+      "x": 26,
+      "z": 30,
+      "radius": 2.5
+    }
+  ],
+  "waypoint": {
+    "x": 14,
+    "z": 30,
+    "radius": 1.8
+  },
+  "markerSurfaces": {
+    "stone": "hall_stone"
+  },
+  "npcs": [],
+  "scenes": [
+    {
+      "id": "warden_meeting",
+      "npc": "warden_guide",
+      "when": [
+        {
+          "type": "visited",
+          "zone": "hideout",
+          "not": true
+        },
+        {
+          "type": "flag",
+          "flag": "warden_met",
+          "not": true
+        }
+      ],
+      "x": 72,
+      "z": 30,
+      "radius": 9,
+      "moment": "campfire",
+      "fight": 2.5,
+      "arrive": 1.6,
+      "strike": "warden_sweep",
+      "talk": "warden_guide_first",
+      "ward": {
+        "radius": 4.5,
+        "rise": 0.8,
+        "fall": 0.8,
+        "lifetime": 60,
+        "admits": [
+          "player"
+        ],
+        "stopsStrikes": true,
+        "grace": 4,
+        "leave": 3
+      },
+      "lead": {
+        "exit": "east",
+        "x": 75.5,
+        "z": 26.5,
+        "ahead": 6,
+        "walk": 3.4,
+        "run": 6.4,
+        "through": 0.7,
+        "waits": false
+      },
+      "owes": {
+        "warden_met": "owed"
+      }
+    }
+  ],
+  "ambience": {
+    "background": "#0a0e16",
+    "abyss": "#05070b",
+    "fogNear": 34,
+    "fogFar": 110,
+    "skyColor": "#5a6f94",
+    "groundColor": "#344057",
+    "skyIntensity": 6.8,
+    "keyColor": "#b9cbe8",
+    "keyIntensity": 4.8
+  },
+  "weather": {
+    "lightning": {
+      "first": 1.4,
+      "min": 5,
+      "max": 10
+    },
+    "rain": 0.85,
+    "wet": 0.6,
+    "mistWall": {
+      "from": {
+        "x": -10,
+        "z": -6
+      },
+      "to": {
+        "x": -10,
+        "z": 66
+      },
+      "height": 7
+    }
+  },
+  "moments": {
+    "combat": true,
+    "areas": [
+      {
+        "x": 40,
+        "z": 47,
+        "radius": 9
+      },
+      {
+        "x": 40,
+        "z": 13,
+        "radius": 9
+      },
+      {
+        "x": 24,
+        "z": 47,
+        "radius": 7
+      },
+      {
+        "x": 24,
+        "z": 13,
+        "radius": 7
+      }
     ],
-    "stopsStrikes": true,
-    "grace": 4,
-    "leave": 3
-   },
-   "lead": {
-    "exit": "east",
-    "x": 75.5,
-    "z": 26.5,
-    "ahead": 6,
-    "walk": 3.4,
-    "run": 6.4,
-    "through": 0.7,
-    "waits": false
-   },
-   "owes": {
-    "warden_met": "owed"
-   }
+    "avoid": [
+      {
+        "x": 8,
+        "z": 30,
+        "radius": 16
+      },
+      {
+        "x": 26,
+        "z": 30,
+        "radius": 7
+      },
+      {
+        "x": 42,
+        "z": 30,
+        "radius": 7
+      },
+      {
+        "x": 58,
+        "z": 30,
+        "radius": 7
+      },
+      {
+        "x": 70,
+        "z": 31,
+        "radius": 10
+      }
+    ],
+    "clearance": {
+      "hero": 8,
+      "exits": 6,
+      "between": 6,
+      "safe": 18,
+      "waypoint": 0,
+      "packs": 4
+    },
+    "interval": {
+      "min": 9,
+      "max": 18
+    },
+    "grace": 3,
+    "near": {
+      "min": 7,
+      "max": 9,
+      "bearing": {
+        "x": -0.26,
+        "z": -0.97,
+        "spreadDegrees": 60
+      }
+    },
+    "start": 0,
+    "max": 2,
+    "table": [
+      {
+        "moment": "campfire",
+        "weight": 3
+      },
+      {
+        "moment": "charge",
+        "weight": 3
+      },
+      {
+        "moment": "market_street",
+        "weight": 3
+      },
+      {
+        "moment": "children_at_play",
+        "weight": 1
+      },
+      {
+        "moment": "funeral",
+        "weight": 1
+      }
+    ],
+    "first": [
+      {
+        "moment": "first_fire",
+        "weight": 1
+      }
+    ],
+    "sure": [
+      {
+        "type": "flag",
+        "flag": "first_moment",
+        "is": "cleared",
+        "not": true
+      }
+    ]
   }
- ],
- "ambience": {
-  "background": "#0a0e16",
-  "abyss": "#05070b",
-  "fogNear": 34,
-  "fogFar": 110,
-  "skyColor": "#5a6f94",
-  "groundColor": "#344057",
-  "skyIntensity": 6.8,
-  "keyColor": "#b9cbe8",
-  "keyIntensity": 4.8
- },
- "weather": {
-  "lightning": {
-   "first": 1.4,
-   "min": 5,
-   "max": 10
-  },
-  "rain": 0.85,
-  "wet": 0.6,
-  "mistWall": {
-   "from": {
-    "x": -10,
-    "z": -6
-   },
-   "to": {
-    "x": -10,
-    "z": 66
-   },
-   "height": 7
-  }
- },
- "moments": {
-  "combat": true,
-  "areas": [
-   {
-    "x": 40,
-    "z": 47,
-    "radius": 9
-   },
-   {
-    "x": 40,
-    "z": 13,
-    "radius": 9
-   },
-   {
-    "x": 24,
-    "z": 47,
-    "radius": 7
-   },
-   {
-    "x": 24,
-    "z": 13,
-    "radius": 7
-   }
-  ],
-  "avoid": [
-   {
-    "x": 8,
-    "z": 30,
-    "radius": 16
-   },
-   {
-    "x": 26,
-    "z": 30,
-    "radius": 7
-   },
-   {
-    "x": 42,
-    "z": 30,
-    "radius": 7
-   },
-   {
-    "x": 58,
-    "z": 30,
-    "radius": 7
-   },
-   {
-    "x": 70,
-    "z": 31,
-    "radius": 10
-   }
-  ],
-  "clearance": {
-   "hero": 8,
-   "exits": 6,
-   "between": 6,
-   "safe": 18,
-   "waypoint": 0,
-   "packs": 4
-  },
-  "interval": {
-   "min": 9,
-   "max": 18
-  },
-  "grace": 3,
-  "near": {
-   "min": 7,
-   "max": 9,
-   "bearing": {
-    "x": -0.26,
-    "z": -0.97,
-    "spreadDegrees": 60
-   }
-  },
-  "start": 0,
-  "max": 2,
-  "table": [
-   {
-    "moment": "campfire",
-    "weight": 3
-   },
-   {
-    "moment": "charge",
-    "weight": 3
-   },
-   {
-    "moment": "market_street",
-    "weight": 3
-   },
-   {
-    "moment": "children_at_play",
-    "weight": 1
-   },
-   {
-    "moment": "funeral",
-    "weight": 1
-   }
-  ],
-  "first": [
-   {
-    "moment": "first_fire",
-    "weight": 1
-   }
-  ],
-  "sure": [
-   {
-    "type": "flag",
-    "flag": "first_moment",
-    "is": "cleared",
-    "not": true
-   }
-  ]
- }
 }

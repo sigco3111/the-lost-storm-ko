@@ -1,137 +1,137 @@
 [
- {
-  "id": "out_of_the_mist",
-  "name": "안개를 벗어나",
-  "requires": [],
-  "when": [
-   {
-    "type": "flag",
-    "flag": "opening",
-    "is": "begun",
-    "not": true
-   }
-  ],
-  "objectives": [
-   {
-    "id": "leave",
-    "type": "either",
-    "text": "사이를 떠나라",
-    "paths": [
-     {
-      "id": "hall",
-      "type": "reach",
-      "zone": "hall_of_time",
-      "x": 14,
-      "z": 30,
-      "radius": 6,
-      "text": "사이를 떠나라"
-     },
-     {
-      "id": "rerouted",
-      "type": "reach",
-      "zone": "hideout",
-      "x": 24,
-      "z": 20,
-      "radius": 8,
-      "text": "불에 닿아라",
-      "when": [
-       {
-        "type": "flag",
-        "flag": "road",
-        "is": "rerouted"
-       }
-      ]
-     }
-    ],
-    "sets": {
-     "roll_taught": "yes"
-    }
-   }
-  ]
- },
- {
-  "id": "to_the_waystation",
-  "name": "피난처를 찾아라",
-  "requires": [
-   "out_of_the_mist",
-   "the_first_taker"
-  ],
-  "objectives": [
-   {
-    "id": "arrive",
-    "type": "reach",
-    "zone": "hideout",
-    "x": 24,
-    "z": 20,
-    "radius": 8,
-    "text": "불에 닿아라",
-    "sets": {
-     "camp": "reached"
-    }
-   }
-  ]
- },
- {
-  "id": "the_first_taker",
-  "name": "첫 번째 순간",
-  "requires": [
-   "out_of_the_mist"
-  ],
-  "when": [],
-  "objectives": [
-   {
-    "id": "put_down",
-    "type": "moment",
-    "text": "순간을 정리하라",
-    "sets": {
-     "first_moment": "cleared"
-    }
-   }
-  ]
- },
- {
-  "id": "wardens_lesson",
-  "name": "관리인의 가르침",
-  "requires": [
-   "to_the_waystation",
-   "the_first_taker"
-  ],
-  "objectives": [
-   {
-    "id": "ask",
-    "type": "talk",
-    "npc": "warden_guide",
-    "talk": "warden_guide_lesson",
-    "text": "관리인 안내자와 대화하라",
-    "sets": {
-     "fire_lesson": "given"
-    }
-   }
-  ]
- },
- {
-  "id": "the_gate",
-  "name": "마지막 문",
-  "requires": [
-   "wardens_lesson"
-  ],
-  "objectives": [
-   {
-    "id": "defeat",
-    "type": "defeat",
-    "monster": "timekeeper_gatekeeper",
-    "text": "",
-    "waiting": "The Last Gate opens at level 8",
+  {
+    "id": "out_of_the_mist",
+    "name": "안개를 벗어나",
+    "requires": [],
     "when": [
-     {
-      "type": "level",
-      "atLeast": 8
-     }
+      {
+        "type": "flag",
+        "flag": "opening",
+        "is": "begun",
+        "not": true
+      }
     ],
-    "sets": {
-     "alpha_slice_complete": "reached"
-    }
-   }
-  ]
- }
+    "objectives": [
+      {
+        "id": "leave",
+        "type": "either",
+        "text": "사이를 떠나라",
+        "paths": [
+          {
+            "id": "hall",
+            "type": "reach",
+            "zone": "hall_of_time",
+            "x": 14,
+            "z": 30,
+            "radius": 6,
+            "text": "사이를 떠나라"
+          },
+          {
+            "id": "rerouted",
+            "type": "reach",
+            "zone": "hideout",
+            "x": 24,
+            "z": 20,
+            "radius": 8,
+            "text": "불에 닿아라",
+            "when": [
+              {
+                "type": "flag",
+                "flag": "road",
+                "is": "rerouted"
+              }
+            ]
+          }
+        ],
+        "sets": {
+          "roll_taught": "yes"
+        }
+      }
+    ]
+  },
+  {
+    "id": "to_the_waystation",
+    "name": "피난처를 찾아라",
+    "requires": [
+      "out_of_the_mist",
+      "the_first_taker"
+    ],
+    "objectives": [
+      {
+        "id": "arrive",
+        "type": "reach",
+        "zone": "hideout",
+        "x": 24,
+        "z": 20,
+        "radius": 8,
+        "text": "불에 닿아라",
+        "sets": {
+          "camp": "reached"
+        }
+      }
+    ]
+  },
+  {
+    "id": "the_first_taker",
+    "name": "첫 번째 순간",
+    "requires": [
+      "out_of_the_mist"
+    ],
+    "when": [],
+    "objectives": [
+      {
+        "id": "put_down",
+        "type": "moment",
+        "text": "순간을 정리하라",
+        "sets": {
+          "first_moment": "cleared"
+        }
+      }
+    ]
+  },
+  {
+    "id": "wardens_lesson",
+    "name": "관리인의 가르침",
+    "requires": [
+      "to_the_waystation",
+      "the_first_taker"
+    ],
+    "objectives": [
+      {
+        "id": "ask",
+        "type": "talk",
+        "npc": "warden_guide",
+        "talk": "warden_guide_lesson",
+        "text": "관리인 안내자와 대화하라",
+        "sets": {
+          "fire_lesson": "given"
+        }
+      }
+    ]
+  },
+  {
+    "id": "the_gate",
+    "name": "마지막 문",
+    "requires": [
+      "wardens_lesson"
+    ],
+    "objectives": [
+      {
+        "id": "defeat",
+        "type": "defeat",
+        "monster": "timekeeper_gatekeeper",
+        "text": "",
+        "waiting": "마지막 문은 레벨 8에 열린다",
+        "when": [
+          {
+            "type": "level",
+            "atLeast": 8
+          }
+        ],
+        "sets": {
+          "alpha_slice_complete": "reached"
+        }
+      }
+    ]
+  }
 ]

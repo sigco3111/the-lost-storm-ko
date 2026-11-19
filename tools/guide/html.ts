@@ -19,20 +19,20 @@ export function decimal(value: number, digits: number): string {
 
 export function seconds(value: number): string {
   const rounded: number = Math.round(value * 10) / 10;
-  return `${rounded} ${rounded === 1 ? 'second' : 'seconds'}`;
+  return `${rounded}초`;
 }
 
 export function minutes(value: number): string {
   const whole: number = Math.round(value);
-  if (whole < 60) return `${whole} min`;
+  if (whole < 60) return `${whole}분`;
   const hours: number = Math.floor(whole / 60);
   const rest: number = whole % 60;
-  return rest === 0 ? `${hours} h` : `${hours} h ${rest} min`;
+  return rest === 0 ? `${hours}시간` : `${hours}시간 ${rest}분`;
 }
 
 export function list(parts: readonly string[]): string {
   if (parts.length <= 1) return parts.join('');
-  return `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1] ?? ''}`;
+  return `${parts.slice(0, -1).join(', ')}와(과) ${parts[parts.length - 1] ?? ''}`;
 }
 
 export function para(...lines: readonly string[]): string {

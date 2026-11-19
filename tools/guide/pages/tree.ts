@@ -55,58 +55,58 @@ export function treePage(data: GuideData): PageBody {
   const notables: number = count(data, 'notable');
   const keystones: number = count(data, 'keystone');
   return {
-    kicker: 'Guide',
-    title: 'The Skill Tree',
-    lede: 'Where your points go, how the five paths fit together, and what it costs to change your mind.',
-    description: 'How the Skill Tree in The Lost Storm works: points per level, the five paths, notables and keystones, the one rule about changing a skill, and what a respec costs.',
+    kicker: '안내서',
+    title: '스킬 트리',
+    lede: '포인트가 어디로 가는지, 다섯 길이 어떻게 맞물리는지, 그리고 초기화에 무엇이 드는지.',
+    description: '폭풍의 잔향의 스킬 트리 작동 방식: 레벨당 포인트, 다섯 길, 노터블과 키스톤, 스킬 변경의 한 가지 규칙, 초기화 비용.',
     body: [
       section(
         'whole',
-        'The whole tree',
+        '트리 전체',
         [
-          `<figure class="tree">${treePicture(data.content, [], 'The whole Skill Tree')}<figcaption>Every place on the tree. Big circles are notables, the biggest are keystones.</figcaption></figure>`,
-          para(`Press ${kbd('T')} to open it in the game. There are ${minors + notables + keystones} places: ${minors} small ones that add a little, ${notables} notables that teach a skill or change one, and ${keystones} keystones that change how you play and always cost you something for it.`),
+          `<figure class="tree">${treePicture(data.content, [], '스킬 트리 전체')}<figcaption>트리의 모든 장소. 큰 원이 노터블, 가장 큰 것이 키스톤이다.</figcaption></figure>`,
+          para(`게임에서 ${kbd('T')}를 눌러 열 수 있다. 장소는 모두 ${minors + notables + keystones}곳: 조금씩 더해주는 작은 장소 ${minors}곳, 스킬을 가르치거나 바꾸는 노터블 ${notables}곳, 플레이 방식을 바꾸되 항상 대가를 요구하는 키스톤 ${keystones}곳이다.`),
         ].join('\n'),
       ),
       section(
         'points',
-        'Points',
+        '포인트',
         [
-          para(`You get ${per} points with every level. ${grants} more come early, from clearing your first moment and from the Warden's first lesson. A point spent is a place taken; there is nothing else to spend them on, so spend them as they come.`),
-          table({ head: ['Level', 'Points by then'], rows: TREE_PAGE.pointLevels.map((level: number): string[] => [String(level), String(pointsAtLevel(data.content, level))]) }),
+          para(`레벨이 오를 때마다 포인트 ${per}개를 얻는다. 초반에는 첫 순간을 해결하고 관리인의 첫 가르침을 받으며 ${grants}개를 더 얻는다. 쓴 포인트는 곧 차지한 장소다. 달리 쓸 곳이 없으니 생기는 대로 써라.`),
+          table({ head: ['레벨', '그때까지의 포인트'], rows: TREE_PAGE.pointLevels.map((level: number): string[] => [String(level), String(pointsAtLevel(data.content, level))]) }),
         ].join('\n'),
       ),
       section(
         'paths',
-        'The five paths',
+        '다섯 길',
         [
-          para('The tree is five paths around a centre. Each path begins with a notable that teaches a skill, and you may start at any of the five. From then on you can only take a place next to one you already have, so a build is a line walked outward, with a branch here and there into the next path.'),
-          table({ head: ['Path', 'What it is for', 'Starts with', 'Skills it teaches', 'Keystone'], rows: data.content.chart.paths.map((entry: ChartPath): string[] => pathRow(data, entry)), className: 'wide' }),
-          para('Between neighbouring paths there are small bridge places, which is how a build crosses from one path into the next.'),
+          para('트리는 중심을 둘러싼 다섯 길이다. 각 길은 스킬을 가르치는 노터블에서 시작하며, 다섯 곳 중 어디에서든 시작할 수 있다. 그 후로는 이미 가진 장소에 이웃한 장소만 차지할 수 있으므로, 빌드란 바깥으로 걸어 나간 하나의 선이고 여기저기 다음 길로 가지를 치기도 한다.'),
+          table({ head: ['길', '역할', '시작 장소', '가르치는 스킬', '키스톤'], rows: data.content.chart.paths.map((entry: ChartPath): string[] => pathRow(data, entry)), className: 'wide' }),
+          para('이웃한 길 사이에는 작은 다리 장소가 있어, 빌드가 한 길에서 다음 길로 넘어갈 수 있다.'),
         ].join('\n'),
       ),
       section(
         'keystones',
-        'Keystones',
-        [para('A keystone sits at the far end of its path. Each one gives you a lot and takes something away. Read the cost before you take one.'), table({ head: ['Keystone', 'What it does'], rows: keystoneRows(data) })].join('\n'),
+        '키스톤',
+        [para('키스톤은 각 길의 가장 먼 끝에 있다. 하나하나가 많은 것을 주고 무언가를 빼앗는다. 찍기 전에 대가를 읽어라.'), table({ head: ['키스톤', '효과'], rows: keystoneRows(data) })].join('\n'),
       ),
       section(
         'one-change',
-        'One change per skill',
+        '스킬당 하나의 변경',
         [
-          para(`${variantCount(data)} notables change a skill into something else. A skill can only be changed by one of them at a time: once you hold one, the others that change the same skill are closed to you until you give it back. These share a skill:`),
+          para(`노터블 ${variantCount(data)}곳이 스킬을 다른 것으로 바꾼다. 하나의 스킬은 한 번에 그중 하나로만 바뀐다: 하나를 가지고 있으면, 같은 스킬을 바꾸는 나머지는 되돌리기 전까지 닫혀 있다. 같은 스킬을 공유하는 장소들:`),
           `<ul>${sharedChanges(data).map((line: string): string => `<li>${line}</li>`).join('')}</ul>`,
-          para(`Every change is listed with its skill on the ${link('/guide/skills/', 'Skills')} page.`),
+          para(`모든 변경은 ${link('/guide/skills/', '스킬')} 페이지에서 해당 스킬과 함께 볼 수 있다.`),
         ].join('\n'),
       ),
       section(
         'respec',
-        'Changing your mind',
+        '마음 바꾸기',
         [
-          para(`You can give back a single place, as long as everything you hold still connects, or clear the whole tree at once. Either costs gold: ${respec.goldPerPoint} for each point, plus ${respec.goldPerLevel} for each point for every level you have. The points come back to spend again.`),
+          para(`가진 장소가 여전히 모두 연결되어 있다면 장소 하나를 되돌릴 수도 있고, 트리 전체를 한 번에 초기화할 수도 있다. 어느 쪽이든 골드가 든다: 포인트당 ${respec.goldPerPoint}, 여기에 레벨마다 포인트당 ${respec.goldPerLevel}씩 더한다. 포인트는 돌려받아 다시 쓸 수 있다.`),
           table({
-            head: ['Level', 'One place', 'The whole tree'],
-            rows: TREE_PAGE.respecLevels.map((level: number): string[] => [String(level), `${respecCost(data, level, 1)} gold`, `${respecCost(data, level, pointsAtLevel(data.content, level))} gold`]),
+            head: ['레벨', '장소 하나', '트리 전체'],
+            rows: TREE_PAGE.respecLevels.map((level: number): string[] => [String(level), `골드 ${respecCost(data, level, 1)}`, `골드 ${respecCost(data, level, pointsAtLevel(data.content, level))}`]),
           }),
         ].join('\n'),
       ),

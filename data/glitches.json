@@ -1,17 +1,77 @@
 {
   "seed": 7919,
-  "rules": {"cooldown": 45, "minLifeFraction": 0.4, "grace": 1.5, "combatRadius": 14, "combatTick": 1},
+  "rules": {
+    "cooldown": 45,
+    "minLifeFraction": 0.4,
+    "grace": 1.5,
+    "combatRadius": 14,
+    "combatTick": 1
+  },
   "stutter": 0.9,
-  "wrongWord": {"names": ["Corin", "Aud", "Wenna", "Tobin", "Ysolde"], "template": "{name}— no. {line}", "window": 30},
+  "wrongWord": {
+    "names": [
+      "Corin",
+      "Aud",
+      "Wenna",
+      "Tobin",
+      "Ysolde"
+    ],
+    "template": "{name}… 아니. {line}",
+    "window": 30
+  },
   "progress": [
-    {"value": 1, "when": [{"type": "quest", "quest": "to_the_waystation", "is": "done"}]}
+    {
+      "value": 1,
+      "when": [
+        {
+          "type": "quest",
+          "quest": "to_the_waystation",
+          "is": "done"
+        }
+      ]
+    }
   ],
   "triggers": [],
   "stages": [
-    {"from": 0, "kinds": ["stutter", "wrong_word"], "combatChancePerMinute": 0.15},
-    {"from": 1, "kinds": ["stutter", "wrong_word"], "combatChancePerMinute": 0.3},
-    {"from": 2, "kinds": ["stutter", "wrong_word"], "combatChancePerMinute": 0.5},
-    {"from": 3, "kinds": ["stutter", "wrong_word"], "combatChancePerMinute": 0.8},
-    {"from": 4, "kinds": ["stutter", "wrong_word"], "combatChancePerMinute": 1.2}
+    {
+      "from": 0,
+      "kinds": [
+        "stutter",
+        "wrong_word"
+      ],
+      "combatChancePerMinute": 0.15
+    },
+    {
+      "from": 1,
+      "kinds": [
+        "stutter",
+        "wrong_word"
+      ],
+      "combatChancePerMinute": 0.3
+    },
+    {
+      "from": 2,
+      "kinds": [
+        "stutter",
+        "wrong_word"
+      ],
+      "combatChancePerMinute": 0.5
+    },
+    {
+      "from": 3,
+      "kinds": [
+        "stutter",
+        "wrong_word"
+      ],
+      "combatChancePerMinute": 0.8
+    },
+    {
+      "from": 4,
+      "kinds": [
+        "stutter",
+        "wrong_word"
+      ],
+      "combatChancePerMinute": 1.2
+    }
   ]
 }
