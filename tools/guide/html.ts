@@ -40,7 +40,7 @@ export function list(parts: readonly string[]): string {
   if (parts.length <= 1) return parts.join('');
   const last: string = parts[parts.length - 1] ?? '';
   const beforeLast: string = parts[parts.length - 2] ?? '';
-  return `${parts.slice(0, -1).join(', ')}${josa(beforeLast, '와', '과')} ${last}`;
+  return `${parts.slice(0, -1).join(', ')}${josa(beforeLast, '과', '와')} ${last}`;
 }
 
 export function para(...lines: readonly string[]): string {
